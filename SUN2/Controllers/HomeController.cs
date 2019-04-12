@@ -8,6 +8,7 @@ namespace SUN2.Controllers
 {
     public class HomeController : Controller
     {
+        //liefert die index view
         public ActionResult Index()
         {
             return View();
