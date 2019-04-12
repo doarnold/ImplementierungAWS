@@ -8,12 +8,13 @@ namespace SUN2.Controllers
 {
     public class HomeController : Controller
     {
-        //liefert die index view
+        //liefert die index view /index
         public ActionResult Index()
         {
             return View();
         }
 
+        //liefert die about view /about
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -21,6 +22,7 @@ namespace SUN2.Controllers
             return View();
         }
 
+        //liefert die contact view /contact
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
