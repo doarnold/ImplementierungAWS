@@ -25,6 +25,7 @@
                     <li>@Html.ActionLink("Startseite", "Index", "Home")</li>
                     <li>@Html.ActionLink("Informationen", "About", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Profil bearbeiten", "EditMe", "Person")</li> <!-- dies sollte in eine extra layout view für logged in user-->
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

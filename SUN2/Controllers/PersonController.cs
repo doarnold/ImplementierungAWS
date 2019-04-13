@@ -86,7 +86,8 @@ namespace SUN2.Controllers
 
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Unauthorized","Person", "");
+                //return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Sie sind nicht eingeloggt.");
             }
             Person person = db.Person.Find(id);
             if (person == null)
@@ -95,6 +96,11 @@ namespace SUN2.Controllers
             }
             ViewBag.id = new SelectList(db.AspNetUsers, "Id", "Email", person.id);
             return View(person);
+        }
+
+        public ActionResult Unauthorized()
+        {
+            return View();
         }
 
         //speichert die geänderten profildaten des eingeloggten users
