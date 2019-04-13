@@ -107,7 +107,7 @@ namespace SUN2.Controllers
         // POST: Person/EditMe
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMe([Bind(Include = "id, name,vorname")] Person person)
+        public ActionResult EditMe([Bind(Include = "id, name, vorname, persinfos")] Person person)
         {
             if (ModelState.IsValid)
             {

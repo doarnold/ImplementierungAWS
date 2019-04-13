@@ -17,6 +17,7 @@ namespace SUN2.Models
         public string id { get; set; }
         public string name { get; set; }
         public string vorname { get; set; }
+        public string persinfos { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
     }
