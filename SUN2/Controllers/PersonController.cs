@@ -96,12 +96,29 @@ namespace SUN2.Controllers
             ViewBag.id = new SelectList(db.AspNetUsers, "Id", "Email", person.id);
             return View(person);
         }
-      
 
-    // POST: Person/Edit/5
-    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+        //speichert die geänderten profildaten des eingeloggten users
+        // POST: Person/EditMe
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditMe([Bind(Include = "id, name,vorname")] Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(person).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            var id = User.Identity.GetUserId();
+            ViewBag.id = new SelectList(db.AspNetUsers, id, "Email", person.id);
+            return View(person);
+        }
+
+
+        // POST: Person/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,vorname")] Person person)
         {
