@@ -78,7 +78,7 @@ namespace SUN2.Controllers
             return View(person);
         }
 
-        //profiledaten des eingeloggten users laden
+        // profiledaten des eingeloggten users laden
         // GET: Person/EditMe
         public ActionResult EditMe()
         {
@@ -103,7 +103,7 @@ namespace SUN2.Controllers
             return View();
         }
 
-        //speichert die geänderten profildaten des eingeloggten users
+        // speichert die geänderten profildaten des eingeloggten users
         // POST: Person/EditMe
         [HttpPost]
         [ValidateAntiForgeryToken]

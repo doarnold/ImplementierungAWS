@@ -15,6 +15,9 @@ namespace SUN2.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        // unser datenmodell initialiseren
+        private SUN2Entities db = new SUN2Entities();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -134,15 +137,17 @@ namespace SUN2.Controllers
             }
         }
 
-        //
+        // select liste für benutzerrollen zur verfügung stellen
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
+            // rollen in viewbag für selectlist schieben
+            ViewBag.aspnetroles = db.AspNetRoles;
             return View();
         }
 
-        //
+        // registrieren und user rolle speichern
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -152,9 +157,21 @@ namespace SUN2.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
+                    // user finden und userrolle eintragen
+                    var currentUser = UserManager.FindByEmail(user.UserName);
+                    UserManager.AddToRole(currentUser.Id, model.Role);
+
+                    // neue "Person" für den User erstellen
+                    Person person = new Person();
+                    person.id = currentUser.Id; // ID der Person ist die User ID
+                    db.Person.Add(person);
+                    db.SaveChanges();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // Weitere Informationen zum Aktivieren der Kontobestätigung und Kennwortzurücksetzung finden Sie unter https://go.microsoft.com/fwlink/?LinkID=320771
@@ -169,6 +186,7 @@ namespace SUN2.Controllers
             }
 
             // Wurde dieser Punkt erreicht, ist ein Fehler aufgetreten; Formular erneut anzeigen.
+            ViewBag.aspnetroles = db.AspNetRoles;
             return View(model);
         }
 

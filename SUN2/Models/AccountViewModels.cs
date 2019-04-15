@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace SUN2.Models
 {
@@ -77,8 +79,12 @@ namespace SUN2.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Kennwort bestätigen")]
-        [Compare("Password", ErrorMessage = "Das Kennwort entspricht nicht dem Bestätigungskennwort.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Das Kennwort entspricht nicht dem Bestätigungskennwort.")]
         public string ConfirmPassword { get; set; }
+       
+        [Display(Name = "Benutzerrolle")]
+        public string Role { get; set; }
+
     }
 
     public class ResetPasswordViewModel
