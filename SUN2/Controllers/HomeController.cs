@@ -1,17 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using SUN2.Models;
 
 namespace SUN2.Controllers
 {
     public class HomeController : Controller
     {
+        private SUN2Entities db = new SUN2Entities();
         //liefert die index view /index
         public ActionResult Index()
         {
-            return View();
+
+            var lehrstuehle = db.Lehrstuhls.ToList();
+
+            return View(lehrstuehle);
         }
 
         //liefert die about view /about
