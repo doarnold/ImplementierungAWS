@@ -24,7 +24,6 @@ namespace SUN2.Models
         public Nullable<System.DateTime> studienbeginn { get; set; }
         public string studiengang { get; set; }
         public string studienfach { get; set; }
-        public string email { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
     }

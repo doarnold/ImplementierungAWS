@@ -315,11 +315,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Person\Create.cshtml" />
-    <Content Include="Views\Person\Delete.cshtml" />
-    <Content Include="Views\Person\Details.cshtml" />
-    <Content Include="Views\Person\Edit.cshtml" />
-    <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Person\EditMe.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
     <Content Include="Views\Error\NotLoggedIn.cshtml" />
@@ -328,6 +323,11 @@
     <Content Include="Views\Lehrstuhl\Details.cshtml" />
     <Content Include="Views\Lehrstuhl\Edit.cshtml" />
     <Content Include="Views\Lehrstuhl\Index.cshtml" />
+    <Content Include="Views\Person\Create.cshtml" />
+    <Content Include="Views\Person\Delete.cshtml" />
+    <Content Include="Views\Person\Details.cshtml" />
+    <Content Include="Views\Person\Edit.cshtml" />
+    <Content Include="Views\Person\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

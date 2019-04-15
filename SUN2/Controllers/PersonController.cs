@@ -49,7 +49,7 @@ namespace SUN2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,vorname")] Person person)
+        public ActionResult Create([Bind(Include = "id,name,vorname,persinfos,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -78,6 +78,23 @@ namespace SUN2.Controllers
             return View(person);
         }
 
+        // POST: Person/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id,name,vorname,persinfos,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(person).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.id = new SelectList(db.AspNetUsers, "Id", "Email", person.id);
+            return View(person);
+        }
+
         // profiledaten des eingeloggten users laden
         // GET: Person/EditMe
         [CustomAuthorize(Roles = "Admin, Student, Dozent")] //nur ein Beispiel, wie Autorisierung funktioniert
@@ -87,7 +104,7 @@ namespace SUN2.Controllers
 
             if (id == null)
             {
-                return RedirectToAction("NotLoggedIn","Error", "");
+                return RedirectToAction("NotLoggedIn", "Error", "");
                 //return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Sie sind nicht eingeloggt.");
             }
             Person person = db.Person.Find(id);
@@ -104,7 +121,7 @@ namespace SUN2.Controllers
         // POST: Person/EditMe
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMe([Bind(Include = "id, name, vorname, persinfos")] Person person)
+        public ActionResult EditMe([Bind(Include = "id,name,vorname,persinfos,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -115,24 +132,6 @@ namespace SUN2.Controllers
             }
             var id = User.Identity.GetUserId();
             ViewBag.id = new SelectList(db.AspNetUsers, id, "Email", person.id);
-            return View(person);
-        }
-
-
-        // POST: Person/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,vorname")] Person person)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(person).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.id = new SelectList(db.AspNetUsers, "Id", "Email", person.id);
             return View(person);
         }
 
