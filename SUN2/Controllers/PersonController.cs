@@ -80,13 +80,14 @@ namespace SUN2.Controllers
 
         // profiledaten des eingeloggten users laden
         // GET: Person/EditMe
+        [CustomAuthorize(Roles = "Admin, Student, Dozent")] //nur ein Beispiel, wie Autorisierung funktioniert
         public ActionResult EditMe()
         {
             var id = User.Identity.GetUserId();
 
             if (id == null)
             {
-                return RedirectToAction("Unauthorized","Person", "");
+                return RedirectToAction("NotLoggedIn","Error", "");
                 //return new HttpStatusCodeResult(HttpStatusCode.Unauthorized, "Sie sind nicht eingeloggt.");
             }
             Person person = db.Person.Find(id);
@@ -98,10 +99,6 @@ namespace SUN2.Controllers
             return View(person);
         }
 
-        public ActionResult Unauthorized()
-        {
-            return View();
-        }
 
         // speichert die geänderten profildaten des eingeloggten users
         // POST: Person/EditMe
@@ -113,7 +110,8 @@ namespace SUN2.Controllers
             {
                 db.Entry(person).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                ViewBag.Message = "Daten wurden erfolgreich gespeichert.";
+                return RedirectToAction("EditMe");
             }
             var id = User.Identity.GetUserId();
             ViewBag.id = new SelectList(db.AspNetUsers, id, "Email", person.id);
