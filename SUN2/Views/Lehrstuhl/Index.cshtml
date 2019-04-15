@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SUN2.Models.Lehrstuhl>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.bezeichnung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.beschreibung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.verantwortlicher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.privat)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.bezeichnung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.beschreibung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.verantwortlicher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.privat)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.lehrstuhlid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.lehrstuhlid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.lehrstuhlid })
+        </td>
+    </tr>
+}
+
+</table>

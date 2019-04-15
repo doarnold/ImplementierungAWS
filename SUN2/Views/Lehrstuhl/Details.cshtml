@@ -1,0 +1,50 @@
+﻿@model SUN2.Models.Lehrstuhl
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Lehrstuhl</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.bezeichnung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bezeichnung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.beschreibung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.beschreibung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.verantwortlicher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.verantwortlicher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.privat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.privat)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.lehrstuhlid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

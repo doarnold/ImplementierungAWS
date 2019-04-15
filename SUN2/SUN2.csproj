@@ -173,10 +173,14 @@
     <Compile Include="Controllers\CustomAuthorize.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LehrstuhlController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbonnentenLehrstuhl.cs">
+      <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AspNetRoles.cs">
@@ -194,8 +198,26 @@
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Gruppe.cs">
+      <DependentUpon>SUN2Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GruppenEintraege.cs">
+      <DependentUpon>SUN2Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Lehrstuhl.cs">
+      <DependentUpon>SUN2Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LehrstuhlEintrage.cs">
+      <DependentUpon>SUN2Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MitarbeiterLehrstuhl.cs">
+      <DependentUpon>SUN2Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MitgliederGruppe.cs">
+      <DependentUpon>SUN2Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Person.cs">
       <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
@@ -301,6 +323,11 @@
     <Content Include="Views\Person\EditMe.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
     <Content Include="Views\Error\NotLoggedIn.cshtml" />
+    <Content Include="Views\Lehrstuhl\Create.cshtml" />
+    <Content Include="Views\Lehrstuhl\Delete.cshtml" />
+    <Content Include="Views\Lehrstuhl\Details.cshtml" />
+    <Content Include="Views\Lehrstuhl\Edit.cshtml" />
+    <Content Include="Views\Lehrstuhl\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

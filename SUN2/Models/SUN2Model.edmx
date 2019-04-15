@@ -15,6 +15,13 @@
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
+        <EntityType Name="AbonnentenLehrstuhl">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="lehrstuhlid" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -66,14 +73,85 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Gruppe">
+          <Key>
+            <PropertyRef Name="gruppenid" />
+          </Key>
+          <Property Name="gruppenid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="bezeichnung" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="beschreibung" Type="nvarchar" MaxLength="1500" />
+          <Property Name="verantwortlicher" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="privat" Type="bit" />
+        </EntityType>
+        <EntityType Name="GruppenEintraege">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="gruppenid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="datum" Type="date" Nullable="false" />
+          <Property Name="autor" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="inhalt" Type="nvarchar" MaxLength="2500" Nullable="false" />
+          <Property Name="label1" Type="nvarchar" MaxLength="150" />
+          <Property Name="label2" Type="nvarchar" MaxLength="150" />
+          <Property Name="label3" Type="nvarchar" MaxLength="150" />
+          <Property Name="label4" Type="nvarchar" MaxLength="150" />
+          <Property Name="label5" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Lehrstuhl">
+          <Key>
+            <PropertyRef Name="lehrstuhlid" />
+          </Key>
+          <Property Name="lehrstuhlid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="bezeichnung" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="beschreibung" Type="nvarchar" MaxLength="1500" />
+          <Property Name="verantwortlicher" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="privat" Type="bit" />
+        </EntityType>
+        <EntityType Name="LehrstuhlEintrage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="lehrstuhlid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="datum" Type="date" Nullable="false" />
+          <Property Name="autor" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="inhalt" Type="nvarchar" MaxLength="2500" Nullable="false" />
+          <Property Name="label1" Type="nvarchar" MaxLength="150" />
+          <Property Name="label2" Type="nvarchar" MaxLength="150" />
+          <Property Name="label3" Type="nvarchar" MaxLength="150" />
+          <Property Name="label4" Type="nvarchar" MaxLength="150" />
+          <Property Name="label5" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="MitarbeiterLehrstuhl">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="lehrstuhlid" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MitgliederGruppe">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="gruppenid" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="name" Type="nchar" MaxLength="100" />
-          <Property Name="vorname" Type="nchar" MaxLength="100" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="vorname" Type="nvarchar" MaxLength="50" />
           <Property Name="persinfos" Type="nvarchar" MaxLength="500" />
+          <Property Name="matnr" Type="int" />
+          <Property Name="hsemester" Type="int" />
+          <Property Name="fsemester" Type="int" />
+          <Property Name="studienbeginn" Type="date" />
+          <Property Name="studiengang" Type="nvarchar" MaxLength="50" />
+          <Property Name="studienfach" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -155,11 +233,18 @@
         </Association>
         <EntityContainer Name="SUN2ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AbonnentenLehrstuhl" EntityType="Self.AbonnentenLehrstuhl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gruppe" EntityType="Self.Gruppe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GruppenEintraege" EntityType="Self.GruppenEintraege" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lehrstuhl" EntityType="Self.Lehrstuhl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LehrstuhlEintrage" EntityType="Self.LehrstuhlEintrage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MitarbeiterLehrstuhl" EntityType="Self.MitarbeiterLehrstuhl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MitgliederGruppe" EntityType="Self.MitgliederGruppe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -252,10 +337,17 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="vorname" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="vorname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Person_AspNetUsers" FromRole="Person" ToRole="AspNetUsers" />
           <Property Name="persinfos" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="matnr" Type="Int32" />
+          <Property Name="hsemester" Type="Int32" />
+          <Property Name="fsemester" Type="Int32" />
+          <Property Name="studienbeginn" Type="DateTime" Precision="0" />
+          <Property Name="studiengang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="studienfach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -335,7 +427,85 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="AbonnentenLehrstuhl" EntityType="SUN2Model.AbonnentenLehrstuhl" />
+          <EntitySet Name="Gruppe" EntityType="SUN2Model.Gruppe" />
+          <EntitySet Name="GruppenEintraege" EntityType="SUN2Model.GruppenEintraege" />
+          <EntitySet Name="Lehrstuhl" EntityType="SUN2Model.Lehrstuhl" />
+          <EntitySet Name="LehrstuhlEintrage" EntityType="SUN2Model.LehrstuhlEintrage" />
+          <EntitySet Name="MitarbeiterLehrstuhl" EntityType="SUN2Model.MitarbeiterLehrstuhl" />
+          <EntitySet Name="MitgliederGruppe" EntityType="SUN2Model.MitgliederGruppe" />
         </EntityContainer>
+        <EntityType Name="AbonnentenLehrstuhl">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="lehrstuhlid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Gruppe">
+          <Key>
+            <PropertyRef Name="gruppenid" />
+          </Key>
+          <Property Name="gruppenid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="bezeichnung" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="beschreibung" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="verantwortlicher" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="privat" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="GruppenEintraege">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="gruppenid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="autor" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="inhalt" Type="String" Nullable="false" MaxLength="2500" FixedLength="false" Unicode="true" />
+          <Property Name="label1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="label2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="label3" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="label4" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="label5" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Lehrstuhl">
+          <Key>
+            <PropertyRef Name="lehrstuhlid" />
+          </Key>
+          <Property Name="lehrstuhlid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="bezeichnung" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="beschreibung" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="verantwortlicher" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="privat" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="LehrstuhlEintrage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="lehrstuhlid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="autor" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="inhalt" Type="String" Nullable="false" MaxLength="2500" FixedLength="false" Unicode="true" />
+          <Property Name="label1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="label2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="label3" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="label4" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="label5" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MitarbeiterLehrstuhl">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="lehrstuhlid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MitgliederGruppe">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="gruppenid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -400,6 +570,13 @@
           <EntitySetMapping Name="Person">
             <EntityTypeMapping TypeName="SUN2Model.Person">
               <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="studienfach" ColumnName="studienfach" />
+                <ScalarProperty Name="studiengang" ColumnName="studiengang" />
+                <ScalarProperty Name="studienbeginn" ColumnName="studienbeginn" />
+                <ScalarProperty Name="fsemester" ColumnName="fsemester" />
+                <ScalarProperty Name="hsemester" ColumnName="hsemester" />
+                <ScalarProperty Name="matnr" ColumnName="matnr" />
                 <ScalarProperty Name="persinfos" ColumnName="persinfos" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -426,6 +603,84 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="AbonnentenLehrstuhl">
+            <EntityTypeMapping TypeName="SUN2Model.AbonnentenLehrstuhl">
+              <MappingFragment StoreEntitySet="AbonnentenLehrstuhl">
+                <ScalarProperty Name="lehrstuhlid" ColumnName="lehrstuhlid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gruppe">
+            <EntityTypeMapping TypeName="SUN2Model.Gruppe">
+              <MappingFragment StoreEntitySet="Gruppe">
+                <ScalarProperty Name="privat" ColumnName="privat" />
+                <ScalarProperty Name="verantwortlicher" ColumnName="verantwortlicher" />
+                <ScalarProperty Name="beschreibung" ColumnName="beschreibung" />
+                <ScalarProperty Name="bezeichnung" ColumnName="bezeichnung" />
+                <ScalarProperty Name="gruppenid" ColumnName="gruppenid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GruppenEintraege">
+            <EntityTypeMapping TypeName="SUN2Model.GruppenEintraege">
+              <MappingFragment StoreEntitySet="GruppenEintraege">
+                <ScalarProperty Name="label5" ColumnName="label5" />
+                <ScalarProperty Name="label4" ColumnName="label4" />
+                <ScalarProperty Name="label3" ColumnName="label3" />
+                <ScalarProperty Name="label2" ColumnName="label2" />
+                <ScalarProperty Name="label1" ColumnName="label1" />
+                <ScalarProperty Name="inhalt" ColumnName="inhalt" />
+                <ScalarProperty Name="autor" ColumnName="autor" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="gruppenid" ColumnName="gruppenid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lehrstuhl">
+            <EntityTypeMapping TypeName="SUN2Model.Lehrstuhl">
+              <MappingFragment StoreEntitySet="Lehrstuhl">
+                <ScalarProperty Name="privat" ColumnName="privat" />
+                <ScalarProperty Name="verantwortlicher" ColumnName="verantwortlicher" />
+                <ScalarProperty Name="beschreibung" ColumnName="beschreibung" />
+                <ScalarProperty Name="bezeichnung" ColumnName="bezeichnung" />
+                <ScalarProperty Name="lehrstuhlid" ColumnName="lehrstuhlid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LehrstuhlEintrage">
+            <EntityTypeMapping TypeName="SUN2Model.LehrstuhlEintrage">
+              <MappingFragment StoreEntitySet="LehrstuhlEintrage">
+                <ScalarProperty Name="label5" ColumnName="label5" />
+                <ScalarProperty Name="label4" ColumnName="label4" />
+                <ScalarProperty Name="label3" ColumnName="label3" />
+                <ScalarProperty Name="label2" ColumnName="label2" />
+                <ScalarProperty Name="label1" ColumnName="label1" />
+                <ScalarProperty Name="inhalt" ColumnName="inhalt" />
+                <ScalarProperty Name="autor" ColumnName="autor" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="lehrstuhlid" ColumnName="lehrstuhlid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MitarbeiterLehrstuhl">
+            <EntityTypeMapping TypeName="SUN2Model.MitarbeiterLehrstuhl">
+              <MappingFragment StoreEntitySet="MitarbeiterLehrstuhl">
+                <ScalarProperty Name="lehrstuhlid" ColumnName="lehrstuhlid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MitgliederGruppe">
+            <EntityTypeMapping TypeName="SUN2Model.MitgliederGruppe">
+              <MappingFragment StoreEntitySet="MitgliederGruppe">
+                <ScalarProperty Name="gruppenid" ColumnName="gruppenid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

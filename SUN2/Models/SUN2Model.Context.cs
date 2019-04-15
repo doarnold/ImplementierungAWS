@@ -32,5 +32,7 @@ namespace SUN2.Models
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Person> Person { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+
+        public System.Data.Entity.DbSet<SUN2.Models.Lehrstuhl> Lehrstuhls { get; set; }
     }
 }
