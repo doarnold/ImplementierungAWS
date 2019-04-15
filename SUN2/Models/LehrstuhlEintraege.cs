@@ -12,7 +12,7 @@ namespace SUN2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LehrstuhlEintrage
+    public partial class LehrstuhlEintraege
     {
         public string id { get; set; }
         public string lehrstuhlid { get; set; }

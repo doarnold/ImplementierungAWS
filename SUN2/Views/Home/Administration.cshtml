@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Administration";
+}
+
+<h2>Administration</h2>
+
+<h3>Nutzerverwaltung</h3>
+<li>@Html.ActionLink("Personen", "Index", "Person")</li>
+<h3>Seitenverwaltung - Lehrstühle</h3>
+<li>@Html.ActionLink("Lehrstühle", "Index", "Lehrstuhl")</li>
+<li>@Html.ActionLink("Abonnenten Lehrstuhlseiten", "Index", "AbonnentenLehrstuhl")</li>
+<li>@Html.ActionLink("Lehrstuhleinträge", "Index", "LehrstuhlEintraege")</li>
+<li>@Html.ActionLink("Mitarbeiter Lehrstühle", "Index", "MitarbeiterLehrstuhl")</li>
+<h3>Seitenverwaltung - Gruppen</h3>
+<li>@Html.ActionLink("Gruppen", "Index", "Gruppe")</li>
+<li>@Html.ActionLink("Mitglieder Gruppen", "Index", "MitgliederGruppe")</li>
+<li>@Html.ActionLink("Gruppeneinträge", "Index", "GruppenEintraege")</li>

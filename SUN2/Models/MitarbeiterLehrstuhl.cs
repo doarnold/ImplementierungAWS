@@ -11,10 +11,13 @@ namespace SUN2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class MitarbeiterLehrstuhl
     {
+        [Key]
         public string userid { get; set; }
+        [Required]
         public string lehrstuhlid { get; set; }
     }
 }

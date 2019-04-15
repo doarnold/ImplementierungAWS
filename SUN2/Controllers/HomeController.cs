@@ -29,5 +29,11 @@ namespace SUN2.Controllers
 
             return View();
         }
+
+        //liefert die administrationsübersicht
+        public ActionResult Administration()
+        {
+            return View();
+        }
     }
 }

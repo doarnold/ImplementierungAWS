@@ -34,5 +34,17 @@ namespace SUN2.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
         public System.Data.Entity.DbSet<SUN2.Models.Lehrstuhl> Lehrstuhls { get; set; }
+
+        public System.Data.Entity.DbSet<SUN2.Models.AbonnentenLehrstuhl> AbonnentenLehrstuhls { get; set; }
+
+        public System.Data.Entity.DbSet<SUN2.Models.Gruppe> Gruppes { get; set; }
+
+        public System.Data.Entity.DbSet<SUN2.Models.GruppenEintraege> GruppenEintraeges { get; set; }
+
+        public System.Data.Entity.DbSet<SUN2.Models.LehrstuhlEintraege> LehrstuhlEintraeges { get; set; }
+
+        public System.Data.Entity.DbSet<SUN2.Models.MitarbeiterLehrstuhl> MitarbeiterLehrstuhls { get; set; }
+
+        public System.Data.Entity.DbSet<SUN2.Models.MitgliederGruppe> MitgliederGruppes { get; set; }
     }
 }

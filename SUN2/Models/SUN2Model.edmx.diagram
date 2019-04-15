@@ -20,9 +20,9 @@
         <EntityTypeShape EntityType="SUN2Model.Gruppe" Width="1.5" PointX="7.75" PointY="6.75" />
         <EntityTypeShape EntityType="SUN2Model.GruppenEintraege" Width="1.5" PointX="9.75" PointY="3.75" />
         <EntityTypeShape EntityType="SUN2Model.Lehrstuhl" Width="1.5" PointX="9.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SUN2Model.LehrstuhlEintrage" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="SUN2Model.MitarbeiterLehrstuhl" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="SUN2Model.MitgliederGruppe" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="SUN2Model.LehrstuhlEintraege" Width="1.5" PointX="5.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

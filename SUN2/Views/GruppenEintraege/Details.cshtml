@@ -1,0 +1,90 @@
+﻿@model SUN2.Models.GruppenEintraege
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GruppenEintraege</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.gruppenid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gruppenid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.datum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.datum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.autor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.autor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inhalt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inhalt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.label1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.label1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.label2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.label2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.label3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.label3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.label4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.label4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.label5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.label5)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

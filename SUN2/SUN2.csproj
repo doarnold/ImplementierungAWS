@@ -169,12 +169,18 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AbonnentenLehrstuhlController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomAuthorize.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GruppeController.cs" />
+    <Compile Include="Controllers\GruppenEintraegeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LehrstuhlController.cs" />
+    <Compile Include="Controllers\LehrstuhlEintraegeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MitarbeiterLehrstuhlController.cs" />
+    <Compile Include="Controllers\MitgliederGruppeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -208,7 +214,7 @@
     <Compile Include="Models\Lehrstuhl.cs">
       <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LehrstuhlEintrage.cs">
+    <Compile Include="Models\LehrstuhlEintraege.cs">
       <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
@@ -328,6 +334,37 @@
     <Content Include="Views\Person\Details.cshtml" />
     <Content Include="Views\Person\Edit.cshtml" />
     <Content Include="Views\Person\Index.cshtml" />
+    <Content Include="Views\AbonnentenLehrstuhl\Create.cshtml" />
+    <Content Include="Views\AbonnentenLehrstuhl\Delete.cshtml" />
+    <Content Include="Views\AbonnentenLehrstuhl\Details.cshtml" />
+    <Content Include="Views\AbonnentenLehrstuhl\Edit.cshtml" />
+    <Content Include="Views\AbonnentenLehrstuhl\Index.cshtml" />
+    <Content Include="Views\Gruppe\Create.cshtml" />
+    <Content Include="Views\Gruppe\Delete.cshtml" />
+    <Content Include="Views\Gruppe\Details.cshtml" />
+    <Content Include="Views\Gruppe\Edit.cshtml" />
+    <Content Include="Views\Gruppe\Index.cshtml" />
+    <Content Include="Views\GruppenEintraege\Create.cshtml" />
+    <Content Include="Views\GruppenEintraege\Delete.cshtml" />
+    <Content Include="Views\GruppenEintraege\Details.cshtml" />
+    <Content Include="Views\GruppenEintraege\Edit.cshtml" />
+    <Content Include="Views\GruppenEintraege\Index.cshtml" />
+    <Content Include="Views\LehrstuhlEintraege\Create.cshtml" />
+    <Content Include="Views\LehrstuhlEintraege\Delete.cshtml" />
+    <Content Include="Views\LehrstuhlEintraege\Details.cshtml" />
+    <Content Include="Views\LehrstuhlEintraege\Edit.cshtml" />
+    <Content Include="Views\LehrstuhlEintraege\Index.cshtml" />
+    <Content Include="Views\MitarbeiterLehrstuhl\Create.cshtml" />
+    <Content Include="Views\MitarbeiterLehrstuhl\Delete.cshtml" />
+    <Content Include="Views\MitarbeiterLehrstuhl\Details.cshtml" />
+    <Content Include="Views\MitarbeiterLehrstuhl\Edit.cshtml" />
+    <Content Include="Views\MitarbeiterLehrstuhl\Index.cshtml" />
+    <Content Include="Views\MitgliederGruppe\Create.cshtml" />
+    <Content Include="Views\MitgliederGruppe\Delete.cshtml" />
+    <Content Include="Views\MitgliederGruppe\Details.cshtml" />
+    <Content Include="Views\MitgliederGruppe\Edit.cshtml" />
+    <Content Include="Views\MitgliederGruppe\Index.cshtml" />
+    <Content Include="Views\Home\Administration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
