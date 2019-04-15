@@ -11,13 +11,10 @@ namespace SUN2.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class MitgliederGruppe
     {
-        [Key]
         public string userid { get; set; }
-        [Required]
         public string gruppenid { get; set; }
     }
 }
