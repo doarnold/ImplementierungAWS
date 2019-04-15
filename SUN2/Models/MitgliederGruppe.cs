@@ -15,6 +15,6 @@ namespace SUN2.Models
     public partial class MitgliederGruppe
     {
         public string userid { get; set; }
-        public string gruppenid { get; set; }
+        public int gruppenid { get; set; }
     }
 }

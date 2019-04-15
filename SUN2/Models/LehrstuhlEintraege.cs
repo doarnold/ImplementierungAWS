@@ -11,11 +11,15 @@ namespace SUN2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class LehrstuhlEintraege
     {
-        public string id { get; set; }
-        public string lehrstuhlid { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+        public int lehrstuhlid { get; set; }
         public System.DateTime datum { get; set; }
         public string autor { get; set; }
         public string inhalt { get; set; }

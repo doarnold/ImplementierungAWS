@@ -11,10 +11,14 @@ namespace SUN2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Lehrstuhl
     {
-        public string lehrstuhlid { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int lehrstuhlid { get; set; }
         public string bezeichnung { get; set; }
         public string beschreibung { get; set; }
         public string verantwortlicher { get; set; }

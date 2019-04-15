@@ -11,10 +11,14 @@ namespace SUN2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Gruppe
     {
-        public string gruppenid { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int gruppenid { get; set; }
         public string bezeichnung { get; set; }
         public string beschreibung { get; set; }
         public string verantwortlicher { get; set; }

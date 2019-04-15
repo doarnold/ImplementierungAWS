@@ -15,6 +15,6 @@ namespace SUN2.Models
     public partial class MitarbeiterLehrstuhl
     {
         public string userid { get; set; }
-        public string lehrstuhlid { get; set; }
+        public int lehrstuhlid { get; set; }
     }
 }
