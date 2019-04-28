@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="SUN2Model.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SUN2Model.AspNetRoles" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SUN2Model.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SUN2Model.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SUN2Model.AspNetUserLogins" Width="2" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SUN2Model.AspNetUsers" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SUN2Model.Person" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SUN2Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
@@ -23,6 +23,7 @@
         <EntityTypeShape EntityType="SUN2Model.MitgliederGruppe" Width="1.5" PointX="2.75" PointY="10.75" />
         <EntityTypeShape EntityType="SUN2Model.LehrstuhlEintraege" Width="1.5" PointX="5.375" PointY="10.75" />
         <EntityTypeShape EntityType="SUN2Model.Gruppe" Width="1.5" PointX="7.375" PointY="10.75" />
+        <AssociationConnector Association="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

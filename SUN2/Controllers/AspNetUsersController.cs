@@ -73,6 +73,9 @@ namespace SUN2.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.aspnetroles = db.AspNetRoles;
+
             ViewBag.Id = new SelectList(db.Person, "id", "name", aspNetUsers.Id);
             return View(aspNetUsers);
         }

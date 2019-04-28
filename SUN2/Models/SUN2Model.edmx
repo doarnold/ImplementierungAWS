@@ -218,6 +218,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LehrstuhlEintraege_LehrstuhlEintraege">
+          <End Role="LehrstuhlEintraege" Type="Self.LehrstuhlEintraege" Multiplicity="1" />
+          <End Role="LehrstuhlEintraege1" Type="Self.LehrstuhlEintraege" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LehrstuhlEintraege">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LehrstuhlEintraege1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Person_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
@@ -261,6 +273,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LehrstuhlEintraege_LehrstuhlEintraege" Association="Self.FK_LehrstuhlEintraege_LehrstuhlEintraege">
+            <End Role="LehrstuhlEintraege" EntitySet="LehrstuhlEintraege" />
+            <End Role="LehrstuhlEintraege1" EntitySet="LehrstuhlEintraege" />
           </AssociationSet>
           <AssociationSet Name="FK_Person_AspNetUsers" Association="Self.FK_Person_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -432,6 +448,10 @@
           <EntitySet Name="MitgliederGruppe" EntityType="SUN2Model.MitgliederGruppe" />
           <EntitySet Name="LehrstuhlEintraege" EntityType="SUN2Model.LehrstuhlEintraege" />
           <EntitySet Name="Gruppe" EntityType="SUN2Model.Gruppe" />
+          <AssociationSet Name="FK_LehrstuhlEintraege_LehrstuhlEintraege" Association="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege">
+            <End Role="LehrstuhlEintraege" EntitySet="LehrstuhlEintraege" />
+            <End Role="LehrstuhlEintraege1" EntitySet="LehrstuhlEintraege" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AbonnentenLehrstuhl">
           <Key>
@@ -493,6 +513,8 @@
           <Property Name="label3" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="label4" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="label5" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LehrstuhlEintraege1" Relationship="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" FromRole="LehrstuhlEintraege" ToRole="LehrstuhlEintraege1" />
+          <NavigationProperty Name="LehrstuhlEintraege2" Relationship="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" FromRole="LehrstuhlEintraege1" ToRole="LehrstuhlEintraege" />
         </EntityType>
         <EntityType Name="Gruppe">
           <Key>
@@ -504,6 +526,18 @@
           <Property Name="verantwortlicher" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="privat" Type="Boolean" />
         </EntityType>
+        <Association Name="FK_LehrstuhlEintraege_LehrstuhlEintraege">
+          <End Type="SUN2Model.LehrstuhlEintraege" Role="LehrstuhlEintraege" Multiplicity="1" />
+          <End Type="SUN2Model.LehrstuhlEintraege" Role="LehrstuhlEintraege1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LehrstuhlEintraege">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LehrstuhlEintraege1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
