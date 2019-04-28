@@ -11,7 +11,9 @@ namespace SUN2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(PersonMetadata))]
     public partial class Person
     {
         public string id { get; set; }

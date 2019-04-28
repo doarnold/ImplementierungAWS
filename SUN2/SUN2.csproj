@@ -218,6 +218,7 @@
       <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\MitarbeiterLehrstuhl.cs">
       <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
