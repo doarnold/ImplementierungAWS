@@ -11,7 +11,9 @@ namespace SUN2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(AbonnentenLehrstuhlMetadata))]
     public partial class AbonnentenLehrstuhl
     {
         public string userid { get; set; }

@@ -14,6 +14,7 @@ namespace SUN2.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    [MetadataType(typeof(LehrstuhlEintraegeMetadata))]
     public partial class LehrstuhlEintraege
     {
         [Key]

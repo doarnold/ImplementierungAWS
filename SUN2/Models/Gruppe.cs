@@ -13,7 +13,9 @@ namespace SUN2.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
 
+    [MetadataType(typeof(GruppeMetadata))]
     public partial class Gruppe
     {
         [Key]

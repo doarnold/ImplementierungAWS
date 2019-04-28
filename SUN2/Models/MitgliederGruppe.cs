@@ -11,7 +11,10 @@ namespace SUN2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(MitgliederGruppeMetadata))]
+
     public partial class MitgliederGruppe
     {
         public string userid { get; set; }

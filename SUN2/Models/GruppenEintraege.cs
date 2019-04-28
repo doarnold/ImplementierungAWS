@@ -14,6 +14,7 @@ namespace SUN2.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    [MetadataType(typeof(GruppenEintraegeMetadata))]
     public partial class GruppenEintraege
     {
         [Key]
