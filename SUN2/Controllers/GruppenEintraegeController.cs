@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -35,10 +37,24 @@ namespace SUN2.Controllers
             return View(gruppenEintraege);
         }
 
+        // neuen eintrag erstellen = mit gruppenid aus gruppentabelle heraus
         // GET: GruppenEintraege/Create
-        public ActionResult Create()
+        public ActionResult Create(int? gruppenid)
         {
-            return View();
+            if (gruppenid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // gruppenid, autor, datum im hintergrund vorbelegen
+            GruppenEintraege gruppenEintraege = new GruppenEintraege();
+            gruppenEintraege.gruppenid = (int)gruppenid;
+            gruppenEintraege.datum = DateTime.Now;
+
+            var userId = User.Identity.GetUserId();
+            gruppenEintraege.autor = userId;
+
+            return View(gruppenEintraege);
         }
 
         // POST: GruppenEintraege/Create

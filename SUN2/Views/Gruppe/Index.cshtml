@@ -23,6 +23,7 @@
         <th>
             @Html.DisplayNameFor(model => model.privat)
         </th>
+
         <th></th>
     </tr>
 
@@ -41,9 +42,13 @@
             @Html.DisplayFor(modelItem => item.privat)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.gruppenid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.gruppenid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.gruppenid })
+            @Html.ActionLink("Edit", "Edit", new { id = item.gruppenid }) |
+            @Html.ActionLink("Details", "Details", new { id = item.gruppenid }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.gruppenid })|
+            @Html.ActionLink("New Post", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)
+            <p>@item.gruppenid</p>
+
+
         </td>
     </tr>
 }
