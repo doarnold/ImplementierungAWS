@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -17,8 +19,7 @@ namespace SUN2.Controllers
         // GET: AspNetUsers
         public ActionResult Index()
         {
-            var aspNetUsers = db.AspNetUsers.Include(a => a.Person);
-            return View(aspNetUsers.ToList());
+            return View(db.AspNetUsers.ToList());
         }
 
         // GET: AspNetUsers/Details/5
@@ -74,6 +75,7 @@ namespace SUN2.Controllers
                 return HttpNotFound();
             }
 
+            //ViewBag mit Rolle zum Editieren füllen
             ViewBag.aspnetroles = db.AspNetRoles;
 
             ViewBag.Id = new SelectList(db.Person, "id", "name", aspNetUsers.Id);
@@ -85,15 +87,25 @@ namespace SUN2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] AspNetUsers aspNetUsers)
+        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Role")] AspNetUsers aspNetUsers)
         {
             if (ModelState.IsValid)
             {
+                // UserManager holen und Rollen entfernen und neue Rolle hinzufuegen
+                var UserManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                UserManager.RemoveFromRoles(db.Entry(aspNetUsers).Entity.Id, "Admin");
+                UserManager.RemoveFromRoles(db.Entry(aspNetUsers).Entity.Id, "Dozent");
+                UserManager.RemoveFromRoles(db.Entry(aspNetUsers).Entity.Id, "Student");
+                UserManager.AddToRole(db.Entry(aspNetUsers).Entity.Id, db.Entry(aspNetUsers).Entity.Role);
+
                 db.Entry(aspNetUsers).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.Id = new SelectList(db.Person, "id", "name", aspNetUsers.Id);
+
+            //ViewBag mit Rolle zum Editieren füllen
+            ViewBag.aspnetroles = db.AspNetRoles;
             return View(aspNetUsers);
         }
 
