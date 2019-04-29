@@ -18,14 +18,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("SUN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+               <!-- @Html.ActionLink("SUN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) -->
+                <a href="@Url.Action("Index", "Home")"><img src="~/Images/SUNlogoWHITEmedium.png" /></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Startseite", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Informationen", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Profil bearbeiten", "EditMe", "Person")</li> <!-- dies sollte in eine extra layout view für logged in user-->
+                    <!-- <li>@Html.ActionLink("Startseite", "Index", "Home")</li> -->
+                    <!-- <li>@Html.ActionLink("Informationen", "About", "Home")</li> -->
+                    <!-- <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li> -->
+                    <li>@Html.ActionLink("Profil bearbeiten", "EditMe", "Person")</li> 
+                    <!-- dies sollte in eine extra layout view für logged in user-->
                     <li>@Html.ActionLink("Administration", "Administration", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
