@@ -46,7 +46,7 @@ namespace SUN2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung,verantwortlicher,privat")] Lehrstuhl lehrstuhl)
+        public ActionResult Create([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung,verantwortlicher")] Lehrstuhl lehrstuhl)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace SUN2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung,verantwortlicher,privat")] Lehrstuhl lehrstuhl)
+        public ActionResult Edit([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung,verantwortlicher")] Lehrstuhl lehrstuhl)
         {
             if (ModelState.IsValid)
             {
