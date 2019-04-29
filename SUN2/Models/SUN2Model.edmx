@@ -448,10 +448,6 @@
           <EntitySet Name="MitgliederGruppe" EntityType="SUN2Model.MitgliederGruppe" />
           <EntitySet Name="LehrstuhlEintraege" EntityType="SUN2Model.LehrstuhlEintraege" />
           <EntitySet Name="Gruppe" EntityType="SUN2Model.Gruppe" />
-          <AssociationSet Name="FK_LehrstuhlEintraege_LehrstuhlEintraege" Association="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege">
-            <End Role="LehrstuhlEintraege" EntitySet="LehrstuhlEintraege" />
-            <End Role="LehrstuhlEintraege1" EntitySet="LehrstuhlEintraege" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AbonnentenLehrstuhl">
           <Key>
@@ -513,9 +509,7 @@
           <Property Name="label3" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="label4" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="label5" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LehrstuhlEintraege1" Relationship="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" FromRole="LehrstuhlEintraege" ToRole="LehrstuhlEintraege1" />
-          <NavigationProperty Name="LehrstuhlEintraege2" Relationship="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" FromRole="LehrstuhlEintraege1" ToRole="LehrstuhlEintraege" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="Gruppe">
           <Key>
             <PropertyRef Name="gruppenid" />
@@ -526,18 +520,6 @@
           <Property Name="verantwortlicher" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="privat" Type="Boolean" />
         </EntityType>
-        <Association Name="FK_LehrstuhlEintraege_LehrstuhlEintraege">
-          <End Type="SUN2Model.LehrstuhlEintraege" Role="LehrstuhlEintraege" Multiplicity="1" />
-          <End Type="SUN2Model.LehrstuhlEintraege" Role="LehrstuhlEintraege1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="LehrstuhlEintraege">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="LehrstuhlEintraege1">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

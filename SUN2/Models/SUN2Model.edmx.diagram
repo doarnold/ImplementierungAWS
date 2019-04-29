@@ -23,7 +23,6 @@
         <EntityTypeShape EntityType="SUN2Model.MitgliederGruppe" Width="1.5" PointX="2.75" PointY="10.75" />
         <EntityTypeShape EntityType="SUN2Model.LehrstuhlEintraege" Width="1.5" PointX="5.375" PointY="10.75" />
         <EntityTypeShape EntityType="SUN2Model.Gruppe" Width="1.5" PointX="7.375" PointY="10.75" />
-        <AssociationConnector Association="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
