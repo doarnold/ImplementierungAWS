@@ -44,9 +44,10 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.gruppenid }) |
             @Html.ActionLink("Details", "Details", new { id = item.gruppenid }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.gruppenid })|
-            @Html.ActionLink("New Post", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)
-            <p>@item.gruppenid</p>
+            @Html.ActionLink("Delete", "Delete", new { id = item.gruppenid }) |
+            @Html.ActionLink("New Entry", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) | 
+            @Html.ActionLink("Show Entries", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)
+
 
 
         </td>

@@ -17,9 +17,25 @@ namespace SUN2.Controllers
         private SUN2Entities db = new SUN2Entities();
 
         // GET: GruppenEintraege
-        public ActionResult Index()
+        public ActionResult Index(int? gruppenid)
         {
-            return View(db.GruppenEintraeges.ToList());
+            List <GruppenEintraege> entries = new List<GruppenEintraege>();
+
+            if(gruppenid == null)
+            {
+                return View(db.GruppenEintraeges.ToList());
+            } else
+            {
+                foreach (GruppenEintraege ge in db.GruppenEintraeges)
+                {
+                    if (ge.gruppenid == gruppenid)
+                    {
+                        entries.Add(ge);
+                    }
+                }
+                return View(entries.ToList());
+            }
+            
         }
 
         // GET: GruppenEintraege/Details/5
