@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -46,10 +47,14 @@ namespace SUN2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "gruppenid,bezeichnung,beschreibung,verantwortlicher,privat")] Gruppe gruppe)
+        public ActionResult Create([Bind(Include = "gruppenid,bezeichnung,beschreibung,privat")] Gruppe gruppe)
         {
             if (ModelState.IsValid)
             {
+                //angemeldeter User ist Verantwortlicher
+                var userId = User.Identity.GetUserId();
+                gruppe.verantwortlicher = userId;
+
                 db.Gruppes.Add(gruppe);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +83,7 @@ namespace SUN2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "gruppenid,bezeichnung,beschreibung,verantwortlicher,privat")] Gruppe gruppe)
+        public ActionResult Edit([Bind(Include = "gruppenid,bezeichnung,verantwortlicher,beschreibung,privat")] Gruppe gruppe)
         {
             if (ModelState.IsValid)
             {
