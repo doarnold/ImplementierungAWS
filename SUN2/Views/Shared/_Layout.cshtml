@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                 </button>
                <!-- @Html.ActionLink("SUN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) -->
-                <a href="@Url.Action("Index", "Home")"><img src="~/Images/SUNlogoWHITEmedium.png" /></a>
+               <a href="@Url.Action("Index", "Home")"><img src="~/Images/SUNlogoWHITEmedium.png" /></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -32,11 +32,51 @@
                     <li>@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")</li>
                     <li>@Html.ActionLink("Administration", "Administration", "Home")</li>
 
-                
+                    <div class="collapse navbar-collapse" id="navigation-bar">
+                        <ul class="navbar-nav ml-auto">
+                            <!--shift navigation elements over; ml-auto stands for margin left automatic so that will fill the margin on the left-hand-side of our navigation-->
+                            <li class="nav-item">
+                            <a class="nav-link" href="#social">T.Weiler</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#who">Seite erstellen</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#work">Moin</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#why">WHY</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#customers">CUSTOMERS</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#pricing">PRICING</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contact">CONTACT</a></li>
+                        </ul>
+                    </div>
 
 
-                </ul>
+                </ul>  
                 @Html.Partial("_LoginPartial")
+
+                <nav class="navbar navbar-expand-lg fixed-top">
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation-bar">
+                        <!--"collapse hides the content-->
+                        <span class="navbar-toggler-icon">&#9776;</span> <!--#9776 is the three bar symbol,, so if the screen is small, there will be a toggle button instead of all these nav items. Navigation items are in there-->
+                    </button>
+
+                    <a class="navbar-brand" href="#"><img src="img/SUNlogoWHITEsmall.png" class="img-fluid"></a> <!--a tag is always a hyperlink; img-fluid makes images responsive-->
+                    <!-- NAVIGATION BAR -->
+
+                    <div class="collapse navbar-collapse" id="navigation-bar">
+                        <ul class="navbar-nav ml-auto">
+                            <!--shift navigation elements over; ml-auto stands for margin left automatic so that will fill the margin on the left-hand-side of our navigation-->
+                            <li class="nav-item"><a class="nav-link" href="#social">T.Weiler</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#who">Seite erstellen</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#work">Moin</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#why">WHY</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#customers">CUSTOMERS</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#pricing">PRICING</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#contact">CONTACT</a></li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- END NAVIGATION BAR -->
+
+
             </div>
         </div>
     </div>
