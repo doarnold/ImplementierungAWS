@@ -15,9 +15,26 @@ namespace SUN2.Controllers
         private SUN2Entities db = new SUN2Entities();
 
         // GET: MitgliederGruppe
-        public ActionResult Index()
+        public ActionResult Index(int? gruppenid)
         {
-            return View(db.MitgliederGruppes.ToList());
+            List<MitgliederGruppe> entries = new List<MitgliederGruppe>();
+
+            if (gruppenid == null)
+            {
+                return View(db.MitgliederGruppes.ToList());
+            }
+            else
+            {
+                foreach (MitgliederGruppe ge in db.MitgliederGruppes)
+                {
+                    if (ge.gruppenid == gruppenid)
+                    {
+                        entries.Add(ge);
+                    }
+                }
+                return View(entries.ToList());
+            }
+
         }
 
         // GET: MitgliederGruppe/Details/5
@@ -36,10 +53,24 @@ namespace SUN2.Controllers
         }
 
         // GET: MitgliederGruppe/Create
-        public ActionResult Create()
+        public ActionResult Create(int? gruppenid)
         {
-            return View();
-        }
+            if (gruppenid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            MitgliederGruppe gm = new MitgliederGruppe();
+            gm.gruppenid = (int)gruppenid;
+
+
+
+            return View(gm);
+
+                
+
+
+            }  
 
         // POST: MitgliederGruppe/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
