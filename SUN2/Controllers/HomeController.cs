@@ -46,5 +46,25 @@ namespace SUN2.Controllers
         {
             return View();
         }
+
+        // liefert die Suchergebnisse
+        public ActionResult Search(String searchstr)
+        {
+            // Was darf gefunden gefunden werden ?
+            // person, Gruppe, EIntrag, lehrstuhl -> wenn nicht private etc
+            // Tags 
+
+
+            List<Object> res = new List<Object>();
+
+
+
+            return View();
+
+
+        }
+
+
+
     }
 }
