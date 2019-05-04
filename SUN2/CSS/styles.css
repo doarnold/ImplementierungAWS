@@ -1,0 +1,32 @@
+﻿.dropdown-menu {
+    background-color: #222;
+}
+
+.dropdown-menu > li > a:hover {
+    color: #fff;
+}
+
+.dropdown-menu > li > a:hover, dropdown-menu > li > a:focus {
+    background-color: #333333;
+}
+
+.dropdown-menu .divider {
+    background-color: #080808;
+}
+
+.dropdown {
+    border-color: #080808;
+}
+
+.dropdown-menu > li > a {
+    color: #9d9d9d;
+}
+
+.dropdown-menu {
+    color: #333333;
+}
+
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }

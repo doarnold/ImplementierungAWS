@@ -1,16 +1,35 @@
-﻿@using Microsoft.AspNet.Identity
+﻿<link rel="stylesheet" href="~/CSS/styles.css" />
+@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hallo " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Abmelden</a></li>
-    </ul>
+<ul class="nav navbar-nav navbar-right">
+    <!--
+        Das ist das Dropdown Menü, welches rechts oben in der Navigation Bar angezeigt wird.
+    -->
+    <li class="nav-item dropdown">
+        @*<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">*@
+    <li class="dropdown">
+        @*@Html.ActionLink("Hallo " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { @class = "nav-link dropdown-toggle", id = "navbarDropdownMenuLink", data_toggle = "dropdown", aria_haspopup = "true" })*@
+        <!--
+        https://stackoverflow.com/questions/8878033/how-to-make-twitter-bootstrap-menu-dropdown-on-hover-rather-than-click
+        -->
+        <a href="@Url.Action("Index", "Manage", routeValues: null)" class="dropdown-toggle" id="navbarDropdownMenuLink" data_toggle="dropdown" role="button" aria-expanded="false">Hallo @User.Identity.GetUserName()!<span class="caret"></span></a>
+        @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>*@
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Profil bearbeiten", "EditMe", "Person", routeValues: null, htmlAttributes: new { @class = "nav-item-dropdown" })</li>
+            <li>@Html.ActionLink("Administration", "Administration", "Home", routeValues: null, htmlAttributes: new { @class = "nav-item-dropdown" })</li>
+            <li role="separator" class="divider"></li>
+            <li><a class="nav-item-dropdown dropdwon-link-style" href="javascript:document.getElementById('logoutForm').submit()">Abmelden</a></li>
+        </ul>
+    </li>
+
+    @*</a>*@
+
+</ul>
     }
 }
 else

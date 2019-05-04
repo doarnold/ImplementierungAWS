@@ -1,39 +1,67 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Soziales Uni Netzwerk</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @using Microsoft.AspNet.Identity
 
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+
+
             <div class="navbar-header">
+            <!--
+                Der Button und die drei span's machen den Header responsive. Wenn man das 
+                Fenster zusammschiebt erscheinen rechts oben drei horizontale Balken. Dafür sind die 
+                die nächsten Zeilen Code verantwortlich.
+            -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               <!-- @Html.ActionLink("SUN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) -->
-                <a href="@Url.Action("Index", "Home")"><img src="~/Images/SUNlogoWHITEmedium.png" /></a>
+            <!--
+                Das Icon welches rechts oben angezeigt wird.
+            -->
+                @*@Html.ActionLink("SUN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                <a href="@Url.Action("Index", "Home")"><img src="~/Images/SUNlogoWHITEmedium.png" height="50"/></a>
             </div>
+
+
             <div class="navbar-collapse collapse">
+                <!-- 
+                    Alles was in der Navigation Bar stehen soll muss in diesen
+                     div Container.
+                -->
+
                 <ul class="nav navbar-nav">
-                    <!-- <li>@Html.ActionLink("Startseite", "Index", "Home")</li> -->
-                    <!-- <li>@Html.ActionLink("Informationen", "About", "Home")</li> -->
-                    <!-- <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li> -->
-                    <li>@Html.ActionLink("Profil bearbeiten", "EditMe", "Person")</li>
-                    <!-- dies sollte in eine extra layout view für logged in user-->
-                    <li>@Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")</li>
-                    <li>@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")</li>
-                    <li>@Html.ActionLink("Administration", "Administration", "Home")</li>
+                    <!-- 
+                        Hier wird geprüft, ob der User angemeldet ist.
+                    Alles was innerhalb der if-Abfrage steht wird erst angezeigt,
+                    wenn der User angemeldet ist.
+                    -->
+                    @if (Request.IsAuthenticated)
+                    {
+                        @Html.AntiForgeryToken()
+                        <!-- <li>@Html.ActionLink("Startseite", "Index", "Home")</li> -->
+                        <!-- <li>@Html.ActionLink("Informationen", "About", "Home")</li> -->
+                        <!-- <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li> -->
+                        @*<li class="nav-item">@Html.ActionLink("Profil bearbeiten", "EditMe", "Person")</li>*@
+                        <li class="nav-item">@Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")</li>
+                        <li class="nav-item">@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")</li>
+                        @*<li class="nav-item">@Html.ActionLink("Administration", "Administration", "Home")</li>*@
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
+
+
         </div>
     </div>
     <div class="container body-content">
