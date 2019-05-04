@@ -41,11 +41,11 @@
                 -->
 
                 <ul class="nav navbar-nav">
-                    <!-- 
-                        Hier wird geprüft, ob der User angemeldet ist.
-                    Alles was innerhalb der if-Abfrage steht wird erst angezeigt,
-                    wenn der User angemeldet ist.
-                    -->
+                    <!--
+        Hier wird geprüft, ob der User angemeldet ist.
+    Alles was innerhalb der if-Abfrage steht wird erst angezeigt,
+    wenn der User angemeldet ist.
+    -->
                     @if (Request.IsAuthenticated)
                     {
                         @Html.AntiForgeryToken()
@@ -53,8 +53,13 @@
                         <!-- <li>@Html.ActionLink("Informationen", "About", "Home")</li> -->
                         <!-- <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li> -->
                         @*<li class="nav-item">@Html.ActionLink("Profil bearbeiten", "EditMe", "Person")</li>*@
+
+
+
+
                         <li class="nav-item">@Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")</li>
                         <li class="nav-item">@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")</li>
+                        <li class="nav-item"> @Html.TextBox("Suche", null, new { @class = "form-control",  placeholder = "What are you searching for?" }) </li>
                         @*<li class="nav-item">@Html.ActionLink("Administration", "Administration", "Home")</li>*@
                     }
                 </ul>
