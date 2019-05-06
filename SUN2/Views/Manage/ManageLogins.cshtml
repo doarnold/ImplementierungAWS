@@ -10,12 +10,7 @@
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
     if (loginProviders.Count() == 0) {
-        <div>
-            <p>
-                Es sind keine externen Authentifizierungsdienste konfiguriert. In <a href="https://go.microsoft.com/fwlink/?LinkId=313242">diesem Artikel</a>
-                finden Sie weitere Informationen zum Einrichten dieser ASP.NET-Anwendung für die Unterstützung der Anmeldung über externe Dienste.
-            </p>
-        </div>
+        
     }
     else
     {

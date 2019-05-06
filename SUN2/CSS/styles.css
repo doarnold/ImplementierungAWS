@@ -30,3 +30,8 @@
     .dropdown:hover .dropdown-menu {
         display: block;
     }
+
+#Lupe {
+    color: white;
+    font-size: 1.5em;
+}
