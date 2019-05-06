@@ -9,27 +9,11 @@
     @Scripts.Render("~/bundles/modernizr")
     @using Microsoft.AspNet.Identity
 
-    <style>
-
-     #Lupe {
-    color: white;
-    font-size: 1.5em;
-    padding-left: 10px; 
-    padding-top: 15px; 
-    }
-
-     .Feld{
-
-        width: 600px; 
-        margin-top:8px;
-
-     }
-
-    </style>
 
 </head>
 <body>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/CSS/styles.css" />
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
 
@@ -61,6 +45,8 @@
 
                 <ul class="nav navbar-nav">
 
+
+
                     <!--
         Hier wird geprüft, ob der User angemeldet ist.
     Alles was innerhalb der if-Abfrage steht wird erst angezeigt,
@@ -77,16 +63,16 @@
 
 
 
-                        <li class="nav-item">@Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")</li>
-                        <li class="nav-item">@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")</li>
-                        <li class="nav-item"> @Html.TextBox("Suche", null, new {@class = "form-control Feld", placeholder = "What are you searching for?" }) </li>
-         
-                        <li class="nav-item"><i id="Lupe" onclick="myFunction()" class="fas fa-search"></i></li>
-                
+                    <li class="nav-item">@Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")</li>
+                    <li class="nav-item">@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")</li>
+                    <li class="nav-item"> @Html.TextBox("Suche", null, new { @class = "form-control Feld", placeholder = "What are you searching for?" }) </li>
 
-                        @*<li class="nav-item">@Html.ActionLink("Administration", "Administration", "Home")</li>*@
-                    }
-                </ul>
+                    <li class="nav-item"><i id="Lupe" onclick="myFunction()" class="fas fa-search"></i></li>
+
+
+                    @*<li class="nav-item">@Html.ActionLink("Administration", "Administration", "Home")</li>*@
+                }
+</ul>
 @Html.Partial("_LoginPartial")
 </div>
 
