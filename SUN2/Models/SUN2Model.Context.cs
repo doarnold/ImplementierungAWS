@@ -46,5 +46,7 @@ namespace SUN2.Models
         public System.Data.Entity.DbSet<SUN2.Models.MitarbeiterLehrstuhl> MitarbeiterLehrstuhls { get; set; }
 
         public System.Data.Entity.DbSet<SUN2.Models.MitgliederGruppe> MitgliederGruppes { get; set; }
+
+        public System.Data.Entity.DbSet<SUN2.Models.PersonAddGruppeModel> PersonAddGruppeModels { get; set; }
     }
 }

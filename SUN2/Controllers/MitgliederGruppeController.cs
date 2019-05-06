@@ -37,6 +37,89 @@ namespace SUN2.Controllers
 
         }
 
+        // Funktionalität zum Hinzfügen neuer Mitglieder zu einer Gruppe
+        // GET Methode stellt eine Liste aller verfügbaren Personen zum Hinzufügen bereit, die nicht bereits
+        // Mitglied der entsprechenden Gruppe (s. import parameter gruppenid) sind
+        // GET: MitgliederGruppe/Add/5
+        public ActionResult Add(int? gruppenid)
+        {
+            List<PersonAddGruppeModel> entries = new List<PersonAddGruppeModel>();
+
+            if (gruppenid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                foreach (Person person in db.Person)
+                {
+                   // foreach (MitgliederGruppe mitglied in db.MitgliederGruppes)
+                   // {
+                       // if (person.id != mitglied.userid && mitglied.gruppenid != gruppenid)
+                       // {
+
+                            entries.Add(new PersonAddGruppeModel {
+                                gruppenid = (int)gruppenid,
+                                id = person.id,
+                                name = person.name,
+                                vorname = person.vorname,
+                                email = person.AspNetUsers.Email
+                                        } );
+                       // }
+                    //}
+                }
+            }
+
+            return View(entries);
+        }
+
+        // Funktionalität zum Hinzfügen neuer Mitglieder zu einer Gruppe
+        // Fügt eine aus der Liste ausgwählte Perosn zur entsprechenden Gruppe hinzu
+        // GET: MitgliederGruppe/AddPerson
+        public ActionResult AddPerson(int? gruppenid, string id)
+        {
+            PersonAddGruppeModel pagm = new PersonAddGruppeModel();
+            pagm.gruppenid = (int)gruppenid;
+            pagm.id = id;
+
+            if (gruppenid == null || id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                foreach (Person person in db.Person)
+                {
+                    if (person.id == id)
+                    {
+                        pagm.name = person.name;
+                        pagm.vorname = person.vorname;
+                        pagm.email = person.AspNetUsers.Email;
+                    }
+
+                }
+            }
+
+            MitgliederGruppe mg = new MitgliederGruppe();
+
+            if (pagm.id != null)
+            {
+                mg.userid = pagm.id;
+                mg.gruppenid = (int)pagm.gruppenid;
+
+                if (ModelState.IsValid)
+                {
+                    db.MitgliederGruppes.Add(mg);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Gruppe");
+                }
+            }
+
+
+            return View(pagm);
+        }
+
+
         // GET: MitgliederGruppe/Details/5
         public ActionResult Details(string id)
         {
@@ -63,12 +146,7 @@ namespace SUN2.Controllers
             MitgliederGruppe gm = new MitgliederGruppe();
             gm.gruppenid = (int)gruppenid;
 
-
-
             return View(gm);
-
-                
-
 
             }  
 
