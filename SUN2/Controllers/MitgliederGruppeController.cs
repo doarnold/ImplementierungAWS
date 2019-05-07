@@ -29,8 +29,28 @@ namespace SUN2.Controllers
                 {
                     if (ge.gruppenid == gruppenid)
                     {
-                        entries.Add(ge);
+
+                        foreach (Person person in db.Person)
+                        {
+                            if(ge.userid == person.id)
+                            {
+                                //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID
+                                if(person.name != null && person.vorname != null)
+                                {
+                                    ge.userid = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
+                                } else
+                                {
+                                    ge.userid = person.AspNetUsers.Email;
+                                }
+                                 
+                            }
+                            
+                        }
+
+                            entries.Add(ge);
                     }
+
+                    
                 }
                 return View(entries.ToList());
             }
@@ -126,6 +146,9 @@ namespace SUN2.Controllers
         }
 
 
+        // !!!!--- NICHT VERWENDET ---!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         // GET: MitgliederGruppe/Details/5
         public ActionResult Details(string id)
         {
@@ -141,6 +164,9 @@ namespace SUN2.Controllers
             return View(mitgliederGruppe);
         }
 
+        // !!!!--- NICHT VERWENDET ---!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         // GET: MitgliederGruppe/Create
         public ActionResult Create(int? gruppenid)
         {
@@ -154,7 +180,11 @@ namespace SUN2.Controllers
 
             return View(gm);
 
-            }  
+            }
+
+
+        // !!!!--- NICHT VERWENDET ---!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         // POST: MitgliederGruppe/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -173,6 +203,9 @@ namespace SUN2.Controllers
             return View(mitgliederGruppe);
         }
 
+        // !!!!--- NICHT VERWENDET ---!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         // GET: MitgliederGruppe/Edit/5
         public ActionResult Edit(string id)
         {
@@ -187,6 +220,9 @@ namespace SUN2.Controllers
             }
             return View(mitgliederGruppe);
         }
+
+        // !!!!--- NICHT VERWENDET ---!!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         // POST: MitgliederGruppe/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

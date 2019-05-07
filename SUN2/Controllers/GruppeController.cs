@@ -18,7 +18,30 @@ namespace SUN2.Controllers
         // GET: Gruppe
         public ActionResult Index()
         {
-            return View(db.Gruppes.ToList());
+            List<Gruppe> entries = new List<Gruppe>();
+
+            foreach (Gruppe gruppe in db.Gruppes)
+            {
+                foreach (Person person in db.Person)
+                {
+                    if(person.id == gruppe.verantwortlicher)
+                    {
+                        //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
+                        if (person.name != null && person.vorname != null)
+                        {
+                            gruppe.verantwortlicher = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
+                        }
+                        else
+                        {
+                            gruppe.verantwortlicher = person.AspNetUsers.Email;
+                        }
+                    }
+                }
+
+                entries.Add(gruppe);
+            }
+
+            return View(entries);
         }
 
         // GET: Gruppe/Details/5

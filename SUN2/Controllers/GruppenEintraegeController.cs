@@ -30,6 +30,21 @@ namespace SUN2.Controllers
                 {
                     if (ge.gruppenid == gruppenid)
                     {
+                        foreach (Person person in db.Person)
+                        {
+                            if (person.id == ge.autor)
+                            {
+                                //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
+                                if (person.name != null && person.vorname != null)
+                                {
+                                    ge.autor = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
+                                }
+                                else
+                                {
+                                    ge.autor = person.AspNetUsers.Email;
+                                }
+                            }  
+                        }
                         entries.Add(ge);
                     }
                 }
