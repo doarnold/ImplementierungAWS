@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<SUN2.Models.GruppenEintraege>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Übersicht aller Gruppeneinträge";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -71,9 +68,9 @@
             @Html.DisplayFor(modelItem => item.label5)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Bearbeiten", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Löschen", "Delete", new { id=item.id })
         </td>
     </tr>
 }

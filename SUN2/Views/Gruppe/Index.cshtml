@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SUN2.Models.Gruppe>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Alle Gruppen";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Neue Gruppe erstellen", "Create")
 </p>
 <table class="table">
     <tr>
@@ -42,13 +42,13 @@
             @Html.DisplayFor(modelItem => item.privat)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.gruppenid }) |
+            @Html.ActionLink("Bearbeiten", "Edit", new { id = item.gruppenid }) |
             @Html.ActionLink("Details", "Details", new { id = item.gruppenid }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.gruppenid }) |
-            @Html.ActionLink("New Entry", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
-            @Html.ActionLink("Show Entries", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
-            @Html.ActionLink("Show Members", "Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null) |
-            @Html.ActionLink("Add Members", "Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)
+            @Html.ActionLink("Löschen", "Delete", new { id = item.gruppenid }) |
+            @Html.ActionLink("Neuer Eintrag", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
+            @Html.ActionLink("Einträge anzeigen", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
+            @Html.ActionLink("Mitglieder anzeigen", "Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null) |
+            @Html.ActionLink("Mitglied hinzufügen", "Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)
 
 
 

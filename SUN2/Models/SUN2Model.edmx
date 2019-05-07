@@ -17,10 +17,11 @@
         </EntityType>
         <EntityType Name="AbonnentenLehrstuhl">
           <Key>
-            <PropertyRef Name="userid" />
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="userid" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="lehrstuhlid" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -125,17 +126,19 @@
         </EntityType>
         <EntityType Name="MitarbeiterLehrstuhl">
           <Key>
-            <PropertyRef Name="userid" />
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="userid" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="lehrstuhlid" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="MitgliederGruppe">
           <Key>
-            <PropertyRef Name="userid" />
+            <PropertyRef Name="id" />
           </Key>
           <Property Name="userid" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="gruppenid" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -441,21 +444,18 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <EntitySet Name="AbonnentenLehrstuhl" EntityType="SUN2Model.AbonnentenLehrstuhl" />
           <EntitySet Name="GruppenEintraege" EntityType="SUN2Model.GruppenEintraege" />
           <EntitySet Name="Lehrstuhl" EntityType="SUN2Model.Lehrstuhl" />
-          <EntitySet Name="MitarbeiterLehrstuhl" EntityType="SUN2Model.MitarbeiterLehrstuhl" />
-          <EntitySet Name="MitgliederGruppe" EntityType="SUN2Model.MitgliederGruppe" />
           <EntitySet Name="LehrstuhlEintraege" EntityType="SUN2Model.LehrstuhlEintraege" />
           <EntitySet Name="Gruppe" EntityType="SUN2Model.Gruppe" />
+          <AssociationSet Name="FK_LehrstuhlEintraege_LehrstuhlEintraege" Association="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege">
+            <End Role="LehrstuhlEintraege" EntitySet="LehrstuhlEintraege" />
+            <End Role="LehrstuhlEintraege1" EntitySet="LehrstuhlEintraege" />
+          </AssociationSet>
+          <EntitySet Name="AbonnentenLehrstuhl" EntityType="SUN2Model.AbonnentenLehrstuhl" />
+          <EntitySet Name="MitarbeiterLehrstuhl" EntityType="SUN2Model.MitarbeiterLehrstuhl" />
+          <EntitySet Name="MitgliederGruppe" EntityType="SUN2Model.MitgliederGruppe" />
         </EntityContainer>
-        <EntityType Name="AbonnentenLehrstuhl">
-          <Key>
-            <PropertyRef Name="userid" />
-          </Key>
-          <Property Name="userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="lehrstuhlid" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="GruppenEintraege">
           <Key>
             <PropertyRef Name="id" />
@@ -481,20 +481,6 @@
           <Property Name="verantwortlicher" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="privat" Type="Boolean" />
         </EntityType>
-        <EntityType Name="MitarbeiterLehrstuhl">
-          <Key>
-            <PropertyRef Name="userid" />
-          </Key>
-          <Property Name="userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="lehrstuhlid" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="MitgliederGruppe">
-          <Key>
-            <PropertyRef Name="userid" />
-          </Key>
-          <Property Name="userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="gruppenid" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="LehrstuhlEintraege">
           <Key>
             <PropertyRef Name="id" />
@@ -509,6 +495,8 @@
           <Property Name="label3" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="label4" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="label5" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LehrstuhlEintraege1" Relationship="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" FromRole="LehrstuhlEintraege" ToRole="LehrstuhlEintraege1" />
+          <NavigationProperty Name="LehrstuhlEintraege2" Relationship="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" FromRole="LehrstuhlEintraege1" ToRole="LehrstuhlEintraege" />
           </EntityType>
         <EntityType Name="Gruppe">
           <Key>
@@ -519,6 +507,42 @@
           <Property Name="beschreibung" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
           <Property Name="verantwortlicher" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="privat" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_LehrstuhlEintraege_LehrstuhlEintraege">
+          <End Type="SUN2Model.LehrstuhlEintraege" Role="LehrstuhlEintraege" Multiplicity="1" />
+          <End Type="SUN2Model.LehrstuhlEintraege" Role="LehrstuhlEintraege1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LehrstuhlEintraege">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LehrstuhlEintraege1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AbonnentenLehrstuhl">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="lehrstuhlid" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="MitarbeiterLehrstuhl">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="lehrstuhlid" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="MitgliederGruppe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="userid" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="gruppenid" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -616,14 +640,6 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="AbonnentenLehrstuhl">
-            <EntityTypeMapping TypeName="SUN2Model.AbonnentenLehrstuhl">
-              <MappingFragment StoreEntitySet="AbonnentenLehrstuhl">
-                <ScalarProperty Name="lehrstuhlid" ColumnName="lehrstuhlid" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="GruppenEintraege">
             <EntityTypeMapping TypeName="SUN2Model.GruppenEintraege">
               <MappingFragment StoreEntitySet="GruppenEintraege">
@@ -651,22 +667,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MitarbeiterLehrstuhl">
-            <EntityTypeMapping TypeName="SUN2Model.MitarbeiterLehrstuhl">
-              <MappingFragment StoreEntitySet="MitarbeiterLehrstuhl">
-                <ScalarProperty Name="lehrstuhlid" ColumnName="lehrstuhlid" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MitgliederGruppe">
-            <EntityTypeMapping TypeName="SUN2Model.MitgliederGruppe">
-              <MappingFragment StoreEntitySet="MitgliederGruppe">
-                <ScalarProperty Name="gruppenid" ColumnName="gruppenid" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LehrstuhlEintraege">
             <EntityTypeMapping TypeName="SUN2Model.LehrstuhlEintraege">
               <MappingFragment StoreEntitySet="LehrstuhlEintraege">
@@ -691,6 +691,33 @@
                 <ScalarProperty Name="beschreibung" ColumnName="beschreibung" />
                 <ScalarProperty Name="bezeichnung" ColumnName="bezeichnung" />
                 <ScalarProperty Name="gruppenid" ColumnName="gruppenid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AbonnentenLehrstuhl">
+            <EntityTypeMapping TypeName="SUN2Model.AbonnentenLehrstuhl">
+              <MappingFragment StoreEntitySet="AbonnentenLehrstuhl">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="lehrstuhlid" ColumnName="lehrstuhlid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MitarbeiterLehrstuhl">
+            <EntityTypeMapping TypeName="SUN2Model.MitarbeiterLehrstuhl">
+              <MappingFragment StoreEntitySet="MitarbeiterLehrstuhl">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="lehrstuhlid" ColumnName="lehrstuhlid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MitgliederGruppe">
+            <EntityTypeMapping TypeName="SUN2Model.MitgliederGruppe">
+              <MappingFragment StoreEntitySet="MitgliederGruppe">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="gruppenid" ColumnName="gruppenid" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

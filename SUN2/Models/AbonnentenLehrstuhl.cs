@@ -12,10 +12,14 @@ namespace SUN2.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     [MetadataType(typeof(AbonnentenLehrstuhlMetadata))]
     public partial class AbonnentenLehrstuhl
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
         public string userid { get; set; }
         public int lehrstuhlid { get; set; }
     }
