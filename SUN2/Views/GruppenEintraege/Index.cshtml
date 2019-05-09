@@ -4,75 +4,59 @@
     ViewBag.Title = "Übersicht aller Gruppeneinträge";
 }
 
-<h2>Index</h2>
+<!-- CSS Einbindung-->
+@Styles.Render("~/Content/css")
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.gruppenid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.datum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.autor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.inhalt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label3)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label4)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label5)
-        </th>
-        <th></th>
-    </tr>
+   
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.gruppenid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.datum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.autor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inhalt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label4)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label5)
-        </td>
-        <td>
-            @Html.ActionLink("Bearbeiten", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Löschen", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+@{ 
+
+    var counter = 0;
+
+    foreach (var item in Model)
+    {
+
+         if (counter == 0)
+        {
+         <h2>
+        Gruppe:
+        @Html.DisplayFor(modelItem => item.gruppenid)
+        <!-- Funktioniert für einzelne Gruppen wirft aber Fehler bei allen !-->
+         </h2>
+            counter++; 
+        }
+
+
+<div id="GruppenBeitragGesamt">
+
+
+    <div id="GruppenHead">
+        @Html.DisplayFor(modelItem => item.autor)
+        @Html.DisplayFor(modelItem => item.datum)
+    </div>
+
+    <div id="GruppenInhalt">
+        @Html.DisplayFor(modelItem => item.inhalt)
+    </div>
+
+    <div id="Gruppen">
+      
+        @Html.DisplayFor(modelItem => item.label1)
+        @Html.DisplayFor(modelItem => item.label2)
+        @Html.DisplayFor(modelItem => item.label3)
+        @Html.DisplayFor(modelItem => item.label4)
+        @Html.DisplayFor(modelItem => item.label5)
+    </div>
+    <div id="GruppenPlatzhalter"></div>
+        <p></p>
+
+    </div>
+
+
+
+   
+
+        }
+    }
 
 </table>
