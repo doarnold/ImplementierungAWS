@@ -69,10 +69,36 @@
         <div class="form-group">
             @Html.LabelFor(model => model.studienbeginn, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @Html.EditorFor(model => model.studienbeginn, new { htmlAttributes = new { @class = "form-control" } })
+
+                @*@Html.DropDownListFor(model => model.studienbeginn, new SelectList(new List<Object>{
+                                 @{ for (int i = 0; i < 20; i++)
+                                     {
+                                         if (i%2 = 0)
+                                         {
+
+                                         }
+                                         new { value = 0 , text = "Wintersemester"  },
+                                     } }
+                    }))*@
 
 
-                @Html.EditorFor(model => model.studienbeginn, new { htmlAttributes = new { @class = "form-control"} })
-                @Html.ValidationMessageFor(model => model.studienbeginn, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(
+                model => model.studienbeginn,
+                new SelectList(new List<Object>
+                {
+                    new { value = 0 , text = "Wintersemester 2019"  },
+                    new { value = 1 , text = "Sommersemester 2019" },
+                    new { value = 2 , text = "Wintersemester 2018"}
+                    },
+                    "value",
+                    "text",
+                    Model.studienbeginn
+                    )
+                    )
+
+
+                @*@Html.ValidationMessageFor(model => model.studienbeginn, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
