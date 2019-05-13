@@ -146,9 +146,8 @@ namespace SUN2.Controllers
         }
 
 
-        // !!!!--- NICHT VERWENDET ---!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+        // zurzeit nicht verwendet, bitte drinlassen
+        /*
         // GET: MitgliederGruppe/Details/5
         public ActionResult Details(string id)
         {
@@ -181,7 +180,6 @@ namespace SUN2.Controllers
             return View(gm);
 
             }
-
 
         // !!!!--- NICHT VERWENDET ---!!!!
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -238,32 +236,45 @@ namespace SUN2.Controllers
                 return RedirectToAction("Index");
             }
             return View(mitgliederGruppe);
-        }
+        } */
 
-        // GET: MitgliederGruppe/Delete/5
-        public ActionResult Delete(string id)
+
+        /*
+    // GET: MitgliederGruppe/Delete/5
+    public ActionResult Delete(int id)
+    {
+        if (id == null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
-            if (mitgliederGruppe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mitgliederGruppe);
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
+        MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
+        if (mitgliederGruppe == null)
+        {
+            return HttpNotFound();
+        }
+        return View(mitgliederGruppe);
+    }
 
+    // POST: MitgliederGruppe/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public ActionResult DeleteConfirmed(int id)
+    {
+        MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
+        db.MitgliederGruppes.Remove(mitgliederGruppe);
+        db.SaveChanges();
+        return RedirectToAction("Index");
+    }
+    */
+
+        // Ermöglicht das Löschen eines Gruppenmitglieds
         // POST: MitgliederGruppe/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult Delete(int id)
         {
             MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
             db.MitgliederGruppes.Remove(mitgliederGruppe);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "MitgliederGruppe", new { gruppenid = mitgliederGruppe.gruppenid });
         }
 
         protected override void Dispose(bool disposing)

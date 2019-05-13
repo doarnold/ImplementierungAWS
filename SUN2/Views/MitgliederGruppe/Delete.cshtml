@@ -1,4 +1,15 @@
-﻿@model SUN2.Models.MitgliederGruppe
+﻿
+<!--
+    
+    Diese View verwenden wir nur indirekt!
+    Löschen funktioniert über ActionLink in der Index View.
+
+    Bitte drinlassen!
+
+
+-->
+
+@model SUN2.Models.MitgliederGruppe
 
 @{
     ViewBag.Title = "Delete";
@@ -26,7 +37,8 @@
 
 <div class="form-actions no-color">
     <input type="submit" value="Delete" class="btn btn-default" /> |
-    @Html.ActionLink("Zurück", "Index", "Gruppe", new { gruppenid = gruppenid }, null)
+
+ 
 </div>
     }
 </div>
