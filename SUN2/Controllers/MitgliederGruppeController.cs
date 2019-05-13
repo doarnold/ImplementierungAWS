@@ -14,6 +14,8 @@ namespace SUN2.Controllers
     {
         private SUN2Entities db = new SUN2Entities();
 
+        // Gibt eine Liste aller Gruppenmitglieder für eine bestimmte Gruppe zurück
+        // (Import: GruppenID, Export: Liste Gruppenmitglieder)
         // GET: MitgliederGruppe
         public ActionResult Index(int? gruppenid)
         {
@@ -29,7 +31,6 @@ namespace SUN2.Controllers
                 {
                     if (ge.gruppenid == gruppenid)
                     {
-
                         foreach (Person person in db.Person)
                         {
                             if(ge.userid == person.id)
@@ -46,16 +47,13 @@ namespace SUN2.Controllers
                             }
                             
                         }
-
                             entries.Add(ge);
-                    }
-
-                    
+                    }   
                 }
                 return View(entries.ToList());
             }
-
         }
+
 
         // Funktionalität zum Hinzfügen neuer Mitglieder zu einer Gruppe;
         // Methode stellt eine Liste aller verfügbaren Personen zum Hinzufügen bereit, die nicht bereits
@@ -112,6 +110,7 @@ namespace SUN2.Controllers
             return View(entries);
         }
 
+
         // Funktionalität zum Hinzfügen neuer Mitglieder zu einer Gruppe
         // Fügt eine aus der Liste ausgwählte Perosn zur entsprechenden Gruppe hinzu
         // ~~Import: Gruppenid, userid
@@ -143,6 +142,17 @@ namespace SUN2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
       
+        }
+
+
+        // Ermöglicht das Löschen eines Gruppenmitglieds
+        // POST: MitgliederGruppe/Delete/5
+        public ActionResult Delete(int id)
+        {
+            MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
+            db.MitgliederGruppes.Remove(mitgliederGruppe);
+            db.SaveChanges();
+            return RedirectToAction("Index", "MitgliederGruppe", new { gruppenid = mitgliederGruppe.gruppenid });
         }
 
 
@@ -240,42 +250,33 @@ namespace SUN2.Controllers
 
 
         /*
-    // GET: MitgliederGruppe/Delete/5
-    public ActionResult Delete(int id)
-    {
-        if (id == null)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-        MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
-        if (mitgliederGruppe == null)
-        {
-            return HttpNotFound();
-        }
-        return View(mitgliederGruppe);
-    }
-
-    // POST: MitgliederGruppe/Delete/5
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public ActionResult DeleteConfirmed(int id)
-    {
-        MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
-        db.MitgliederGruppes.Remove(mitgliederGruppe);
-        db.SaveChanges();
-        return RedirectToAction("Index");
-    }
-    */
-
-        // Ermöglicht das Löschen eines Gruppenmitglieds
-        // POST: MitgliederGruppe/Delete/5
+         
+        // GET: MitgliederGruppe/Delete/5
         public ActionResult Delete(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
+            if (mitgliederGruppe == null)
+            {
+                return HttpNotFound();
+            }
+            return View(mitgliederGruppe);
+        }
+
+        // POST: MitgliederGruppe/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
             MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
             db.MitgliederGruppes.Remove(mitgliederGruppe);
             db.SaveChanges();
-            return RedirectToAction("Index", "MitgliederGruppe", new { gruppenid = mitgliederGruppe.gruppenid });
+            return RedirectToAction("Index");
         }
+        */
 
         protected override void Dispose(bool disposing)
         {

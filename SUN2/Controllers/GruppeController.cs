@@ -45,25 +45,6 @@ namespace SUN2.Controllers
         }
 
 
-        // Wird zurzeit nicht benötigt und ist deswegen auskommentiert!
-        /*
-        // GET: Gruppe/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Gruppe gruppe = db.Gruppes.Find(id);
-            if (gruppe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gruppe);
-        }
-        */
-
-
         // Ermöglicht das Erstellen einer neuen Gruppe
         // GET: Gruppe/Create
         public ActionResult Create()
@@ -154,7 +135,25 @@ namespace SUN2.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-         
+
+
+        // Wird zurzeit nicht benötigt und ist deswegen auskommentiert!
+        /*
+        // GET: Gruppe/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Gruppe gruppe = db.Gruppes.Find(id);
+            if (gruppe == null)
+            {
+                return HttpNotFound();
+            }
+            return View(gruppe);
+        }
+        */
 
         protected override void Dispose(bool disposing)
         {

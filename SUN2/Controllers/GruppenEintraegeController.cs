@@ -58,24 +58,6 @@ namespace SUN2.Controllers
         }
 
 
-        // Wird zurzeit nicht benötigt und ist deswegen auskommentiert!
-        /*
-        // GET: GruppenEintraege/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            GruppenEintraege gruppenEintraege = db.GruppenEintraeges.Find(id);
-            if (gruppenEintraege == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gruppenEintraege);
-        } */
-
-
         // Ermöglicht es, einen neuen Gruppeneintrag in einer bestimmten Gruppe zu erstellen 
         // (Import: GruppenID, Export: gruppenEintraegeModel)
         // GET: GruppenEintraege/Create
@@ -177,6 +159,25 @@ namespace SUN2.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", new { gruppenid = gruppenEintraege.gruppenid });
         }
+
+
+        // Wird zurzeit nicht benötigt und ist deswegen auskommentiert!
+        /*
+        // GET: GruppenEintraege/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            GruppenEintraege gruppenEintraege = db.GruppenEintraeges.Find(id);
+            if (gruppenEintraege == null)
+            {
+                return HttpNotFound();
+            }
+            return View(gruppenEintraege);
+        } */
+
 
         protected override void Dispose(bool disposing)
         {
