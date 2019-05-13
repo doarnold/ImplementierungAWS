@@ -1,12 +1,12 @@
 ﻿@model SUN2.Models.Gruppe
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Gruppe löschen";
 }
 
-<h2>Delete</h2>
+<h2>Gruppe löschen</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Möchten Sie diese Gruppe wirklich löschen?</h3>
 <div>
     <h4>Gruppe</h4>
     <hr />
@@ -28,14 +28,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.verantwortlicher)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.verantwortlicher)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.privat)
         </dt>
 
@@ -49,7 +41,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input type="submit" value="Gruppe löschen" class="btn btn-default" /> 
             @Html.ActionLink("Zurück", "Index")
         </div>
     }
