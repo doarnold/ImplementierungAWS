@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -14,42 +15,55 @@ namespace SUN2.Controllers
     {
         private SUN2Entities db = new SUN2Entities();
 
+        // Gibt eine Liste mit allen vorhandenen Lehrstühlen zurück
         // GET: Lehrstuhl
         public ActionResult Index()
         {
-            return View(db.Lehrstuhls.ToList());
+            List<Lehrstuhl> entries = new List<Lehrstuhl>();
+
+            foreach (Lehrstuhl lehrstuhl in db.Lehrstuhls)
+            {
+                foreach (Person person in db.Person)
+                {
+                    if (person.id == lehrstuhl.verantwortlicher)
+                    {
+                        //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
+                        if (person.name != null && person.vorname != null)
+                        {
+                            lehrstuhl.verantwortlicher = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
+                        }
+                        else
+                        {
+                            lehrstuhl.verantwortlicher = person.AspNetUsers.Email;
+                        }
+                    }
+                }
+                entries.Add(lehrstuhl);
+            }
+            return View(entries);
         }
 
-        // GET: Lehrstuhl/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Lehrstuhl lehrstuhl = db.Lehrstuhls.Find(id);
-            if (lehrstuhl == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lehrstuhl);
-        }
 
+        // Ermöglicht das Erstellen eines neuen Lehrstuhls
         // GET: Lehrstuhl/Create
         public ActionResult Create()
         {
             return View();
         }
 
+
+        // Ermöglicht das Erstellen eines neuen Lehrstuhls (Import: LehrstuhlModel, Export: LehrstuhlModel)
         // POST: Lehrstuhl/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung,verantwortlicher")] Lehrstuhl lehrstuhl)
+        public ActionResult Create([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung")] Lehrstuhl lehrstuhl)
         {
             if (ModelState.IsValid)
             {
+                //angemeldeter User ist Verantwortlicher
+                var userId = User.Identity.GetUserId();
+                lehrstuhl.verantwortlicher = userId;
+
                 db.Lehrstuhls.Add(lehrstuhl);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -58,6 +72,8 @@ namespace SUN2.Controllers
             return View(lehrstuhl);
         }
 
+
+        // Ermglicht das Bearbeiten eines Lehrstuhls (Import: LehrstuhlID, Export: LehrstuhlModel)
         // GET: Lehrstuhl/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,12 +89,12 @@ namespace SUN2.Controllers
             return View(lehrstuhl);
         }
 
+
+        // Ermglicht das Bearbeiten eines Lehrstuhls (Import: LehrstuhlID, Export: LehrstuhlModel)
         // POST: Lehrstuhl/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung,verantwortlicher")] Lehrstuhl lehrstuhl)
+        public ActionResult Edit([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung,verantwortlicher,privat")] Lehrstuhl lehrstuhl)
         {
             if (ModelState.IsValid)
             {
@@ -88,6 +104,7 @@ namespace SUN2.Controllers
             }
             return View(lehrstuhl);
         }
+
 
         // GET: Lehrstuhl/Delete/5
         public ActionResult Delete(int? id)
@@ -104,6 +121,7 @@ namespace SUN2.Controllers
             return View(lehrstuhl);
         }
 
+
         // POST: Lehrstuhl/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -114,6 +132,25 @@ namespace SUN2.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        // Wird zurzeit nicht verwendet, bitte drinlassen!
+        /*
+        // GET: Lehrstuhl/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Lehrstuhl lehrstuhl = db.Lehrstuhls.Find(id);
+            if (lehrstuhl == null)
+            {
+                return HttpNotFound();
+            }
+            return View(lehrstuhl);
+        } */
+
 
         protected override void Dispose(bool disposing)
         {

@@ -124,7 +124,7 @@ namespace SUN2.Controllers
         }
 
 
-        // Ermöglicht das Löschen einer bestimmten Gruppe (Import: GruppenID, Export: GruppeModel)
+        // Ermöglicht das Löschen einer bestimmten Gruppe (Import: GruppenID, Export: -)
         // POST: Gruppe/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

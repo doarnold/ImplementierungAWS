@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SUN2.Models.Lehrstuhl>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Alle Lehrstühle";
 }
 
-<h2>Index</h2>
+<h2>Übersicht aller Lehrstuhlseiten</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Neuen Lehrstuhl anlegen", "Create")
 </p>
 <table class="table">
     <tr>
@@ -20,26 +20,37 @@
         <th>
             @Html.DisplayNameFor(model => model.verantwortlicher)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.privat)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.bezeichnung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.beschreibung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.verantwortlicher)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.lehrstuhlid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.lehrstuhlid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.lehrstuhlid })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.bezeichnung)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.beschreibung)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.verantwortlicher)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.privat)
+    </td>
+    <td>
+        @Html.ActionLink("Bearbeiten", "Edit", new { id = item.lehrstuhlid }) |
+        @Html.ActionLink("Löschen", "Delete", new { id = item.lehrstuhlid }) |
+        @Html.ActionLink("Neuer Eintrag", "Create", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null) |
+        @Html.ActionLink("Einträge anzeigen", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null) |
+        @Html.ActionLink("Mitarbeiter anzeigen", "Index", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null) |
+        @Html.ActionLink("Mitarbeiter hinzufügen", "Add", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null) |
+        @Html.ActionLink("abonnieren", "Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null) |
+        @Html.ActionLink("deabonnieren", "Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
+    </td>
+</tr>
 }
 
 </table>
