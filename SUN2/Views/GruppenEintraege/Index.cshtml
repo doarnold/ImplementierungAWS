@@ -6,6 +6,7 @@
 
 <!-- CSS Einbindung-->
 @Styles.Render("~/Content/css")
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
 
@@ -18,41 +19,56 @@
 
         if (counter == 0)
         {
-            <h2>
+            <div id="GruppenPlatzhalter"></div>
+            <h2 style="text-align:center">
                 Gruppe:
                 @Html.DisplayFor(modelItem => item.gruppenid)
                 <!-- Funktioniert für einzelne Gruppen wirft aber Fehler bei allen !-->
             </h2>
+            <div id="GruppenPlatzhalter"></div>
             counter++;
         }
 
 
-        <div id="GruppenBeitragGesamt">
+<div id="GruppenBeitragGesamt">
 
 
-            <div id="GruppenHead">
-                @Html.DisplayFor(modelItem => item.autor)
-                @Html.DisplayFor(modelItem => item.datum)
-                @Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id })
-            </div>
-
-            <div id="GruppenInhalt">
-                @Html.DisplayFor(modelItem => item.inhalt)
-            </div>
-
-            <div id="Gruppen">
-
-                @Html.DisplayFor(modelItem => item.label1)
-                @Html.DisplayFor(modelItem => item.label2)
-                @Html.DisplayFor(modelItem => item.label3)
-                @Html.DisplayFor(modelItem => item.label4)
-                @Html.DisplayFor(modelItem => item.label5)
-            </div>
-            <div id="GruppenPlatzhalter"></div>
-            <p></p>
-
+    <div id="GruppenHead">
+        <div id="GruppenPostName">
+            @Html.DisplayFor(modelItem => item.autor)
         </div>
+
+        @Html.DisplayFor(modelItem => item.datum)
+        <div id="GruppenEdit">
+            @Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id })
+        </div>
+
+    </div>
+
+    <div id="GruppenInhalt">
+        @Html.DisplayFor(modelItem => item.inhalt)
+    </div>
+
+
+
+    <div id="GruppenLabelsRahmen">
+
+        <div id="GruppenLabels">
+            @Html.DisplayFor(modelItem => item.label1)
+        </div>
+        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label2)</div>
+        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label3)</div>
+        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label4)</div>
+        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label5)</div>
+    </div>
+
+
+
+    <div id="GruppenPlatzhalter"></div>
+  
+
+</div>
 
 
 
