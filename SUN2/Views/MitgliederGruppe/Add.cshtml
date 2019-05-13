@@ -4,7 +4,7 @@
     ViewBag.Title = "Mitglied zum Hinzufügen auswählen";
 }
 
-<h2>Add</h2>
+<h2>Mitglied hinzufügen</h2>
 
 
 
@@ -49,3 +49,6 @@
     }
 
 </table>
+
+@{ var gruppenid = Model.First(); }
+@Html.ActionLink("Zurück", "Index", "Gruppe", new { gruppenid = gruppenid }, null) 
