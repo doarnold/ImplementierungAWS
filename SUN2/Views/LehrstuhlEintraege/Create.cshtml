@@ -1,42 +1,23 @@
 ﻿@model SUN2.Models.LehrstuhlEintraege
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Eintrag für Lehrstuhl";
 }
 
-<h2>Create</h2>
+<h2>Eintrag für Lehrstuhl erstellen</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
+    @Html.HiddenFor(model => model.autor)
+    @Html.HiddenFor(model => model.datum)
+    @Html.HiddenFor(model => model.lehrstuhlid)
+
     <div class="form-horizontal">
-        <h4>LehrstuhlEintraege</h4>
+        <h4>Bitte die Felder ausfüllen.</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.lehrstuhlid, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.lehrstuhlid, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.lehrstuhlid, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.datum, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.datum, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.datum, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.autor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.autor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.autor, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.inhalt, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -88,12 +69,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Speichern" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Zurück", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null)
 </div>

@@ -448,10 +448,6 @@
           <EntitySet Name="Lehrstuhl" EntityType="SUN2Model.Lehrstuhl" />
           <EntitySet Name="LehrstuhlEintraege" EntityType="SUN2Model.LehrstuhlEintraege" />
           <EntitySet Name="Gruppe" EntityType="SUN2Model.Gruppe" />
-          <AssociationSet Name="FK_LehrstuhlEintraege_LehrstuhlEintraege" Association="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege">
-            <End Role="LehrstuhlEintraege" EntitySet="LehrstuhlEintraege" />
-            <End Role="LehrstuhlEintraege1" EntitySet="LehrstuhlEintraege" />
-          </AssociationSet>
           <EntitySet Name="AbonnentenLehrstuhl" EntityType="SUN2Model.AbonnentenLehrstuhl" />
           <EntitySet Name="MitarbeiterLehrstuhl" EntityType="SUN2Model.MitarbeiterLehrstuhl" />
           <EntitySet Name="MitgliederGruppe" EntityType="SUN2Model.MitgliederGruppe" />
@@ -495,8 +491,6 @@
           <Property Name="label3" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="label4" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="label5" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LehrstuhlEintraege1" Relationship="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" FromRole="LehrstuhlEintraege" ToRole="LehrstuhlEintraege1" />
-          <NavigationProperty Name="LehrstuhlEintraege2" Relationship="SUN2Model.FK_LehrstuhlEintraege_LehrstuhlEintraege" FromRole="LehrstuhlEintraege1" ToRole="LehrstuhlEintraege" />
           </EntityType>
         <EntityType Name="Gruppe">
           <Key>
@@ -508,18 +502,6 @@
           <Property Name="verantwortlicher" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="privat" Type="Boolean" />
         </EntityType>
-        <Association Name="FK_LehrstuhlEintraege_LehrstuhlEintraege">
-          <End Type="SUN2Model.LehrstuhlEintraege" Role="LehrstuhlEintraege" Multiplicity="1" />
-          <End Type="SUN2Model.LehrstuhlEintraege" Role="LehrstuhlEintraege1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="LehrstuhlEintraege">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="LehrstuhlEintraege1">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="AbonnentenLehrstuhl">
           <Key>
             <PropertyRef Name="id" />

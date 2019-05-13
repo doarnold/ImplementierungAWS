@@ -12,15 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.lehrstuhlid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.datum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.autor)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.inhalt)
         </th>
         <th>
@@ -41,41 +32,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.lehrstuhlid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.datum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.autor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inhalt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label4)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.label5)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.inhalt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.label1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.label2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.label3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.label4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.label5)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div>
+    @Html.ActionLink("Zurück", "Index", "Lehrstuhl")
+</div>

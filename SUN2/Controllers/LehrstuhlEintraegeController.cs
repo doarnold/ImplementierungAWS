@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -14,36 +15,71 @@ namespace SUN2.Controllers
     {
         private SUN2Entities db = new SUN2Entities();
 
+        // Liefert eine Liste von Lehrstuhleinträgen. Diese List enthält nur die Einträge eines bestimmten Lehrstuhls, falls
+        // eine lehrstuhlID übergeben wird, ansonsten werden die Einträge aller lehrstühle zurückgegeben 
+        // (Import optional: lehrstuhlID, Export: lehrstuhlEinträge List)
         // GET: LehrstuhlEintraege
-        public ActionResult Index()
+        public ActionResult Index(int? lehrstuhlid)
         {
-            return View(db.LehrstuhlEintraeges.ToList());
+            List<LehrstuhlEintraege> entries = new List<LehrstuhlEintraege>();
+
+            if (lehrstuhlid == null)
+            {
+                return View(db.LehrstuhlEintraeges.ToList());
+            }
+            else
+            {
+                foreach (LehrstuhlEintraege le in db.LehrstuhlEintraeges)
+                {
+                    if (le.lehrstuhlid == lehrstuhlid)
+                    {
+                        foreach (Person person in db.Person)
+                        {
+                            if (person.id == le.autor)
+                            {
+                                //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
+                                if (person.name != null && person.vorname != null)
+                                {
+                                    le.autor = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
+                                }
+                                else
+                                {
+                                    le.autor = person.AspNetUsers.Email;
+                                }
+                            }
+                        }
+                        entries.Add(le);
+                    }
+                }
+                return View(entries.ToList());
+            }
         }
 
-        // GET: LehrstuhlEintraege/Details/5
-        public ActionResult Details(int? id)
+        // Ermöglicht es, einen neuen Lehrstuhleintrag in einem bestimmten Lerhstuhl zu erstellen 
+        // (Import: lehrstuhlID, Export: lehrstuhlEintraegeModel)
+        // GET: LehrstuhlEintraege/Create
+        public ActionResult Create(int? lehrstuhlid)
         {
-            if (id == null)
+            if (lehrstuhlid == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LehrstuhlEintraege lehrstuhlEintraege = db.LehrstuhlEintraeges.Find(id);
-            if (lehrstuhlEintraege == null)
-            {
-                return HttpNotFound();
-            }
+
+            // lehrstuhlid, autor, datum im hintergrund vorbelegen
+            LehrstuhlEintraege lehrstuhlEintraege = new LehrstuhlEintraege();
+            lehrstuhlEintraege.lehrstuhlid = (int)lehrstuhlid;
+            lehrstuhlEintraege.datum = DateTime.Now;
+
+            var userId = User.Identity.GetUserId();
+            lehrstuhlEintraege.autor = userId;
+
             return View(lehrstuhlEintraege);
         }
 
-        // GET: LehrstuhlEintraege/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
+        // Ermöglicht es, einen neuen Lehrstuhleintrag in einem bestimmten Lerhstuhl zu erstellen 
+        // (Import: lehrstuhlEintraegeModel, Export: lehrstuhlEintraegeModel)
         // POST: LehrstuhlEintraege/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,lehrstuhlid,datum,autor,inhalt,label1,label2,label3,label4,label5")] LehrstuhlEintraege lehrstuhlEintraege)
@@ -52,11 +88,12 @@ namespace SUN2.Controllers
             {
                 db.LehrstuhlEintraeges.Add(lehrstuhlEintraege);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { lehrstuhlid = lehrstuhlEintraege.lehrstuhlid });
             }
 
             return View(lehrstuhlEintraege);
         }
+
 
         // GET: LehrstuhlEintraege/Edit/5
         public ActionResult Edit(int? id)
@@ -73,9 +110,8 @@ namespace SUN2.Controllers
             return View(lehrstuhlEintraege);
         }
 
+
         // POST: LehrstuhlEintraege/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,lehrstuhlid,datum,autor,inhalt,label1,label2,label3,label4,label5")] LehrstuhlEintraege lehrstuhlEintraege)
@@ -88,6 +124,7 @@ namespace SUN2.Controllers
             }
             return View(lehrstuhlEintraege);
         }
+
 
         // GET: LehrstuhlEintraege/Delete/5
         public ActionResult Delete(int? id)
@@ -104,6 +141,7 @@ namespace SUN2.Controllers
             return View(lehrstuhlEintraege);
         }
 
+
         // POST: LehrstuhlEintraege/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -114,6 +152,25 @@ namespace SUN2.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        // wird zurzeit nicht benötigt, bitte drinlassen
+        /*
+        // GET: LehrstuhlEintraege/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LehrstuhlEintraege lehrstuhlEintraege = db.LehrstuhlEintraeges.Find(id);
+            if (lehrstuhlEintraege == null)
+            {
+                return HttpNotFound();
+            }
+            return View(lehrstuhlEintraege);
+        } */
+
 
         protected override void Dispose(bool disposing)
         {
