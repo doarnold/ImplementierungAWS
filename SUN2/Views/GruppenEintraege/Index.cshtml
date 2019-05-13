@@ -7,56 +7,60 @@
 <!-- CSS Einbindung-->
 @Styles.Render("~/Content/css")
 
-   
 
-@{ 
+
+@{
 
     var counter = 0;
 
     foreach (var item in Model)
     {
 
-         if (counter == 0)
+        if (counter == 0)
         {
-         <h2>
-        Gruppe:
-        @Html.DisplayFor(modelItem => item.gruppenid)
-        <!-- Funktioniert für einzelne Gruppen wirft aber Fehler bei allen !-->
-         </h2>
-            counter++; 
+            <h2>
+                Gruppe:
+                @Html.DisplayFor(modelItem => item.gruppenid)
+                <!-- Funktioniert für einzelne Gruppen wirft aber Fehler bei allen !-->
+            </h2>
+            counter++;
         }
 
 
-<div id="GruppenBeitragGesamt">
+        <div id="GruppenBeitragGesamt">
 
 
-    <div id="GruppenHead">
-        @Html.DisplayFor(modelItem => item.autor)
-        @Html.DisplayFor(modelItem => item.datum)
-    </div>
+            <div id="GruppenHead">
+                @Html.DisplayFor(modelItem => item.autor)
+                @Html.DisplayFor(modelItem => item.datum)
+                @Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id })
+            </div>
 
-    <div id="GruppenInhalt">
-        @Html.DisplayFor(modelItem => item.inhalt)
-    </div>
+            <div id="GruppenInhalt">
+                @Html.DisplayFor(modelItem => item.inhalt)
+            </div>
 
-    <div id="Gruppen">
-      
-        @Html.DisplayFor(modelItem => item.label1)
-        @Html.DisplayFor(modelItem => item.label2)
-        @Html.DisplayFor(modelItem => item.label3)
-        @Html.DisplayFor(modelItem => item.label4)
-        @Html.DisplayFor(modelItem => item.label5)
-    </div>
-    <div id="GruppenPlatzhalter"></div>
-        <p></p>
+            <div id="Gruppen">
 
-    </div>
+                @Html.DisplayFor(modelItem => item.label1)
+                @Html.DisplayFor(modelItem => item.label2)
+                @Html.DisplayFor(modelItem => item.label3)
+                @Html.DisplayFor(modelItem => item.label4)
+                @Html.DisplayFor(modelItem => item.label5)
+            </div>
+            <div id="GruppenPlatzhalter"></div>
+            <p></p>
+
+        </div>
 
 
 
-   
 
-        }
+
     }
+}
 
 </table>
+
+@Html.ActionLink("Zurück zu allen Gruppen", "Index", "Gruppe")

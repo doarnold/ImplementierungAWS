@@ -15,6 +15,8 @@ namespace SUN2.Controllers
     {
         private SUN2Entities db = new SUN2Entities();
 
+
+        // Gibt eine Liste mit allen vorhandenen Gruppen zurück
         // GET: Gruppe
         public ActionResult Index()
         {
@@ -37,13 +39,14 @@ namespace SUN2.Controllers
                         }
                     }
                 }
-
                 entries.Add(gruppe);
             }
-
             return View(entries);
         }
 
+
+        // Wird zurzeit nicht benötigt und ist deswegen auskommentiert!
+        /*
         // GET: Gruppe/Details/5
         public ActionResult Details(int? id)
         {
@@ -58,16 +61,19 @@ namespace SUN2.Controllers
             }
             return View(gruppe);
         }
+        */
 
+
+        // Ermöglicht das Erstellen einer neuen Gruppe
         // GET: Gruppe/Create
         public ActionResult Create()
         {
             return View();
         }
 
+
+        // Ermöglicht das Erstellen einer neuen Gruppe
         // POST: Gruppe/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "gruppenid,bezeichnung,beschreibung,privat")] Gruppe gruppe)
@@ -86,6 +92,8 @@ namespace SUN2.Controllers
             return View(gruppe);
         }
 
+
+        // Ermöglicht das Bearbeiten einer bestimmten Gruppe (Import: GruppenID, Export GruppeModel)
         // GET: Gruppe/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -101,9 +109,9 @@ namespace SUN2.Controllers
             return View(gruppe);
         }
 
+
+        // Ermöglicht das Bearbeiten einer bestimmten Gruppe (Import: GruppeModel, Export: GruppeModel)
         // POST: Gruppe/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "gruppenid,bezeichnung,verantwortlicher,beschreibung,privat")] Gruppe gruppe)
@@ -117,6 +125,8 @@ namespace SUN2.Controllers
             return View(gruppe);
         }
 
+
+        // Ermöglicht das Löschen einer bestimmten Gruppe (Import: GruppenID, Export: GruppeModel)
         // GET: Gruppe/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -132,6 +142,8 @@ namespace SUN2.Controllers
             return View(gruppe);
         }
 
+
+        // Ermöglicht das Löschen einer bestimmten Gruppe (Import: GruppenID, Export: GruppeModel)
         // POST: Gruppe/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -142,6 +154,7 @@ namespace SUN2.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+         
 
         protected override void Dispose(bool disposing)
         {

@@ -42,9 +42,8 @@
             @Html.DisplayFor(modelItem => item.privat)
         </td>
         <td>
-            @Html.ActionLink("Bearbeiten", "Edit", new { id = item.gruppenid }) |
-            @Html.ActionLink("Details", "Details", new { id = item.gruppenid }) |
-            @Html.ActionLink("Löschen", "Delete", new { id = item.gruppenid }) |
+            @Html.ActionLink("Gruppe bearbeiten", "Edit", new { id = item.gruppenid }) |
+            @Html.ActionLink("Gruppe löschen", "Delete", new { id = item.gruppenid }) |
             @Html.ActionLink("Neuer Eintrag", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
             @Html.ActionLink("Einträge anzeigen", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
             @Html.ActionLink("Mitglieder anzeigen", "Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null) |

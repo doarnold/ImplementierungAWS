@@ -16,6 +16,10 @@ namespace SUN2.Controllers
     {
         private SUN2Entities db = new SUN2Entities();
 
+
+        // Liefert eine Liste von Gruppeneinträgen. Diese List enthält nur die Einträge einer bestimmten Gruppe, falls
+        // eine GruppenID übergeben wird, ansonsten werden die Einträge aller Gruppen zurückgegeben 
+        // (Import optional: GruppenID, Export: GruppenEinträge List)
         // GET: GruppenEintraege
         public ActionResult Index(int? gruppenid)
         {
@@ -53,6 +57,9 @@ namespace SUN2.Controllers
             
         }
 
+
+        // Wird zurzeit nicht benötigt und ist deswegen auskommentiert!
+        /*
         // GET: GruppenEintraege/Details/5
         public ActionResult Details(int? id)
         {
@@ -66,9 +73,11 @@ namespace SUN2.Controllers
                 return HttpNotFound();
             }
             return View(gruppenEintraege);
-        }
+        } */
 
-        // neuen eintrag erstellen = mit gruppenid aus gruppentabelle heraus
+
+        // Ermöglicht es, einen neuen Gruppeneintrag in einer bestimmten Gruppe zu erstellen 
+        // (Import: GruppenID, Export: gruppenEintraegeModel)
         // GET: GruppenEintraege/Create
         public ActionResult Create(int? gruppenid)
         {
@@ -88,9 +97,10 @@ namespace SUN2.Controllers
             return View(gruppenEintraege);
         }
 
+
+        // Ermöglicht es, einen neuen Gruppeneintrag in einer bestimmten Gruppe zu erstellen 
+        // (Import: gruppenEintrageModel, Export: gruppenEintraegeModel)
         // POST: GruppenEintraege/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,gruppenid,datum,autor,inhalt,label1,label2,label3,label4,label5")] GruppenEintraege gruppenEintraege)
@@ -99,12 +109,14 @@ namespace SUN2.Controllers
             {
                 db.GruppenEintraeges.Add(gruppenEintraege);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { gruppenid = gruppenEintraege.gruppenid } );
             }
 
             return View(gruppenEintraege);
         }
 
+
+        // Ermöglicht es, einen bestimmten Gruppeneintrag zu bearbeiten (Import: GruppenEintragsID, Export: gruppenEintrageModel)
         // GET: GruppenEintraege/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -120,9 +132,9 @@ namespace SUN2.Controllers
             return View(gruppenEintraege);
         }
 
+
+        // Ermöglicht es, einen bestimmten Gruppeneintrag zu bearbeiten (Import: gruppenEintrageModel, Export: gruppenEintrageModel)
         // POST: GruppenEintraege/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,gruppenid,datum,autor,inhalt,label1,label2,label3,label4,label5")] GruppenEintraege gruppenEintraege)
@@ -131,11 +143,13 @@ namespace SUN2.Controllers
             {
                 db.Entry(gruppenEintraege).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { gruppenid = gruppenEintraege.gruppenid });
             }
             return View(gruppenEintraege);
         }
 
+
+        // Ermöglicht es, einen bestimmten Gruppeneintrag zu löschen (Import: gruppenEintragID, Export: gruppenEintrageModel)
         // GET: GruppenEintraege/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -151,6 +165,8 @@ namespace SUN2.Controllers
             return View(gruppenEintraege);
         }
 
+
+        // Ermöglicht es, einen bestimmten Gruppeneintrag zu löschen (Import: gruppenEintrageModel, Export: gruppenEintrageModel)
         // POST: GruppenEintraege/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -159,7 +175,7 @@ namespace SUN2.Controllers
             GruppenEintraege gruppenEintraege = db.GruppenEintraeges.Find(id);
             db.GruppenEintraeges.Remove(gruppenEintraege);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { gruppenid = gruppenEintraege.gruppenid });
         }
 
         protected override void Dispose(bool disposing)
