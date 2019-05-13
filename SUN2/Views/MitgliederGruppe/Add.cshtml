@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<SUN2.Models.PersonAddGruppeModel>
 
 @{
-    ViewBag.Title = "Mitglied zum Hinzufügen auswählen";
+    ViewBag.Title = "Mitglied hinzufügen";
 }
 
-<h2>Mitglied hinzufügen</h2>
-
+    <h2>Mitglied zum Hinzufügen auswählen</h2>
 
 
 <p>
@@ -13,16 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            <p>User ID</p>
-        </th>
-        <th>
             <p>E-Mail</p>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.name)
+            <p>Vorname</p>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.vorname)
+            <p>Nachname</p>
         </th>
         <th></th>
     </tr>
@@ -31,16 +27,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.name)
+                @Html.DisplayFor(modelItem => item.vorname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.vorname)
+                @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
                 @Html.ActionLink("Hinzufügen", "AddPerson", "MitgliederGruppe", new { gruppenid = item.gruppenid, id = item.id }, null)
