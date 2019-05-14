@@ -40,6 +40,24 @@ namespace SUN2.Controllers
                 }
                 entries.Add(lehrstuhl);
             }
+
+            // Um abonnieren/deabonnieren zu kennzeichnen, ViewBag mit allen Abos des Users an Frontend senden
+            List<AbonnentenLehrstuhl> list = new List<AbonnentenLehrstuhl>();
+
+            //angemeldeter User 
+            var userId = User.Identity.GetUserId();
+
+            // Alle Abos des angemeldeten Users suchen
+            foreach (AbonnentenLehrstuhl al in db.AbonnentenLehrstuhls)
+            {
+                if (al.userid == userId)
+                {
+                    list.Add(al);
+                }
+            }
+
+            ViewBag.abos = list;
+
             return View(entries);
         }
 

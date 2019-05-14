@@ -29,9 +29,26 @@ namespace SUN2.Controllers
                 var userId = User.Identity.GetUserId();
                 al.userid = userId;
 
-                db.AbonnentenLehrstuhls.Add(al);
-                db.SaveChanges();
+
+                // Prüfen, ob diese Verknüpfung bereits exisitert
+                // Falls ja, dann nicht erneut hinzufügen
+                Boolean exist = false;
+                foreach ( AbonnentenLehrstuhl abonnenten in db.AbonnentenLehrstuhls)
+                {
+                    if(abonnenten.userid == userId && abonnenten.lehrstuhlid == lehrstuhlid)
+                    {
+                        exist = true;
+                    }
+                }
+
+                if(!exist)
+                {
+                    db.AbonnentenLehrstuhls.Add(al);
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index", "Lehrstuhl");
+
             } else
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

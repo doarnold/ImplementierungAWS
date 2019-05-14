@@ -47,8 +47,28 @@
         @Html.ActionLink("Einträge anzeigen", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null) |
         @Html.ActionLink("Mitarbeiter anzeigen", "Index", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null) |
         @Html.ActionLink("Mitarbeiter hinzufügen", "Add", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null) |
-        @Html.ActionLink("abonnieren", "Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null) |
-        @Html.ActionLink("deabonnieren", "Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
+
+        <!-- hier müssen wir gucken, ob der Lehrstuhl bereits abonniert ist -> ViewBag.abos -->
+        @{
+            var aboexist = false;
+            foreach (var abo in ViewBag.abos)
+            {
+                if (abo.lehrstuhlid == item.lehrstuhlid)
+                {
+                    @Html.ActionLink("deabonnieren", "Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
+                    aboexist = true;
+                }
+            }
+
+            if (!aboexist)
+            {
+                @Html.ActionLink("abonnieren", "Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
+            }
+
+        }
+     
+
+
     </td>
 </tr>
 }
