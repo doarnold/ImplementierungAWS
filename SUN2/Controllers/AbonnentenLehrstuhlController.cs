@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -14,6 +15,55 @@ namespace SUN2.Controllers
     {
         private SUN2Entities db = new SUN2Entities();
 
+
+        // Ermöglicht das Abonnieren eines bestimmten Lehrstuhls (import: Lehrstuhlid, Export: redirect)
+        // POST: AbonnentenLehrstuhl/Abo/5
+        public ActionResult Abo(int? lehrstuhlid)
+        {
+            if (lehrstuhlid != null)
+            {
+                AbonnentenLehrstuhl al = new AbonnentenLehrstuhl();
+                al.lehrstuhlid = (int)lehrstuhlid;
+
+                //angemeldeter User 
+                var userId = User.Identity.GetUserId();
+                al.userid = userId;
+
+                db.AbonnentenLehrstuhls.Add(al);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Lehrstuhl");
+            } else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+
+
+        // Ermöglich das Deabonnieren eines bestimtmen Lehrstuhls (Import: lehrstuhlid,  Export: redirect)
+        // POST: AbonnentenLehrstuhl/Deabo/5
+        public ActionResult Deabo(int? lehrstuhlid)
+        {
+            //angemeldeter User 
+            var userId = User.Identity.GetUserId();
+            AbonnentenLehrstuhl abonnentenLehrstuhl = new AbonnentenLehrstuhl();
+
+            // Korrekten Eintrag suchen
+            foreach ( AbonnentenLehrstuhl al in db.AbonnentenLehrstuhls )
+            {
+                if ( al.userid == userId && al.lehrstuhlid == lehrstuhlid)
+                {
+                    abonnentenLehrstuhl = al;
+                }
+            }
+
+            db.AbonnentenLehrstuhls.Remove(abonnentenLehrstuhl);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Lehrstuhl");
+        }
+
+
+        // wird zurzeit nicht benötigt, bitte drinlassen!
+        /*
         // GET: AbonnentenLehrstuhl
         public ActionResult Index()
         {
@@ -114,6 +164,8 @@ namespace SUN2.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        */
+
 
         protected override void Dispose(bool disposing)
         {
