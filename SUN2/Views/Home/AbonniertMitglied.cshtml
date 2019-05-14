@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SUN2.Models.AboMitgliedModel>
+
+<h4>Meine Gruppen & abonnierten Lehrstühle</h4>
+
+<table class="table">
+    <tr>
+        <th>
+
+            @Html.DisplayNameFor(model => model.bezeichnung)
+
+        </th>
+        <th>
+
+            @Html.DisplayNameFor(model => model.beschreibung)
+
+        </th>
+        <th>
+
+            @Html.DisplayNameFor(model => model.verantwortlicher)
+
+        </th>
+
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.bezeichnung)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.beschreibung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.verantwortlicher) <!-- hier müssen wir mal sehen, dass der name erscheint -->
+            </td>
+
+        </tr>
+    }
+
+
+
+</table>
+
+
+ 

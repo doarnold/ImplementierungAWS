@@ -226,9 +226,11 @@
     <Compile Include="Models\MitgliederGruppe.cs">
       <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AboMitgliedModel.cs" />
     <Compile Include="Models\Person.cs">
       <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NewsfeedModel.cs" />
     <Compile Include="Models\PersonAddLehrstuhlModel.cs" />
     <Compile Include="Models\PersonAddGruppeModel.cs" />
     <Compile Include="Models\SUN2Model.Context.cs">
@@ -379,6 +381,7 @@
     <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\MitgliederGruppe\Add.cshtml" />
     <Content Include="Views\MitarbeiterLehrstuhl\Add.cshtml" />
+    <Content Include="Views\Home\AbonniertMitglied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
