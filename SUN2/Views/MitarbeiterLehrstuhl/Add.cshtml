@@ -1,10 +1,10 @@
-﻿@model IEnumerable<SUN2.Models.PersonAddGruppeModel>
+﻿@model IEnumerable<SUN2.Models.PersonAddLehrstuhlModel>
 
 @{
-    ViewBag.Title = "Mitglied hinzufügen";
+    ViewBag.Title = "Mitarbeiter hinzufügen";
 }
 
-<h2>Mitglied zum Hinzufügen auswählen</h2>
+<h2>Mitarbeiter zum Hinzufügen auswählen</h2>
 
 
 <p>
@@ -36,7 +36,7 @@
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                @Html.ActionLink("Hinzufügen", "AddPerson", "MitgliederGruppe", new { gruppenid = item.gruppenid, id = item.id }, null)
+                @Html.ActionLink("Hinzufügen", "AddPerson", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid, id = item.id }, null)
             </td>
         </tr>
     }
@@ -45,11 +45,11 @@
 
 @{ if (Model.Count() != 0)
     {
-        var gruppenid = Model.First();
-        @Html.ActionLink("Zurück", "Index", "Gruppe", new { gruppenid = gruppenid }, null)
+        var lehrstuhlid = Model.First();
+        @Html.ActionLink("Zurück", "Index", "Lehrstuhl", new { lehrstuhlid = lehrstuhlid.lehrstuhlid }, null)
     }
     else
     {
-        @Html.ActionLink("Zurück", "Index", "Gruppe")
+        @Html.ActionLink("Zurück", "Index", "Lehrstuhl")
     }
 }

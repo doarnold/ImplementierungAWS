@@ -1,39 +1,43 @@
 ﻿@model IEnumerable<SUN2.Models.MitarbeiterLehrstuhl>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lehrstuhlmitarbeiter";
 }
 
-<h2>Index</h2>
+<h2>Alle Mitarbeiter des Lehrstuhls</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.lehrstuhlid)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.userid)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.lehrstuhlid)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.userid)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.userid }) |
-        @Html.ActionLink("Details", "Details", new { id = item.userid }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.userid })
-    </td>
-</tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(model => item.userid)
+            </th>
+            <td>
+                @Html.ActionLink("Mitarbeiter entfernen", "Delete", new { id = item.id })
+
+            </td>
+        </tr>
+    }
 
 </table>
+
+@{ if (Model.Count() != 0)
+    {
+        var lehrstuhlid = Model.First();
+        @Html.ActionLink("Zurück", "Index", "Lehrstuhl", new { lehrstuhlid = lehrstuhlid.lehrstuhlid }, null)
+    }
+    else
+    {
+        @Html.ActionLink("Zurück", "Index", "Lehrstuhl")
+    }
+}
+

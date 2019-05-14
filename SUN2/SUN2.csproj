@@ -18,8 +18,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <IISExpressSSLPort>44312</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -230,6 +229,7 @@
     <Compile Include="Models\Person.cs">
       <DependentUpon>SUN2Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PersonAddLehrstuhlModel.cs" />
     <Compile Include="Models\PersonAddGruppeModel.cs" />
     <Compile Include="Models\SUN2Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -378,6 +378,7 @@
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\MitgliederGruppe\Add.cshtml" />
+    <Content Include="Views\MitarbeiterLehrstuhl\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
