@@ -4,6 +4,20 @@
     ViewBag.Title = "Alle Gruppen";
 }
 
+
+<head>
+    <style>
+        .btn-primary {
+            background-color: black;
+        }
+
+            .btn-primary:hover {
+                background-color: darkorange;
+            }
+    </style>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+</head>
+
 <h2>Übersicht aller Gruppen</h2>
 
 <p>
@@ -27,53 +41,54 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.bezeichnung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.beschreibung)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.verantwortlicher)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.privat)
-        </td>
-        <td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.bezeichnung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.beschreibung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.verantwortlicher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.privat)
+            </td>
+            <td>
 
-            <a href="@Url.Action("Edit", "Gruppe", new {id = item.gruppenid } )" class="btn btn-primary" title="Bearbeiten">
-                <i class='fas fa-edit'></i>
-            </a>
-            <a href="@Url.Action("Delete", "Gruppe", new { id = item.gruppenid } )" class="btn btn-primary" title="Löschen">
-                <i class='fas fa-trash-alt'></i>
-            </a>
-            <a href="@Url.Action("Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Neuer Eintrag">
-                <i class='fa fa-plus'></i>
-            </a>
-            <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Einträge Anzeigen">
-                <i class='fa fa-list'></i>
-            </a>
-            <a href="@Url.Action("Index", "MitgliederGruppe", new {gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Mitglieder anzeigen">
-                <i class='fa fa-users'></i>
-            </a>
-            <a href="@Url.Action("Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Mitglied hinzufühgen">
-                <i class='fa fa-user-plus'></i>
-            </a>
-
-
-            @*@Html.ActionLink("Gruppe bearbeiten", "Edit", new { id = item.gruppenid }) |
-            @Html.ActionLink("Gruppe löschen", "Delete", new { id = item.gruppenid }) |
-            @Html.ActionLink("Neuer Eintrag", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
-            @Html.ActionLink("Einträge anzeigen", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
-            @Html.ActionLink("Mitglieder anzeigen", "Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null) |
-            @Html.ActionLink("Mitglied hinzufügen", "Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)*@
+                <a href="@Url.Action("Edit", "Gruppe", new {id = item.gruppenid } )" class="btn btn-primary" title="Bearbeiten">
+                    <i class='fas fa-edit'></i>
+                </a>
+                <a href="@Url.Action("Delete", "Gruppe", new { id = item.gruppenid } )" class="btn btn-primary" title="Löschen">
+                    <i class='fas fa-trash-alt'></i>
+                </a>
+                <a href="@Url.Action("Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Neuer Eintrag">
+                    <i class='fa fa-plus'></i>
+                </a>
+                <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Einträge Anzeigen">
+                    <i class='fa fa-list'></i>
+                </a>
+                <a href="@Url.Action("Index", "MitgliederGruppe", new {gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Mitglieder anzeigen">
+                    <i class='fa fa-users'></i>
+                </a>
+                <a href="@Url.Action("Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Mitglied hinzufühgen">
+                    <i class='fa fa-user-plus'></i>
+                </a>
 
 
+                @*@Html.ActionLink("Gruppe bearbeiten", "Edit", new { id = item.gruppenid }) |
+                    @Html.ActionLink("Gruppe löschen", "Delete", new { id = item.gruppenid }) |
+                    @Html.ActionLink("Neuer Eintrag", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
+                    @Html.ActionLink("Einträge anzeigen", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
+                    @Html.ActionLink("Mitglieder anzeigen", "Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null) |
+                    @Html.ActionLink("Mitglied hinzufügen", "Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)*@
 
-        </td>
-    </tr>
-}
+
+
+            </td>
+        </tr>
+    }
 
 </table>
