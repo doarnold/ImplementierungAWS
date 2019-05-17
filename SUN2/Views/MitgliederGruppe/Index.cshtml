@@ -19,7 +19,11 @@
     {
         <tr>
             <th>
-                @Html.DisplayFor(model => item.userid)
+                <a href="@Url.Action("Details", "AspNetUsers", new {id = "059aa70c-b572-4fee-a527-756f79b9c27a" } )">
+                    @Html.DisplayFor(model => item.userid)
+
+                </a>
+
             </th>
             <td>
                 @Html.ActionLink("Mitglied entfernen", "Delete", new { id = item.id })
