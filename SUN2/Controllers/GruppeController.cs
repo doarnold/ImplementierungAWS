@@ -21,6 +21,7 @@ namespace SUN2.Controllers
         public ActionResult Index()
         {
             List<Gruppe> entries = new List<Gruppe>();
+            List<Person> zuordnung = new List<Person>();
 
             foreach (Gruppe gruppe in db.Gruppes)
             {
@@ -37,10 +38,20 @@ namespace SUN2.Controllers
                         {
                             gruppe.verantwortlicher = person.AspNetUsers.Email;
                         }
+
+                        // zuordnungstabelle für verlinkung erstellen
+                        Person el = new Person();
+                        el.id = person.id;
+                        el.name = gruppe.verantwortlicher;
+
+                        zuordnung.Add(el);
                     }
                 }
                 entries.Add(gruppe);
             }
+
+            ViewBag.zuordnung = zuordnung;
+
             return View(entries);
         }
 
