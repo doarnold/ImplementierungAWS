@@ -2,6 +2,14 @@
 
 @{
     ViewBag.Title = "Gruppenmitglieder";
+    var listtest = new List<string>();
+    foreach(var item in Model)
+    {
+        listtest.Add(item.userid);
+    }
+
+    var testlist = ViewBag.zuordnung;
+
 }
 
 <h2>Alle Mitglieder der Gruppe</h2>
@@ -15,14 +23,27 @@
         <th></th>
     </tr>
 
+
     @foreach (var item in Model)
     {
+
+        var idTest = item.userid;
         <tr>
             <th>
-                <a href="@Url.Action("Details", "AspNetUsers", new {id = "059aa70c-b572-4fee-a527-756f79b9c27a" } )">
-                    @Html.DisplayFor(model => item.userid)
 
-                </a>
+                @foreach (var person in testlist)
+                {
+                    if (person.name == item.userid)
+                    {
+
+                        <a href="@Url.Action("Details", "AspNetUsers", new { id = person.id }, null )">
+                            @Html.DisplayFor(model => item.userid)
+
+                        </a>
+                    }
+                }
+
+
 
             </th>
             <td>
