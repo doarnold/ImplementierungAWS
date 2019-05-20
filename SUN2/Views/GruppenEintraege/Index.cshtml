@@ -36,16 +36,20 @@
     <div id="GruppenHead">
         <div id="GruppenPostName">
             @{
-                foreach (var person in zuordnung)
+                if (zuordnung != null)
                 {
-                    if (person.name == item.autor)
+                    foreach (var person in zuordnung)
                     {
-                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                            @Html.DisplayFor(model => item.autor)
-                        </a>
-                        break;
+                        if (person.name == item.autor)
+                        {
+                            <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                @Html.DisplayFor(model => item.autor)
+                            </a>
+                            break;
+                        }
                     }
                 }
+
             }
         </div>
 

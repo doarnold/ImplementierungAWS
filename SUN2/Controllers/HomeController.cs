@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using SUN2.Models;
 
@@ -22,6 +23,7 @@ namespace SUN2.Controllers
         public ActionResult Index()
         {
             List<NewsFeedModel> list = new List<NewsFeedModel>();
+            List<Person> zuordnung = new List<Person>();
 
             // Alle abonnierten Lehrstuhleinträge und relevanten (=mitglied) Gruppeneinträge auslesen
             foreach (LehrstuhlEintraege le in db.LehrstuhlEintraeges)
@@ -40,6 +42,13 @@ namespace SUN2.Controllers
                         {
                             le.autor = person.AspNetUsers.Email;
                         }
+
+                        // zuordnungstabelle für verlinkung erstellen     
+                        zuordnung.Add(new Person
+                        {
+                            id = person.id,
+                            name = le.autor
+                        });
                     }
                 }
 
@@ -54,7 +63,8 @@ namespace SUN2.Controllers
                     label2 = le.label2,
                     label3 = le.label3,
                     label4 = le.label4,
-                    label5 = le.label5
+                    label5 = le.label5,
+                    typ = "l"
                 });
             }
 
@@ -74,6 +84,13 @@ namespace SUN2.Controllers
                         {
                             le.autor = person.AspNetUsers.Email;
                         }
+
+                        // zuordnungstabelle für verlinkung erstellen     
+                        zuordnung.Add(new Person
+                        {
+                            id = person.id,
+                            name = le.autor
+                        });
                     }
                 }
 
@@ -88,7 +105,8 @@ namespace SUN2.Controllers
                     label2 = le.label2,
                     label3 = le.label3,
                     label4 = le.label4,
-                    label5 = le.label5
+                    label5 = le.label5,
+                    typ = "g"
                 });
             }
 
@@ -96,6 +114,7 @@ namespace SUN2.Controllers
 
             // Gruppen und Lehrstühle müssen in eienr Partial View angezeigt werden!
             // var lehrstuehle = db.Lehrstuhls.ToList();
+            ViewBag.zuordnung = zuordnung.Distinct();
 
             return View(list);
         }
@@ -109,6 +128,7 @@ namespace SUN2.Controllers
 
             // Abos und Mitgliedschaften ermitteln
             List<AboMitgliedModel> amm = new List<AboMitgliedModel>();
+            List<Person> zuordnung = new List<Person>();
 
             foreach (MitgliederGruppe mg in db.MitgliederGruppes) // relevante gruppen suchen
             {
@@ -122,6 +142,7 @@ namespace SUN2.Controllers
                             {
                                 if (gr.verantwortlicher == person.id)
                                 {
+
                                     //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID
                                     if (person.name != null && person.vorname != null)
                                     {
@@ -132,7 +153,15 @@ namespace SUN2.Controllers
                                         gr.verantwortlicher = person.AspNetUsers.Email;
                                     }
 
+                                    // zuordnungstabelle für verlinkung erstellen     
+                                    zuordnung.Add(new Person
+                                    {
+                                        id = person.id,
+                                        name = gr.verantwortlicher
+                                    } );
                                 }
+
+
                             }
 
                             // zur liste hinzufügen
@@ -142,7 +171,8 @@ namespace SUN2.Controllers
                                 bezeichnung = gr.bezeichnung,
                                 beschreibung = gr.beschreibung,
                                 verantwortlicher = gr.verantwortlicher,
-                                privat = gr.privat
+                                privat = gr.privat,
+                                typ = "g"
                             });
                         }
                     }
@@ -172,7 +202,14 @@ namespace SUN2.Controllers
                                             l.verantwortlicher = person.AspNetUsers.Email;
                                         }
 
-                                    }
+                                    // zuordnungstabelle für verlinkung erstellen     
+                                    zuordnung.Add(new Person
+                                    {
+                                        id = person.id,
+                                        name = l.verantwortlicher
+                                    });
+
+                                }
                                 }
 
                                 // zur liste hinzufügen
@@ -182,7 +219,8 @@ namespace SUN2.Controllers
                                 bezeichnung = l.bezeichnung,
                                 beschreibung = l.beschreibung,
                                 verantwortlicher = l.verantwortlicher,
-                                privat = l.privat
+                                privat = l.privat,
+                                typ = "l"
                             });
                         }
                     }
@@ -190,6 +228,8 @@ namespace SUN2.Controllers
                 }
             }
 
+
+            ViewBag.zuordnung = zuordnung.Distinct();
 
             return View(amm);
         }

@@ -20,6 +20,7 @@ namespace SUN2.Controllers
         public ActionResult Index()
         {
             List<Lehrstuhl> entries = new List<Lehrstuhl>();
+            List<Person> zuordnung = new List<Person>();
 
             foreach (Lehrstuhl lehrstuhl in db.Lehrstuhls)
             {
@@ -36,8 +37,18 @@ namespace SUN2.Controllers
                         {
                             lehrstuhl.verantwortlicher = person.AspNetUsers.Email;
                         }
+
+
+                        // zuordnungstabelle für verlinkung erstellen
+                        Person el = new Person();
+                        el.id = person.id;
+                        el.name = lehrstuhl.verantwortlicher;
+
+                        zuordnung.Add(el);
                     }
                 }
+                ViewBag.zuordnung = zuordnung;
+
                 entries.Add(lehrstuhl);
             }
 

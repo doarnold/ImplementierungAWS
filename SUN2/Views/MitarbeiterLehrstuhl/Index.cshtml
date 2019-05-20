@@ -8,19 +8,40 @@
 
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.userid)
-        </th>
-        <th></th>
-    </tr>
+    <br />
+    <br />
+
+    @{ var zuordnung = ViewBag.zuordnung;}
 
     @foreach (var item in Model)
     {
+
         <tr>
             <th>
-                @Html.DisplayFor(model => item.userid)
-            </th>
+                @{
+
+
+                    if (zuordnung != null)
+                    {
+                        foreach (var person in zuordnung)
+                        {
+                            if (person.name == item.userid)
+                            {
+
+                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null )">
+                                    @Html.DisplayFor(model => item.userid)
+
+                                </a>
+                                break;
+                            }
+                        }
+
+
+                    }
+
+
+
+                </th>
             <td>
                 @Html.ActionLink("Mitarbeiter entfernen", "Delete", new { id = item.id })
 

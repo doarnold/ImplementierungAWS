@@ -21,6 +21,7 @@ namespace SUN2.Controllers
         public ActionResult Index(int? lehrstuhlid)
         {
             List<MitarbeiterLehrstuhl> entries = new List<MitarbeiterLehrstuhl>();
+            List<Person> zuordnung = new List<Person>();
 
             if (lehrstuhlid == null)
             {
@@ -48,10 +49,20 @@ namespace SUN2.Controllers
 
                             }
 
+                            // zuordnungstabelle für verlinkung erstellen
+                            Person el = new Person();
+                            el.id = person.id;
+                            el.name = ml.userid;
+
+                            zuordnung.Add(el);
+
                         }
                         entries.Add(ml);
                     }
                 }
+
+                ViewBag.zuordnung = zuordnung;
+
                 return View(entries.ToList());
             }
         }

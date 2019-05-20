@@ -25,19 +25,24 @@
         var userid = item.userid;
         <tr>
             <th>
-
-                @foreach (var person in zuordnung)
-                {
-                    if (person.name == item.userid)
+                @{
+                    if (zuordnung != null)
                     {
+                        foreach (var person in zuordnung)
+                        {
+                            if (person.name == item.userid)
+                            {
 
-                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null )">
-                            @Html.DisplayFor(model => item.userid)
+                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null )">
+                                    @Html.DisplayFor(model => item.userid)
 
-                        </a>
+                                </a>
+                                break;
+                            }
+                        }
                     }
-                }
 
+                }
 
 
             </th>

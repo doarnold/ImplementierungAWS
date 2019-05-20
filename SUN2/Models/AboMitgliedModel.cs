@@ -14,6 +14,7 @@ namespace SUN2.Models
         public string beschreibung { get; set; }
         public string verantwortlicher { get; set; }
         public Nullable<bool> privat { get; set; }
+        public String typ { get; set; } //g = gruppe, l = lehrstuhl
     }
 
 }

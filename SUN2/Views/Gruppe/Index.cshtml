@@ -54,16 +54,21 @@
                 @{
                     var zuordnung = ViewBag.zuordnung;
 
-                    foreach (var person in zuordnung)
+                    if (zuordnung != null)
                     {
-                        if (person.name == item.verantwortlicher)
+                        foreach (var person in zuordnung)
                         {
-                            <a href="@Url.Action("Details", "Person", new { id = person.id }, null )">
-                                @Html.DisplayFor(model => item.verantwortlicher)
+                            if (person.name == item.verantwortlicher)
+                            {
+                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null )">
+                                    @Html.DisplayFor(model => item.verantwortlicher)
 
-                            </a>
+                                </a>
+                            }
                         }
                     }
+
+
                 }
             </td>
             <td>

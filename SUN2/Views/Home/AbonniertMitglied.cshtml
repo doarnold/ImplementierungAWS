@@ -2,6 +2,8 @@
 
 <h4>Meine Gruppen & abonnierten Lehrstühle</h4>
 
+@{ var zuordnung = ViewBag.zuordnung; }
+
 <table class="table">
     <tr>
         <th>
@@ -28,14 +30,45 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.bezeichnung)
+                @{
+
+                    if (item.typ == "g")
+                    {
+                        <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
+                            @Html.DisplayFor(modelItem => item.bezeichnung)
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
+                            @Html.DisplayFor(modelItem => item.bezeichnung)
+                        </a>
+                    }
+                }
+
+
 
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.beschreibung)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.verantwortlicher) <!-- hier müssen wir mal sehen, dass der name erscheint -->
+                @{
+                    if (zuordnung != null)
+                    {
+                        foreach (var person in zuordnung)
+                        {
+                            if (person.name == item.verantwortlicher)
+                            {
+                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                    @Html.DisplayFor(model => item.verantwortlicher)
+                                </a>
+                                break;
+                            }
+                        }
+                    }
+
+                }
             </td>
 
         </tr>

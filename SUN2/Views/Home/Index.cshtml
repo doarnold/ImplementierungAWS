@@ -5,6 +5,7 @@
     //List<String> lehrstuhlName = ViewBag.lehrstuhlName;
 }
 
+@{  var zuordnung = ViewBag.zuordnung; }
 
     <div class="row">
         <div class="col-md-8 jumbotron" style="margin:5px; width:100%; min-height:800px;">
@@ -37,6 +38,7 @@
                         @Html.DisplayNameFor(model => model.label5)
                     </th>
                     <th></th>
+                    <th></th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -46,7 +48,22 @@
                             @Html.DisplayFor(modelItem => item.inhalt)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.autor)
+                            @{
+                                if (zuordnung != null)
+                                {
+                                    foreach (var person in zuordnung)
+                                    {
+                                        if (person.name == item.autor)
+                                        {
+                                            <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                                @Html.DisplayFor(model => item.autor)
+                                            </a>
+                                            break;
+                                        }
+                                    }
+                                }
+
+                            }
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.datum)
@@ -66,12 +83,25 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.label5)
                         </td>
+                        <td>
+                            @{
+                                if (item.typ == "g")
+                                {
+                                    @Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Zum Lehrstuhl", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)
+                                }
+                            }
+
+                        </td>
                     </tr>
                 }
 
             </table>
 
-
+            </div>
 
         </div>
 

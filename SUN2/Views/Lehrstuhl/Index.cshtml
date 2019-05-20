@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Alle Lehrstühle";
 }
+
+@{ var zuordnung = ViewBag.zuordnung; }
     <head>
         <style>
             .btn-primary {
@@ -49,10 +51,35 @@
         @Html.DisplayFor(modelItem => item.beschreibung)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.verantwortlicher)
+        @{
+            if (zuordnung != null)
+            {
+                foreach (var person in zuordnung)
+                {
+                    if (person.name == item.verantwortlicher)
+                    {
+                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                            @Html.DisplayFor(model => item.verantwortlicher)
+                        </a>
+                        break;
+                    }
+                }
+            }
+
+        }
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.privat)
+        @{
+            if (item.privat == true)
+            {
+                <i class='fa fa-eye-slash'> privat</i>
+            }
+            else
+            {
+                <i class='fa fa-eye'> öffentlich</i>
+            }
+        }
+        
     </td>
     <td>
         <a href="@Url.Action("Edit", "Lehrstuhl", new { id = item.lehrstuhlid } )" class="btn btn-primary" title="Bearbeiten">

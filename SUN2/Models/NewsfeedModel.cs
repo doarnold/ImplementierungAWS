@@ -19,6 +19,7 @@ namespace SUN2.Models
         public string label3 { get; set; }
         public string label4 { get; set; }
         public string label5 { get; set; }
+        public string typ { get; set; }  //g = gruppe, l = lehrstuhl
 
     }
 }
