@@ -89,8 +89,9 @@
         @Html.AntiForgeryToken()
 
 <div class="form-actions no-color">
-    <input type="submit" value="Delete" class="btn btn-default" /> |
-    @Html.ActionLink("Zurück", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, null)
+    <input type="submit" value="Löschen" class="btn btn-default" /> |
+    <input type="button" value="Zurück" onclick="window.history.back()" />
+    @Html.ActionLink("Alle Einträge", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, null)
 </div>
     }
 </div>

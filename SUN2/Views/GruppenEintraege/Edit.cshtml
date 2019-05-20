@@ -76,5 +76,6 @@
 }
 
 <div>
-    @Html.ActionLink("Zurück", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, null)
+    <input type="button" value="Zurück" onclick="window.history.back()" />
+    @Html.ActionLink("Alle Einträge", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, null)
 </div>

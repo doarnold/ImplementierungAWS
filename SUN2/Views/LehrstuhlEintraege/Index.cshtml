@@ -85,5 +85,6 @@
 </table>
 
 <div>
-    @Html.ActionLink("Zurück", "Index", "Lehrstuhl")
+    <input type="button" value="Zurück" onclick="window.history.back()" />
+    @Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")
 </div>

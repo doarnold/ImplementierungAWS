@@ -77,5 +77,6 @@
 }
 
 <div>
-    @Html.ActionLink("Zurück", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null)
+    <input type="button" value="Zurück" onclick="window.history.back()" />
+    @Html.ActionLink("Alle Einträge", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null)
 </div>

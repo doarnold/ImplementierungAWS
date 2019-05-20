@@ -15,19 +15,23 @@
     var zuordnung = ViewBag.zuordnung;
     var counter = 0;
 
-    foreach (var item in Model)
+    if (Request.IsAuthenticated)
     {
 
-        if (counter == 0)
+
+        foreach (var item in Model)
         {
+
+            if (counter == 0)
+            {
             <div id="GruppenPlatzhalter"></div>
             <h2 style="text-align:center">
                 SUN - Newsfeed
             </h2>
             <h5 style="text-align:center">Hier findest Du alle Einträge Deiner Gruppen und abonnierten Lehrstühle</h5>
             <div id="GruppenPlatzhalter"></div>
-            counter++;
-        }
+                counter++;
+            }
 
         <div class="row">
             <div class="col-md-8 jumbotron" style="margin:5px; width:100%; min-height:200px;">
@@ -57,15 +61,20 @@
 
                         @Html.DisplayFor(modelItem => item.datum)
                     <div id="GruppenEdit">
-                        @Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id }) |
-                        @Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id }) |
+
+
+
                         @{
                             if (item.typ == "g")
                             {
+                                @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                                @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
                                 @Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
                             }
                             else
                             {
+                                @Html.ActionLink("Eintrag bearbeiten", "Edit", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
+                                @Html.ActionLink("Eintrag löschen", "Delete", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
                                 @Html.ActionLink("Zum Lehrstuhl", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)
                             }
                         }
@@ -103,8 +112,9 @@
 
 
 
-    }
-}
+                                    }
+                                }
+                            }
 
 
 
