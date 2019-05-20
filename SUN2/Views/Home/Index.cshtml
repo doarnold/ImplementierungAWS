@@ -24,42 +24,41 @@
 
             if (counter == 0)
             {
-            <div id="GruppenPlatzhalter"></div>
-            <h2 style="text-align:center">
-                SUN - Newsfeed
-            </h2>
-            <h5 style="text-align:center">Hier findest Du alle Einträge Deiner Gruppen und abonnierten Lehrstühle</h5>
-            <div id="GruppenPlatzhalter"></div>
+                <div id="GruppenPlatzhalter"></div>
+                <h2 style="text-align:center">
+                    SUN - Newsfeed
+                </h2>
+                <h5 style="text-align:center">Hier findest Du alle Einträge Deiner Gruppen und abonnierten Lehrstühle</h5>
+                <div id="GruppenPlatzhalter"></div>
                 counter++;
             }
 
-        <div class="row">
-            <div class="col-md-8 jumbotron" style="margin:5px; width:100%; min-height:200px;">
-
-                <div id="GruppenBeitragGesamt">
 
 
-                    <div id="GruppenHead">
-                        <div id="GruppenPostName">
-                            @{
-                                if (zuordnung != null)
+            <div id="GruppenBeitragGesamt">
+
+
+                <div id="GruppenHead">
+                    <div id="GruppenPostName">
+                        @{
+                            if (zuordnung != null)
+                            {
+                                foreach (var person in zuordnung)
                                 {
-                                    foreach (var person in zuordnung)
+                                    if (person.name == item.autor)
                                     {
-                                        if (person.name == item.autor)
-                                        {
-                                            <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                                @Html.DisplayFor(model => item.autor)
-                                            </a>
-                                            break;
-                                        }
+                                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                            @Html.DisplayFor(model => item.autor)
+                                        </a>
+                                        break;
                                     }
                                 }
-
                             }
-                        </div>
 
-                        @Html.DisplayFor(modelItem => item.datum)
+                        }
+                    </div>
+
+                    @Html.DisplayFor(modelItem => item.datum)
                     <div id="GruppenEdit">
 
 
@@ -81,40 +80,38 @@
 
                     </div>
 
-                    </div>
-
-                    <div id="GruppenInhalt">
-                        @Html.DisplayFor(modelItem => item.inhalt)
-                    </div>
-
-
-
-                    <div id="GruppenLabelsRahmen">
-
-                        <div id="GruppenLabels">
-                            @Html.DisplayFor(modelItem => item.label1)
-                        </div>
-                        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label2)</div>
-                        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label3)</div>
-                        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label4)</div>
-                        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label5)</div>
-                    </div>
-
-
-
-                    <div id="GruppenPlatzhalter"></div>
-
-
                 </div>
+
+                <div id="GruppenInhalt">
+                    @Html.DisplayFor(modelItem => item.inhalt)
+                </div>
+
+
+
+                <div id="GruppenLabelsRahmen">
+
+                    <div id="GruppenLabels">
+                        @Html.DisplayFor(modelItem => item.label1)
+                    </div>
+                    <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label2)</div>
+                    <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label3)</div>
+                    <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label4)</div>
+                    <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label5)</div>
+                </div>
+
+
+
+                <div id="GruppenPlatzhalter"></div>
+
+
             </div>
-        </div>
 
 
 
 
-                                    }
-                                }
-                            }
 
+        }
+    }
 
+}
 

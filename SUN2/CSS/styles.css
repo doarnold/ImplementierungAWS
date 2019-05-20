@@ -31,6 +31,8 @@
         display: block;
     }
 
+
+
 /* Layout.cshtml */
 #Lupe {
     color: white;
@@ -49,6 +51,8 @@
 
 
 }
+
+/* Beträge Layout insb. Gruppen*/
 
 #GruppenBeitragGesamt {
     background-color: lightblue;
@@ -84,13 +88,15 @@
     flex-direction: column;
     min-height: 30vh;
     text-align: justify;
+    
 }
 
 #GruppenLabelsRahmen {
     background-color: lightblue;
-    height: 30px; 
+    height: 30px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    text-align: justify;
 }
 
 
@@ -117,5 +123,6 @@
     text-align: top;
 }
 
-/* Layout.cshtml ende */
+/* Beträge NewsFeed */
+
 
