@@ -10,30 +10,21 @@
 <p>
 </p>
 <table class="table">
-    <tr>
-        <th>
-            <p>E-Mail</p>
-        </th>
-        <th>
-            <p>Vorname</p>
-        </th>
-        <th>
-            <p>Nachname</p>
-        </th>
-        <th></th>
-    </tr>
+
+    <br /><br />
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.vorname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
+                <a href="@Url.Action("Details", "Person", new { id = item.id }, null )">
+
+                    @Html.DisplayFor(modelItem => item.vorname)
+
+                    @Html.DisplayFor(modelItem => item.name)
+                    (@Html.DisplayFor(modelItem => item.email))
+
+                </a>
             </td>
             <td>
                 @Html.ActionLink("Hinzufügen", "AddPerson", "MitgliederGruppe", new { gruppenid = item.gruppenid, id = item.id }, null)

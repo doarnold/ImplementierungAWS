@@ -20,7 +20,6 @@ namespace SUN2.Controllers
         public ActionResult Index(int? gruppenid)
         {
             List<MitgliederGruppe> entries = new List<MitgliederGruppe>();
-            List<Person> zuordnung = new List<Person>();
 
             if (gruppenid == null)
             {
@@ -44,22 +43,12 @@ namespace SUN2.Controllers
                                 {
                                     ge.userid = person.AspNetUsers.Email;
                                 }
-
-                                // zuordnungstabelle für verlinkung erstellen
-                                Person el = new Person();
-                                el.id = person.id;
-                                el.name = ge.userid;
-
-                                zuordnung.Add(el);
-
                             }
                             
                         }
                             entries.Add(ge);
                     }   
                 }
-
-                ViewBag.zuordnung = zuordnung;
 
                 return View(entries.ToList());
             }
