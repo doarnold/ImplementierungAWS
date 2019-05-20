@@ -51,10 +51,32 @@
                 @Html.DisplayFor(modelItem => item.beschreibung)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.verantwortlicher)
+                @{
+                    var zuordnung = ViewBag.zuordnung;
+
+                    foreach (var person in zuordnung)
+                    {
+                        if (person.name == item.verantwortlicher)
+                        {
+                            <a href="@Url.Action("Details", "Person", new { id = person.id }, null )">
+                                @Html.DisplayFor(model => item.verantwortlicher)
+
+                            </a>
+                        }
+                    }
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.privat)
+                @{
+                    if (item.privat == true)
+                    {
+                        <i class='fa fa-eye-slash'> privat</i>
+                    }
+                    else
+                    {
+                        <i class='fa fa-eye'> öffentlich</i>
+                    }
+                }
             </td>
             <td>
 

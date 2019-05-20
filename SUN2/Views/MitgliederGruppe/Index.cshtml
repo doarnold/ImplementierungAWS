@@ -8,7 +8,7 @@
         listtest.Add(item.userid);
     }
 
-    var testlist = ViewBag.zuordnung;
+    var zuordnung = ViewBag.zuordnung;
 
 }
 
@@ -27,16 +27,16 @@
     @foreach (var item in Model)
     {
 
-        var idTest = item.userid;
+        var userid = item.userid;
         <tr>
             <th>
 
-                @foreach (var person in testlist)
+                @foreach (var person in zuordnung)
                 {
                     if (person.name == item.userid)
                     {
 
-                        <a href="@Url.Action("Details", "AspNetUsers", new { id = person.id }, null )">
+                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null )">
                             @Html.DisplayFor(model => item.userid)
 
                         </a>

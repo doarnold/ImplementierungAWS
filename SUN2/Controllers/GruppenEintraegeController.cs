@@ -24,8 +24,10 @@ namespace SUN2.Controllers
         public ActionResult Index(int? gruppenid)
         {
             List <GruppenEintraege> entries = new List<GruppenEintraege>();
+            List<Person> zuordnung = new List<Person>();
+            String userid = "";
 
-            if(gruppenid == null)
+            if (gruppenid == null)
             {
                 return View(db.GruppenEintraeges.ToList());
             } else
@@ -47,11 +49,24 @@ namespace SUN2.Controllers
                                 {
                                     ge.autor = person.AspNetUsers.Email;
                                 }
+
+                                userid = person.id;
                             }  
                         }
+
+                        // zuordnungstabelle für verlinkung erstellen
+                        Person el = new Person();
+                        el.id = userid;
+                        el.name = ge.autor;
+
+                        zuordnung.Add(el);
+
                         entries.Add(ge);
                     }
                 }
+
+                ViewBag.zuordnung = zuordnung;
+
                 return View(entries.ToList());
             }
             

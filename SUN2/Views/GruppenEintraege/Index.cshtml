@@ -11,7 +11,7 @@
 
 
 @{
-
+    var zuordnung = ViewBag.zuordnung;
     var counter = 0;
 
     foreach (var item in Model)
@@ -35,7 +35,18 @@
 
     <div id="GruppenHead">
         <div id="GruppenPostName">
-            @Html.DisplayFor(modelItem => item.autor)
+            @{
+                foreach (var person in zuordnung)
+                {
+                    if (person.name == item.autor)
+                    {
+                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                            @Html.DisplayFor(model => item.autor)
+                        </a>
+                        break;
+                    }
+                }
+            }
         </div>
 
         @Html.DisplayFor(modelItem => item.datum)
