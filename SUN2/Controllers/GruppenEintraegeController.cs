@@ -67,6 +67,16 @@ namespace SUN2.Controllers
 
                 ViewBag.zuordnung = zuordnung;
 
+                // Bezeichnung der Gruppe in View übergeben
+                foreach(Gruppe gr in db.Gruppes)
+                {
+                    if(gr.gruppenid == gruppenid)
+                    {
+                        ViewBag.bezeichnung = gr.bezeichnung;
+                    }
+                }
+              
+
                 return View(entries.ToList());
             }
             

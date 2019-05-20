@@ -5,49 +5,38 @@
     //List<String> lehrstuhlName = ViewBag.lehrstuhlName;
 }
 
-@{  var zuordnung = ViewBag.zuordnung; }
 
-    <div class="row">
-        <div class="col-md-8 jumbotron" style="margin:5px; width:100%; min-height:800px;">
-            <h4>Newsfeed</h4>
+<!-- CSS Einbindung-->
+@Styles.Render("~/Content/css")
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.inhalt)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.autor)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.datum)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.label1)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.label2)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.label3)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.label4)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.label5)
-                    </th>
-                    <th></th>
-                    <th></th>
-                </tr>
 
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.inhalt)
-                        </td>
-                        <td>
+@{
+    var zuordnung = ViewBag.zuordnung;
+    var counter = 0;
+
+    foreach (var item in Model)
+    {
+
+        if (counter == 0)
+        {
+            <div id="GruppenPlatzhalter"></div>
+            <h2 style="text-align:center">
+                SUN - Newsfeed
+            </h2>
+            <h5 style="text-align:center">Hier findest Du alle Einträge Deiner Gruppen und abonnierten Lehrstühle</h5>
+            <div id="GruppenPlatzhalter"></div>
+            counter++;
+        }
+
+        <div class="row">
+            <div class="col-md-8 jumbotron" style="margin:5px; width:100%; min-height:200px;">
+
+                <div id="GruppenBeitragGesamt">
+
+
+                    <div id="GruppenHead">
+                        <div id="GruppenPostName">
                             @{
                                 if (zuordnung != null)
                                 {
@@ -64,50 +53,58 @@
                                 }
 
                             }
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.datum)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.label1)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.label2)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.label3)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.label4)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.label5)
-                        </td>
-                        <td>
-                            @{
-                                if (item.typ == "g")
-                                {
-                                    @Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
-                                }
-                                else
-                                {
-                                    @Html.ActionLink("Zum Lehrstuhl", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)
-                                }
+                        </div>
+
+                        @Html.DisplayFor(modelItem => item.datum)
+                    <div id="GruppenEdit">
+                        @Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id }) |
+                        @{
+                            if (item.typ == "g")
+                            {
+                                @Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
                             }
+                            else
+                            {
+                                @Html.ActionLink("Zum Lehrstuhl", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)
+                            }
+                        }
 
-                        </td>
-                    </tr>
-                }
+                    </div>
 
-            </table>
+                    </div>
 
+                    <div id="GruppenInhalt">
+                        @Html.DisplayFor(modelItem => item.inhalt)
+                    </div>
+
+
+
+                    <div id="GruppenLabelsRahmen">
+
+                        <div id="GruppenLabels">
+                            @Html.DisplayFor(modelItem => item.label1)
+                        </div>
+                        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label2)</div>
+                        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label3)</div>
+                        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label4)</div>
+                        <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label5)</div>
+                    </div>
+
+
+
+                    <div id="GruppenPlatzhalter"></div>
+
+
+                </div>
             </div>
-
         </div>
 
-        <!--
-        <div class="col-md-5 jumbotron" style="width:39%;">
-            <p>Erstmal ausgelagert.</p>
 
-        </div>
-        -->
+
+
+    }
+}
+
+
+

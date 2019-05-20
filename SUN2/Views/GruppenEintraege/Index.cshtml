@@ -12,6 +12,7 @@
 
 @{
     var zuordnung = ViewBag.zuordnung;
+    var bezeichnung = ViewBag.bezeichnung;
     var counter = 0;
 
     foreach (var item in Model)
@@ -22,8 +23,7 @@
             <div id="GruppenPlatzhalter"></div>
             <h2 style="text-align:center">
                 Gruppe:
-                @Html.DisplayFor(modelItem => item.gruppenid)
-                <!-- Funktioniert für einzelne Gruppen wirft aber Fehler bei allen !-->
+                @bezeichnung <!-- bei inkonstenten testdaten wird hier nichts angezeigt !-->
             </h2>
             <div id="GruppenPlatzhalter"></div>
             counter++;

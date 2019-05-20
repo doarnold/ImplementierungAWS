@@ -65,6 +65,15 @@ namespace SUN2.Controllers
 
                 ViewBag.zuordnung = zuordnung;
 
+                // Bezeichnung des lehrstuhls in View übergeben
+                foreach (Lehrstuhl le in db.Lehrstuhls)
+                {
+                    if (le.lehrstuhlid == lehrstuhlid)
+                    {
+                        ViewBag.bezeichnung = le.bezeichnung;
+                    }
+                }
+
                 return View(entries.ToList());
             }
         }

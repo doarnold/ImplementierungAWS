@@ -1,82 +1,87 @@
 ﻿@model IEnumerable<SUN2.Models.AboMitgliedModel>
 
-<h4>Meine Gruppen & abonnierten Lehrstühle</h4>
+@{
+    ViewBag.Title = "Meine Gruppen und Lehrstühle";
+}
 
-@{ var zuordnung = ViewBag.zuordnung; }
+    <br />
+    <h4>Meine Gruppen & abonnierten Lehrstühle</h4>
 
-<table class="table">
-    <tr>
-        <th>
+    @{ var zuordnung = ViewBag.zuordnung; }
 
-            @Html.DisplayNameFor(model => model.bezeichnung)
-
-        </th>
-        <th>
-
-            @Html.DisplayNameFor(model => model.beschreibung)
-
-        </th>
-        <th>
-
-            @Html.DisplayNameFor(model => model.verantwortlicher)
-
-        </th>
-
-
-
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <table class="table">
         <tr>
-            <td>
-                @{
+            <th>
 
-                    if (item.typ == "g")
-                    {
-                        <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
-                            @Html.DisplayFor(modelItem => item.bezeichnung)
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
-                            @Html.DisplayFor(modelItem => item.bezeichnung)
-                        </a>
-                    }
-                }
+                @Html.DisplayNameFor(model => model.bezeichnung)
 
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.beschreibung)
+
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.verantwortlicher)
+
+            </th>
 
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.beschreibung)
-            </td>
-            <td>
-                @{
-                    if (zuordnung != null)
-                    {
-                        foreach (var person in zuordnung)
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+
+                        if (item.typ == "g")
                         {
-                            if (person.name == item.verantwortlicher)
-                            {
-                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                    @Html.DisplayFor(model => item.verantwortlicher)
-                                </a>
-                                break;
-                            }
+                            <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
+                                @Html.DisplayFor(modelItem => item.bezeichnung)
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
+                                @Html.DisplayFor(modelItem => item.bezeichnung)
+                            </a>
                         }
                     }
 
-                }
-            </td>
-
-        </tr>
-    }
 
 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.beschreibung)
+                </td>
+                <td>
+                    @{
+                        if (zuordnung != null)
+                        {
+                            foreach (var person in zuordnung)
+                            {
+                                if (person.name == item.verantwortlicher)
+                                {
+                                    <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                        @Html.DisplayFor(model => item.verantwortlicher)
+                                    </a>
+                                    break;
+                                }
+                            }
+                        }
 
-</table>
+                    }
+                </td>
+
+            </tr>
+        }
 
 
- 
+
+    </table>
+
+
+
