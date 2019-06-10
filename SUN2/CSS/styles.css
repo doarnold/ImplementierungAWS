@@ -31,7 +31,9 @@
         display: block;
     }
 
-
+input {
+    color: black;
+}
 
 /* Layout.cshtml */
 #Lupe {
@@ -138,10 +140,10 @@
 
 
 h2{
-    color: whitesmoke; 
+    color: black; 
 }
 h1 {
-    color: whitesmoke;
+    color: black;
 }
 
 
