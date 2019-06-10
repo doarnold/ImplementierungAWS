@@ -26,59 +26,118 @@ namespace SUN2.Controllers
             List <GruppenEintraege> entries = new List<GruppenEintraege>();
             List<Person> zuordnung = new List<Person>();
             String userid = "";
+            Boolean ok = false; // für prüfung auf mitgliedschaft
+            Boolean[] verantwortlich = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein Verantwortlicher
+            Boolean[] autor = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein autor
 
-            if (gruppenid == null)
+            foreach (Gruppe gruppe in db.Gruppes)
             {
-                return View(db.GruppenEintraeges.ToList());
-            } else
-            {
-                foreach (GruppenEintraege ge in db.GruppenEintraeges)
+                // Wenn die Gruppe privat ist, dann prüfe, ob User Mitglied der Gruppe ist
+                // falls ja oder gruppe nicht privat, dann OK und weiter (Admin sieht alles immer)
+                if (gruppe.gruppenid == gruppenid && gruppe.privat == true && !User.IsInRole("Admin"))
                 {
-                    if (ge.gruppenid == gruppenid)
+                    // hier werden PRIVATEN alle Gruppen ausgeschlossen, in denen der User nicht Mitglied ist
+                    var userId = User.Identity.GetUserId();
+                    ok = false;
+
+                    // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
+                    if (gruppe.verantwortlicher == userId)
                     {
-                        foreach (Person person in db.Person)
+                        verantwortlich[gruppe.gruppenid] = true;
+                    }
+                    else
+                    {
+                        verantwortlich[gruppe.gruppenid] = false;
+                    }
+
+                    foreach (MitgliederGruppe mg in db.MitgliederGruppes)
+                    {
+                        if (mg.gruppenid == gruppe.gruppenid && mg.userid == userId)
                         {
-                            if (person.id == ge.autor)
-                            {
-                                //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
-                                if (person.name != null && person.vorname != null)
-                                {
-                                    ge.autor = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                                }
-                                else
-                                {
-                                    ge.autor = person.AspNetUsers.Email;
-                                }
-
-                                userid = person.id;
-                            }  
+                            ok = true;
                         }
-
-                        // zuordnungstabelle für verlinkung erstellen
-                        Person el = new Person();
-                        el.id = userid;
-                        el.name = ge.autor;
-
-                        zuordnung.Add(el);
-
-                        entries.Add(ge);
                     }
                 }
-
-                ViewBag.zuordnung = zuordnung;
-
-                // Bezeichnung der Gruppe in View übergeben
-                foreach(Gruppe gr in db.Gruppes)
+                else
                 {
-                    if(gr.gruppenid == gruppenid)
+                    ok = true;
+                }
+            }
+
+            if (ok)
+            {
+                if (gruppenid == null)
+                {
+                    return View(db.GruppenEintraeges.ToList());
+                }
+                else
+                {
+                    foreach (GruppenEintraege ge in db.GruppenEintraeges)
                     {
-                        ViewBag.bezeichnung = gr.bezeichnung;
+                        if (ge.gruppenid == gruppenid)
+                        {
+
+                            // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
+                            var userId = User.Identity.GetUserId();
+
+                            if (ge.autor == userId)
+                            {
+                                autor[ge.id] = true;
+                            }
+                            else
+                            {
+                                autor[ge.id] = false;
+                            }
+
+
+                            foreach (Person person in db.Person)
+                            {
+                                if (person.id == ge.autor)
+                                {
+                                    //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
+                                    if (person.name != null && person.vorname != null)
+                                    {
+                                        ge.autor = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
+                                    }
+                                    else
+                                    {
+                                        ge.autor = person.AspNetUsers.Email;
+                                    }
+
+                                    userid = person.id;
+                                }
+                            }
+
+                            // zuordnungstabelle für verlinkung erstellen
+                            Person el = new Person();
+                            el.id = userid;
+                            el.name = ge.autor;
+
+                            zuordnung.Add(el);
+
+                            entries.Add(ge);
+                        }
+                    }
+
+                    ViewBag.zuordnung = zuordnung;
+                    ViewBag.autor = autor;
+                    ViewBag.verantwortlich = verantwortlich;
+
+                    // Bezeichnung der Gruppe in View übergeben
+                    foreach (Gruppe gr in db.Gruppes)
+                    {
+                        if (gr.gruppenid == gruppenid)
+                        {
+                            ViewBag.bezeichnung = gr.bezeichnung;
+                        }
                     }
                 }
-              
 
-                return View(entries.ToList());
+
+
             }
+            return View(entries.ToList());
+           
             
         }
 

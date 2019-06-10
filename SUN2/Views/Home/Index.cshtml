@@ -60,26 +60,39 @@
 
                     @Html.DisplayFor(modelItem => item.datum)
 
-                    <div id="GruppenEdit">
+                <div id="GruppenEdit">
 
 
 
-                        @{
-                            if (item.typ == "g")
-                            {
-                                @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
-                                @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
-                                @Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Eintrag bearbeiten", "Edit", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
-                                @Html.ActionLink("Eintrag löschen", "Delete", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
-                                @Html.ActionLink("Zum Lehrstuhl", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)
-                            }
+                    @{
+                        if (item.typ == "g")
+                        {
+
+                        
+                                var verant = ViewBag.verantwortlich;
+                                var aut = ViewBag.autor;
+
+                                if (verant[item.entityid] == true || aut[item.id] == true || User.IsInRole("Admin"))
+                                {
+
+
+                                    @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                                    @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+
+                                }
+                            
+
+                            @Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
                         }
+                        else
+                        {
+                            @Html.ActionLink("Eintrag bearbeiten", "Edit", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
+                            @Html.ActionLink("Eintrag löschen", "Delete", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
+                            @Html.ActionLink("Zum Lehrstuhl", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)
+                        }
+                    }
 
-                    </div>
+                </div>
 
                 </div>
 

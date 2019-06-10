@@ -22,35 +22,74 @@ namespace SUN2.Controllers
         {
             List<Gruppe> entries = new List<Gruppe>();
             List<Person> zuordnung = new List<Person>();
+            Boolean ok = false; // für prüfung auf mitgliedschaft
+            Boolean[] verantwortlich = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein Verantwortlicher
 
             foreach (Gruppe gruppe in db.Gruppes)
             {
-                foreach (Person person in db.Person)
+                // Wenn die Gruppe privat ist, dann prüfe, ob User Mitglied der Gruppe ist
+                // falls ja oder gruppe nicht privat, dann OK und weiter (Admin sieht alles immer)
+
+                if(gruppe.privat == true && !User.IsInRole("Admin")) 
                 {
-                    if(person.id == gruppe.verantwortlicher)
+                    // hier werden PRIVATEN alle Gruppen ausgeschlossen, in denen der User nicht Mitglied ist
+                    var userId = User.Identity.GetUserId();
+                    ok = false;
+
+                    // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
+                    if(gruppe.verantwortlicher == userId)
                     {
-                        //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
-                        if (person.name != null && person.vorname != null)
-                        {
-                            gruppe.verantwortlicher = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                        }
-                        else
-                        {
-                            gruppe.verantwortlicher = person.AspNetUsers.Email;
-                        }
+                        verantwortlich[gruppe.gruppenid] = true;
+                    } else
+                    {
+                        verantwortlich[gruppe.gruppenid] = false;
+                    }
 
-                        // zuordnungstabelle für verlinkung erstellen
-                        Person el = new Person();
-                        el.id = person.id;
-                        el.name = gruppe.verantwortlicher;
-
-                        zuordnung.Add(el);
+                    foreach (MitgliederGruppe mg in db.MitgliederGruppes)
+                    {
+                        if (mg.gruppenid == gruppe.gruppenid && mg.userid == userId)
+                        {
+                            ok = true;
+                        }
                     }
                 }
-                entries.Add(gruppe);
+                else
+                {
+                    ok = true;
+                }
+
+
+                if(ok)
+                {
+                    foreach (Person person in db.Person)
+                    {
+                        if (person.id == gruppe.verantwortlicher)
+                        {
+                            //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
+                            if (person.name != null && person.vorname != null)
+                            {
+                                gruppe.verantwortlicher = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
+                            }
+                            else
+                            {
+                                gruppe.verantwortlicher = person.AspNetUsers.Email;
+                            }
+
+                            // zuordnungstabelle für verlinkung erstellen
+                            Person el = new Person();
+                            el.id = person.id;
+                            el.name = gruppe.verantwortlicher;
+
+                            zuordnung.Add(el);
+                        }
+                    }
+                    entries.Add(gruppe);
+                }
             }
+                
 
             ViewBag.zuordnung = zuordnung;
+            ViewBag.verantwortlich = verantwortlich;
 
             return View(entries);
         }
@@ -93,12 +132,14 @@ namespace SUN2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Gruppe gruppe = db.Gruppes.Find(id);
             if (gruppe == null)
             {
                 return HttpNotFound();
             }
             return View(gruppe);
+
         }
 
 

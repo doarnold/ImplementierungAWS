@@ -54,10 +54,22 @@
                 </div>
 
                 @Html.DisplayFor(modelItem => item.datum)
-                <div id="GruppenEdit">
-                    @Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id })
-                </div>
+            <div id="GruppenEdit">
+
+                @{
+                    var verant = ViewBag.verantwortlich;
+                    var aut = ViewBag.autor;
+
+                    if (verant[item.gruppenid] == true || aut[item.id] == true || User.IsInRole("Admin"))
+                    {
+
+                        Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id }); 
+                        <p>|</p>
+                        Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id });
+
+                        }
+                }
+            </div>
 
             </div>
 
@@ -92,7 +104,7 @@
     }
 }
 
-</table>
+
 
 <input type="button" value="Zurück" onclick="window.history.back()" />
 @Html.ActionLink("Alle Gruppen", "Index", "Gruppe")

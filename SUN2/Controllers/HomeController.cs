@@ -68,8 +68,41 @@ namespace SUN2.Controllers
                 });
             }
 
+
+            Boolean[] verantwortlich = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein Verantwortlicher
+            Boolean[] autor = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein autor
+
             foreach (GruppenEintraege le in db.GruppenEintraeges)
             {
+                // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
+                var userId = User.Identity.GetUserId();
+
+                if (le.autor == userId)
+                {
+                    autor[le.id] = true;
+                }
+                else
+                {
+                    autor[le.id] = false;
+                }
+
+                // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
+                foreach(Gruppe gr in db.Gruppes)
+                {
+                    if(gr.gruppenid == le.gruppenid)
+                    {
+                        if (gr.verantwortlicher == userId)
+                        {
+                            verantwortlich[le.gruppenid] = true;
+                        }
+                        else
+                        {
+                            verantwortlich[le.gruppenid] = false;
+                        }
+                    }
+                }
+
+
                 // Userid richtig darstellen
                 foreach (Person person in db.Person)
                 {
@@ -93,6 +126,11 @@ namespace SUN2.Controllers
                         });
                     }
                 }
+
+
+
+                ViewBag.autor = autor;
+                ViewBag.verantwortlich = verantwortlich;
 
                 list.Add(new NewsFeedModel
                 {
