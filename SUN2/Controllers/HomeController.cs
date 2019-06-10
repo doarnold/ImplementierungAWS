@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
+using SUN2.Controllers.misc;
 using SUN2.Models;
 
 
@@ -17,6 +18,10 @@ namespace SUN2.Controllers
     public class HomeController : Controller
     {
         private SUN2Entities db = new SUN2Entities();
+
+        ////////////////////////
+        ///  Lehrstuhleinträge
+        ////////////////////
 
 
         //liefert die index view /index
@@ -68,6 +73,9 @@ namespace SUN2.Controllers
                 });
             }
 
+            ////////////////////////
+            ///  Gruppeneinträge
+            ////////////////////
 
             Boolean[] verantwortlich = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein Verantwortlicher
             Boolean[] autor = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein autor
@@ -76,31 +84,10 @@ namespace SUN2.Controllers
             {
                 // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
                 var userId = User.Identity.GetUserId();
-
-                if (le.autor == userId)
-                {
-                    autor[le.id] = true;
-                }
-                else
-                {
-                    autor[le.id] = false;
-                }
+                autor[le.id] = authCheck.AutorGE(le.gruppenid, userId);
 
                 // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
-                foreach(Gruppe gr in db.Gruppes)
-                {
-                    if(gr.gruppenid == le.gruppenid)
-                    {
-                        if (gr.verantwortlicher == userId)
-                        {
-                            verantwortlich[le.gruppenid] = true;
-                        }
-                        else
-                        {
-                            verantwortlich[le.gruppenid] = false;
-                        }
-                    }
-                }
+                verantwortlich[le.gruppenid] = authCheck.VerantGr(le.gruppenid, userId);
 
 
                 // Userid richtig darstellen
@@ -128,24 +115,27 @@ namespace SUN2.Controllers
                 }
 
 
-
                 ViewBag.autor = autor;
                 ViewBag.verantwortlich = verantwortlich;
 
-                list.Add(new NewsFeedModel
-                {
-                    id = le.id,
-                    entityid = le.gruppenid,
-                    datum = le.datum,
-                    autor = le.autor,
-                    inhalt = le.inhalt,
-                    label1 = le.label1,
-                    label2 = le.label2,
-                    label3 = le.label3,
-                    label4 = le.label4,
-                    label5 = le.label5,
-                    typ = "g"
-                });
+ 
+                    list.Add(new NewsFeedModel
+                    {
+                        id = le.id,
+                        entityid = le.gruppenid,
+                        datum = le.datum,
+                        autor = le.autor,
+                        inhalt = le.inhalt,
+                        label1 = le.label1,
+                        label2 = le.label2,
+                        label3 = le.label3,
+                        label4 = le.label4,
+                        label5 = le.label5,
+                        typ = "g"
+                    });
+             
+
+
             }
 
 

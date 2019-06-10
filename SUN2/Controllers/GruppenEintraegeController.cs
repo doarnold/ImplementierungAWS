@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using SUN2.Controllers.misc;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -37,18 +38,11 @@ namespace SUN2.Controllers
                 if (gruppe.gruppenid == gruppenid && gruppe.privat == true && !User.IsInRole("Admin"))
                 {
                     // hier werden PRIVATEN alle Gruppen ausgeschlossen, in denen der User nicht Mitglied ist
-                    var userId = User.Identity.GetUserId();
                     ok = false;
 
                     // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
-                    if (gruppe.verantwortlicher == userId)
-                    {
-                        verantwortlich[gruppe.gruppenid] = true;
-                    }
-                    else
-                    {
-                        verantwortlich[gruppe.gruppenid] = false;
-                    }
+                    var userId = User.Identity.GetUserId();
+                    verantwortlich[gruppe.gruppenid] = authCheck.VerantGr(gruppe.gruppenid, userId);
 
                     foreach (MitgliederGruppe mg in db.MitgliederGruppes)
                     {
@@ -79,15 +73,7 @@ namespace SUN2.Controllers
 
                             // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
                             var userId = User.Identity.GetUserId();
-
-                            if (ge.autor == userId)
-                            {
-                                autor[ge.id] = true;
-                            }
-                            else
-                            {
-                                autor[ge.id] = false;
-                            }
+                            autor[ge.id] = authCheck.VerantGr(ge.id, userId);
 
 
                             foreach (Person person in db.Person)
