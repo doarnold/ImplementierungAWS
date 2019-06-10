@@ -25,20 +25,24 @@ namespace SUN2.Controllers
             List<Person> zuordnung = new List<Person>();
             Boolean ok = false; // für prüfung auf mitgliedschaft
             Boolean[] verantwortlich = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein Verantwortlicher
+            Boolean[] mitglied = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein mitglied
 
             foreach (Gruppe gruppe in db.Gruppes)
             {
                 // Wenn die Gruppe privat ist, dann prüfe, ob User Mitglied der Gruppe ist
                 // falls ja oder gruppe nicht privat, dann OK und weiter (Admin sieht alles immer)
 
-                if(gruppe.privat == true && !User.IsInRole("Admin")) 
+                // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
+                var userId = User.Identity.GetUserId();
+                verantwortlich[gruppe.gruppenid] = authCheck.VerantGr(gruppe.gruppenid, userId);
+                mitglied[gruppe.gruppenid] = authCheck.MitgliedGr(gruppe.gruppenid, userId);
+
+                if (gruppe.privat == true && !User.IsInRole("Admin")) 
                 {
                     // hier werden PRIVATEN alle Gruppen ausgeschlossen, in denen der User nicht Mitglied ist
                     ok = false;
 
-                    // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
-                    var userId = User.Identity.GetUserId();
-                    verantwortlich[gruppe.gruppenid] = authCheck.VerantGr(gruppe.gruppenid, userId);
+
 
                     foreach (MitgliederGruppe mg in db.MitgliederGruppes)
                     {
@@ -85,6 +89,7 @@ namespace SUN2.Controllers
 
             ViewBag.zuordnung = zuordnung;
             ViewBag.verantwortlich = verantwortlich;
+            ViewBag.mitglied = mitglied;
 
             return View(entries);
         }
@@ -109,8 +114,15 @@ namespace SUN2.Controllers
                 //angemeldeter User ist Verantwortlicher
                 var userId = User.Identity.GetUserId();
                 gruppe.verantwortlicher = userId;
-
                 db.Gruppes.Add(gruppe);
+
+                // Mitgliedschaft herstellen
+                MitgliederGruppe mg = new MitgliederGruppe();
+                mg.gruppenid = gruppe.gruppenid;
+                mg.userid = userId;
+                db.MitgliederGruppes.Add(mg);
+
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
