@@ -43,6 +43,10 @@ input {
     padding-top: 15px;
 }
 
+#Lupe:hover {
+    color: yellow;
+}
+
 .Feld {
     width: 600px;
     margin-top: 8px;
