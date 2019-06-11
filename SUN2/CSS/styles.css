@@ -237,6 +237,79 @@ p {
    color: white; 
 }
 
+
+/* Registrieren */
+
+#Register-box {
+    font-size: 14px;
+    border-top: 2px solid #3498db;
+    width: 300px;
+    padding: 20px;
+    margin: 60px auto;
+    /*/display: none; */
+    background-color: #FFFFFF;
+    /*background-color: transparent;*/
+}
+
+
+
+#Register-box input[type='text']:focus, input[type="password"]:focus {
+    color: black;
+    border: 1px solid black;
+    outline: none;
+}
+
+#Register-box input[type='text'], input[type='password'] {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555555;
+    border: 1px solid #cccccc;
+    line-heigt: 2;
+}
+
+#Register-box select {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    width: 100%;
+    height: 28px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555555;
+    border: 1px solid #cccccc;
+    line-heigt: 1;
+}
+
+
+
+
+#Register-box .button {
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    cursor: pointer;
+    padding: 6px 13px;
+    border: 0 solid #018dc4;
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    background: #3498db;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+    #Register-box .button:hover {
+        background-color: #2980b9;
+        -webkit-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+    }
+
+
+
+
 /* Beiträge bearbeiten */
 #TextboxInhalt {
     width: 100% !important;
