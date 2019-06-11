@@ -29,14 +29,23 @@ namespace SUN2.Controllers
         {
             List<NewsFeedModel> list = new List<NewsFeedModel>();
             List<Person> zuordnung = new List<Person>();
+            Boolean[] lverantwortlich = new Boolean[10000]; // Index lehrstuhlid, Eintrag false -> lehrstuhl lehrstuhlid kein Verantwortlicher
+            Boolean[] lautor = new Boolean[10000]; // Index lehrstuhlid, Eintrag false -> lehrstuhl lehrstuhlid kein autor
             Boolean abonniert = false;
             var userId = User.Identity.GetUserId();
 
-            // Alle abonnierten Lehrstuhleinträge und relevanten (=mitglied) Gruppeneinträge auslesen
+            // Alle abonnierten Lehrstuhleinträge und relevanten (=mitglied) lehrstuhleinträge auslesen
             foreach (LehrstuhlEintraege le in db.LehrstuhlEintraeges)
             {
+                // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
+                lautor[le.id] = AuthCheck.AutorLE(le.lehrstuhlid, userId);
+
+                // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
+                lverantwortlich[le.lehrstuhlid] = AuthCheck.VerantLehr(le.lehrstuhlid, userId);
+
+
                 // prüfen, ob user mitarbeiter des lehrstuhls ist oder diesen abonniert hat
-                foreach(MitarbeiterLehrstuhl ml in db.MitarbeiterLehrstuhls)
+                foreach (MitarbeiterLehrstuhl ml in db.MitarbeiterLehrstuhls)
                 {
                     if(ml.userid == userId || User.IsInRole("Admin"))
                     {
@@ -68,7 +77,12 @@ namespace SUN2.Controllers
                     }
                 }
 
-                if(abonniert)
+
+                ViewBag.lautor = lautor;
+                ViewBag.lverantwortlich = lverantwortlich;
+
+
+                if (abonniert)
                 {
                     list.Add(new NewsFeedModel
                     {

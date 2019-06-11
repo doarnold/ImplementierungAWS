@@ -86,8 +86,16 @@
                         }
                         else
                         {
+                                var lverant = ViewBag.lverantwortlich;
+                                var laut = ViewBag.lautor;
+
+                                if (lverant[item.entityid] == true || laut[item.id] == true || User.IsInRole("Admin"))
+                                {
+
                             @Html.ActionLink("Eintrag bearbeiten", "Edit", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
                             @Html.ActionLink("Eintrag löschen", "Delete", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
+                                }
+
                             @Html.ActionLink("Zum Lehrstuhl", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)
                         }
                     }
