@@ -157,12 +157,20 @@ namespace SUN2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LehrstuhlEintraege lehrstuhlEintraege = db.LehrstuhlEintraeges.Find(id);
-            if (lehrstuhlEintraege == null)
+
+            var userId = User.Identity.GetUserId();
+            int idauth = (int)id;
+            if (AuthCheck.VerantLehr(idauth, userId) || AuthCheck.AutorLE(idauth, userId) || User.IsInRole("Admin"))
             {
-                return HttpNotFound();
+                LehrstuhlEintraege lehrstuhlEintraege = db.LehrstuhlEintraeges.Find(id);
+                if (lehrstuhlEintraege == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(lehrstuhlEintraege);
             }
-            return View(lehrstuhlEintraege);
+
+            return RedirectToAction("Unauthorized", "Error");
         }
 
 
@@ -188,12 +196,20 @@ namespace SUN2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LehrstuhlEintraege lehrstuhlEintraege = db.LehrstuhlEintraeges.Find(id);
-            if (lehrstuhlEintraege == null)
+
+            var userId = User.Identity.GetUserId();
+            int idauth = (int)id;
+            if (AuthCheck.VerantLehr(idauth, userId) || AuthCheck.AutorLE(idauth, userId) || User.IsInRole("Admin"))
             {
-                return HttpNotFound();
+                    LehrstuhlEintraege lehrstuhlEintraege = db.LehrstuhlEintraeges.Find(id);
+                if (lehrstuhlEintraege == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(lehrstuhlEintraege);
             }
-            return View(lehrstuhlEintraege);
+
+            return RedirectToAction("Unauthorized", "Error");
         }
 
 

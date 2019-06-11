@@ -135,12 +135,20 @@ namespace SUN2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Lehrstuhl lehrstuhl = db.Lehrstuhls.Find(id);
-            if (lehrstuhl == null)
+
+            var userId = User.Identity.GetUserId();
+            int idauth = (int)id;
+            if (AuthCheck.VerantLehr(idauth, userId) || User.IsInRole("Admin"))
             {
-                return HttpNotFound();
+                Lehrstuhl lehrstuhl = db.Lehrstuhls.Find(id);
+                if (lehrstuhl == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(lehrstuhl);
             }
-            return View(lehrstuhl);
+
+            return RedirectToAction("Unauthorized", "Error");
         }
 
 
@@ -167,12 +175,21 @@ namespace SUN2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Lehrstuhl lehrstuhl = db.Lehrstuhls.Find(id);
-            if (lehrstuhl == null)
+
+
+            var userId = User.Identity.GetUserId();
+            int idauth = (int)id;
+            if (AuthCheck.VerantLehr(idauth, userId) || User.IsInRole("Admin"))
             {
-                return HttpNotFound();
-            }
-            return View(lehrstuhl);
+                Lehrstuhl lehrstuhl = db.Lehrstuhls.Find(id);
+                if (lehrstuhl == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(lehrstuhl);
+             }
+
+            return RedirectToAction("Unauthorized", "Error");
         }
 
 

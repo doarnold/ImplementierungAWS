@@ -24,7 +24,7 @@ namespace SUN2.Controllers
         // GET: GruppenEintraege
         public ActionResult Index(int? gruppenid)
         {
-            List <GruppenEintraege> entries = new List<GruppenEintraege>();
+            List<GruppenEintraege> entries = new List<GruppenEintraege>();
             List<Person> zuordnung = new List<Person>();
             String userid = "";
             Boolean ok = false; // für prüfung auf mitgliedschaft
@@ -115,8 +115,8 @@ namespace SUN2.Controllers
 
             }
             return View(entries.ToList());
-           
-            
+
+
         }
 
 
@@ -153,7 +153,7 @@ namespace SUN2.Controllers
             {
                 db.GruppenEintraeges.Add(gruppenEintraege);
                 db.SaveChanges();
-                return RedirectToAction("Index", new { gruppenid = gruppenEintraege.gruppenid } );
+                return RedirectToAction("Index", new { gruppenid = gruppenEintraege.gruppenid });
             }
 
             return View(gruppenEintraege);
@@ -168,13 +168,21 @@ namespace SUN2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GruppenEintraege gruppenEintraege = db.GruppenEintraeges.Find(id);
-            if (gruppenEintraege == null)
+
+            var userId = User.Identity.GetUserId();
+            int idauth = (int)id;
+            if (AuthCheck.VerantGr(idauth, userId) || AuthCheck.AutorGE(idauth, userId) || User.IsInRole("Admin"))
             {
-                return HttpNotFound();
+                GruppenEintraege gruppenEintraege = db.GruppenEintraeges.Find(id);
+                if (gruppenEintraege == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gruppenEintraege);
             }
-            return View(gruppenEintraege);
-        }
+
+            return RedirectToAction("Unauthorized", "Error");
+         }
 
 
         // Ermöglicht es, einen bestimmten Gruppeneintrag zu bearbeiten (Import: gruppenEintrageModel, Export: gruppenEintrageModel)
@@ -201,12 +209,20 @@ namespace SUN2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GruppenEintraege gruppenEintraege = db.GruppenEintraeges.Find(id);
-            if (gruppenEintraege == null)
+
+            var userId = User.Identity.GetUserId();
+            int idauth = (int)id;
+            if (AuthCheck.VerantGr(idauth, userId) || AuthCheck.AutorGE(idauth, userId) || User.IsInRole("Admin"))
             {
-                return HttpNotFound();
+                GruppenEintraege gruppenEintraege = db.GruppenEintraeges.Find(id);
+                if (gruppenEintraege == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gruppenEintraege);
             }
-            return View(gruppenEintraege);
+
+            return RedirectToAction("Unauthorized", "Error");
         }
 
 

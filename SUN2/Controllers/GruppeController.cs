@@ -100,6 +100,7 @@ namespace SUN2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "gruppenid,bezeichnung,beschreibung,privat")] Gruppe gruppe)
         {
+    
             if (ModelState.IsValid)
             {
                 //angemeldeter User ist Verantwortlicher
@@ -113,9 +114,8 @@ namespace SUN2.Controllers
                 mg.userid = userId;
                 db.MitgliederGruppes.Add(mg);
 
-
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index");  
             }
 
             return View(gruppe);
@@ -131,12 +131,20 @@ namespace SUN2.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Gruppe gruppe = db.Gruppes.Find(id);
-            if (gruppe == null)
+            var userId = User.Identity.GetUserId();
+            int idauth = (int)id;
+            if (AuthCheck.VerantGr(idauth, userId) || User.IsInRole("Admin"))
             {
-                return HttpNotFound();
+
+                Gruppe gruppe = db.Gruppes.Find(id);
+                if (gruppe == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gruppe);
             }
-            return View(gruppe);
+
+            return RedirectToAction("Unauthorized", "Error");
 
         }
 
@@ -165,12 +173,21 @@ namespace SUN2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Gruppe gruppe = db.Gruppes.Find(id);
-            if (gruppe == null)
+
+            var userId = User.Identity.GetUserId();
+            int idauth = (int)id;
+            if (AuthCheck.VerantGr(idauth, userId) || User.IsInRole("Admin"))
             {
-                return HttpNotFound();
+                Gruppe gruppe = db.Gruppes.Find(id);
+                if (gruppe == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(gruppe);
             }
-            return View(gruppe);
+
+            return RedirectToAction("Unauthorized", "Error");
+
         }
 
 
