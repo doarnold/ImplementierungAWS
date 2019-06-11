@@ -173,7 +173,7 @@
     <Compile Include="Controllers\AbonnentenLehrstuhlController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
-    <Compile Include="Controllers\misc\authCheck.cs" />
+    <Compile Include="Controllers\misc\AuthCheck.cs" />
     <Compile Include="Controllers\misc\CustomAuthorize.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GruppeController.cs" />
@@ -182,6 +182,7 @@
     <Compile Include="Controllers\LehrstuhlController.cs" />
     <Compile Include="Controllers\LehrstuhlEintraegeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\misc\HelpFunctions.cs" />
     <Compile Include="Controllers\MitarbeiterLehrstuhlController.cs" />
     <Compile Include="Controllers\MitgliederGruppeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />

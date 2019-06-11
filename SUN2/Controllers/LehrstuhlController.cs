@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using SUN2.Controllers.misc;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -28,16 +29,7 @@ namespace SUN2.Controllers
                 {
                     if (person.id == lehrstuhl.verantwortlicher)
                     {
-                        //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
-                        if (person.name != null && person.vorname != null)
-                        {
-                            lehrstuhl.verantwortlicher = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                        }
-                        else
-                        {
-                            lehrstuhl.verantwortlicher = person.AspNetUsers.Email;
-                        }
-
+                        lehrstuhl.verantwortlicher = HelpFunctions.GetDisplayName(person.id);
 
                         // zuordnungstabelle für verlinkung erstellen
                         Person el = new Person();
@@ -163,22 +155,6 @@ namespace SUN2.Controllers
         }
 
 
-        // Wird zurzeit nicht verwendet, bitte drinlassen!
-        /*
-        // GET: Lehrstuhl/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Lehrstuhl lehrstuhl = db.Lehrstuhls.Find(id);
-            if (lehrstuhl == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lehrstuhl);
-        } */
 
 
         protected override void Dispose(bool disposing)

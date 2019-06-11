@@ -42,7 +42,7 @@ namespace SUN2.Controllers
 
                     // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
                     var userId = User.Identity.GetUserId();
-                    verantwortlich[gruppe.gruppenid] = authCheck.VerantGr(gruppe.gruppenid, userId);
+                    verantwortlich[gruppe.gruppenid] = AuthCheck.VerantGr(gruppe.gruppenid, userId);
 
                     foreach (MitgliederGruppe mg in db.MitgliederGruppes)
                     {
@@ -73,22 +73,14 @@ namespace SUN2.Controllers
 
                             // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
                             var userId = User.Identity.GetUserId();
-                            autor[ge.id] = authCheck.VerantGr(ge.id, userId);
+                            autor[ge.id] = AuthCheck.VerantGr(ge.id, userId);
 
 
                             foreach (Person person in db.Person)
                             {
                                 if (person.id == ge.autor)
                                 {
-                                    //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
-                                    if (person.name != null && person.vorname != null)
-                                    {
-                                        ge.autor = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                                    }
-                                    else
-                                    {
-                                        ge.autor = person.AspNetUsers.Email;
-                                    }
+                                    ge.autor = HelpFunctions.GetDisplayName(person.id);
 
                                     userid = person.id;
                                 }
@@ -229,24 +221,6 @@ namespace SUN2.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", new { gruppenid = gruppenEintraege.gruppenid });
         }
-
-
-        // Wird zurzeit nicht benötigt und ist deswegen auskommentiert!
-        /*
-        // GET: GruppenEintraege/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            GruppenEintraege gruppenEintraege = db.GruppenEintraeges.Find(id);
-            if (gruppenEintraege == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gruppenEintraege);
-        } */
 
 
         protected override void Dispose(bool disposing)

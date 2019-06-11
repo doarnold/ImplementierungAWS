@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using SUN2.Controllers.misc;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -39,15 +40,7 @@ namespace SUN2.Controllers
                         {
                             if (person.id == le.autor)
                             {
-                                //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
-                                if (person.name != null && person.vorname != null)
-                                {
-                                    le.autor = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                                }
-                                else
-                                {
-                                    le.autor = person.AspNetUsers.Email;
-                                }
+                                le.autor = HelpFunctions.GetDisplayName(person.id);
 
                                 userid = person.id;
                             }
@@ -176,23 +169,6 @@ namespace SUN2.Controllers
             return RedirectToAction("Index");
         }
 
-
-        // wird zurzeit nicht benötigt, bitte drinlassen
-        /*
-        // GET: LehrstuhlEintraege/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LehrstuhlEintraege lehrstuhlEintraege = db.LehrstuhlEintraeges.Find(id);
-            if (lehrstuhlEintraege == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lehrstuhlEintraege);
-        } */
 
 
         protected override void Dispose(bool disposing)

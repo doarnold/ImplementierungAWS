@@ -14,7 +14,7 @@ namespace SUN2.Controllers.misc
 
     // Klasse mit statischen Methoden zur Realisierung bzw. Kapselung von Funktionalitäten im
     // Zusammenhang mit Berechtigungen und Autoritätschecks
-    public class authCheck
+    public class AuthCheck
     {
 
         public static SUN2Entities db = new SUN2Entities();

@@ -34,14 +34,13 @@ namespace SUN2.Controllers
 
                 // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
                 var userId = User.Identity.GetUserId();
-                verantwortlich[gruppe.gruppenid] = authCheck.VerantGr(gruppe.gruppenid, userId);
-                mitglied[gruppe.gruppenid] = authCheck.MitgliedGr(gruppe.gruppenid, userId);
+                verantwortlich[gruppe.gruppenid] = AuthCheck.VerantGr(gruppe.gruppenid, userId);
+                mitglied[gruppe.gruppenid] = AuthCheck.MitgliedGr(gruppe.gruppenid, userId);
 
                 if (gruppe.privat == true && !User.IsInRole("Admin")) 
                 {
                     // hier werden PRIVATEN alle Gruppen ausgeschlossen, in denen der User nicht Mitglied ist
                     ok = false;
-
 
 
                     foreach (MitgliederGruppe mg in db.MitgliederGruppes)
@@ -64,15 +63,7 @@ namespace SUN2.Controllers
                     {
                         if (person.id == gruppe.verantwortlicher)
                         {
-                            //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
-                            if (person.name != null && person.vorname != null)
-                            {
-                                gruppe.verantwortlicher = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                            }
-                            else
-                            {
-                                gruppe.verantwortlicher = person.AspNetUsers.Email;
-                            }
+                            gruppe.verantwortlicher = HelpFunctions.GetDisplayName(person.id);
 
                             // zuordnungstabelle für verlinkung erstellen
                             Person el = new Person();
@@ -195,24 +186,6 @@ namespace SUN2.Controllers
             return RedirectToAction("Index");
         }
 
-
-        // Wird zurzeit nicht benötigt und ist deswegen auskommentiert!
-        /*
-        // GET: Gruppe/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Gruppe gruppe = db.Gruppes.Find(id);
-            if (gruppe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(gruppe);
-        }
-        */
 
         protected override void Dispose(bool disposing)
         {

@@ -57,15 +57,7 @@ namespace SUN2.Controllers
                 {
                     if (person.id == le.autor)
                     {
-                        //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
-                        if (person.name != null && person.vorname != null)
-                        {
-                            le.autor = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                        }
-                        else
-                        {
-                            le.autor = person.AspNetUsers.Email;
-                        }
+                        le.autor = HelpFunctions.GetDisplayName(person.id);
 
                         // zuordnungstabelle für verlinkung erstellen     
                         zuordnung.Add(new Person
@@ -108,10 +100,10 @@ namespace SUN2.Controllers
             foreach (GruppenEintraege le in db.GruppenEintraeges)
             {
                 // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
-                autor[le.id] = authCheck.AutorGE(le.gruppenid, userId);
+                autor[le.id] = AuthCheck.AutorGE(le.gruppenid, userId);
 
                 // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
-                verantwortlich[le.gruppenid] = authCheck.VerantGr(le.gruppenid, userId);
+                verantwortlich[le.gruppenid] = AuthCheck.VerantGr(le.gruppenid, userId);
 
                 // prüfen, ob user mitglied der gruppe ist
                 foreach(MitgliederGruppe mg in db.MitgliederGruppes)
@@ -128,15 +120,7 @@ namespace SUN2.Controllers
                 {
                     if (person.id == le.autor)
                     {
-                        //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID als Verantwortlicher
-                        if (person.name != null && person.vorname != null)
-                        {
-                            le.autor = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                        }
-                        else
-                        {
-                            le.autor = person.AspNetUsers.Email;
-                        }
+                        le.autor = HelpFunctions.GetDisplayName(person.id);
 
                         // zuordnungstabelle für verlinkung erstellen     
                         zuordnung.Add(new Person
@@ -206,15 +190,7 @@ namespace SUN2.Controllers
                                 if (gr.verantwortlicher == person.id)
                                 {
 
-                                    //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID
-                                    if (person.name != null && person.vorname != null)
-                                    {
-                                        gr.verantwortlicher = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                                    }
-                                    else
-                                    {
-                                        gr.verantwortlicher = person.AspNetUsers.Email;
-                                    }
+                                    gr.verantwortlicher = HelpFunctions.GetDisplayName(person.id);
 
                                     // zuordnungstabelle für verlinkung erstellen     
                                     zuordnung.Add(new Person
@@ -255,15 +231,7 @@ namespace SUN2.Controllers
                                 {
                                     if (l.verantwortlicher == person.id)
                                     {
-                                        //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID
-                                        if (person.name != null && person.vorname != null)
-                                        {
-                                            l.verantwortlicher = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                                        }
-                                        else
-                                        {
-                                            l.verantwortlicher = person.AspNetUsers.Email;
-                                        }
+                                    l.verantwortlicher = HelpFunctions.GetDisplayName(person.id);
 
                                     // zuordnungstabelle für verlinkung erstellen     
                                     zuordnung.Add(new Person
@@ -324,7 +292,7 @@ namespace SUN2.Controllers
                     id = 0,
                     entityid = gr.gruppenid,
                     field1 = gr.bezeichnung,
-                    field2 = gr.verantwortlicher,
+                    field2 = HelpFunctions.GetDisplayName(gr.verantwortlicher),
                     field3 = "",
                     field4 = "",
                     typ = "g"
@@ -343,7 +311,7 @@ namespace SUN2.Controllers
                     id = 0,
                     entityid = l.lehrstuhlid,
                     field1 = l.bezeichnung,
-                    field2 = l.verantwortlicher,
+                    field2 = HelpFunctions.GetDisplayName(l.verantwortlicher),
                     field3 = "",
                     field4 = "",
                     typ = "l"
@@ -366,7 +334,7 @@ namespace SUN2.Controllers
                     id = ge.id,
                     entityid = ge.gruppenid,
                     field1 = ge.inhalt,
-                    field2 = ge.autor,
+                    field2 = HelpFunctions.GetDisplayName(ge.autor),
                     field3 = ge.datum.ToString(),
                     field4 = "",
                     typ = "ge"
@@ -390,7 +358,7 @@ namespace SUN2.Controllers
                     id = le.id,
                     entityid = le.lehrstuhlid,
                     field1 = le.inhalt,
-                    field2 = le.autor,
+                    field2 = HelpFunctions.GetDisplayName(le.autor),
                     field3 = le.datum.ToString(),
                     field4 = "",
                     typ = "le"
@@ -408,7 +376,7 @@ namespace SUN2.Controllers
                 {
                     id = 0,
                     entityid = 0,
-                    field1 = p.vorname + p.name + " (" + p.AspNetUsers.Email + ") ",
+                    field1 = HelpFunctions.GetDisplayName(p.id),
                     field2 = p.AspNetUsers.Role,
                     field3 = p.AspNetUsers.Email,
                     field4 = p.id,

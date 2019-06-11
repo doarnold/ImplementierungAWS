@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SUN2.Controllers.misc;
 using SUN2.Models;
 
 namespace SUN2.Controllers
@@ -36,14 +37,7 @@ namespace SUN2.Controllers
                         {
                             if(ge.userid == person.id)
                             {
-                                //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID
-                                if(person.name != null && person.vorname != null)
-                                {
-                                    ge.userid = person.vorname + " " + person.name + " (" + person.AspNetUsers.Email + ")";
-                                } else
-                                {
-                                    ge.userid = person.AspNetUsers.Email;
-                                }
+                                ge.userid = HelpFunctions.GetDisplayName(person.id);
                         }
 
                             // zuordnungstabelle für verlinkung erstellen
@@ -166,127 +160,7 @@ namespace SUN2.Controllers
         }
 
 
-        // zurzeit nicht verwendet, bitte drinlassen
-        /*
-        // GET: MitgliederGruppe/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
-            if (mitgliederGruppe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mitgliederGruppe);
-        }
-
-        // !!!!--- NICHT VERWENDET ---!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        // GET: MitgliederGruppe/Create
-        public ActionResult Create(int? gruppenid)
-        {
-            if (gruppenid == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            MitgliederGruppe gm = new MitgliederGruppe();
-            gm.gruppenid = (int)gruppenid;
-
-            return View(gm);
-
-            }
-
-        // !!!!--- NICHT VERWENDET ---!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        // POST: MitgliederGruppe/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "userid,gruppenid")] MitgliederGruppe mitgliederGruppe)
-        {
-            if (ModelState.IsValid)
-            {
-                db.MitgliederGruppes.Add(mitgliederGruppe);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(mitgliederGruppe);
-        }
-
-        // !!!!--- NICHT VERWENDET ---!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        // GET: MitgliederGruppe/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
-            if (mitgliederGruppe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mitgliederGruppe);
-        }
-
-        // !!!!--- NICHT VERWENDET ---!!!!
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        // POST: MitgliederGruppe/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "userid,gruppenid")] MitgliederGruppe mitgliederGruppe)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(mitgliederGruppe).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(mitgliederGruppe);
-        } */
-
-
-        /*
-         
-        // GET: MitgliederGruppe/Delete/5
-        public ActionResult Delete(int id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
-            if (mitgliederGruppe == null)
-            {
-                return HttpNotFound();
-            }
-            return View(mitgliederGruppe);
-        }
-
-        // POST: MitgliederGruppe/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
-            db.MitgliederGruppes.Remove(mitgliederGruppe);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-        */
+     
 
         protected override void Dispose(bool disposing)
         {
