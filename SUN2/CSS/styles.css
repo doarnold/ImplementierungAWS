@@ -63,6 +63,7 @@ input {
 #GruppenBeitragGesamt {
     background-color: Cornsilk;
     width: 31%;
+    height: 300px;
     float: left;
     z-index: 0;
     margin: 10px;
