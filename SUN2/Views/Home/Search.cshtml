@@ -1,0 +1,220 @@
+﻿@model IEnumerable<SUN2.Models.SearchModel>
+
+@{
+    ViewBag.Title = "Suchergebnisse";
+}
+
+    <br />
+<h2>Suchergebnisse</h2>
+
+<br />
+
+
+<!-- gruppen -->
+<h3>Gefundene Gruppen:</h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>Bezeichnung
+        </th>
+        <th>
+            Verantwortlicher
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+        if (item.typ == "g")
+        {
+            <tr>
+
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.entityid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field2)
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<br />
+<br />
+
+
+<!-- lehrstühle -->
+<h3>Gefundene Lehrstühle:</h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Bezeichnung
+        </th>
+        <th>
+            Verantwortlicher
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.typ == "l")
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.entityid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field2)
+                </td>
+            </tr>
+        }
+    }
+</table>
+<br /><br />
+
+<!-- Gruppeneinträge -->
+<h3>Gefundene Gruppeneinträge: </h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Inhalt
+        </th>
+        <th>
+            Autor
+        </th>
+        <th>
+            Datum
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.typ == "ge")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.entityid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field3)
+                </td>
+            </tr>
+        }
+    }
+</table>
+<br /><br />
+
+<!-- Lehrstuhleinträge -->
+<h3>Gefundene Lehrstuhleinträge: </h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Inhalt
+        </th>
+        <th>
+            Autor
+        </th>
+        <th>
+            Datum
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.typ == "le")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.entityid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field3)
+                </td>
+            </tr>
+        }
+    }
+</table>
+<br /><br />
+
+
+<!-- Personen -->
+<h3>Gefundene Personen: </h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Rolle
+        </th>
+        <th>
+            E-Mail
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.typ == "p")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.field3)
+                </td>
+            </tr>
+        }
+
+
+
+    }
+
+</table>
+
+<br /><br />
+
+
+<input type="button" value="Zurück" onclick="window.history.back()" />

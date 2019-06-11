@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @using Microsoft.AspNet.Identity
+ 
 
 
 </head>
@@ -20,20 +21,20 @@
 
             <div class="navbar-header">
                 <!--
-        Der Button und die drei span's machen den Header responsive. Wenn man das
-        Fenster zusammschiebt erscheinen rechts oben drei horizontale Balken. Dafür sind die
-        die nächsten Zeilen Code verantwortlich.
-    -->
+                    Der Button und die drei span's machen den Header responsive. Wenn man das
+                    Fenster zusammschiebt erscheinen rechts oben drei horizontale Balken. Dafür sind die
+                    die nächsten Zeilen Code verantwortlich.
+                -->
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
                 <!--
-        Das Icon welches links oben angezeigt wird.
-    -->
+                    Das Icon welches links oben angezeigt wird.
+                -->
                 @*@Html.ActionLink("SUN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
-                <a href="@Url.Action("Index", "Home")"><img src="~/Images/SUNhubMedium.png" height="50" /></a> 
+                <a href="@Url.Action("Index", "Home")"><img src="~/Images/SUNhubMedium.png" height="50" /></a>
             </div>
 
 
@@ -62,43 +63,57 @@
 
 
 
-                    <li class="nav-item">@Html.ActionLink("Abos & Mitgliedschaften", "AbonniertMitglied", "Home")</li>
-                    <li class="nav-item">@Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")</li>
-                    <li class="nav-item">@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")</li>
-                    <li class="nav-item"> @Html.TextBox("Suche", null, new { @class = "form-control Feld", placeholder = "What are you searching for?" }) </li>
+                        <li class="nav-item">@Html.ActionLink("Abos & Mitgliedschaften", "AbonniertMitglied", "Home")</li>
+                        <li class="nav-item">@Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")</li>
+                        <li class="nav-item">@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")</li>
+                        <li class="nav-item">
+                            <input class="form-control Feld" type="text" name="suche" id="suche" placeholder="Was suchst Du?">
+                        </li>
 
-                    <li class="nav-item"><i id="Lupe" onclick="myFunction()" class="fas fa-search"></i></li>
+                        <li class="nav-item">
+                        <li id="Lupe" class="fas fa-search" onclick="search()">
 
-
-                    @*<li class="nav-item">@Html.ActionLink("Administration", "Administration", "Home")</li>*@
-                }
-</ul>
-@Html.Partial("_LoginPartial")
-</div>
+                        </li>
 
 
-</div>
-</div>
-<div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - SUN</p>
-    </footer>
-</div>
+                        </li>
+ 
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - SUN</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 
-
-
 <script>
+    function search() {
+ 
+        var s = document.getElementById("suche").value;
 
-    function myFunction() {
-        alert("I am an alert box!");
+        window.location.href = '/Home/Search?searchstr=' + s;
+
     }
-
 </script>
+
+
 </html>
+
+
+
+
+
+

@@ -235,6 +235,7 @@
     <Compile Include="Models\NewsfeedModel.cs" />
     <Compile Include="Models\PersonAddLehrstuhlModel.cs" />
     <Compile Include="Models\PersonAddGruppeModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\SUN2Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -384,6 +385,7 @@
     <Content Include="Views\MitgliederGruppe\Add.cshtml" />
     <Content Include="Views\MitarbeiterLehrstuhl\Add.cshtml" />
     <Content Include="Views\Home\AbonniertMitglied.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
