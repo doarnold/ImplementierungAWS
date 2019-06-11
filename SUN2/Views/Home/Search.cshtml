@@ -34,11 +34,14 @@
             <tr>
 
                 <td>
-
                     @Html.DisplayFor(modelItem => item.entityid)
+
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.field1)
+                    <a href="@Url.Action("Index", "Gruppeneintraege", new { gruppenid = item.entityid }, null)">
+                        @Html.DisplayFor(modelItem => item.field1)
+                    </a>
+                    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.field2)
@@ -76,9 +79,13 @@
 
                 <td>
                     @Html.DisplayFor(modelItem => item.entityid)
+
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.field1)
+                    <a href="@Url.Action("Index", "Lehrstuhleintraege", new { lehrstuhlid = item.entityid }, null)">
+                        @Html.DisplayFor(modelItem => item.field1)
+                    </a>
+                   
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.field2)
@@ -115,7 +122,9 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.entityid)
+                    <a href="@Url.Action("Index", "Gruppeneintraege", new { gruppenid = item.entityid }, null)">
+                        @Html.DisplayFor(modelItem => item.entityid)
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.field1)
@@ -157,7 +166,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.entityid)
+                    <a href="@Url.Action("Index", "Lehrstuhleintraege", new { lehrstuhlid = item.entityid }, null)">
+                        @Html.DisplayFor(modelItem => item.entityid)
+                    </a>
+                   
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.field1)
@@ -197,7 +209,9 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.field1)
+                    <a href="@Url.Action("Details", "Person", new { id = item.field4 }, null)">
+                        @Html.DisplayFor(model => item.field1)
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.field2)
@@ -205,6 +219,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.field3)
                 </td>
+ 
             </tr>
         }
 

@@ -408,10 +408,10 @@ namespace SUN2.Controllers
                 {
                     id = 0,
                     entityid = 0,
-                    field1 = p.vorname + p.name + "(" + p.AspNetUsers.Email + ")",
+                    field1 = p.vorname + p.name + " (" + p.AspNetUsers.Email + ") ",
                     field2 = p.AspNetUsers.Role,
                     field3 = p.AspNetUsers.Email,
-                    field4 = "",
+                    field4 = p.id,
                     typ = "p"
                 });
             }
