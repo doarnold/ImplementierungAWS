@@ -22,44 +22,77 @@ namespace SUN2.Controllers
         {
             List<Lehrstuhl> entries = new List<Lehrstuhl>();
             List<Person> zuordnung = new List<Person>();
+            Boolean[] verantwortlich = new Boolean[10000]; // Index lehrstuhlid, Eintrag false -> lehrstuhl kein Verantwortlicher
+            Boolean[] mitarbeiter = new Boolean[10000]; // Index lehrstuhlid, Eintrag false -> lehrstuhl kein mitarbeiter
+            Boolean ok = false; // mitarbeiter private gruppe
+            var userId = User.Identity.GetUserId();
 
             foreach (Lehrstuhl lehrstuhl in db.Lehrstuhls)
             {
-                foreach (Person person in db.Person)
+                // Wenn der lehrstuhl privat ist, dann prüfe, ob User mitarbeiter ist
+                // falls ja oder lehrstuhl nicht privat, dann OK und weiter (Admin sieht alles immer)
+
+                // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
+                verantwortlich[lehrstuhl.lehrstuhlid] = AuthCheck.VerantLehr(lehrstuhl.lehrstuhlid, userId);
+                mitarbeiter[lehrstuhl.lehrstuhlid] = AuthCheck.MitarbeiterLehr(lehrstuhl.lehrstuhlid, userId);
+
+                if (lehrstuhl.privat == true && !User.IsInRole("Admin"))
                 {
-                    if (person.id == lehrstuhl.verantwortlicher)
+                    // hier werden PRIVATEN alle lehrstühle ausgeschlossen, in denen der User nicht Mitarbeiter ist
+                    ok = false;
+
+
+                    foreach (MitarbeiterLehrstuhl ml in db.MitarbeiterLehrstuhls)
                     {
-                        lehrstuhl.verantwortlicher = HelpFunctions.GetDisplayName(person.id);
-
-                        // zuordnungstabelle für verlinkung erstellen
-                        Person el = new Person();
-                        el.id = person.id;
-                        el.name = lehrstuhl.verantwortlicher;
-
-                        zuordnung.Add(el);
+                        if (ml.lehrstuhlid == lehrstuhl.lehrstuhlid && ml.userid == userId)
+                        {
+                            ok = true;
+                        }
                     }
                 }
-                ViewBag.zuordnung = zuordnung;
-
-                entries.Add(lehrstuhl);
-            }
-
-            // Um abonnieren/deabonnieren zu kennzeichnen, ViewBag mit allen Abos des Users an Frontend senden
-            List<AbonnentenLehrstuhl> list = new List<AbonnentenLehrstuhl>();
-
-            //angemeldeter User 
-            var userId = User.Identity.GetUserId();
-
-            // Alle Abos des angemeldeten Users suchen
-            foreach (AbonnentenLehrstuhl al in db.AbonnentenLehrstuhls)
-            {
-                if (al.userid == userId)
+                else
                 {
-                    list.Add(al);
+                    ok = true;
                 }
-            }
 
-            ViewBag.abos = list;
+                if(ok)
+                {
+                    foreach (Person person in db.Person)
+                    {
+                        if (person.id == lehrstuhl.verantwortlicher)
+                        {
+                            lehrstuhl.verantwortlicher = HelpFunctions.GetDisplayName(person.id);
+
+                            // zuordnungstabelle für verlinkung erstellen
+                            Person el = new Person();
+                            el.id = person.id;
+                            el.name = lehrstuhl.verantwortlicher;
+
+                            zuordnung.Add(el);
+                        }
+                    }
+                    ViewBag.zuordnung = zuordnung;
+                    entries.Add(lehrstuhl);
+                }
+
+                // Um abonnieren/deabonnieren zu kennzeichnen, ViewBag mit allen Abos des Users an Frontend senden
+                List<AbonnentenLehrstuhl> list = new List<AbonnentenLehrstuhl>();
+
+                // Alle Abos des angemeldeten Users suchen
+                foreach (AbonnentenLehrstuhl al in db.AbonnentenLehrstuhls)
+                {
+                    if (al.userid == userId)
+                    {
+                        list.Add(al);
+                    }
+                }
+
+                ViewBag.abos = list;
+
+            }
+            ViewBag.mitarbeiter = mitarbeiter;
+            ViewBag.verantwortlich = verantwortlich;
+
 
             return View(entries);
         }

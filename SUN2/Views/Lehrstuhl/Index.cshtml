@@ -82,61 +82,83 @@
 
             </td>
             <td>
-                <a href="@Url.Action("Edit", "Lehrstuhl", new { id = item.lehrstuhlid } )" class="btn btn-primary" title="Bearbeiten">
-                    <i class='fas fa-edit'></i>
-                </a>
-                <a href="@Url.Action("Delete", "Lehrstuhl", new { id = item.lehrstuhlid } )" class="btn btn-primary" title="Löschen">
-                    <i class='fas fa-trash-alt'></i>
-                </a>
-                <a href="@Url.Action("Create", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Neuer Eintrag">
-                    <i class='fa fa-plus'></i>
-                </a>
-                <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Einträge Anzeigen">
-                    <i class='fa fa-list'></i>
-                </a>
-                <a href="@Url.Action("Index", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Mitarbeiter anzeigen">
-                    <i class='fa fa-users'></i>
-                </a>
-                <a href="@Url.Action("Add", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Mitarbeiter hinzufühgen">
-                    <i class='fa fa-user-plus'></i>
-                </a>
-                @*@Html.ActionLink("Bearbeiten", "Edit", new { id = item.lehrstuhlid }) |
-                    @Html.ActionLink("Löschen", "Delete", new { id = item.lehrstuhlid }) |
-                    @Html.ActionLink("Neuer Eintrag", "Create", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null) |*@
-                @*@Html.ActionLink("Einträge anzeigen", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null) |
-                    @Html.ActionLink("Mitarbeiter anzeigen", "Index", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null) |
-                    @Html.ActionLink("Mitarbeiter hinzufügen", "Add", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null) |*@
 
-                <!-- hier müssen wir gucken, ob der Lehrstuhl bereits abonniert ist -> ViewBag.abos -->
                 @{
-                    var aboexist = false;
-                    foreach (var abo in ViewBag.abos)
-                    {
-                        if (abo.lehrstuhlid == item.lehrstuhlid)
-                        {
-                            //@Html.ActionLink("deabonnieren", "Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
-                            aboexist = true;
+                    var verant = ViewBag.verantwortlich;
 
-                            <a href="@Url.Action("Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Deabonieren">
-                                <i class='fa fa-thumbs-down'></i>
-                            </a>
+                    if (verant[item.lehrstuhlid] == true || User.IsInRole("Admin"))
+                    {
+
+                        <a href="@Url.Action("Edit", "Lehrstuhl", new { id = item.lehrstuhlid })" class="btn btn-primary" title="Bearbeiten">
+                            <i class='fas fa-edit'></i>
+                        </a>
+                        <a href="@Url.Action("Delete", "Lehrstuhl", new { id = item.lehrstuhlid })" class="btn btn-primary" title="Löschen">
+                            <i class='fas fa-trash-alt'></i>
+                        </a>
+
+
+                        <a href="@Url.Action("Index", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Mitarbeiter anzeigen">
+                            <i class='fa fa-users'></i>
+                        </a>
+
+
+                        <a href="@Url.Action("Add", "MitarbeiterLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Mitarbeiter hinzufühgen">
+                            <i class='fa fa-user-plus'></i>
+                        </a>
                         }
                     }
 
-                    if (!aboexist)
-                    {
-                        // @Html.ActionLink("abonnieren", "Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
 
-                        <a href="@Url.Action("Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Abonieren">
-                            <i class='fa fa-thumbs-up'></i>
-                        </a>
-                    }
+                    @{
+                        var mit = ViewBag.mitarbeiter;
 
-                }
+                        if (mit[item.lehrstuhlid] == true || verant[item.lehrstuhlid] == true || User.IsInRole("Admin"))
+                        {
+                            <a href="@Url.Action("Create", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Neuer Eintrag">
+                                <i class='fa fa-plus'></i>
+                            </a>
+                        }
 
 
 
-            </td>
+                            <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Einträge Anzeigen">
+                                <i class='fa fa-list'></i>
+                            </a>
+
+                        }
+
+
+
+                            <!-- hier müssen wir gucken, ob der Lehrstuhl bereits abonniert ist -> ViewBag.abos -->
+                            @{
+                                var aboexist = false;
+                                foreach (var abo in ViewBag.abos)
+                                {
+                                    if (abo.lehrstuhlid == item.lehrstuhlid)
+                                    {
+                                        //@Html.ActionLink("deabonnieren", "Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
+                                        aboexist = true;
+
+                                        <a href="@Url.Action("Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Deabonieren">
+                                            <i class='fa fa-thumbs-down'></i>
+                                        </a>
+                                    }
+                                }
+
+                                if (!aboexist)
+                                {
+                                    // @Html.ActionLink("abonnieren", "Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
+
+                                    <a href="@Url.Action("Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Abonieren">
+                                        <i class='fa fa-thumbs-up'></i>
+                                    </a>
+                                }
+
+                            }
+
+
+
+                        </td>
         </tr>
     }
 

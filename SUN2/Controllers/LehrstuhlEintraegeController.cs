@@ -25,50 +25,89 @@ namespace SUN2.Controllers
             List<LehrstuhlEintraege> entries = new List<LehrstuhlEintraege>();
             List<Person> zuordnung = new List<Person>();
             String userid = "";
+            Boolean ok = false; // für prüfung auf mitgliedschaft
+            Boolean[] verantwortlich = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein Verantwortlicher
+            Boolean[] autor = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein autor
+            var userId = User.Identity.GetUserId();
 
-            if (lehrstuhlid == null)
+            foreach (Lehrstuhl l in db.Lehrstuhls)
             {
-                return View(db.LehrstuhlEintraeges.ToList());
-            }
-            else
-            {
-                foreach (LehrstuhlEintraege le in db.LehrstuhlEintraeges)
+                // Wenn der lehrstuhl privat ist, dann prüfe, ob User mitarbeiter des lehrstuhls ist
+                // falls ja oder lehrstuhl nicht privat, dann OK und weiter (Admin sieht alles immer)
+                if (l.lehrstuhlid == lehrstuhlid && l.privat == true && !User.IsInRole("Admin"))
                 {
-                    if (le.lehrstuhlid == lehrstuhlid)
+                    // hier werden PRIVATEN alle lehrstühle ausgeschlossen, in denen der User nicht mitarbeiter ist
+                    ok = false;
+
+                    // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
+                    autor[l.lehrstuhlid] = AuthCheck.AutorLE(l.lehrstuhlid, userId);
+                    verantwortlich[l.lehrstuhlid] = AuthCheck.VerantGr(l.lehrstuhlid, userId);
+
+                    foreach (MitarbeiterLehrstuhl ml in db.MitarbeiterLehrstuhls)
                     {
-                        foreach (Person person in db.Person)
+                        if (ml.lehrstuhlid == l.lehrstuhlid && ml.userid == userId)
                         {
-                            if (person.id == le.autor)
-                            {
-                                le.autor = HelpFunctions.GetDisplayName(person.id);
-
-                                userid = person.id;
-                            }
+                            ok = true;
                         }
-                        // zuordnungstabelle für verlinkung erstellen
-                        Person el = new Person();
-                        el.id = userid;
-                        el.name = le.autor;
-
-                        zuordnung.Add(el);
-
-                        entries.Add(le);
                     }
                 }
-
-                ViewBag.zuordnung = zuordnung;
-
-                // Bezeichnung des lehrstuhls in View übergeben
-                foreach (Lehrstuhl le in db.Lehrstuhls)
+                else
                 {
-                    if (le.lehrstuhlid == lehrstuhlid)
+                    ok = true;
+                }
+            }
+
+        
+            if(ok)
+            {
+                if (lehrstuhlid == null)
+                {
+                    return View(db.LehrstuhlEintraeges.ToList());
+                }
+                else
+                {
+                    foreach (LehrstuhlEintraege le in db.LehrstuhlEintraeges)
                     {
-                        ViewBag.bezeichnung = le.bezeichnung;
+                        if (le.lehrstuhlid == lehrstuhlid)
+                        {
+                            foreach (Person person in db.Person)
+                            {
+                                if (person.id == le.autor)
+                                {
+                                    le.autor = HelpFunctions.GetDisplayName(person.id);
+
+                                    userid = person.id;
+                                }
+                            }
+                            // zuordnungstabelle für verlinkung erstellen
+                            Person el = new Person();
+                            el.id = userid;
+                            el.name = le.autor;
+
+                            zuordnung.Add(el);
+
+                            entries.Add(le);
+                        }
+                    }
+
+                    ViewBag.zuordnung = zuordnung;
+
+                    // Bezeichnung des lehrstuhls in View übergeben
+                    foreach (Lehrstuhl le in db.Lehrstuhls)
+                    {
+                        if (le.lehrstuhlid == lehrstuhlid)
+                        {
+                            ViewBag.bezeichnung = le.bezeichnung;
+                        }
                     }
                 }
-
-                return View(entries.ToList());
+  
             }
+
+            ViewBag.autor = autor;
+            ViewBag.verantwortlich = verantwortlich;
+
+            return View(entries.ToList());
         }
 
         // Ermöglicht es, einen neuen Lehrstuhleintrag in einem bestimmten Lerhstuhl zu erstellen 

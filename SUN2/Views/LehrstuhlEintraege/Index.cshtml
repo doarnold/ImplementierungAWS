@@ -76,12 +76,20 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
-            </td>
-        </tr>
-    }
+                @{
+                    var verant = ViewBag.verantwortlich;
+                    var aut = ViewBag.autor;
 
+                    if (verant[item.lehrstuhlid] == true || aut[item.id] == true || User.IsInRole("Admin"))
+                    {
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }); <p>|</p>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    }
+                }
+             </td >
+ </tr>
+                    }
 </table>
 
 <div>

@@ -112,7 +112,7 @@
                 @{
                     var mit = ViewBag.mitglied;
 
-                    if (mit[item.gruppenid] == true || User.IsInRole("Admin"))
+                    if (mit[item.gruppenid] == true || verant[item.gruppenid] == true || User.IsInRole("Admin"))
                     {
                         <a href="@Url.Action("Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Neuer Eintrag">
                             <i class='fa fa-plus'></i>
