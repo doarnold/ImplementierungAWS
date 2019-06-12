@@ -4,8 +4,8 @@
     ViewBag.Title = "Suchergebnisse";
 }
 
-    <br />
-<h2>Suchergebnisse</h2>
+<br />
+<h2 style="text-align:center">Suchergebnisse</h2>
 
 <br />
 
@@ -18,7 +18,8 @@
         <th>
             ID
         </th>
-        <th>Bezeichnung
+        <th>
+            Bezeichnung
         </th>
         <th>
             Verantwortlicher
@@ -41,7 +42,7 @@
                     <a href="@Url.Action("Index", "Gruppeneintraege", new { gruppenid = item.entityid }, null)">
                         @Html.DisplayFor(modelItem => item.field1)
                     </a>
-                    
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.field2)
@@ -55,7 +56,7 @@
 <br />
 
 
-<!-- lehrstühle -->
+<!-- lehrstühle-->
 <h3>Gefundene Lehrstühle:</h3>
 <br />
 <table class="table">
@@ -71,6 +72,7 @@
         </th>
     </tr>
 
+
     @foreach (var item in Model)
     {
         if (item.typ == "l")
@@ -85,13 +87,15 @@
                     <a href="@Url.Action("Index", "Lehrstuhleintraege", new { lehrstuhlid = item.entityid }, null)">
                         @Html.DisplayFor(modelItem => item.field1)
                     </a>
-                   
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.field2)
                 </td>
             </tr>
         }
+        else { <caption> ERROR </caption>}
+
     }
 </table>
 <br /><br />
@@ -169,7 +173,7 @@
                     <a href="@Url.Action("Index", "Lehrstuhleintraege", new { lehrstuhlid = item.entityid }, null)">
                         @Html.DisplayFor(modelItem => item.entityid)
                     </a>
-                   
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.field1)
@@ -219,7 +223,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.field3)
                 </td>
- 
+
             </tr>
         }
 

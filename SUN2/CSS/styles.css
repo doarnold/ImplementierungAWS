@@ -84,6 +84,7 @@ input {
     padding-left: 30px;
     padding-top: 1%;
     padding-bottom: 1%;
+    width: 100%;
 }
 
 
@@ -133,6 +134,85 @@ input {
 }
 
 #GruppenEdit {
+    text-align: top;
+}
+
+/* Beiträge Layout insb. Lehrstuehle */
+
+
+#LehrstuhlBeitragGesamt {
+    background-color: Cornsilk;
+    width: 31%;
+    height: 300px;
+    float: left;
+    z-index: 0;
+    margin: 10px;
+    box-shadow: 0 1px 3px rgb(242, 168, 104), 0 1px 2px rgb(242, 168, 104);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+#LehrstuhlBeitragGesamt:hover {
+    box-shadow: 0 14px 28px rgb(242, 168, 104), 0 10px 10px rgb(242, 168, 104);
+}
+
+#LehrstuhlHead {
+    background-color: bisque;
+    float: left;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding-left: 30px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 100%;
+}
+
+
+
+#LehrstuhlInhalt {
+    color: black;
+    width: 100%;
+    height: 100px;
+    overflow-y: scroll;
+    padding-left: 2%;
+    padding-top: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    transition: height 0.5s;
+    z-index: 0;
+}
+
+#LehrstuhlLabelsRahmen {
+    background-color: bisque;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    min-height: 30px;
+    text-align: justify;
+}
+
+
+#LehrstuhlLabels {
+    padding-top: 5px;
+    padding-right: 10px;
+    padding-left: 30px;
+    float: left;
+}
+
+
+#LehrstuhlPlatzhalter {
+    margin-top: 40px;
+}
+
+
+#LehrstuhlPostName {
+    font-weight: bold;
+    float: left;
+    padding-right: 10px;
+}
+
+#LehrstuhlEdit {
     text-align: top;
 }
 

@@ -30,72 +30,72 @@
         }
 
 
-        <div id="GruppenBeitragGesamt">
+    <div id="GruppenBeitragGesamt">
 
 
-            <div id="GruppenHead">
-                <div id="GruppenPostName">
-                    @{
-                        if (zuordnung != null)
+        <div id="GruppenHead">
+            <div id="GruppenPostName">
+                @{
+                    if (zuordnung != null)
+                    {
+                        foreach (var person in zuordnung)
                         {
-                            foreach (var person in zuordnung)
+                            if (person.name == item.autor)
                             {
-                                if (person.name == item.autor)
-                                {
-                                    <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                        @Html.DisplayFor(model => item.autor)
-                                    </a>
-                                    break;
-                                }
+                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                    @Html.DisplayFor(model => item.autor)
+                                </a>
+                                break;
                             }
                         }
+                    }
+
+                }
+            </div>
+
+            @Html.DisplayFor(modelItem => item.datum)
+            <div id="GruppenEdit">
+
+                @{
+                    var verant = ViewBag.verantwortlich;
+                    var aut = ViewBag.autor;
+
+                    if (verant[item.gruppenid] == true || aut[item.id] == true || User.IsInRole("Admin"))
+                    {
+
+                        Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id });
+                        <p>|</p>
+                        Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id });
 
                     }
-                </div>
-
-                @Html.DisplayFor(modelItem => item.datum)
-                <div id="GruppenEdit">
-
-                    @{
-                        var verant = ViewBag.verantwortlich;
-                        var aut = ViewBag.autor;
-
-                        if (verant[item.gruppenid] == true || aut[item.id] == true || User.IsInRole("Admin"))
-                        {
-
-                            Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id });
-                            <p>|</p>
-                            Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id });
-
-                        }
-                    }
-                </div>
-
+                }
             </div>
-
-            <div id="GruppenInhalt">
-                @Html.DisplayFor(modelItem => item.inhalt)
-            </div>
-
-
-
-            <div id="GruppenLabelsRahmen">
-
-                <div id="GruppenLabels">
-                    @Html.DisplayFor(modelItem => item.label1)
-                </div>
-                <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label2)</div>
-                <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label3)</div>
-                <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label4)</div>
-                <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label5)</div>
-            </div>
-
-
-
-            <div id="GruppenPlatzhalter"></div>
-
 
         </div>
+
+        <div id="GruppenInhalt">
+            @Html.DisplayFor(modelItem => item.inhalt)
+        </div>
+
+
+
+        <div id="GruppenLabelsRahmen">
+
+            <div id="GruppenLabels">
+                @Html.DisplayFor(modelItem => item.label1)
+            </div>
+            <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label2)</div>
+            <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label3)</div>
+            <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label4)</div>
+            <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label5)</div>
+        </div>
+
+
+
+        <div id="GruppenPlatzhalter"></div>
+
+
+    </div>
 
 
 
@@ -105,6 +105,11 @@
 }
 
 
-
-<input type="button" value="Zurück" onclick="window.history.back()" />
-@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")
+<div class="form-group">
+    <div class="col-md-10">
+        <input type="button" value="Zurück" onclick="window.history.back()" />
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Alle Gruppen", "Index", "Gruppe")
+    </div>
+</div>

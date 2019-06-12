@@ -4,95 +4,112 @@
     ViewBag.Title = "Index";
 }
 
-@{ var zuordnung = ViewBag.zuordnung; }
+<!-- CSS Einbindung-->
+@Styles.Render("~/Content/css")
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.inhalt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label3)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label4)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.label5)
-        </th>
-        <th></th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
+@{
+    var zuordnung = ViewBag.zuordnung;
+    var bezeichnung = ViewBag.bezeichnung;
+    var counter = 0;
+
+    foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.inhalt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.label1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.label2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.label3)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.label4)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.label5)
-            </td>
-            <td>
-                @{
-                    if (zuordnung != null)
-                    {
-                        foreach (var person in zuordnung)
+
+        if (counter == 0)
+        {
+            <div id="LehrstuhlPlatzhalter"></div>
+            <h2 style="text-align:center">
+                Lehrstuhl:
+                @bezeichnung <!-- bei inkonstenten testdaten wird hier nichts angezeigt !-->
+            </h2>
+            <div id="LehrstuhlPlatzhalter"></div>
+            counter++;
+        }
+
+
+        <div id="LehrstuhlBeitragGesamt">
+
+
+            <div id="LehrstuhlHead">
+                <div id="LehrstuhlPostName">
+                    @{
+                        if (zuordnung != null)
                         {
-                            if (person.name == item.autor)
+                            foreach (var person in zuordnung)
                             {
-                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                    @Html.DisplayFor(model => item.autor)
-                                </a>
-                                break;
+                                if (person.name == item.autor)
+                                {
+                                    <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                        @Html.DisplayFor(model => item.autor)
+                                    </a>
+                                    break;
+                                }
                             }
                         }
 
                     }
+                </div>
 
-                }
-            </td>
-            <td>
-                @{
-                    var verant = ViewBag.verantwortlich;
-                    var aut = ViewBag.autor;
+                @Html.DisplayFor(modelItem => item.datum)
+                <div id="LehrstuhlEdit">
 
-                    if (verant[item.lehrstuhlid] == true || aut[item.id] == true || User.IsInRole("Admin"))
-                    {
+                    @{
+                        var verant = ViewBag.verantwortlich;
+                        var aut = ViewBag.autor;
 
-                        @Html.ActionLink("Edit", "Edit", new { id = item.id }); <p>|</p>
-                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        if (verant[item.lehrstuhlid] == true || aut[item.id] == true || User.IsInRole("Admin"))
+                        {
+
+                            Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id });
+                            <p>|</p>
+                            Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id });
+
+                        }
                     }
-                }
-             </td >
- </tr>
-                    }
-</table>
+                </div>
 
-<div>
-    <input type="button" value="Zurück" onclick="window.history.back()" />
-    @Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")
+            </div>
+
+            <div id="LehrstuhlInhalt">
+                @Html.DisplayFor(modelItem => item.inhalt)
+            </div>
+
+
+
+            <div id="LehrstuhlLabelsRahmen">
+
+                <div id="LehrstuhlLabels">
+                    @Html.DisplayFor(modelItem => item.label1)
+                </div>
+                <div id="LehrstuhlLabels">@Html.DisplayFor(modelItem => item.label2)</div>
+                <div id="LehrstuhlLabels">@Html.DisplayFor(modelItem => item.label3)</div>
+                <div id="LehrstuhlLabels">@Html.DisplayFor(modelItem => item.label4)</div>
+                <div id="LehrstuhlLabels">@Html.DisplayFor(modelItem => item.label5)</div>
+            </div>
+
+
+
+            <div id="LehrstuhlPlatzhalter"></div>
+
+
+        </div>
+
+
+
+
+
+    }
+}
+
+<hr />
+<div class="form-group">
+    <div class="col-md-10">
+        <input type="button" value="Zurück" onclick="window.history.back()" />
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")
+    </div>
 </div>
