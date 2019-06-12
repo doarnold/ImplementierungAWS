@@ -1,5 +1,7 @@
 ﻿@model SUN2.Models.LehrstuhlEintraege
 
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+
 @{
     ViewBag.Title = "Eintrag für Lehrstuhl";
 }
@@ -20,61 +22,45 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.inhalt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.inhalt, new { htmlAttributes = new { @class = "form-control" } })
+            
+            <div class="col">
+                @Html.EditorFor(model => model.inhalt, new { htmlAttributes = new { @class = "form-control", id="TextboxInhalt", placeholder="Geben Sie hier den Inhalt ein." } })
                 @Html.ValidationMessageFor(model => model.inhalt, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.label1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.label1, new { htmlAttributes = new { @class = "form-control" } })
+
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.label1, new { htmlAttributes = new { @class = "form-control", placeholder = "Label 1"  } })
                 @Html.ValidationMessageFor(model => model.label1, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.label2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.label2, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.label2, new { htmlAttributes = new { @class = "form-control", placeholder = "Label 2"  } })
                 @Html.ValidationMessageFor(model => model.label2, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.label3, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.label3, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.label3, new { htmlAttributes = new { @class = "form-control", placeholder = "Label 3"  } })
                 @Html.ValidationMessageFor(model => model.label3, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.label4, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.label4, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.label4, new { htmlAttributes = new { @class = "form-control", placeholder = "Label 4"  } })
                 @Html.ValidationMessageFor(model => model.label4, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.label5, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.label5, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.label5, new { htmlAttributes = new { @class = "form-control", placeholder = "Label 5"  } })
                 @Html.ValidationMessageFor(model => model.label5, "", new { @class = "text-danger" })
             </div>
         </div>
 
+
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-10">
                 <input type="submit" value="Speichern" class="btn btn-default" />
+            </div>
+            <div class="col-md-2">
+                @Html.ActionLink("Zurück", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null)
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Zurück", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null)
-</div>
