@@ -62,47 +62,62 @@
                     <div>@Html.DisplayFor(modelItem => item.datum.Day).@Html.DisplayFor(modelItem => item.datum.Month).@Html.DisplayFor(modelItem => item.datum.Year) </div>
                     
 
-                <div id="GruppenEdit">
+                    <div id="GruppenEdit">
 
 
 
-                    @{
-                        if (item.typ == "g")
-                        {
+                        @{
+                            if (item.typ == "g")
+                            {
 
-                        
+
                                 var verant = ViewBag.verantwortlich;
                                 var aut = ViewBag.autor;
 
                                 if (verant[item.entityid] == true || aut[item.id] == true || User.IsInRole("Admin"))
                                 {
 
-
-                                    @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
-                                    @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                                    <a href="@Url.Action("Edit", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Bearbeiten">
+                                        <i class='fas fa-edit'></i>
+                                    </a>
+                                    // @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                                    // @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                                    <a href="@Url.Action("Delete", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Löschen">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </a>
 
                                 }
-                            
 
-                            @Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
-                        }
-                        else
-                        {
+
+                                //@Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
+                                <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)" class="btn btn-primary" title="Gruppe">
+                                    <i class='fa fa-users'></i>
+                                </a>
+                            }
+                            else
+                            {
                                 var lverant = ViewBag.lverantwortlich;
                                 var laut = ViewBag.lautor;
 
                                 if (lverant[item.entityid] == true || laut[item.id] == true || User.IsInRole("Admin"))
                                 {
 
-                            @Html.ActionLink("Eintrag bearbeiten", "Edit", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
-                            @Html.ActionLink("Eintrag löschen", "Delete", "LehrstuhlEintraege", new { id = item.id }, null) <a>|</a>
+
+                                    <a href="@Url.Action("Edit", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Bearbeiten">
+                                        <i class='fas fa-edit'></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Löschen">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </a>
                                 }
 
-                            @Html.ActionLink("Zum Lehrstuhl", "Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)
+                                <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)" class="btn btn-primary" title="Lehrstuhl">
+                                    <i class='fa fa-users'></i>
+                                </a>
+                            }
                         }
-                    }
 
-                </div>
+                    </div>
 
                 </div>
 
@@ -115,31 +130,38 @@
                 <div id="GruppenLabelsRahmen">
 
 
-                    @if (item.inhalt != null)
+
+
+                    @if (item.label1 != null && item.label1 != "")
                     {
-                        <div id="GruppenLabels">
-                            @Html.DisplayFor(modelItem => item.label1)
-                        </div>}
-                    @if (item.inhalt != null)
+                        
+                            <button type="button" class="btn btn-info">#@item.label1</button>
+                        
+                    }
+                    else
                     {
-                        <div id="GruppenLabels">
-                            @Html.DisplayFor(modelItem => item.label2)
-                        </div>}
-                    @if (item.inhalt != null)
+                    }
+
+                    @if (item.label2 != null && item.label2 != "")
                     {
-                        <div id="GruppenLabels">
-                            @Html.DisplayFor(modelItem => item.label3)
-                        </div>}
-                    @if (item.inhalt != null)
+                        
+                            <button type="button" class="btn btn-info">#@Html.DisplayFor(modelItem => item.label2)</button>
+                        }
+                    @if (item.label3 != null && item.label3 != "")
                     {
-                        <div id="GruppenLabels">
-                            @Html.DisplayFor(modelItem => item.label4)
-                        </div>}
-                    @if (item.inhalt != null)
+                        
+                            <button type="button" class="btn btn-info">#@Html.DisplayFor(modelItem => item.label3)</button>
+                        }
+                    @if (item.label4 != null && item.label4 != "")
                     {
-                        <div id="GruppenLabels">
-                            @Html.DisplayFor(modelItem => item.label5)
-                        </div>}
+                        
+                            <button type="button" class="btn btn-info">#@Html.DisplayFor(modelItem => item.label4)</button>
+                       }
+                    @if (item.label5 != null && item.label5 != "")
+                    {
+                        
+                            <button type="button" class="btn btn-info">#@Html.DisplayFor(modelItem => item.label5)</button>
+                        }
 
                 </div>
 
@@ -158,4 +180,8 @@
     }
 
 }
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+<script>
+
+</script>
 
