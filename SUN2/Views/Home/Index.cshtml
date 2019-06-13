@@ -47,7 +47,7 @@
                                 {
                                     if (person.name == item.autor)
                                     {
-                                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                        <a class="linkTest" href="@Url.Action("Details", "Person", new { id = person.id }, null)">
                                             @Html.DisplayFor(model => item.autor)
                                         </a>
                                         break;

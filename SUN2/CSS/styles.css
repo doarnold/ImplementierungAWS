@@ -90,7 +90,8 @@ input {
 }
 #GruppenHead {
     color: white !important;
-    background-color: #3498db;
+    background-color: #007BA8;
+    
     float: left;
     padding-left: 10px;
     padding-top: 1%;
@@ -121,12 +122,12 @@ input {
 #GruppenLabelsRahmen {
     overflow-x: hidden;
     overflow-y: visible;
-    background-color: #3498db;
+    background-color: #007BA8;
+    
     min-height: 30px;
     text-align: justify;
     height: 15%;
     overflow-y: scroll;
-   
 }
 
 
@@ -562,4 +563,8 @@ background-color: #FFFFFF;
     width: 100% !important;
     max-width: 100% !important;
     height: 100px !important;
+}
+
+.linkTest {
+    color:white !important;
 }
