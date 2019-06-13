@@ -57,8 +57,10 @@
 
                         }
                     </div>
-
-                    @Html.DisplayFor(modelItem => item.datum)
+                    <br />
+                    
+                    <div>@Html.DisplayFor(modelItem => item.datum.Day).@Html.DisplayFor(modelItem => item.datum.Month).@Html.DisplayFor(modelItem => item.datum.Year) </div>
+                    
 
                 <div id="GruppenEdit">
 
@@ -112,18 +114,38 @@
 
                 <div id="GruppenLabelsRahmen">
 
-                    <div id="GruppenLabels">
-                        @Html.DisplayFor(modelItem => item.label1)
-                    </div>
-                    <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label2)</div>
-                    <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label3)</div>
-                    <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label4)</div>
-                    <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label5)</div>
+
+                    @if (item.inhalt != null)
+                    {
+                        <div id="GruppenLabels">
+                            @Html.DisplayFor(modelItem => item.label1)
+                        </div>}
+                    @if (item.inhalt != null)
+                    {
+                        <div id="GruppenLabels">
+                            @Html.DisplayFor(modelItem => item.label2)
+                        </div>}
+                    @if (item.inhalt != null)
+                    {
+                        <div id="GruppenLabels">
+                            @Html.DisplayFor(modelItem => item.label3)
+                        </div>}
+                    @if (item.inhalt != null)
+                    {
+                        <div id="GruppenLabels">
+                            @Html.DisplayFor(modelItem => item.label4)
+                        </div>}
+                    @if (item.inhalt != null)
+                    {
+                        <div id="GruppenLabels">
+                            @Html.DisplayFor(modelItem => item.label5)
+                        </div>}
+
                 </div>
 
 
 
-                <div id="GruppenPlatzhalter"></div>
+                @*<div id="GruppenPlatzhalter"></div>*@
 
 
             </div>
