@@ -91,7 +91,6 @@ input {
 #GruppenHead {
     color: white !important;
     background-color: #007BA8;
-    
     float: left;
     padding-left: 10px;
     padding-top: 1%;
@@ -100,30 +99,73 @@ input {
     height: 30%;
     border-bottom: 4px solid #006E96;
     border-radius: 2px 2px 0px 0px;
+    font-family: helvetica;
+    font-size: 1.0em;
+    color: #919191;
 }
 
 
-    #GruppenInhalt {
-        background-color: #F4F4F4;
-        color: black;
-        width: 100%;
-        height: 55%;
-        overflow-y: scroll;
-        padding-left: 2%;
-        padding-top: 2%;
-        padding-right: 2%;
-        padding-bottom: 2%;
-        display: flex;
-        flex-direction: column;
-        text-align: justify;
-        transition: height 0.5s;
-    }
+#GruppenInhalt {
+    background-color: #F4F4F4;
+    width: 100%;
+    height: 55%;
+    overflow-y: scroll;
+    padding-left: 2%;
+    padding-top: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    transition: height 0.5s;
+    border-bottom: 4px solid #006E96;
+    border-radius: 2px 2px 0px 0px;
+    font-family: helvetica;
+    font-size: 0.8em;
+    color: #666;
+}
+/* Scrollbar*/
+::-webkit-scrollbar {
+    width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+    transition: all 0.6s ease;
+    box-shadow: none;
+    border-radius: 0;
+    background: rgba(255,255,255,.0);
+    &:hover
+
+{
+    background: rgba(255,255,255,.25);
+}
+
+}
+
+::-webkit-scrollbar-thumb {
+    transition: all 0.6s ease;
+    box-shadow: none;
+    border-radius: 0;
+    background: rgba(4, 175, 239, .125);
+    &:hover
+
+{
+    background: rgba(4, 175, 239, .8);
+}
+
+&:window-inactive {
+    background: rgba(4, 175, 239, .4);
+}
+
+}
+ /* ! Scrollbar*/
+
+
 
 #GruppenLabelsRahmen {
     overflow-x: hidden;
     overflow-y: visible;
     background-color: #007BA8;
-    
     min-height: 30px;
     text-align: justify;
     height: 15%;
@@ -131,12 +173,13 @@ input {
 }
 
 
+
 #GruppenLabels {
     padding-top: 5px;
     padding-right: 10px;
     padding-left: 30px;
     float: left;
-
+  
 }
 
 
@@ -262,7 +305,7 @@ h1 {
 
 
 body {
-    
+   
     /*background: url('https://i.pinimg.com/originals/4d/9d/3f/4d9d3f0f71a32bdd3d19d0b572bab2c1.jpg') no-repeat center center fixed;*/
     background-size: cover;
 }
