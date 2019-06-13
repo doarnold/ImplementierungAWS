@@ -38,7 +38,7 @@ namespace SUN2.Controllers
             foreach (LehrstuhlEintraege le in db.LehrstuhlEintraeges)
             {
                 // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
-                lautor[le.id] = AuthCheck.AutorLE(le.lehrstuhlid, userId);
+                lautor[le.id] = AuthCheck.AutorLE(le.id, userId);
 
                 // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
                 lverantwortlich[le.lehrstuhlid] = AuthCheck.VerantLehr(le.lehrstuhlid, userId);
@@ -114,7 +114,7 @@ namespace SUN2.Controllers
             foreach (GruppenEintraege le in db.GruppenEintraeges)
             {
                 // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
-                autor[le.id] = AuthCheck.AutorGE(le.gruppenid, userId);
+                autor[le.id] = AuthCheck.AutorGE(le.id, userId);
 
                 // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
                 verantwortlich[le.gruppenid] = AuthCheck.VerantGr(le.gruppenid, userId);

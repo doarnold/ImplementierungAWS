@@ -30,6 +30,7 @@ namespace SUN2.Controllers
             Boolean ok = false; // für prüfung auf mitgliedschaft
             Boolean[] verantwortlich = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein Verantwortlicher
             Boolean[] autor = new Boolean[10000]; // Index gruppenid, Eintrag false -> Gruppe gruppenid kein autor
+            var userId = User.Identity.GetUserId();
 
             foreach (Gruppe gruppe in db.Gruppes)
             {
@@ -40,9 +41,6 @@ namespace SUN2.Controllers
                     // hier werden PRIVATEN alle Gruppen ausgeschlossen, in denen der User nicht Mitglied ist
                     ok = false;
 
-                    // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
-                    var userId = User.Identity.GetUserId();
-                    verantwortlich[gruppe.gruppenid] = AuthCheck.VerantGr(gruppe.gruppenid, userId);
 
                     foreach (MitgliederGruppe mg in db.MitgliederGruppes)
                     {
@@ -68,13 +66,14 @@ namespace SUN2.Controllers
                 {
                     foreach (GruppenEintraege ge in db.GruppenEintraeges)
                     {
+                        // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
+                        autor[ge.id] = AuthCheck.AutorGE(ge.id, userId);
+                        // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
+                        verantwortlich[ge.gruppenid] = AuthCheck.VerantGr(ge.gruppenid, userId);
+
+
                         if (ge.gruppenid == gruppenid)
                         {
-
-                            // Signal an Frontend, ob User auch autor ist und bearbeiten/löschen darf
-                            var userId = User.Identity.GetUserId();
-                            autor[ge.id] = AuthCheck.VerantGr(ge.id, userId);
-
 
                             foreach (Person person in db.Person)
                             {

@@ -41,7 +41,7 @@ namespace SUN2.Controllers
 
                     // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
                     autor[l.lehrstuhlid] = AuthCheck.AutorLE(l.lehrstuhlid, userId);
-                    verantwortlich[l.lehrstuhlid] = AuthCheck.VerantGr(l.lehrstuhlid, userId);
+                    verantwortlich[l.lehrstuhlid] = AuthCheck.VerantLehr(l.lehrstuhlid, userId);
 
                     foreach (MitarbeiterLehrstuhl ml in db.MitarbeiterLehrstuhls)
                     {
