@@ -322,9 +322,12 @@ p {
    color: white; 
 }
 
+#login-NewUserLink{
+    text-align: center; 
+}
+
 
 /* Registrieren */
-
 #Register-box {
     font-size: 14px;
     border-top: 2px solid #3498db;
@@ -399,7 +402,7 @@ p {
         transition: all 0.4s ease-in-out;
     }
 
-
+/* Default Form Layout*/
 
 
 /* Beiträge bearbeiten */
