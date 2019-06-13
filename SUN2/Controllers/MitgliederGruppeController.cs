@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SUN2.Controllers.misc;
 using SUN2.Models;
 
@@ -147,6 +148,75 @@ namespace SUN2.Controllers
             }
       
         }
+
+
+        // Funktionalität zum Hinzfügen neuer Mitglieder zu einer Gruppe
+        // Fügt den angemeldeten User einer (öffentlichen) Gruppe hinzu
+        // ~~Import: userid
+        // ~~Export: nichts oder BadRequest View
+        // GET: MitgliederGruppe/Beitreten
+        public ActionResult Beitreten(int? gruppenid)
+        {
+            MitgliederGruppe mg = new MitgliederGruppe();
+            mg.userid = User.Identity.GetUserId();
+            mg.gruppenid = (int)gruppenid;
+
+            //Falls die Gruppenid nicht gesetzt ist, Fehler melden
+            if (gruppenid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+
+            //Wenn alles okay ist, speichere einen neuen Eintrag in der MitgliederGruppe Tabelle und 
+            //leite zur Index Seite von Gruppen um
+            if (ModelState.IsValid)
+            {
+                db.MitgliederGruppes.Add(mg);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Gruppe");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+        }
+
+
+
+        // Ermöglicht das Austreten des angemeldeten Users aus einer Gruppe
+        // POST: MitgliederGruppe/Delete/5
+        public ActionResult Austreten(int? gruppenid)
+        {
+
+            var userid = User.Identity.GetUserId();
+            var ok = false;
+            var id = 0;
+
+            foreach(MitgliederGruppe mit in db.MitgliederGruppes)
+            {
+                if(mit.userid == userid && mit.gruppenid == gruppenid)
+                {
+                    ok = true;
+                    id = mit.id;
+
+                }
+            }
+
+            if(ok)
+            {
+                MitgliederGruppe mitgliederGruppe = db.MitgliederGruppes.Find(id);
+                db.MitgliederGruppes.Remove(mitgliederGruppe);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Gruppe");
+            } else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+        }
+
 
 
         // Ermöglicht das Löschen eines Gruppenmitglieds

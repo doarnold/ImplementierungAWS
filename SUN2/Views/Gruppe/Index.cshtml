@@ -117,27 +117,51 @@
                         <a href="@Url.Action("Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Neuer Eintrag">
                             <i class='fa fa-plus'></i>
                         </a>
+                    }
+                }
+
+
+                <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Einträge Anzeigen">
+                    <i class='fa fa-list'></i>
+                </a>
+
+
+                <!-- selbst einer gruppe beitreten / austreten -->
+                @{
+                    var mitglied = false;
+                    foreach (var bei in ViewBag.beitritt)
+                    {
+                        if (bei.gruppenid == item.gruppenid)
+                        {
+                            mitglied = true;
+
+                            <a href="@Url.Action("Austreten", "MitgliederGruppe", new { gruppenid = item.gruppenid}, null )" class="btn btn-primary" title="Austreten">
+                                <i class='fa fa-thumbs-down'></i>
+                            </a>
                         }
                     }
 
+                    if (!mitglied)
+                    {
+                        <a href="@Url.Action("Beitreten", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Beitreten">
+                            <i class='fa fa-thumbs-up'></i>
+                        </a>
+                    }
 
-                    <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Einträge Anzeigen">
-                        <i class='fa fa-list'></i>
-                    </a>
-
-
-
-
-                    @*@Html.ActionLink("Gruppe bearbeiten", "Edit", new { id = item.gruppenid }) |
-            @Html.ActionLink("Gruppe löschen", "Delete", new { id = item.gruppenid }) |
-            @Html.ActionLink("Neuer Eintrag", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
-            @Html.ActionLink("Einträge anzeigen", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
-            @Html.ActionLink("Mitglieder anzeigen", "Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null) |
-            @Html.ActionLink("Mitglied hinzufügen", "Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)*@
+                }
+               
 
 
+                @*@Html.ActionLink("Gruppe bearbeiten", "Edit", new { id = item.gruppenid }) |
+        @Html.ActionLink("Gruppe löschen", "Delete", new { id = item.gruppenid }) |
+        @Html.ActionLink("Neuer Eintrag", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
+        @Html.ActionLink("Einträge anzeigen", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
+        @Html.ActionLink("Mitglieder anzeigen", "Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null) |
+        @Html.ActionLink("Mitglied hinzufügen", "Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)*@
 
-                </td>
+
+
+            </td>
         </tr>
     }
 

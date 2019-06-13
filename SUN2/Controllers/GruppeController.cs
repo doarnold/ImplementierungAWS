@@ -75,6 +75,21 @@ namespace SUN2.Controllers
                     }
                     entries.Add(gruppe);
                 }
+
+
+                // Um eintreten austreten zu kennzeichnen, ViewBag an frontend
+                List<MitgliederGruppe> list = new List<MitgliederGruppe>();
+
+                // Alle mitgliedschaften des angemeldeten Users suchen
+                foreach (MitgliederGruppe al in db.MitgliederGruppes)
+                {
+                    if (al.userid == userId)
+                    {
+                        list.Add(al);
+                    }
+                }
+
+                ViewBag.beitritt = list;
             }
                 
 
@@ -108,9 +123,13 @@ namespace SUN2.Controllers
                 gruppe.verantwortlicher = userId;
                 db.Gruppes.Add(gruppe);
 
+                db.SaveChanges();
+
                 // Mitgliedschaft herstellen
+                Gruppe neu = db.Gruppes.OrderByDescending(p => p.gruppenid).FirstOrDefault(); // neue gruppenid ermitteln
+
                 MitgliederGruppe mg = new MitgliederGruppe();
-                mg.gruppenid = gruppe.gruppenid;
+                mg.gruppenid = neu.gruppenid;
                 mg.userid = userId;
                 db.MitgliederGruppes.Add(mg);
 
