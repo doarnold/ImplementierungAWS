@@ -404,7 +404,137 @@ p {
 
 /* Default Form Layout*/
 
+#defaultInput-box {
+font-size: 14px;
+border-top: 2px solid #3498db;
+width: 500px;
+padding: 20px;
+margin: 60px auto;
+/*/display: none; */
+background-color: #FFFFFF;
+/*background-color: transparent;*/
+}
 
+
+
+#defaultInput-box input[type='text']:focus{
+    color: black;
+    border: 1px solid black;
+    outline: none;
+}
+
+#defaultInput-box input[type='text'] {
+    margin-left: 20%; 
+    margin-top: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555555;
+    border: 1px solid #cccccc;
+    line-heigt: 2;
+}
+
+#defaultInput-box select:focus {
+    color: black;
+    border: 1px solid black;
+    outline: none;
+}
+
+#defaultInput-box #editor {
+    margin-left: 20%;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555555;
+    border: 1px solid #cccccc;
+    line-heigt: 2;
+}
+
+#editor:focus {
+    color: black;
+    border: 1px solid black;
+    outline: none;
+}
+
+#defaultInput-box TextArea {
+    
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    max-width: 100%;
+    line-height: 1.5;
+    padding: 15px 15px 30px;
+    border-radius: 3px;
+    border: 1px solid #F7E98D;
+    font: 13px Tahoma, cursive;
+    transition: box-shadow 0.5s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-smoothing: subpixel-antialiased;
+    background: linear-gradient(#F9EFAF, #F7E98D);
+    background: -o-linear-gradient(#F9EFAF, #F7E98D);
+    background: -ms-linear-gradient(#F9EFAF, #F7E98D);
+    background: -moz-linear-gradient(#F9EFAF, #F7E98D);
+    background: -webkit-linear-gradient(#F9EFAF, #F7E98D);
+
+
+    overflow: hidden;
+    min-width: 100%;
+    min-height: 50px;
+    height: auto; 
+    /*max-height: 100px;*/
+}
+
+
+
+#defaultInput-box select {
+    margin-left: 20%;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555555;
+    border: 1px solid #cccccc;
+    line-heigt: 2;
+}
+
+
+
+
+#defaultInput-box .button {
+    margin-left: 20%;
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    cursor: pointer;
+    padding: 6px 13px;
+    border: 0 solid #018dc4;
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    background: #3498db;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+    #defaultInput-box .button:hover {
+        background-color: #2980b9;
+        -webkit-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+    }
+
+#defaultLabel {
+    font-size: 18px;
+    color: #555555;
+   
+
+}
 /* Beiträge bearbeiten */
 #TextboxInhalt {
     width: 100% !important;
