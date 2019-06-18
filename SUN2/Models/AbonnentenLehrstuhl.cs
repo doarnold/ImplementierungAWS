@@ -19,7 +19,8 @@ namespace SUN2.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
+        public int id { get; set; } 
+
         public string userid { get; set; }
         public int lehrstuhlid { get; set; }
     }

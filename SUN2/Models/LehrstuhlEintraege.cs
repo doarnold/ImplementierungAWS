@@ -23,11 +23,17 @@ namespace SUN2.Models
         public int lehrstuhlid { get; set; }
         public System.DateTime datum { get; set; }
         public string autor { get; set; }
+        [StringLength(2500, MinimumLength = 15)]
         public string inhalt { get; set; }
+        [StringLength(150, MinimumLength = 0)]
         public string label1 { get; set; }
+        [StringLength(150, MinimumLength = 0)]
         public string label2 { get; set; }
+                [StringLength(150, MinimumLength = 0)]
         public string label3 { get; set; }
+        [StringLength(150, MinimumLength = 0)]
         public string label4 { get; set; }
+        [StringLength(150, MinimumLength = 0)]
         public string label5 { get; set; }
     }
 }

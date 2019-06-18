@@ -17,8 +17,11 @@ namespace SUN2.Models
     public partial class Person
     {
         public string id { get; set; }
+        [StringLength(50, MinimumLength = 2)]
         public string name { get; set; }
+        [StringLength(50, MinimumLength = 2)]
         public string vorname { get; set; }
+        [StringLength(500, MinimumLength = 0)]
         public string persinfos { get; set; }
         public Nullable<int> matnr { get; set; }
         public Nullable<int> hsemester { get; set; }
