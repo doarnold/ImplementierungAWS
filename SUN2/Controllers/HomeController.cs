@@ -81,7 +81,6 @@ namespace SUN2.Controllers
                 ViewBag.lautor = lautor;
                 ViewBag.lverantwortlich = lverantwortlich;
 
-
                 if (abonniert)
                 {
                     list.Add(new NewsFeedModel
@@ -96,7 +95,8 @@ namespace SUN2.Controllers
                         label3 = le.label3,
                         label4 = le.label4,
                         label5 = le.label5,
-                        typ = "l"
+                        typ = "l",
+                        entityname = HelpFunctions.GetLehrstuhlName(le.lehrstuhlid)
                     });
                 }
 
@@ -163,7 +163,8 @@ namespace SUN2.Controllers
                         label3 = le.label3,
                         label4 = le.label4,
                         label5 = le.label5,
-                        typ = "g"
+                        typ = "g",
+                        entityname = HelpFunctions.GetGruppenName(le.gruppenid)
                     });
                    
                 }

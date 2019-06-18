@@ -33,6 +33,36 @@ namespace SUN2.Controllers.misc
             }
             return "";
         }
-      
+
+
+        // Eingabe: gruppenid
+        // Ausgabe: gruppenname
+        public static String GetGruppenName(int gruppenid)
+        {
+            foreach(Gruppe g in db.Gruppes)
+            {
+                if(g.gruppenid == gruppenid)
+                {
+                    return g.bezeichnung;
+                } 
+            }
+            return "";
+        }
+
+
+        // Eingabe: lehrstuhlid
+        // Ausgabe: lehrstuhlname
+        public static String GetLehrstuhlName(int lehrstuhlid)
+        {
+            foreach (Lehrstuhl l in db.Lehrstuhls)
+            {
+                if (l.lehrstuhlid == lehrstuhlid)
+                {
+                    return l.bezeichnung;
+                }
+            }
+            return "";
+        }
+
     }
 }
