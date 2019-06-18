@@ -134,9 +134,9 @@
 
                     @if (item.label1 != null && item.label1 != "")
                     {
-                        
-                            <button type="button" class="btn btn-info">#@item.label1</button>
-                        
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1}, null)">#@item.label1</a>
+
                     }
                     else
                     {
@@ -144,24 +144,24 @@
 
                     @if (item.label2 != null && item.label2 != "")
                     {
-                        
-                            <button type="button" class="btn btn-info">#@Html.DisplayFor(modelItem => item.label2)</button>
-                        }
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2}, null)">#@item.label2</a>
+                    }
                     @if (item.label3 != null && item.label3 != "")
                     {
-                        
-                            <button type="button" class="btn btn-info">#@Html.DisplayFor(modelItem => item.label3)</button>
-                        }
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3}, null)">#@item.label3</a>
+                    }
                     @if (item.label4 != null && item.label4 != "")
                     {
-                        
-                            <button type="button" class="btn btn-info">#@Html.DisplayFor(modelItem => item.label4)</button>
-                       }
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4}, null)">#@item.label4</a>
+                    }
                     @if (item.label5 != null && item.label5 != "")
                     {
-                        
-                            <button type="button" class="btn btn-info">#@Html.DisplayFor(modelItem => item.label5)</button>
-                        }
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5}, null)">#@item.label5</a>
+                    }
 
                 </div>
 
