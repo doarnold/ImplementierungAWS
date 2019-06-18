@@ -25,6 +25,11 @@
                 Lehrstuhl:
                 @bezeichnung <!-- bei inkonstenten testdaten wird hier nichts angezeigt !-->
             </h2>
+
+            <a href="@Url.Action("Create", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)">
+                Neuen Eintrag erstellen
+            </a>
+
             <div id="LehrstuhlPlatzhalter"></div>
             counter++;
         }
