@@ -305,9 +305,9 @@ h1 {
 
 
 body {
-   
     /*background: url('https://i.pinimg.com/originals/4d/9d/3f/4d9d3f0f71a32bdd3d19d0b572bab2c1.jpg') no-repeat center center fixed;*/
     background-size: cover;
+    background: #fafafa;
 }
 
 #login-box {
@@ -610,4 +610,76 @@ background-color: #FFFFFF;
 
 .linkTest {
     color:white !important;
+}
+
+
+/*Listen*/
+
+#ListContainer {
+    padding: 30px;
+    max-width: 780px;
+    width: 100%;
+    margin: auto;
+}
+
+    #ListContainer .a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    
+     }
+
+
+#ListContainer table {
+    background-color: transparent;
+    width: 100%;
+    max-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 7px;
+}
+
+#ListContainer td {
+    padding: 14px;
+    line-height: 20px;
+    text-align: left;
+}
+
+
+
+    #ListContainer th {
+        font-weight: 700;
+        font-size: 13px;
+        color: #007BA8;
+        vertical-align: bottom;
+        padding: 0 14px !important;
+    }
+
+
+
+#ListContainer td {
+    vertical-align: middle;
+    background: #fff;
+    box-shadow: 0 3px 2px rgba(0,0,0,.08);
+    transition: all .2s ease;
+    font-size: 13px;
+    color: #777;
+}
+
+    #ListContainer td:last-child {
+        border-radius: 0 6px 6px 0;
+    }
+
+    #ListContainer td:first-child {
+        border-radius: 6px 0 0 6px;
+    }
+
+    #ListContainer tr:hover td {
+        box-shadow: 0 3px 2px #007BA8;
+        background-color: #f7f8fb;
+        color: #444;
+    }
+
+#ListHeader {
+    text-align: center;
+    color: #007BA8;
 }
