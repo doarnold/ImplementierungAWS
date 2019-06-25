@@ -4,84 +4,98 @@
     ViewBag.Title = "Meine Gruppen und Lehrstühle";
 }
 
+<!-- CSS Einbindung-->
+@Styles.Render("~/Content/css")
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
 <br />
-<h2>Meine Gruppen & abonnierten Lehrstühle</h2>
+<div id="ListHeader">
+    <h2>Meine Gruppen & abonnierten Lehrstühle</h2>
 
-@{ var zuordnung = ViewBag.zuordnung; }
+    <div class="form-group">
+        <div class="col-md-6">
+            <p>
+                @Html.ActionLink("Zu den Lehrstühlen", "Index", "Lehrstuhl")
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                @Html.ActionLink("Zu den Gruppen", "Index", "Gruppe")
+            </p>
+        </div>
+        </div>
+    </div>
 
-<table class="table">
-    <tr>
-        <th>
+    <br />
 
-            @Html.DisplayNameFor(model => model.bezeichnung)
+    @{ var zuordnung = ViewBag.zuordnung; }
 
-        </th>
-        <th>
+    <div id="ListContainer">
+        <table class="table">
+            <tr>
+                <th>
+                    Bezeichnung
+                </th>
+                <th>
+                    Beschreibung
+                </th>
+                <th>
+                    Verantwortlicher
+                </th>
+            </tr>
 
-            @Html.DisplayNameFor(model => model.beschreibung)
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
 
-        </th>
-        <th>
-
-            @Html.DisplayNameFor(model => model.verantwortlicher)
-
-        </th>
-
-
-
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @{
-
-                    if (item.typ == "g")
-                    {
-                        <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
-                            @Html.DisplayFor(modelItem => item.bezeichnung)
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
-                            @Html.DisplayFor(modelItem => item.bezeichnung)
-                        </a>
-                    }
-                }
-
-
-
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.beschreibung)
-            </td>
-            <td>
-                @{
-                    if (zuordnung != null)
-                    {
-                        foreach (var person in zuordnung)
-                        {
-                            if (person.name == item.verantwortlicher)
+                            if (item.typ == "g")
                             {
-                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                    @Html.DisplayFor(model => item.verantwortlicher)
+                                <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
+                                    @Html.DisplayFor(modelItem => item.bezeichnung)
                                 </a>
-                                break;
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
+                                    @Html.DisplayFor(modelItem => item.bezeichnung)
+                                </a>
                             }
                         }
-                    }
-
-                }
-            </td>
-
-        </tr>
-    }
 
 
 
-</table>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.beschreibung)
+                    </td>
+                    <td>
+                        @{
+                            if (zuordnung != null)
+                            {
+                                foreach (var person in zuordnung)
+                                {
+                                    if (person.name == item.verantwortlicher)
+                                    {
+                                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                            @Html.DisplayFor(model => item.verantwortlicher)
+                                        </a>
+                                        break;
+                                    }
+                                }
+                            }
+
+                        }
+                    </td>
+
+                </tr>
+            }
 
 
 
+        </table>
+
+
+    </div>
