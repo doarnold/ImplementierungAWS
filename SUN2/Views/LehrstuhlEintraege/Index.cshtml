@@ -35,11 +35,11 @@
         }
 
 
-        <div id="LehrstuhlBeitragGesamt">
+        <div id="GruppenBeitragGesamt">
 
 
-            <div id="LehrstuhlHead">
-                <div id="LehrstuhlPostName">
+            <div id="GruppenHead">
+                <div id="GruppenPostName">
                     @{
                         if (zuordnung != null)
                         {
@@ -47,7 +47,7 @@
                             {
                                 if (person.name == item.autor)
                                 {
-                                    <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                    <a class="linkTest" href="@Url.Action("Details", "Person", new { id = person.id }, null)">
                                         @Html.DisplayFor(model => item.autor)
                                     </a>
                                     break;
@@ -55,49 +55,94 @@
                             }
                         }
 
+
+
                     }
                 </div>
+                <br />
+                <br />
 
-                @Html.DisplayFor(modelItem => item.datum)
-                <div id="LehrstuhlEdit">
+                <div>@Html.DisplayFor(modelItem => item.datum.Day).@Html.DisplayFor(modelItem => item.datum.Month).@Html.DisplayFor(modelItem => item.datum.Year) </div>
+
+
+                <div id="GruppenEdit">
+
+
 
                     @{
-                        var verant = ViewBag.verantwortlich;
-                        var aut = ViewBag.autor;
 
-                        if (verant[item.lehrstuhlid] == true || aut[item.id] == true || User.IsInRole("Admin"))
-                        {
+                            var lverant = ViewBag.verantwortlich;
+                            var laut = ViewBag.autor;
 
-                            Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id });
-                            <p>|</p>
-                            Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id });
+                            if (lverant[item.lehrstuhlid] == true || laut[item.id] == true || User.IsInRole("Admin"))
+                            {
 
-                        }
+
+                                <a href="@Url.Action("Edit", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Bearbeiten">
+                                    <i class='fas fa-edit'></i>
+                                </a>
+                                <a href="@Url.Action("Delete", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Löschen">
+                                    <i class='fas fa-trash-alt'></i>
+                                </a>
+                            }
+
+                            <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Lehrstuhl">
+                                <i class='fa fa-users'></i>
+                            </a>
+                        
                     }
+
                 </div>
 
             </div>
 
-            <div id="LehrstuhlInhalt">
+            <div id="GruppenInhalt">
                 @Html.DisplayFor(modelItem => item.inhalt)
             </div>
 
 
 
-            <div id="LehrstuhlLabelsRahmen">
+            <div id="GruppenLabelsRahmen">
 
-                <div id="LehrstuhlLabels">
-                    @Html.DisplayFor(modelItem => item.label1)
-                </div>
-                <div id="LehrstuhlLabels">@Html.DisplayFor(modelItem => item.label2)</div>
-                <div id="LehrstuhlLabels">@Html.DisplayFor(modelItem => item.label3)</div>
-                <div id="LehrstuhlLabels">@Html.DisplayFor(modelItem => item.label4)</div>
-                <div id="LehrstuhlLabels">@Html.DisplayFor(modelItem => item.label5)</div>
+
+
+
+                @if (item.label1 != null && item.label1 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1}, null)">#@item.label1</a>
+
+                }
+                else
+                {
+                }
+
+                @if (item.label2 != null && item.label2 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2}, null)">#@item.label2</a>
+                }
+                @if (item.label3 != null && item.label3 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3}, null)">#@item.label3</a>
+                }
+                @if (item.label4 != null && item.label4 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4}, null)">#@item.label4</a>
+                }
+                @if (item.label5 != null && item.label5 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5}, null)">#@item.label5</a>
+                }
+
             </div>
 
 
 
-            <div id="LehrstuhlPlatzhalter"></div>
+            @*<div id="GruppenPlatzhalter"></div>*@
 
 
         </div>

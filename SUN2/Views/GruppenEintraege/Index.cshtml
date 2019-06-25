@@ -49,7 +49,7 @@
                             {
                                 if (person.name == item.autor)
                                 {
-                                    <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                    <a class="linkTest" href="@Url.Action("Details", "Person", new { id = person.id }, null)">
                                         @Html.DisplayFor(model => item.autor)
                                     </a>
                                     break;
@@ -60,7 +60,7 @@
                     }
                 </div>
 
-                @Html.DisplayFor(modelItem => item.datum)
+                <div>@Html.DisplayFor(modelItem => item.datum.Day).@Html.DisplayFor(modelItem => item.datum.Month).@Html.DisplayFor(modelItem => item.datum.Year) </div>
                 <div id="GruppenEdit">
 
                     @{
@@ -70,11 +70,22 @@
                         if (verant[item.gruppenid] == true || aut[item.id] == true || User.IsInRole("Admin"))
                         {
 
-                            Html.ActionLink("Eintrag bearbeiten", "Edit", new { id = item.id });
-                            <p>|</p>
-                            Html.ActionLink("Eintrag löschen", "Delete", new { id = item.id });
+                            <a href="@Url.Action("Edit", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Bearbeiten">
+                                <i class='fas fa-edit'></i>
+                            </a>
+                            // @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                            // @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                            <a href="@Url.Action("Delete", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Löschen">
+                                <i class='fas fa-trash-alt'></i>
+                            </a>
 
                         }
+
+
+                        //@Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
+                        <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Gruppe">
+                            <i class='fa fa-users'></i>
+                        </a>
                     }
                 </div>
 
@@ -88,13 +99,36 @@
 
             <div id="GruppenLabelsRahmen">
 
-                <div id="GruppenLabels">
-                    @Html.DisplayFor(modelItem => item.label1)
-                </div>
-                <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label2)</div>
-                <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label3)</div>
-                <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label4)</div>
-                <div id="GruppenLabels">@Html.DisplayFor(modelItem => item.label5)</div>
+                @if (item.label1 != null && item.label1 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1}, null)">#@item.label1</a>
+
+                }
+                else
+                {
+                }
+
+                @if (item.label2 != null && item.label2 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2}, null)">#@item.label2</a>
+                }
+                @if (item.label3 != null && item.label3 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3}, null)">#@item.label3</a>
+                }
+                @if (item.label4 != null && item.label4 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4}, null)">#@item.label4</a>
+                }
+                @if (item.label5 != null && item.label5 != "")
+                {
+
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5}, null)">#@item.label5</a>
+                }
             </div>
 
 
