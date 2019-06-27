@@ -43,54 +43,85 @@
                 <th>
                     Verantwortlicher
                 </th>
+                <th>
+                    
+                </th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @{
+        <tr>
+            <td>
+                @{
 
-                            if (item.typ == "g")
+                    if (item.typ == "g")
+                    {
+                        <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
+                            @Html.DisplayFor(modelItem => item.bezeichnung)
+                        </a>
+
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
+                            @Html.DisplayFor(modelItem => item.bezeichnung)
+                        </a>
+
+          
+                    }
+                }
+
+
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.beschreibung)
+            </td>
+            <td>
+                @{
+                    if (zuordnung != null)
+                    {
+                        foreach (var person in zuordnung)
+                        {
+                            if (person.name == item.verantwortlicher)
                             {
-                                <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
-                                    @Html.DisplayFor(modelItem => item.bezeichnung)
+                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                    @Html.DisplayFor(model => item.verantwortlicher)
                                 </a>
-                            }
-                            else
-                            {
-                                <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
-                                    @Html.DisplayFor(modelItem => item.bezeichnung)
-                                </a>
+                                break;
                             }
                         }
+                    }
+
+                }
+            </td>
+
+
+            <td>
+                @{
+
+                    if (item.typ == "g")
+                    {
+       
+                        <a href="@Url.Action("Austreten", "MitgliederGruppe", new { gruppenid = item.id}, null )" class="btn btn-primary" title="Austreten">
+                            <i class='fa fa-thumbs-down'></i>
+                        </a>
+                    }
+                    else
+                    {
+        
+
+                        <a href="@Url.Action("Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.id }, null )" class="btn btn-primary" title="Deabonieren">
+                            <i class='fa fa-thumbs-down'></i>
+                        </a>
+                    }
+                }
 
 
 
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.beschreibung)
-                    </td>
-                    <td>
-                        @{
-                            if (zuordnung != null)
-                            {
-                                foreach (var person in zuordnung)
-                                {
-                                    if (person.name == item.verantwortlicher)
-                                    {
-                                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                            @Html.DisplayFor(model => item.verantwortlicher)
-                                        </a>
-                                        break;
-                                    }
-                                }
-                            }
+            </td>
 
-                        }
-                    </td>
-
-                </tr>
+        </tr>
             }
 
 
