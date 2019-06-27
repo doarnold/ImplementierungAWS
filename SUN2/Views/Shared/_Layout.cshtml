@@ -67,7 +67,18 @@
                         <li class="nav-item">@Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")</li>
                         <li class="nav-item">@Html.ActionLink("Alle Gruppen", "Index", "Gruppe")</li>
                         <li class="nav-item">
-                            <input class="form-control Feld" type="text" name="suche" id="suche" placeholder="Was suchst Du?" onsubmit="search()">
+                            <input class="form-control Feld" type="text" name="suche" id="suche" placeholder="Was suchst Du?" onsubmit="search()" onkeypress="handle(event)">
+
+                            <script>
+                                function handle(e) {
+                                    if (e.keyCode == 13) {
+                                        search();
+                                    }
+
+                                    return false;
+                                }
+                            </script>
+
                         </li>
 
                         <li class="nav-item">
