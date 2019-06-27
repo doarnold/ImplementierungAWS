@@ -4,6 +4,9 @@
     ViewBag.Title = "Index";
 }
 
+@if (Request.IsAuthenticated)
+    {
+
 <h2>Index</h2>
 
 <p>
@@ -20,7 +23,7 @@
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model=> model.Person.vorname)
+            @Html.DisplayNameFor(model => model.Person.vorname)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Person.name)
@@ -48,16 +51,16 @@
             </td>
             <td>
 
-              @foreach(var item2 in item.AspNetRoles)
-              {
-                  
-                  <label>
-                      @item2.Name
-                  </label>
-                 
+                @foreach (var item2 in item.AspNetRoles)
+                {
+
+                    <label>
+                        @item2.Name
+                    </label>
 
 
-              }
+
+                }
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
@@ -68,3 +71,5 @@
     }
 
 </table>
+
+}
