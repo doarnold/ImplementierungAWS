@@ -1,179 +1,183 @@
 ﻿@model IEnumerable<SUN2.Models.Person>
-
+@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-
-
-
-    <form method="post">
-        <fieldset>
-            <div>
-                <label for="search">Search:</label>
-                <input type="text" name="search" value="" />
-        
-      
-                <label>&nbsp;</label>
-                <input type="submit" value="Submit" class="submit" />
-            </div>
-        </fieldset>
-    </form>
+    <div id="ListHeader">
+        <p>
+            @Html.ActionLink("Create New", "Create")
 
 
 
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.vorname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.persinfos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.matnr)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.hsemester)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fsemester)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.studienbeginn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.studiengang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.studienfach)
-        </th>
-        <th>
-            <p>E-Mail (Username)</p>
-        </th>
-        <th></th>
-    </tr>
+            <form method="post">
+                <fieldset>
+                    <div>
+                        <label for="search">Search:</label>
+                        <input type="text" name="search" value="" />
 
 
-    @if (IsPost)
-    {
-        string searchString = Request.Form["search"];
-
-
-        <text>
-            You entered:
-            <br />
-            @searchString
-
-        </text>
+                        <label>&nbsp;</label>
+                        <input type="submit" value="Submit" class="submit" />
+                    </div>
+                </fieldset>
+            </form>
 
 
 
+        </p>
+</div>
 
-        foreach (var item in Model)
-        {
+        <div id="ListContainer">
 
-
-
-            if (searchString == "")
-            {
-
-
-
+            <table class="table">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.vorname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.persinfos)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.matnr)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.hsemester)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.fsemester)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.studienbeginn)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.studiengang)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.studienfach)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.vorname)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.persinfos)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.matnr)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.hsemester)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fsemester)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.studienbeginn)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.studiengang)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.studienfach)
+                    </th>
+                    <th style="color: #007BA8">
+                        E-Mail (Username)
+                    </th>
+                    <th></th>
                 </tr>
-            }
-            else
-            {
 
-                if (item.name == searchString)
+
+                @if (IsPost)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.vorname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.persinfos)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.matnr)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.hsemester)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.fsemester)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.studienbeginn)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.studiengang)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.studienfach)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                        </td>
-                    </tr>
+                    string searchString = Request.Form["search"];
+
+
+                    <text>
+                        You entered:
+                        <br />
+                        @searchString
+
+                    </text>
+
+
+
+
+                    foreach (var item in Model)
+                    {
+
+
+
+                        if (searchString == "")
+                        {
+
+
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.vorname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.persinfos)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.matnr)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.hsemester)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fsemester)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.studienbeginn)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.studiengang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.studienfach)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+
+                            if (item.name == searchString)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.vorname)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.persinfos)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.matnr)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.hsemester)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.fsemester)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.studienbeginn)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.studiengang)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.studienfach)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        }
+                    }
                 }
 
-
-
-            }
-        }
-    }
-
-</table>
+            </table>
+        </div>
