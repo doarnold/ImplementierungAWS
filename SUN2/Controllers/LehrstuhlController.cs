@@ -110,7 +110,7 @@ namespace SUN2.Controllers
         // POST: Lehrstuhl/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung")] Lehrstuhl lehrstuhl)
+        public ActionResult Create([Bind(Include = "lehrstuhlid,bezeichnung,beschreibung,privat")] Lehrstuhl lehrstuhl)
         {
             if (ModelState.IsValid)
             {
