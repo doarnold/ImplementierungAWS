@@ -4,36 +4,14 @@
     ViewBag.Title = "Gruppe löschen";
 }
 
-<h2>Gruppe löschen</h2>
 
-<h3>Möchten Sie diese Gruppe wirklich löschen?</h3>
+
+<h3>Möchten Sie die Gruppe " @Html.DisplayFor(model => model.bezeichnung) " wirklich löschen?</h3>
 <div>
-    <h4>Gruppe</h4>
+   
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.bezeichnung)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.bezeichnung)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.beschreibung)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.beschreibung)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.privat)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.privat)
-        </dd>
 
     </dl>
 
