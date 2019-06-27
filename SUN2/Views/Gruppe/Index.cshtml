@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SUN2.Models.Gruppe>
-
+@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Alle Gruppen";
 }
@@ -19,150 +19,157 @@
 </head>
 
 <br />
-<h2>Übersicht aller Gruppen</h2>
 
-<p>
-    @Html.ActionLink("Neue Gruppe anlegen", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.bezeichnung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.beschreibung)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.verantwortlicher)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.privat)
-        </th>
 
-        <th></th>
-    </tr>
+<div id="ListHeader">
+    <h2>Übersicht aller Gruppen</h2>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.bezeichnung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.beschreibung)
-            </td>
-            <td>
-                @{
-                    var zuordnung = ViewBag.zuordnung;
+    <p>
+        @Html.ActionLink("Neue Gruppe anlegen", "Create")
+    </p>
+</div>
 
-                    if (zuordnung != null)
-                    {
-                        foreach (var person in zuordnung)
-                        {
-                            if (person.name == item.verantwortlicher)
+    <div id="ListContainer">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.bezeichnung)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.beschreibung)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.verantwortlicher)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.privat)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bezeichnung)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.beschreibung)
+                    </td>
+                    <td>
+                        @{
+                            var zuordnung = ViewBag.zuordnung;
+
+                            if (zuordnung != null)
                             {
-                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                    @Html.DisplayFor(model => item.verantwortlicher)
-                                </a>
-                                break;
+                                foreach (var person in zuordnung)
+                                {
+                                    if (person.name == item.verantwortlicher)
+                                    {
+                                        <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                            @Html.DisplayFor(model => item.verantwortlicher)
+                                        </a>
+                                        break;
+                                    }
+                                }
+                            }
+
+
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (item.privat == true)
+                            {
+                                <i class='fa fa-eye-slash'> privat</i>
+                            }
+                            else
+                            {
+                                <i class='fa fa-eye'> öffentlich</i>
                             }
                         }
-                    }
+                    </td>
+                    <td>
 
+                        @{
+                            var verant = ViewBag.verantwortlich;
 
-                }
-            </td>
-            <td>
-                @{
-                    if (item.privat == true)
-                    {
-                        <i class='fa fa-eye-slash'> privat</i>
-                    }
-                    else
-                    {
-                        <i class='fa fa-eye'> öffentlich</i>
-                    }
-                }
-            </td>
-            <td>
+                            if (verant[item.gruppenid] == true || User.IsInRole("Admin"))
+                            {
+                                <a href="@Url.Action("Edit", "Gruppe", new { id = item.gruppenid })" class="btn btn-primary" title="Bearbeiten">
+                                    <i class='fas fa-edit'></i>
+                                </a>
+                                <a href="@Url.Action("Delete", "Gruppe", new { id = item.gruppenid })" class="btn btn-primary" title="Löschen">
+                                    <i class='fas fa-trash-alt'></i>
+                                </a>
 
-                @{
-                    var verant = ViewBag.verantwortlich;
+                                <a href="@Url.Action("Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Mitglieder anzeigen">
+                                    <i class='fa fa-users'></i>
+                                </a>
 
-                    if (verant[item.gruppenid] == true || User.IsInRole("Admin"))
-                    {
-                        <a href="@Url.Action("Edit", "Gruppe", new { id = item.gruppenid })" class="btn btn-primary" title="Bearbeiten">
-                            <i class='fas fa-edit'></i>
-                        </a>
-                        <a href="@Url.Action("Delete", "Gruppe", new { id = item.gruppenid })" class="btn btn-primary" title="Löschen">
-                            <i class='fas fa-trash-alt'></i>
-                        </a>
-
-                        <a href="@Url.Action("Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Mitglieder anzeigen">
-                            <i class='fa fa-users'></i>
-                        </a>
-
-                        <a href="@Url.Action("Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Mitglied hinzufühgen">
-                            <i class='fa fa-user-plus'></i>
-                        </a>
-                    }
-                }
-
-
-                @{
-                    var mit = ViewBag.mitglied;
-
-                    if (mit[item.gruppenid] == true || verant[item.gruppenid] == true || User.IsInRole("Admin"))
-                    {
-                        <a href="@Url.Action("Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Neuer Eintrag">
-                            <i class='fa fa-plus'></i>
-                        </a>
-                    }
-                }
-
-
-                <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Einträge Anzeigen">
-                    <i class='fa fa-list'></i>
-                </a>
-
-
-                <!-- selbst einer gruppe beitreten / austreten -->
-                @{
-                    var mitglied = false;
-                    foreach (var bei in ViewBag.beitritt)
-                    {
-                        if (bei.gruppenid == item.gruppenid)
-                        {
-                            mitglied = true;
-
-                            <a href="@Url.Action("Austreten", "MitgliederGruppe", new { gruppenid = item.gruppenid}, null )" class="btn btn-primary" title="Austreten">
-                                <i class='fa fa-thumbs-down'></i>
-                            </a>
+                                <a href="@Url.Action("Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Mitglied hinzufühgen">
+                                    <i class='fa fa-user-plus'></i>
+                                </a>
+                            }
                         }
-                    }
 
-                    if (!mitglied)
-                    {
-                        <a href="@Url.Action("Beitreten", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Beitreten">
-                            <i class='fa fa-thumbs-up'></i>
+
+                        @{
+                            var mit = ViewBag.mitglied;
+
+                            if (mit[item.gruppenid] == true || verant[item.gruppenid] == true || User.IsInRole("Admin"))
+                            {
+                                <a href="@Url.Action("Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Neuer Eintrag">
+                                    <i class='fa fa-plus'></i>
+                                </a>
+                            }
+                        }
+
+
+                        <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Einträge Anzeigen">
+                            <i class='fa fa-list'></i>
                         </a>
-                    }
-
-                }
-               
 
 
-                @*@Html.ActionLink("Gruppe bearbeiten", "Edit", new { id = item.gruppenid }) |
-        @Html.ActionLink("Gruppe löschen", "Delete", new { id = item.gruppenid }) |
-        @Html.ActionLink("Neuer Eintrag", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
-        @Html.ActionLink("Einträge anzeigen", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
-        @Html.ActionLink("Mitglieder anzeigen", "Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null) |
-        @Html.ActionLink("Mitglied hinzufügen", "Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)*@
+                        <!-- selbst einer gruppe beitreten / austreten -->
+                        @{
+                            var mitglied = false;
+                            foreach (var bei in ViewBag.beitritt)
+                            {
+                                if (bei.gruppenid == item.gruppenid)
+                                {
+                                    mitglied = true;
+
+                                    <a href="@Url.Action("Austreten", "MitgliederGruppe", new { gruppenid = item.gruppenid}, null )" class="btn btn-primary" title="Austreten">
+                                        <i class='fa fa-thumbs-down'></i>
+                                    </a>
+                                }
+                            }
+
+                            if (!mitglied)
+                            {
+                                <a href="@Url.Action("Beitreten", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null )" class="btn btn-primary" title="Beitreten">
+                                    <i class='fa fa-thumbs-up'></i>
+                                </a>
+                            }
+
+                        }
 
 
 
-            </td>
-        </tr>
-    }
+                        @*@Html.ActionLink("Gruppe bearbeiten", "Edit", new { id = item.gruppenid }) |
+                            @Html.ActionLink("Gruppe löschen", "Delete", new { id = item.gruppenid }) |
+                            @Html.ActionLink("Neuer Eintrag", "Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
+                            @Html.ActionLink("Einträge anzeigen", "Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null) |
+                            @Html.ActionLink("Mitglieder anzeigen", "Index", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null) |
+                            @Html.ActionLink("Mitglied hinzufügen", "Add", "MitgliederGruppe", new { gruppenid = item.gruppenid }, null)*@
 
-</table>
+
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
