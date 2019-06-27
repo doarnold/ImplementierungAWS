@@ -66,7 +66,7 @@ namespace SUN2.Controllers
                 {
                     if (person.id == le.autor)
                     {
-                        le.autor = HelpFunctions.GetDisplayName(person.id);
+                        le.autor = HelpFunctions.GetFeedDisplayName(person.id);
 
                         // zuordnungstabelle für verlinkung erstellen     
                         zuordnung.Add(new Person
@@ -134,7 +134,7 @@ namespace SUN2.Controllers
                 {
                     if (person.id == le.autor)
                     {
-                        le.autor = HelpFunctions.GetDisplayName(person.id);
+                        le.autor = HelpFunctions.GetFeedDisplayName(person.id);
 
                         // zuordnungstabelle für verlinkung erstellen     
                         zuordnung.Add(new Person

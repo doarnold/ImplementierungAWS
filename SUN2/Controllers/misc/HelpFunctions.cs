@@ -35,6 +35,30 @@ namespace SUN2.Controllers.misc
         }
 
 
+        // Eingabe: User ID
+        // Ausgabe: Anzeige Vorname+Nachname (falls vorhanden) oder E-Mail Adresse
+        public static String GetFeedDisplayName(String userid)
+        {
+            foreach (Person p in db.Person)
+            {
+                if (p.id == userid)
+                {
+                    //Kombination aus Vorname+Nachname+E-Mail anzeigen statt techn. User ID 
+                    if (p.name != null && p.vorname != null)
+                    {
+                        return p.vorname + " " + p.name;
+                    }
+                    else
+                    {
+                        return p.AspNetUsers.Email;
+                    }
+                }
+
+            }
+            return "";
+        }
+
+
         // Eingabe: gruppenid
         // Ausgabe: gruppenname
         public static String GetGruppenName(int gruppenid)
