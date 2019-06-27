@@ -21,11 +21,12 @@ namespace SUN2.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int lehrstuhlid { get; set; }
         [StringLength(400, MinimumLength = 10)]
+        [Required]
         public string bezeichnung { get; set; }
         [StringLength(1500, MinimumLength = 10)]
+        [Required]
         public string beschreibung { get; set; }
         public string verantwortlicher { get; set; }
-        [Required]
         public Nullable<bool> privat { get; set; }
     }
 }
