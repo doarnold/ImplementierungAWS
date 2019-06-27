@@ -1,4 +1,4 @@
-﻿
+﻿@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Administration";
 }
@@ -8,11 +8,20 @@
     @Html.AntiForgeryToken()
 
 
-    <h2>Administration</h2>
 
-    <h3>Nutzerverwaltung</h3>
-    <li>@Html.ActionLink("Personen (Profile, Zuorndung ASP.NET User, ...)", "Index", "Person")</li>
-    <li>@Html.ActionLink("ASP.NET User (E-Mail Adresse, ...)", "Index", "AspNetUsers")</li>
+    <div id="administration">
+
+        <h2>Nutzerverwaltung</h2>
+        <li>@Html.ActionLink("Personen (Profile, Zuorndung ASP.NET User, ...)", "Index", "Person")</li>
+        <li>@Html.ActionLink("ASP.NET User (E-Mail Adresse, ...)", "Index", "AspNetUsers")</li>
+
+    </div>
+
+
+
+
+
+
     /*<h3>Seitenverwaltung - Lehrstühle</h3>
     <li>@Html.ActionLink("Lehrstühle", "Index", "Lehrstuhl")</li>
     <li>@Html.ActionLink("Abonnenten Lehrstuhlseiten", "Index", "AbonnentenLehrstuhl")</li>

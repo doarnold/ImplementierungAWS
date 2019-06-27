@@ -617,7 +617,7 @@ background-color: #FFFFFF;
 
 #ListContainer {
     padding: 30px;
-    max-width: 780px;
+    max-width: 780px; /* 780px*/
     width: 100%;
     margin: auto;
 }
@@ -652,6 +652,7 @@ background-color: #FFFFFF;
         color: #007BA8;
         vertical-align: bottom;
         padding: 0 14px !important;
+
     }
 
 
@@ -683,3 +684,28 @@ background-color: #FFFFFF;
     text-align: center;
     color: #007BA8;
 }
+
+/*Administration*/
+
+#administration {
+    margin-top: 5%; 
+    text-align: center; 
+ 
+}
+
+    #administration li {
+        margin-top: 10px;
+        width: 60%;
+        height: auto;
+        display: inline-block;
+        cursor: pointer;
+        padding: 6px 13px;
+        border: 0 solid #018dc4;
+        font-size: 18px;
+        color: white !important;
+        background: #3498db;
+    }
+
+    #administration a {
+        color: white !important;
+    }
