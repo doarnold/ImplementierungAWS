@@ -9,360 +9,369 @@
 
 <br />
 
-
-<!-- gruppen -->
-@{
+@if (Request.IsAuthenticated)
+{
     var ok = false;
-    foreach (var item in Model)
+
+    <!-- gruppen -->
     {
 
-        if (ok == false)
+        foreach (var item in Model)
         {
-            if (item.typ == "g")
+
+            if (ok == false)
             {
-                ok = true;
-            }
-        }
-    }
-}
-
-@{
-    if (ok)
-    {
-        <h3>Gefundene Gruppen:</h3>
-        <br />
-        <table class="table">
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Bezeichnung
-                </th>
-                <th>
-                    Verantwortlicher
-                </th>
-            </tr>
-            @foreach (var item in Model)
-            {
-
-
                 if (item.typ == "g")
                 {
-                    <tr>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.entityid)
-
-                        </td>
-                        <td>
-                            <a href="@Url.Action("Index", "Gruppeneintraege", new { gruppenid = item.entityid }, null)">
-                                @Html.DisplayFor(modelItem => item.field1)
-                            </a>
-
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field2)
-                        </td>
-                    </tr>
+                    ok = true;
                 }
-            }
-
-        </table>
-        <br /><br />
-
-    }
-    else
-    {
-        <h3>Es wurden keine Gruppen gefunden, die Ihren Suchbegriff beinhalten.</h3>
-    }
-}
-
-<hr />
-
-<!-- lehrstühle-->
-@{
-    ok = false;
-    foreach (var item in Model)
-    {
-
-        if (ok == false)
-        {
-            if (item.typ == "l")
-            {
-                ok = true;
             }
         }
     }
-}
 
-@{
-    if (ok)
     {
-        <h3>Gefundene Lehrstühle:</h3>
-        <br />
-        <table class="table">
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Bezeichnung
-                </th>
-                <th>
-                    Verantwortlicher
-                </th>
-            </tr>
+        if (ok)
+        {
+            <h3>Gefundene Gruppen:</h3>
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Bezeichnung
+                    </th>
+                    <th>
+                        Verantwortlicher
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
 
 
-            @foreach (var item in Model)
+                    if (item.typ == "g")
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.entityid)
+
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Index", "Gruppeneintraege", new { gruppenid = item.entityid }, null)">
+                                    @Html.DisplayFor(modelItem => item.field1)
+                                </a>
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field2)
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </table>
+            <br /><br />
+
+        }
+        else
+        {
+            <h3>Es wurden keine Gruppen gefunden, die Ihren Suchbegriff beinhalten.</h3>
+        }
+    }
+
+    <hr />
+
+    <!-- lehrstühle-->
+    {
+        ok = false;
+        foreach (var item in Model)
+        {
+
+            if (ok == false)
             {
                 if (item.typ == "l")
                 {
-                    <tr>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.entityid)
-
-                        </td>
-                        <td>
-                            <a href="@Url.Action("Index", "Lehrstuhleintraege", new { lehrstuhlid = item.entityid }, null)">
-                                @Html.DisplayFor(modelItem => item.field1)
-                            </a>
-
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field2)
-                        </td>
-                    </tr>
+                    ok = true;
                 }
-            }
-
-        </table>
-        <br /><br />
-
-    }
-    else
-    {
-        <h3>Es wurden keine Lehrstühle gefunden, die Ihren Suchbegriff beinhalten.</h3>
-    }
-}
-
-<hr />
-
-<!-- Gruppeneinträge -->
-@{
-    ok = false;
-    foreach (var item in Model)
-    {
-
-        if (ok == false)
-        {
-            if (item.typ == "ge")
-            {
-                ok = true;
             }
         }
     }
-}
 
-@{
-    if (ok)
     {
-        <h3>Gefundene Gruppeneinträge: </h3>
-        <br />
-        <table class="table">
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Inhalt
-                </th>
-                <th>
-                    Autor
-                </th>
-                <th>
-                    Datum
-                </th>
+        if (ok)
+        {
+            <h3>Gefundene Lehrstühle:</h3>
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Bezeichnung
+                    </th>
+                    <th>
+                        Verantwortlicher
+                    </th>
+                </tr>
 
-            </tr>
 
-            @foreach (var item in Model)
+                @foreach (var item in Model)
+                {
+                    if (item.typ == "l")
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.entityid)
+
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Index", "Lehrstuhleintraege", new { lehrstuhlid = item.entityid }, null)">
+                                    @Html.DisplayFor(modelItem => item.field1)
+                                </a>
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field2)
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </table>
+            <br /><br />
+
+        }
+        else
+        {
+            <h3>Es wurden keine Lehrstühle gefunden, die Ihren Suchbegriff beinhalten.</h3>
+        }
+    }
+
+    <hr />
+
+    <!-- Gruppeneinträge -->
+    {
+        ok = false;
+        foreach (var item in Model)
+        {
+
+            if (ok == false)
             {
                 if (item.typ == "ge")
                 {
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Index", "Gruppeneintraege", new { gruppenid = item.entityid }, null)">
-                                @Html.DisplayFor(modelItem => item.entityid)
-                            </a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field1)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field2)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field3)
-                        </td>
-                    </tr>
+                    ok = true;
                 }
-            }
-        </table>
-        <br /><br />
-
-    }
-    else
-    {
-        <h3>Es wurden keine Gruppeneinträge gefunden, die Ihren Suchbegriff beinhalten.</h3>
-    }
-}
-
-<hr />
-
-<!-- Lehrstuhleinträge -->
-@{
-    ok = false;
-    foreach (var item in Model)
-    {
-
-        if (ok == false)
-        {
-            if (item.typ == "le")
-            {
-                ok = true;
             }
         }
     }
-}
 
-@{
-    if (ok)
     {
-        <h3>Gefundene Lehrstuhleinträge: </h3>
-        <br />
-        <table class="table">
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Inhalt
-                </th>
-                <th>
-                    Autor
-                </th>
-                <th>
-                    Datum
-                </th>
-            </tr>
+        if (ok)
+        {
+            <h3>Gefundene Gruppeneinträge: </h3>
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Inhalt
+                    </th>
+                    <th>
+                        Autor
+                    </th>
+                    <th>
+                        Datum
+                    </th>
 
-            @foreach (var item in Model)
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.typ == "ge")
+                    {
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Index", "Gruppeneintraege", new { gruppenid = item.entityid }, null)">
+                                    @Html.DisplayFor(modelItem => item.entityid)
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field1)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field2)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field3)
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+            <br /><br />
+
+        }
+        else
+        {
+            <h3>Es wurden keine Gruppeneinträge gefunden, die Ihren Suchbegriff beinhalten.</h3>
+        }
+    }
+
+    <hr />
+
+    <!-- Lehrstuhleinträge -->
+    {
+        ok = false;
+        foreach (var item in Model)
+        {
+
+            if (ok == false)
             {
                 if (item.typ == "le")
                 {
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Index", "Lehrstuhleintraege", new { lehrstuhlid = item.entityid }, null)">
-                                @Html.DisplayFor(modelItem => item.entityid)
-                            </a>
-
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field1)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field2)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field3)
-                        </td>
-                    </tr>
+                    ok = true;
                 }
-            }
-        </table>
-        <br /><br />
-
-    }
-    else
-    {
-        <h3>Es wurden keine Lehrstuhleinträge gefunden, die Ihren Suchbegriff beinhalten.</h3>
-    }
-}
-
-<hr />
-
-<!-- Personen -->
-@{
-    ok = false;
-    foreach (var item in Model)
-    {
-
-        if (ok == false)
-        {
-            if (item.typ == "p")
-            {
-                ok = true;
             }
         }
     }
-}
 
-@{
-    if (ok)
     {
-        <h3>Gefundene Personen: </h3>
-        <br />
-        <table class="table">
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Rolle
-                </th>
-                <th>
-                    E-Mail
-                </th>
-            </tr>
+        if (ok)
+        {
+            <h3>Gefundene Lehrstuhleinträge: </h3>
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Inhalt
+                    </th>
+                    <th>
+                        Autor
+                    </th>
+                    <th>
+                        Datum
+                    </th>
+                </tr>
 
-            @foreach (var item in Model)
+                @foreach (var item in Model)
+                {
+                    if (item.typ == "le")
+                    {
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Index", "Lehrstuhleintraege", new { lehrstuhlid = item.entityid }, null)">
+                                    @Html.DisplayFor(modelItem => item.entityid)
+                                </a>
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field1)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field2)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field3)
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+            <br /><br />
+
+        }
+        else
+        {
+            <h3>Es wurden keine Lehrstuhleinträge gefunden, die Ihren Suchbegriff beinhalten.</h3>
+        }
+    }
+
+    <hr />
+
+    <!-- Personen -->
+    {
+        ok = false;
+        foreach (var item in Model)
+        {
+
+            if (ok == false)
             {
                 if (item.typ == "p")
                 {
-                    <tr>
-                        <td>
-                            <a href="@Url.Action("Details", "Person", new { id = item.field4 }, null)">
-                                @Html.DisplayFor(model => item.field1)
-                            </a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field2)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.field3)
-                        </td>
+                    ok = true;
+                }
+            }
+        }
+    }
 
-                    </tr>
+    {
+        if (ok)
+        {
+            <h3>Gefundene Personen: </h3>
+            <br />
+            <table class="table">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Rolle
+                    </th>
+                    <th>
+                        E-Mail
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    if (item.typ == "p")
+                    {
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("Details", "Person", new { id = item.field4 }, null)">
+                                    @Html.DisplayFor(model => item.field1)
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field2)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.field3)
+                            </td>
+
+                        </tr>
+                    }
+
+
+
                 }
 
+            </table>
 
+            <br /><br />
 
-            }
-
-        </table>
-
-        <br /><br />
-
+        }
+        else
+        {
+            <h3>Es wurden keine Personen gefunden, die Ihren Suchbegriff beinhalten.</h3>
+        }
     }
-    else
-    {
-        <h3>Es wurden keine Personen gefunden, die Ihren Suchbegriff beinhalten.</h3>
-    }
+
+
+
+    <input type="button" value="Zurück" onclick="window.history.back()" />
+
 }
-
-
-
-<input type="button" value="Zurück" onclick="window.history.back()" />
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

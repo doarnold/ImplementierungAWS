@@ -1,4 +1,10 @@
-﻿@Styles.Render("~/Content/css")
+﻿<!--
+
+Wird diese Seite Überhaupt noch benötigt?
+
+-->
+
+@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Administration";
 }
@@ -12,15 +18,11 @@
     <div id="administration">
 
         <h2>Nutzerverwaltung</h2>
-        <li>@Html.ActionLink("Personen (Profile, Zuorndung ASP.NET User, ...)", "Index", "Person")</li>
-        <li>@Html.ActionLink("ASP.NET User (E-Mail Adresse, ...)", "Index", "AspNetUsers")</li>
-
+        <ul>
+            <li>@Html.ActionLink("Personen (Profile, Zuorndung ASP.NET User, ...)", "Index", "Person")</li>
+            <li>@Html.ActionLink("ASP.NET User (E-Mail Adresse, ...)", "Index", "AspNetUsers")</li>
+        </ul>
     </div>
-
-
-
-
-
 
     /*<h3>Seitenverwaltung - Lehrstühle</h3>
     <li>@Html.ActionLink("Lehrstühle", "Index", "Lehrstuhl")</li>
@@ -32,4 +34,8 @@
     <li>@Html.ActionLink("Mitglieder Gruppen", "Index", "MitgliederGruppe")</li>
     <li>@Html.ActionLink("Gruppeneinträge", "Index", "GruppenEintraege")</li> */
 
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
 }

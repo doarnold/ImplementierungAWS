@@ -8,6 +8,8 @@
 @Styles.Render("~/Content/css")
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+@if (Request.IsAuthenticated)
+    {
 
 <br />
 <div id="ListHeader">
@@ -24,109 +26,110 @@
                 @Html.ActionLink("Zu den Gruppen", "Index", "Gruppe")
             </p>
         </div>
-        </div>
     </div>
+</div>
 
-    <br />
+<br />
 
-    @{ var zuordnung = ViewBag.zuordnung; }
+{ var zuordnung = ViewBag.zuordnung; }
 
-    <div id="ListContainer">
-        <table class="table">
-            <tr>
-                <th>
-                    Bezeichnung
-                </th>
-                <th>
-                    Beschreibung
-                </th>
-                <th>
-                    Verantwortlicher
-                </th>
-                <th>
-                    
-                </th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
+<div id="ListContainer">
+    <table class="table">
         <tr>
-            <td>
-                @{
+            <th>
+                Bezeichnung
+            </th>
+            <th>
+                Beschreibung
+            </th>
+            <th>
+                Verantwortlicher
+            </th>
+            <th>
 
-                    if (item.typ == "g")
-                    {
-                        <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
-                            @Html.DisplayFor(modelItem => item.bezeichnung)
-                        </a>
+            </th>
+        </tr>
 
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
-                            @Html.DisplayFor(modelItem => item.bezeichnung)
-                        </a>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
 
-          
-                    }
-                }
-
-
-
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.beschreibung)
-            </td>
-            <td>
-                @{
-                    if (zuordnung != null)
-                    {
-                        foreach (var person in zuordnung)
+                        if (item.typ == "g")
                         {
-                            if (person.name == item.verantwortlicher)
-                            {
-                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                    @Html.DisplayFor(model => item.verantwortlicher)
-                                </a>
-                                break;
-                            }
+                            <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
+                                @Html.DisplayFor(modelItem => item.bezeichnung)
+                            </a>
+
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
+                                @Html.DisplayFor(modelItem => item.bezeichnung)
+                            </a>
+
+
                         }
                     }
 
-                }
-            </td>
 
 
-            <td>
-                @{
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.beschreibung)
+                </td>
+                <td>
+                    @{
+                        if (zuordnung != null)
+                        {
+                            foreach (var person in zuordnung)
+                            {
+                                if (person.name == item.verantwortlicher)
+                                {
+                                    <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                        @Html.DisplayFor(model => item.verantwortlicher)
+                                    </a>
+                                    break;
+                                }
+                            }
+                        }
 
-                    if (item.typ == "g")
-                    {
-       
-                        <a href="@Url.Action("Austreten", "MitgliederGruppe", new { gruppenid = item.id}, null )" class="btn btn-primary" title="Austreten">
-                            <i class='fa fa-thumbs-down'></i>
-                        </a>
                     }
-                    else
-                    {
-        
+                </td>
 
-                        <a href="@Url.Action("Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.id }, null )" class="btn btn-primary" title="Deabonieren">
-                            <i class='fa fa-thumbs-down'></i>
-                        </a>
+
+                <td>
+                    @{
+
+                        if (item.typ == "g")
+                        {
+                            <a href="@Url.Action("Austreten", "MitgliederGruppe", new { gruppenid = item.id}, null )" class="btn btn-primary" title="Austreten">
+                                <i class='fa fa-thumbs-down'></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.id }, null )" class="btn btn-primary" title="Deabonieren">
+                                <i class='fa fa-thumbs-down'></i>
+                            </a>
+                        }
                     }
-                }
 
 
 
-            </td>
+                </td>
 
-        </tr>
-            }
-
-
-
-        </table>
+            </tr>
+        }
 
 
-    </div>
+
+    </table>
+
+
+</div>
+
+} else {
+Response.Redirect("/Error/NotLoggedIn");
+}
