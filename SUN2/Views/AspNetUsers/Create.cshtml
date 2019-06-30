@@ -6,9 +6,9 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm())
+@if (Request.IsAuthenticated)
 {
-    if (Request.IsAuthenticated)
+    using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
@@ -133,6 +133,8 @@
         </div>
 
     }
-}   else {
-    Redirect.
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
 }
