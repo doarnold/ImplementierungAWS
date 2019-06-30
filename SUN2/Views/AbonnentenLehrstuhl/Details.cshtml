@@ -4,23 +4,29 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (Request.IsAuthenticated)
+{
+    @Html.AntiForgeryToken()
 
-<div>
-    <h4>AbonnentenLehrstuhl</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.lehrstuhlid)
-        </dt>
+    <h2>Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.lehrstuhlid)
-        </dd>
+    <div>
+        <h4>AbonnentenLehrstuhl</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.lehrstuhlid)
+            </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.userid }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dd>
+                @Html.DisplayFor(model => model.lehrstuhlid)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.userid }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+}
