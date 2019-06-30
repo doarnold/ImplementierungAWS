@@ -8,7 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @using Microsoft.AspNet.Identity
- 
+
 
 
 </head>
@@ -49,10 +49,10 @@
 
 
                     <!--
-        Hier wird geprüft, ob der User angemeldet ist.
-    Alles was innerhalb der if-Abfrage steht wird erst angezeigt,
-    wenn der User angemeldet ist.
-    -->
+                        Hier wird geprüft, ob der User angemeldet ist.
+                    Alles was innerhalb der if-Abfrage steht wird erst angezeigt,
+                    wenn der User angemeldet ist.
+                    -->
                     @if (Request.IsAuthenticated)
                     {
                         @Html.AntiForgeryToken()
@@ -81,18 +81,16 @@
 
                         </li>
 
-                        <li class="nav-item">
+                        @*<li class="nav-item">*@
                         <li id="Lupe" class="fas fa-search" onclick="search()">
 
                         </li>
 
-
-                        </li>
- 
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
+            }
 
 
         </div>
@@ -110,9 +108,10 @@
     @RenderSection("scripts", required: false)
 </body>
 
+
 <script>
     function search() {
- 
+
         var s = document.getElementById("suche").value;
 
         window.location.href = '/Home/Search?searchstr=' + s;
@@ -120,11 +119,7 @@
     }
 </script>
 
-
-</html>
-
-
-
+</hmtl>
 
 
 
