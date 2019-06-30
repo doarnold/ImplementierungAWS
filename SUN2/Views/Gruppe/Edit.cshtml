@@ -4,10 +4,13 @@
     ViewBag.Title = "Edit";
 }
 
+@if (Request.IsAuthenticated)
+{
+
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
+    using (Html.BeginForm())
+    {
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(model => model.gruppenid)
@@ -50,8 +53,14 @@
             </div>
         </div>
     </div>
-}
+    }
 
 <div>
     @Html.ActionLink("Zurück", "Index")
 </div>
+
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

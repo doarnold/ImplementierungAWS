@@ -5,22 +5,26 @@
 }
 
 
+@if (Request.IsAuthenticated)
+{
 
-<h3>Möchten Sie die Gruppe " @Html.DisplayFor(model => model.bezeichnung) " wirklich löschen?</h3>
-<div>
-   
-    <hr />
-    <dl class="dl-horizontal">
+    <h3>Möchten Sie die Gruppe " @Html.DisplayFor(model => model.bezeichnung) " wirklich löschen?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal"></dl>
 
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Gruppe löschen" class="btn btn-default" /> 
-            @Html.ActionLink("Zurück", "Index")
-        </div>
-    }
-</div>
+            <div class="form-actions no-color">
+                <input type="submit" value="Gruppe löschen" class="btn btn-default" />
+                @Html.ActionLink("Zurück", "Index")
+            </div>
+        }
+    </div>
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

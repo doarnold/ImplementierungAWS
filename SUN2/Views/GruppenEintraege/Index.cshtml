@@ -8,10 +8,8 @@
 @Styles.Render("~/Content/css")
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-
-
-
-@{
+@if (Request.IsAuthenticated)
+{
     var zuordnung = ViewBag.zuordnung;
     var bezeichnung = ViewBag.bezeichnung;
     var counter = 0;
@@ -34,8 +32,6 @@
             <div id="GruppenPlatzhalter"></div>
             counter++;
         }
-
-
 
         <div id="GruppenBeitragGesamt">
 
@@ -102,7 +98,7 @@
                 @if (item.label1 != null && item.label1 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1}, null)">#@item.label1</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1 }, null)">#@item.label1</a>
 
                 }
                 else
@@ -112,45 +108,42 @@
                 @if (item.label2 != null && item.label2 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2}, null)">#@item.label2</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2 }, null)">#@item.label2</a>
                 }
                 @if (item.label3 != null && item.label3 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3}, null)">#@item.label3</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3 }, null)">#@item.label3</a>
                 }
                 @if (item.label4 != null && item.label4 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4}, null)">#@item.label4</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4 }, null)">#@item.label4</a>
                 }
                 @if (item.label5 != null && item.label5 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5}, null)">#@item.label5</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5 }, null)">#@item.label5</a>
                 }
             </div>
 
-
-
             <div id="GruppenPlatzhalter"></div>
 
-
         </div>
-
-
-
-
-
     }
+
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="button" value="Zurück" onclick="window.history.back()" />
+        </div>
+        <div class="col-md-2">
+            @Html.ActionLink("Alle Gruppen", "Index", "Gruppe")
+        </div>
+    </div>
+
 }
-
-
-<div class="form-group">
-    <div class="col-md-10">
-        <input type="button" value="Zurück" onclick="window.history.back()" />
-    </div>
-    <div class="col-md-2">
-        @Html.ActionLink("Alle Gruppen", "Index", "Gruppe")
-    </div>
-</div>
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

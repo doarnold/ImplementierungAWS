@@ -4,35 +4,37 @@
     ViewBag.Title = "Delete";
 }
 
+@if (Request.IsAuthenticated)
+{
+    <h3>Möchten Sie wirklich diesen Eintrag löschen?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
 
+            <dt>
+                @Html.DisplayNameFor(model => model.inhalt)
+            </dt>
 
-<h3>Möchten Sie wirklich diesen Eintrag löschen?</h3>
-<div>
-    <hr />
-    <dl class="dl-horizontal">
+            <dd>
+                @Html.DisplayFor(model => model.inhalt)
+            </dd>
 
+        </dl>
 
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
+            <div class="form-actions no-color">
+                <input type="submit" value="Löschen" class="btn btn-default" /> |
+                <input type="button" value="Zurück" onclick="window.history.back()" />
+                @Html.ActionLink("Alle Einträge", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, null)
+            </div>
+        }
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.inhalt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.inhalt)
-        </dd>
-
-
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-<div class="form-actions no-color">
-    <input type="submit" value="Löschen" class="btn btn-default" /> |
-    <input type="button" value="Zurück" onclick="window.history.back()" />
-    @Html.ActionLink("Alle Einträge", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, null)
-</div>
-    }
-</div>
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

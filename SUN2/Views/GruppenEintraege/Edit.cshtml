@@ -6,10 +6,13 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@if (Request.IsAuthenticated)
 {
+
+    using (Html.BeginForm())
+    {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
     <h4>Gruppen Eintraege</h4>
     <hr />
@@ -73,9 +76,15 @@
         </div>
     </div>
 </div>
-}
+    }
 
 <div>
     <input type="button" value="Zurück" onclick="window.history.back()" />
     @Html.ActionLink("Alle Einträge", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, null)
 </div>
+
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

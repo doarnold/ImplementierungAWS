@@ -1,6 +1,5 @@
-﻿
-<!--
-    
+﻿<!--
+
     Diese View wird nicht verwendet.
     Alle Details stehen auf der Index-Seite.
 
@@ -17,47 +16,55 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (Request.IsAuthenticated)
+{
+    <h2>Details</h2>
 
-<div>
-    <h4>Gruppe</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.bezeichnung)
-        </dt>
+    <div>
+        <h4>Gruppe</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.bezeichnung)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.bezeichnung)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.bezeichnung)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.beschreibung)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.beschreibung)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.beschreibung)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.beschreibung)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.verantwortlicher)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.verantwortlicher)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.verantwortlicher)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.verantwortlicher)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.privat)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.privat)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.privat)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.privat)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.gruppenid }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.gruppenid }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}
