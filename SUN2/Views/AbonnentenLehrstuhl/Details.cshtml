@@ -28,5 +28,7 @@
         @Html.ActionLink("Edit", "Edit", new { id = Model.userid }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
-
+} else
+{
+    Response.Redirect("/Error/NotLoggedIn");
 }

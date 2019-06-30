@@ -9,7 +9,6 @@
 
 @using (Html.BeginForm())
 {
-
     if (Request.IsAuthenticated)
     {
         @Html.AntiForgeryToken()
@@ -44,4 +43,8 @@
         }
     }
 
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
 }
