@@ -1,14 +1,11 @@
-﻿
-<!-- 
-    
+﻿<!--
+
     Diese View wird nicht verwendet, da die Details in der Index View angezeigt werden.
-    
+
     Bitte drinlassen!
-    
+
 
 -->
-
-
 
 @model SUN2.Models.Lehrstuhl
 
@@ -16,40 +13,49 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (Request.IsAuthenticated)
+{
 
-<div>
-    <h4>Lehrstuhl</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.bezeichnung)
-        </dt>
+    <h2>Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.bezeichnung)
-        </dd>
+    <div>
+        <h4>Lehrstuhl</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.bezeichnung)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.beschreibung)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.bezeichnung)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.beschreibung)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.beschreibung)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.verantwortlicher)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.beschreibung)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.verantwortlicher)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.verantwortlicher)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.verantwortlicher)
+            </dd>
 
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.lehrstuhlid }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.lehrstuhlid }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

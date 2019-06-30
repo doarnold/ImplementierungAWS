@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
-
-@{
+@if (Request.IsAuthenticated)
+{
     var zuordnung = ViewBag.zuordnung;
     var bezeichnung = ViewBag.bezeichnung;
     var counter = 0;
@@ -54,11 +54,9 @@
                                 }
                             }
                         }
-
-
-
                     }
                 </div>
+
                 <br />
                 <br />
 
@@ -67,29 +65,27 @@
 
                 <div id="GruppenEdit">
 
-
-
                     @{
 
-                            var lverant = ViewBag.verantwortlich;
-                            var laut = ViewBag.autor;
+                        var lverant = ViewBag.verantwortlich;
+                        var laut = ViewBag.autor;
 
-                            if (lverant[item.lehrstuhlid] == true || laut[item.id] == true || User.IsInRole("Admin"))
-                            {
+                        if (lverant[item.lehrstuhlid] == true || laut[item.id] == true || User.IsInRole("Admin"))
+                        {
 
 
-                                <a href="@Url.Action("Edit", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Bearbeiten">
-                                    <i class='fas fa-edit'></i>
-                                </a>
-                                <a href="@Url.Action("Delete", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Löschen">
-                                    <i class='fas fa-trash-alt'></i>
-                                </a>
-                            }
-
-                            <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Lehrstuhl">
-                                <i class='fa fa-users'></i>
+                            <a href="@Url.Action("Edit", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Bearbeiten">
+                                <i class='fas fa-edit'></i>
                             </a>
-                        
+                            <a href="@Url.Action("Delete", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Löschen">
+                                <i class='fas fa-trash-alt'></i>
+                            </a>
+                        }
+
+                        <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Lehrstuhl">
+                            <i class='fa fa-users'></i>
+                        </a>
+
                     }
 
                 </div>
@@ -100,17 +96,11 @@
                 @Html.DisplayFor(modelItem => item.inhalt)
             </div>
 
-
-
             <div id="GruppenLabelsRahmen">
-
-
-
-
                 @if (item.label1 != null && item.label1 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1}, null)">#@item.label1</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1 }, null)">#@item.label1</a>
 
                 }
                 else
@@ -120,46 +110,43 @@
                 @if (item.label2 != null && item.label2 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2}, null)">#@item.label2</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2 }, null)">#@item.label2</a>
                 }
                 @if (item.label3 != null && item.label3 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3}, null)">#@item.label3</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3 }, null)">#@item.label3</a>
                 }
                 @if (item.label4 != null && item.label4 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4}, null)">#@item.label4</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4 }, null)">#@item.label4</a>
                 }
                 @if (item.label5 != null && item.label5 != "")
                 {
 
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5}, null)">#@item.label5</a>
+                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5 }, null)">#@item.label5</a>
                 }
 
             </div>
 
-
-
             @*<div id="GruppenPlatzhalter"></div>*@
 
-
         </div>
-
-
-
-
-
     }
-}
 
-<hr />
-<div class="form-group">
-    <div class="col-md-10">
-        <input type="button" value="Zurück" onclick="window.history.back()" />
+    <hr />
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="button" value="Zurück" onclick="window.history.back()" />
+        </div>
+        <div class="col-md-2">
+            @Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")
+        </div>
     </div>
-    <div class="col-md-2">
-        @Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")
-    </div>
-</div>
+
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

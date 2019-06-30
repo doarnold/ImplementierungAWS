@@ -4,24 +4,28 @@
     ViewBag.Title = "Delete";
 }
 
-
-
+@if (Request.IsAuthenticated)
+{
     <h3>Möchten Sie wirklich den Lehrstuhl "@Html.DisplayFor(model => model.bezeichnung)" löschen?</h3>
-<div>
 
-    <hr />
-    <dl class="dl-horizontal">
+    <div>
+        <hr />
+        <dl class="dl-horizontal"></dl>
 
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    </dl>
+            <div class="form-actions no-color">
+                <input type="submit" value="Löschen" class="btn btn-default" /> |
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Löschen" class="btn btn-default" /> |
-
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
-</div>
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

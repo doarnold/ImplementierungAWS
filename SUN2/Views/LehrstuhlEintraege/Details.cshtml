@@ -1,6 +1,5 @@
-﻿
-<!--
-    
+﻿<!--
+
     Diese View wird zurzeit nicht verwendet, da die Details in der Index View angezeigt werden
 
     Bitte drinlassen!
@@ -16,87 +15,97 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (Request.IsAuthenticated)
+{
 
-<div>
-    <h4>LehrstuhlEintraege</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.lehrstuhlid)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.lehrstuhlid)
-        </dd>
+    <h2>Details</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.datum)
-        </dt>
+    <div>
+        <h4>LehrstuhlEintraege</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.lehrstuhlid)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.datum)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.lehrstuhlid)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.autor)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.datum)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.autor)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.datum)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.inhalt)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.autor)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.inhalt)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.autor)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.label1)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.inhalt)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.label1)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.inhalt)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.label2)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.label1)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.label2)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.label1)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.label3)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.label2)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.label3)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.label2)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.label4)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.label3)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.label4)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.label3)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.label5)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.label4)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.label5)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.label4)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dt>
+                @Html.DisplayNameFor(model => model.label5)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.label5)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

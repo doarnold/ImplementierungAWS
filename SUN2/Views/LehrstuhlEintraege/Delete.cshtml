@@ -4,36 +4,39 @@
     ViewBag.Title = "Lehrstuhleintrag löschen";
 }
 
+@if (Request.IsAuthenticated)
+{
 
-<h3>Möchten Sie diesen Lehrstuhleintrag wirklich löschen?</h3>
-<div>
-
-    <hr />
-    <dl class="dl-horizontal">
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.inhalt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.inhalt)
-        </dd>
-
-
-
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-<div class="form-actions no-color">
-    <input type="submit" value="Löschen" class="btn btn-default" /> |
+    <h3>Möchten Sie diesen Lehrstuhleintrag wirklich löschen?</h3>
     <div>
-        <input type="button" value="Zurück" onclick="window.history.back()" />
-        @Html.ActionLink("Alle Einträge", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null)
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.inhalt)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.inhalt)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Löschen" class="btn btn-default" /> |
+                <div>
+                    <input type="button" value="Zurück" onclick="window.history.back()" />
+                    @Html.ActionLink("Alle Einträge", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null)
+                </div>
+            </div>
+        }
     </div>
-</div>
-    }
-</div>
+
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}
