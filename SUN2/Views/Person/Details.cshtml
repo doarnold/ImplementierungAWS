@@ -4,95 +4,103 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Profil von @Html.DisplayFor(model => model.vorname) @Html.DisplayFor(model => model.name)</h2>
+@if (Request.IsAuthenticated)
+{
 
-<div>
+    <h2>Profil von @Html.DisplayFor(model => model.vorname) @Html.DisplayFor(model => model.name)</h2>
 
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+    <div>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.vorname)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.vorname)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.vorname)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.persinfos)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.vorname)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.persinfos)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.persinfos)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.matnr)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.persinfos)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.matnr)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.matnr)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.hsemester)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.matnr)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.hsemester)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.hsemester)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fsemester)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.hsemester)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.fsemester)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.fsemester)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.studienbeginn)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.fsemester)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.studienbeginn)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.studienbeginn)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.studiengang)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.studienbeginn)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.studiengang)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.studiengang)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.studienfach)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.studiengang)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.studienfach)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.studienfach)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.studienfach)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUsers.Email)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            </dt>
 
-    </dl>
-</div>
-<p>
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUsers.Email)
+            </dd>
 
-    <input type="button" value="Zurück" onclick="window.history.back()" />
-</p>
+        </dl>
+    </div>
+    <p>
+        <input type="button" value="Zurück" onclick="window.history.back()" />
+    </p>
+
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

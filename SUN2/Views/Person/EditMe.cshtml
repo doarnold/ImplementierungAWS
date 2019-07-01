@@ -2,168 +2,173 @@
 @Styles.Render("~/Content/css")
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+@if (Request.IsAuthenticated)
+{
+
+    <div id="defaultInput-box">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
 
-<div id="defaultInput-box">
-    @using (Html.BeginForm())
+            <div class="header"><h2>Mein Profil bearbeiten</h2></div>
+
+            <p id="defaultLabel">
+                Beschreibe dich selbst.
+            </p>
+            @Html.TextAreaFor(model => model.persinfos, new { htmlAttributes = new { @placeholder = "Beschreibe dich selbst.", @rows = 100, @cols = 200 } })
+
+            @Html.ValidationMessageFor(model => model.persinfos, "", new { @class = "text-danger" })
+
+            <hr />
+
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+
+            <label class="col-sm-3">Name:</label>
+
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @placeholder = "Name" } })
+                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+
+            </div>
+
+            <label class="col-sm-3">Vorname:</label>
+
+
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.vorname, new { htmlAttributes = new { @placeholder = "Vorname" } })
+                @Html.ValidationMessageFor(model => model.vorname, "", new { @class = "text-danger" })
+
+            </div>
+
+            <label class="col-sm-3">Matrikelnummer:</label>
+
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.matnr, new { htmlAttributes = new { @id = "editor", @placeholder = "Matrikel-Nr." } })
+                @Html.ValidationMessageFor(model => model.matnr, "", new { @class = "text-danger" })
+            </div>
+
+
+            <br />
+            <label class="col-sm-3">Hochschulsemester:</label>
+
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.hsemester, new { htmlAttributes = new { @id = "editor", @placeholder = "Hochschulsemster" } })
+                @Html.ValidationMessageFor(model => model.hsemester, "", new { @class = "text-danger" })
+
+            </div>
+
+            <br />
+            <label class="col-sm-3">Fachsemester:</label>
+
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.fsemester, new { htmlAttributes = new { @id = "editor", @placeholder = "Fachsemster" } })
+                @Html.ValidationMessageFor(model => model.fsemester, "", new { @class = "text-danger" })
+
+            </div>
+
+            <br />
+            <label class="col-sm-3">Studienbeginn:</label>
+
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.studienbeginn, new { htmlAttributes = new { @id = "editor", @placeholder = "Studienbeginn" } })
+            </div>
+
+            <br />
+            @*<label class="col-sm-3"></label>
+                <div class="col-sm-9">
+                    @Html.DropDownListFor(
+                    model => model.studienbeginn,
+                    new SelectList(new List<Object>
+                    {
+                        new { value = 0 , text = "Wintersemester 2019"  },
+                        new { value = 1 , text = "Sommersemester 2019" },
+                        new { value = 2 , text = "Wintersemester 2018"}
+                        },
+                        "value",
+                        "text",
+                        Model.studienbeginn
+                        )
+                        )
+                </div>*@
+
+            <label class="col-sm-3">Studiengang:</label>
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.studiengang, new { htmlAttributes = new { @placeholder = "Studiengang" } })
+                @Html.ValidationMessageFor(model => model.studiengang, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="col-sm-3">Studienfach:</label>
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.studienfach, new { htmlAttributes = new { @placeholder = "Studienfach" } })
+                @Html.ValidationMessageFor(model => model.studienfach, "", new { @class = "text-danger" })
+            </div>
+
+
+            <input id="submitButton" type="submit" value="Save" class="button">
+        }
+    </div>
+
+
+    if (ViewBag.Message != null)
     {
-        @Html.AntiForgeryToken()
+        <span>@ViewBag.Message</span>
+    }
+
+    <div>
+        @Html.ActionLink("Zum Newsfeed", "Index", "Home")
+    </div>
 
 
-        <div class="header"><h2>Mein Profil bearbeiten</h2></div>
-
-        <p id="defaultLabel">
-            Beschreibe dich selbst.
-        </p>
-        @Html.TextAreaFor(model => model.persinfos, new { htmlAttributes = new { @placeholder = "Beschreibe dich selbst.", @rows = 100, @cols = 200 } })
-
-        @Html.ValidationMessageFor(model => model.persinfos, "", new { @class = "text-danger" })
-
-        <hr />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
 
 
-
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
-
-        <label class="col-sm-3">Name:</label>
-
-        <div class="col-sm-9">
-            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @placeholder = "Name" } })
-            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-
-        </div>
-
-        <label class="col-sm-3">Vorname:</label>
+        $(document).ready(function () {
+            $("#submitButton").click(function () {
+                alert("Ihre persönlichen Daten wurden erfolgreich aktualisiert.");
+            });
+        });
 
 
-        <div class="col-sm-9">
-            @Html.EditorFor(model => model.vorname, new { htmlAttributes = new { @placeholder = "Vorname" } })
-            @Html.ValidationMessageFor(model => model.vorname, "", new { @class = "text-danger" })
 
-        </div>
+        //For auto resize Textarea
+        var textarea = document.querySelector('textarea');
+        textarea.addEventListener('keydown', autosize);
 
-        <label class="col-sm-3">Matrikelnummer:</label>
+        function autosize() {
+            var el = this;
+            setTimeout(function () {
+                el.style.cssText = 'height:auto; padding:0';
+                el.style.cssText = 'height:' + el.scrollHeight + 'px';
+            }, 0);
+        }
 
-        <div class="col-sm-9">
-            @Html.EditorFor(model => model.matnr, new { htmlAttributes = new { @id = "editor", @placeholder = "Matrikel-Nr." } })
-            @Html.ValidationMessageFor(model => model.matnr, "", new { @class = "text-danger" })
-        </div>
 
 
-        <br />
-        <label class="col-sm-3">Hochschulsemester:</label>
 
-        <div class="col-sm-9">
-            @Html.EditorFor(model => model.hsemester, new { htmlAttributes = new { @id = "editor", @placeholder = "Hochschulsemster" } })
-            @Html.ValidationMessageFor(model => model.hsemester, "", new { @class = "text-danger" })
 
-        </div>
 
-        <br />
-        <label class="col-sm-3">Fachsemester:</label>
 
-        <div class="col-sm-9">
-            @Html.EditorFor(model => model.fsemester, new { htmlAttributes = new { @id = "editor", @placeholder = "Fachsemster" } })
-            @Html.ValidationMessageFor(model => model.fsemester, "", new { @class = "text-danger" })
 
-        </div>
+    </script>
 
-        <br />
-        <label class="col-sm-3">Studienbeginn:</label>
 
-        <div class="col-sm-9">
-            @Html.EditorFor(model => model.studienbeginn, new { htmlAttributes = new { @id = "editor", @placeholder = "Studienbeginn" } })
-        </div>
 
-        <br />
-        @*<label class="col-sm-3"></label>
-        <div class="col-sm-9">
-            @Html.DropDownListFor(
-            model => model.studienbeginn,
-            new SelectList(new List<Object>
-            {
-                new { value = 0 , text = "Wintersemester 2019"  },
-                new { value = 1 , text = "Sommersemester 2019" },
-                new { value = 2 , text = "Wintersemester 2018"}
-                },
-                "value",
-                "text",
-                Model.studienbeginn
-                )
-                )
+
+    @*<div style="text-align: center">
+            @Html.ActionLink("Back to List", "Index")
         </div>*@
 
-        <label class="col-sm-3">Studiengang:</label>
-        <div class="col-sm-9">
-            @Html.EditorFor(model => model.studiengang, new { htmlAttributes = new { @placeholder = "Studiengang" } })
-            @Html.ValidationMessageFor(model => model.studiengang, "", new { @class = "text-danger" })
-        </div>
-
-        <label class="col-sm-3">Studienfach:</label>
-        <div class="col-sm-9">
-            @Html.EditorFor(model => model.studienfach, new { htmlAttributes = new { @placeholder = "Studienfach" } })
-            @Html.ValidationMessageFor(model => model.studienfach, "", new { @class = "text-danger" })
-        </div>
-
-
-        <input id ="submitButton" type="submit" value="Save" class="button">
-
-
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
     }
-</div>
-        @{
-            if (ViewBag.Message != null)
-            {
-                <span>@ViewBag.Message</span>
-            }
-        }
 
-        <div>
-            @Html.ActionLink("Zum Newsfeed", "Index", "Home")
-        </div>
-
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script>
-
-
-                $(document).ready(function(){
-                    $("#submitButton").click(function(){
-                    alert("Ihre persönlichen Daten wurden erfolgreich aktualisiert.");
-                    });
-                });
-
-
-
-                //For auto resize Textarea
-                var textarea = document.querySelector('textarea');
-                textarea.addEventListener('keydown', autosize);
-
-                function autosize() {
-                    var el = this;
-                    setTimeout(function () {
-                        el.style.cssText = 'height:auto; padding:0';
-                        el.style.cssText = 'height:' + el.scrollHeight + 'px';
-                    }, 0);
-                }
-
-            
-
-
-
-
-            
-
-        </script>
-
-
-
-
-        @*<div style="text-align: center">
-                @Html.ActionLink("Back to List", "Index")
-            </div>*@
-
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}
