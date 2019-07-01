@@ -4,10 +4,11 @@
     ViewBag.Title = "Neue Gruppe";
 }
 
-<h2>Neue Gruppe anlegen</h2>
-
 @if (Request.IsAuthenticated)
 {
+    <br />
+    <h2>Neue Gruppe anlegen</h2>
+
     using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()

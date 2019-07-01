@@ -69,7 +69,7 @@ namespace SUN2.Models
         [Display(Name = "Verantwortlicher")]
         public string verantwortlicher;
 
-        [Display(Name = "Private Gruppe?")]
+        [Display(Name = "Sichtbarkeit")]
         public Nullable<bool> privat;
     }
 
@@ -109,7 +109,7 @@ namespace SUN2.Models
         [Display(Name = "Verantwortlicher")]
         public string verantwortlicher;
 
-        [Display(Name = "Privat?")]
+        [Display(Name = "Sichtbarkeit")]
         public Nullable<bool> privat;
     }
 
