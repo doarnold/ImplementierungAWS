@@ -2,60 +2,52 @@
 
 @{
     ViewBag.Title = "Gruppenmitglieder";
+}
+
+@if (Request.IsAuthenticated)
+{
+
+    <h2>Alle Mitglieder der Gruppe</h2>
+
     var listtest = new List<string>();
-    foreach(var item in Model)
+    foreach (var item in Model)
     {
         listtest.Add(item.userid);
     }
 
     var zuordnung = ViewBag.zuordnung;
 
-}
-
-<h2>Alle Mitglieder der Gruppe</h2>
-
-
-<table class="table">
-
-       <br /><br />
-
-    @foreach (var item in Model)
-    {
-
-        var userid = item.userid;
-        <tr>
-            <th>
-                @{
-                    if (zuordnung != null)
-                    {
-                        foreach (var person in zuordnung)
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            var userid = item.userid;
+            <tr>
+                <th>
+                    @{
+                        if (zuordnung != null)
                         {
-                            if (person.name == item.userid)
+                            foreach (var person in zuordnung)
                             {
-
-                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null )">
-                                    @Html.DisplayFor(model => item.userid)
-
-                                </a>
-                                break;
+                                if (person.name == item.userid)
+                                {
+                                    <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                        @Html.DisplayFor(model => item.userid)
+                                    </a>
+                                    break;
+                                }
                             }
                         }
                     }
+                </th>
+                <td>
+                    @Html.ActionLink("Mitglied entfernen", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
 
-                }
+    </table>
 
-
-            </th>
-            <td>
-                @Html.ActionLink("Mitglied entfernen", "Delete", new { id = item.id })
-
-            </td>
-        </tr>
-    }
-
-</table>
-
-@{ if (Model.Count() != 0)
+    if (Model.Count() != 0)
     {
         var gruppenid = Model.First();
         @Html.ActionLink("Zurück", "Index", "Gruppe", new { gruppenid = gruppenid }, null)
@@ -64,6 +56,10 @@
     {
         @Html.ActionLink("Zurück", "Index", "Gruppe")
     }
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
 }
 
 

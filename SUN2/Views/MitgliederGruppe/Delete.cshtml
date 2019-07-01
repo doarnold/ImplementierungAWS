@@ -1,6 +1,5 @@
-﻿
-<!--
-    
+﻿<!--
+
     Diese View verwenden wir nur indirekt!
     Löschen funktioniert über ActionLink in der Index View.
 
@@ -15,30 +14,36 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+@if (Request.IsAuthenticated)
+{
+    <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>MitgliederGruppe</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.gruppenid)
-        </dt>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>MitgliederGruppe</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.gruppenid)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.gruppenid)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.gruppenid)
+            </dd>
 
-    </dl>
+        </dl>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-<div class="form-actions no-color">
-    <input type="submit" value="Delete" class="btn btn-default" /> |
-
- 
-</div>
-    }
-</div>
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+            </div>
+        }
+    </div>
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

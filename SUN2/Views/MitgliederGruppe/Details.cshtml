@@ -1,6 +1,5 @@
-﻿
-<!--
-    
+﻿<!--
+
 
     Diese View wird nicht verwendet.
     Bitte drinlassen!
@@ -15,23 +14,30 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+@if (Request.IsAuthenticated)
+{
+    <h2>Details</h2>
 
-<div>
-    <h4>MitgliederGruppe</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.gruppenid)
-        </dt>
+    <div>
+        <h4>MitgliederGruppe</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.gruppenid)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.gruppenid)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.gruppenid)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.userid }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.userid }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
+}

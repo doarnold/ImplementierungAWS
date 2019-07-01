@@ -6,11 +6,13 @@
 
 <h2>Edit</h2>
 
-
-@using (Html.BeginForm())
+@if (Request.IsAuthenticated)
 {
+
+    using (Html.BeginForm())
+    {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>MitgliederGruppe</h4>
         <hr />
@@ -31,7 +33,7 @@
             </div>
         </div>
     </div>
-}
+    }
 
 <div>
     @Html.ActionLink("Zurück", "Index", "Gruppe", new { gruppenid = gruppenid }, null)
@@ -39,4 +41,9 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}
+
+} else
+{
+    Response.Redirect("/Error/NotLoggedIn");
 }
