@@ -129,8 +129,6 @@
                                 </a>
                             }
 
-
-
                             <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Einträge Anzeigen">
                                 <i class='fa fa-list'></i>
                             </a>
@@ -147,7 +145,7 @@
                                     //@Html.ActionLink("deabonnieren", "Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
                                     aboexist = true;
 
-                                    <a href="@Url.Action("Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Deabonieren">
+                                    <a href="@Url.Action("Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Abo beenden">
                                         <i class='fa fa-thumbs-down'></i>
                                     </a>
                                 }
@@ -157,7 +155,7 @@
                             {
                                 // @Html.ActionLink("abonnieren", "Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null)
 
-                                <a href="@Url.Action("Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Abonieren">
+                                <a href="@Url.Action("Abo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.lehrstuhlid }, null )" class="btn btn-primary" title="Abonnieren">
                                     <i class='fa fa-thumbs-up'></i>
                                 </a>
                             }

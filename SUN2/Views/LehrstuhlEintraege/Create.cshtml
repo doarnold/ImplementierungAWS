@@ -7,6 +7,7 @@
 }
 @if (Request.IsAuthenticated)
 {
+    <br />
     <h2>Eintrag für Lehrstuhl erstellen</h2>
 
     using (Html.BeginForm())
@@ -18,7 +19,7 @@
         @Html.HiddenFor(model => model.lehrstuhlid)
 
         <div class="form-horizontal">
-            <h4>Bitte die Felder ausfüllen.</h4>
+            <h4>Bitte die Felder ausfüllen und anschließend auf Speichern drücken.</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -68,9 +69,5 @@
 }
 else
 {
-}
-else
-{
     Response.Redirect("/Error/NotLoggedIn");
-}
 }

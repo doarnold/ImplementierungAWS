@@ -4,54 +4,43 @@
     ViewBag.Title = "Lehrstuhlmitarbeiter";
 }
 
-<h2>Alle Mitarbeiter des Lehrstuhls</h2>
+@if (Request.IsAuthenticated)
+{
+    <h2>Alle Mitarbeiter des Lehrstuhls</h2>
+    <table class="table">
+        @*<br />
+            <br />*@
 
+        @{ var zuordnung = ViewBag.zuordnung; }
 
-<table class="table">
-    <br />
-    <br />
-
-    @{ var zuordnung = ViewBag.zuordnung;}
-
-    @foreach (var item in Model)
-    {
-
-        <tr>
-            <th>
-                @{
-
-
-                    if (zuordnung != null)
-                    {
-                        foreach (var person in zuordnung)
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @{
+                        if (zuordnung != null)
                         {
-                            if (person.name == item.userid)
+                            foreach (var person in zuordnung)
                             {
-
-                                <a href="@Url.Action("Details", "Person", new { id = person.id }, null )">
-                                    @Html.DisplayFor(model => item.userid)
-
-                                </a>
-                                break;
+                                if (person.name == item.userid)
+                                {
+                                    <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                        @Html.DisplayFor(model => item.userid)
+                                    </a>
+                                    break;
+                                }
                             }
                         }
-
-
                     }
-
-
-
                 </th>
-            <td>
-                @Html.ActionLink("Mitarbeiter entfernen", "Delete", new { id = item.id })
+                <td>
+                    @Html.ActionLink("Mitarbeiter entfernen", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </table>
 
-            </td>
-        </tr>
-    }
-
-</table>
-
-@{ if (Model.Count() != 0)
+    if (Model.Count() != 0)
     {
         var lehrstuhlid = Model.First();
         @Html.ActionLink("Zurück", "Index", "Lehrstuhl", new { lehrstuhlid = lehrstuhlid.lehrstuhlid }, null)
@@ -60,5 +49,9 @@
     {
         @Html.ActionLink("Zurück", "Index", "Lehrstuhl")
     }
+}
+else
+{
+    Response.Redirect("/Error/NotLoggedIn");
 }
 
