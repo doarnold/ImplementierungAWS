@@ -1,95 +1,64 @@
 ﻿@model SUN2.Models.Person
-
+@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Details";
 }
-
 @if (Request.IsAuthenticated)
 {
 
-    <h2>Profil von @Html.DisplayFor(model => model.vorname) @Html.DisplayFor(model => model.name)</h2>
 
-    <div>
+<div id="card">
+    <div id="details">
 
+
+        <div id="name" style="font-weight: bold">
+
+
+            @Html.DisplayFor(model => model.vorname)
+
+            @Html.DisplayFor(model => model.name)
+
+        </div>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.name)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.vorname)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.vorname)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.matnr)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.matnr)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.hsemester)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.hsemester)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.fsemester)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.fsemester)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.studienbeginn)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.studienbeginn)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.studiengang)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.studiengang)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.studienfach)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.studienfach)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AspNetUsers.Email)
-            </dd>
-
-        </dl>
+        <div id="matr">
+            <text> Martrikelnummer: </text>
+            @Html.DisplayFor(model => model.matnr)
+            <br />
+            <text>Hochschulsemester:</text>
+            @Html.DisplayFor(model => model.hsemester)
+            <br />
+            <text>Fachsemester:</text>
+            @Html.DisplayFor(model => model.fsemester)
+            <br />
+            <text>Studienbeginn:</text>
+            @Html.DisplayFor(model => model.studienbeginn)
+            <br />
+            <text>Studiengang:</text>
+            @Html.DisplayFor(model => model.studiengang)
+            <br />
+            <text>Studienfach:</text>
+            @Html.DisplayFor(model => model.studienfach)
+            <br />
+            <text>E-Mail:</text>
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
+        </div>
     </div>
-    <p>
-        <input type="button" value="Zurück" onclick="window.history.back()" />
-    </p>
+
+
+
+    <div id="avatar">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgRBhARDw4SDw8QEBAQDg4TCg8PEg8OFREWFhURExUYHCggGBolGxMWITEhJSkrLi4uFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALgAuAMBIgACEQEDEQH/xAAaAAEBAQEBAQEAAAAAAAAAAAAAAQQDAgUH/8QAKxABAAEDAQYFBAMAAAAAAAAAAAECAwQRITFBUWGBEiNxkbEFEyLxMpLR/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AP3EQBRAFEAUQBRAFEAUQBRAFEAUQBRAFEAQQBRAFEAUQBRAFEAUQBRAFEAUQBRAFEAQAAAAAAAANWHIzuFH9v8AAbpmIjbOndynJs6/yh8mqqqZ1mdZQH2qLlE7pie70+G60ZN6I2VT8g+uMmLlzVVpVv4TzawAAAAAAAQAQBRAFEAURxyrvhszznZAM2bkaz4Y3Rv6yyAAAAABEt+LlzM+Grfwnn0lgAfbHLHueKzE8ePq6AogCiAKIoPIAAAAADD9Qq8yI5R8/pufOz48/tAM4AAAAAAAPo4E+R3locMSnSxHXa7gAAAAKgCCAKIAogCsf1CI/GeO2NOjWwZsT971iAZwAAAAAHq3RrXEc5eXTHiZvU+oPqRGwQBRAFEAUQBBAFEAUQBWTPpnWJ4bu7UldMTTpIPlj3do8NyYeAAAAAHbEifvx3cX0bNmmmNm+d4OogCiAKIAogAIAogCiAKIAxZlPm684cG3Lp1t+nwxAAAAA9W41riOsPp6sGJTrd15NwKIAogCiAKgAggCiAKIAo53L1EcdvKGa5kVzu2QDtkX4iNI3/DGAAAAAO+NdiJ0ndPFsfMdbd+uOscgbhyt3qJ6TydAUQBRAFEUEEAV5rrpiNrzduRTT8QxVVTM6yDvXkzwjRyqu3J4vAAAAAAAAAAAA9Rcr5z7vIDpF+5z17O1vJid+zrwZQH0VYrN6Ynp8NkSCiAII8X6tLc+wM12vWvX29HgAAAAAAAAAAAAAAAAAGjFr4ezO9W6tK4kG4QAccmfwj1AGYAAAAAAAAAAAAAAAAAAAG6J2AA//9k=" />
+    </div>
+
+        <br />
+        <input id="button" type="button" value="Zurück" onclick="window.history.back()" />
+   
+
+</div>
+
+
+
 
 }
 else
