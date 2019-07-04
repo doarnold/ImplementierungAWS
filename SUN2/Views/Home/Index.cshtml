@@ -53,7 +53,22 @@
                                 }
                             }
 
-                            <i>in @item.entityname</i>
+                            if (item.typ == "g")
+                            {
+                    <a class="linkTest" href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.entityid })">
+                        <i>in</i>
+                        @Html.DisplayFor(model => item.entityname)
+                    </a>
+                            }
+                            else
+                            {
+
+                    <a class="linkTest" href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid })">
+                        <i>in</i>
+                        @Html.DisplayFor(model => item.entityname)
+                    </a>
+                            }
+
 
                         }
                     </div>
