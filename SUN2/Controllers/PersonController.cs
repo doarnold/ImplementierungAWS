@@ -59,7 +59,7 @@ namespace SUN2.Controllers
         // POST: Person/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
+        public ActionResult Create([Bind(Include = "id,persinfos,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace SUN2.Controllers
         // POST: Person/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
+        public ActionResult Edit([Bind(Include = "id,persinfos,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +142,7 @@ namespace SUN2.Controllers
         // POST: Person/EditMe
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMe([Bind(Include = "id,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
+        public ActionResult EditMe([Bind(Include = "id,persinfos,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
         {
             if (ModelState.IsValid)
             {
