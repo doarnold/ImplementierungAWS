@@ -126,12 +126,7 @@ input {
 }
 
 
-#avatar {
-    position: absolute;
-    bottom: 70px !important;
 
-    left: 460px;
-}
 /* Scrollbar*/
 ::-webkit-scrollbar {
     width: 1rem;
@@ -777,10 +772,14 @@ background-color: #FFFFFF;
 
 #card #avatar {
     float: right;
-    bottom: 0; 
+    bottom: 0;
 
-   
+    position: absolute;
+    top: 70px !important;
+    left: 460px;
 }
+   
+
 
     #avatar img {
         border-radius: 15px;
