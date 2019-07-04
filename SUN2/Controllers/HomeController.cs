@@ -49,7 +49,7 @@ namespace SUN2.Controllers
                 // prüfen, ob user mitarbeiter des lehrstuhls ist oder diesen abonniert hat
                 foreach (MitarbeiterLehrstuhl ml in db.MitarbeiterLehrstuhls)
                 {
-                    if(ml.userid == userId || User.IsInRole("Admin"))
+                    if(ml.lehrstuhlid == le.lehrstuhlid &&  ml.userid == userId || User.IsInRole("Admin"))
                     {
                         abonniert = true;
                     }
@@ -57,7 +57,7 @@ namespace SUN2.Controllers
 
                 foreach(AbonnentenLehrstuhl al in db.AbonnentenLehrstuhls)
                 {
-                    if (al.userid == userId || User.IsInRole("Admin"))
+                    if (al.lehrstuhlid == le.lehrstuhlid && al.userid == userId || User.IsInRole("Admin"))
                     {
                         abonniert = true;
                     }
@@ -124,7 +124,7 @@ namespace SUN2.Controllers
                 // prüfen, ob user mitglied der gruppe ist
                 foreach(MitgliederGruppe mg in db.MitgliederGruppes)
                 {
-                    if(mg.userid == userId || User.IsInRole("Admin"))
+                    if(mg.gruppenid == le.gruppenid && mg.userid == userId || User.IsInRole("Admin"))
                     {
                         mitglied = true;
                     }
