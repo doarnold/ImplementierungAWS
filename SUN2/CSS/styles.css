@@ -124,6 +124,14 @@ input {
     font-size: 0.8em;
     color: #666;
 }
+
+
+#avatar {
+    position: absolute;
+    bottom: 70px !important;
+
+    left: 460px;
+}
 /* Scrollbar*/
 ::-webkit-scrollbar {
     width: 1rem;
