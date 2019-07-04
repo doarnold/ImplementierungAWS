@@ -353,15 +353,11 @@
     <Content Include="Views\AbonnentenLehrstuhl\Details.cshtml" />
     <Content Include="Views\AbonnentenLehrstuhl\Edit.cshtml" />
     <Content Include="Views\AbonnentenLehrstuhl\Index.cshtml" />
-    <Content Include="Views\MitarbeiterLehrstuhl\Create.cshtml" />
     <Content Include="Views\MitarbeiterLehrstuhl\Delete.cshtml" />
     <Content Include="Views\MitarbeiterLehrstuhl\Details.cshtml" />
-    <Content Include="Views\MitarbeiterLehrstuhl\Edit.cshtml" />
     <Content Include="Views\MitarbeiterLehrstuhl\Index.cshtml" />
-    <Content Include="Views\MitgliederGruppe\Create.cshtml" />
     <Content Include="Views\MitgliederGruppe\Delete.cshtml" />
     <Content Include="Views\MitgliederGruppe\Details.cshtml" />
-    <Content Include="Views\MitgliederGruppe\Edit.cshtml" />
     <Content Include="Views\MitgliederGruppe\Index.cshtml" />
     <Content Include="Views\Home\Administration.cshtml" />
     <Content Include="Views\Gruppe\Create.cshtml" />
