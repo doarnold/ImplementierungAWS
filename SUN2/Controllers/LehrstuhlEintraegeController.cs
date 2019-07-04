@@ -148,7 +148,9 @@ namespace SUN2.Controllers
             return View(lehrstuhlEintraege);
         }
 
-
+        // Ermöglicht es, einen Lehrstuhleintrag zu bearbeiten
+        // (Import: lehrstuhlEintraegsID, Export: lehrstuhlEintraegeModel)
+        // redirect auf error view, falls keine authorizierung vorliegt
         // GET: LehrstuhlEintraege/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -172,7 +174,9 @@ namespace SUN2.Controllers
             return RedirectToAction("Unauthorized", "Error");
         }
 
-
+        // Ermöglicht es, einen Lehrstuhleintrag zu bearbeiten
+        // (Import: lehrstuhlEintraegsModel, Export: redirect)
+        // redirect index seite
         // POST: LehrstuhlEintraege/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -188,6 +192,10 @@ namespace SUN2.Controllers
         }
 
 
+        // Löschung des Lehrstuhleintrags als 
+        // import: lehrstuhleintragid
+        // export: lehrstuhleintraegeModel
+        // redirect auf error view, falls keine authorizierung vorliegt.
         // GET: LehrstuhlEintraege/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -212,6 +220,9 @@ namespace SUN2.Controllers
         }
 
 
+        // Ermöglicht das Löschen als Post
+        // import: lehrstuhleintrag id
+        // export: redirect
         // POST: LehrstuhlEintraege/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

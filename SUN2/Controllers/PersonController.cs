@@ -15,6 +15,9 @@ namespace SUN2.Controllers
     {
         private SUN2Entities db = new SUN2Entities();
 
+        // Liefert eine Übersicht aller Personen
+        // import: keine
+        // export: personenModel als liste
         // GET: Person
         public ActionResult Index()
         {
@@ -22,6 +25,10 @@ namespace SUN2.Controllers
             return View(person.ToList());
         }
 
+
+        // Ermöglicht das Anzeigen von personendetails
+        // import: userid
+        // export: personenmodel
         // GET: Person/Details/5
         public ActionResult Details(string id)
         {
@@ -37,6 +44,8 @@ namespace SUN2.Controllers
             return View(person);
         }
 
+
+        // Ermöglicht das Anlegen einer neuen Person
         // GET: Person/Create
         public ActionResult Create()
         {
@@ -44,9 +53,10 @@ namespace SUN2.Controllers
             return View();
         }
 
+        // Ermöglicht das Anlegen einer neuen Person als POST
+        // import: personenmodel
+        // export: personenmodel
         // POST: Person/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
@@ -62,6 +72,10 @@ namespace SUN2.Controllers
             return View(person);
         }
 
+
+        // Ermgöglicht das Bearbeiten einer Person
+        // import: userid
+        // export: personenmodel
         // GET: Person/Edit/5
         public ActionResult Edit(string id)
         {
@@ -78,9 +92,11 @@ namespace SUN2.Controllers
             return View(person);
         }
 
+
+        // Ermöglicht das Bearbeiten einer Person
+        // import: personenmodel
+        // export: personenmodel
         // POST: Person/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
@@ -95,6 +111,10 @@ namespace SUN2.Controllers
             return View(person);
         }
 
+
+        // Ermöglicht dem eingeloggten User, seine eigenen Daten zu bearbeiten
+        // import: keine
+        // export: personenmodel
         // profiledaten des eingeloggten users laden
         // GET: Person/EditMe
         public ActionResult EditMe()
@@ -117,6 +137,8 @@ namespace SUN2.Controllers
 
 
         // speichert die geänderten profildaten des eingeloggten users
+        // import: personenmodel
+        // export: personenmodel
         // POST: Person/EditMe
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -134,6 +156,10 @@ namespace SUN2.Controllers
             return View(person);
         }
 
+
+        // Ermöglicht das Löschen eineer Person
+        // import: userid
+        // export: personenmodel
         // GET: Person/Delete/5
         public ActionResult Delete(string id)
         {
@@ -149,6 +175,10 @@ namespace SUN2.Controllers
             return View(person);
         }
 
+
+        // Ermöglicht das Löschen einer Person als POST
+        // import: userid
+        // export: redirect
         // POST: Person/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

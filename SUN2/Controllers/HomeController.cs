@@ -24,7 +24,9 @@ namespace SUN2.Controllers
         ////////////////////
 
 
-        //liefert die index view /index
+        // Index View der Newsfeed Seite, die das NewsfeedModel verwendet
+        // Import: keine
+        // Export: NewsfeedModel + diverse ViewBags 
         public ActionResult Index()
         {
             List<NewsFeedModel> list = new List<NewsFeedModel>();
@@ -183,6 +185,8 @@ namespace SUN2.Controllers
 
 
         // Liefert eine Liste aller abonnierten Lehrstühle und Gruppenmitglieschaften
+        // import: keine
+        // export: abomigliedmodel + viewbag
         public ActionResult AbonniertMitglied()
         {
             //angemeldeter User ist Verantwortlicher
@@ -290,6 +294,8 @@ namespace SUN2.Controllers
 
         // liefert die Suchergebnisse für generelle Suche auf alle DB Tabellen und Felder
         // mit einem Suchwort als Eingabe
+        // import: searchstring
+        // export: SearchModel
         public ActionResult Search(String searchstr)
         {
             // liefert die Ergebnisse

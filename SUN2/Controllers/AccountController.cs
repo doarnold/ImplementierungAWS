@@ -10,6 +10,14 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SUN2.Models;
 
+/**
+ * Diese Klasse wurde systemgeneriert und wird als Bibliothek verwendet.
+ * Es wurden lediglich minimale Änderungen für die Registrierung vorgenommen.
+ * Auf Kommentierungen wird deshalb weitestgehend verzichtet.
+ * 
+ * */
+
+
 namespace SUN2.Controllers
 {
     [Authorize]

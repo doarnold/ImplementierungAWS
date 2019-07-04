@@ -10,6 +10,13 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using SUN2.Models;
 
+/**
+ * Diese Klasse wurde systemgeneriert und wird als Bibliothek verwendet.
+ * Es wurden minimale Änderungen (Viewbag füllen) vorgenommen.
+ * Auf Kommentierungen wird deshalb weitgehend verzichtet.
+ * 
+ * */
+
 namespace SUN2.Controllers
 {
     public class AspNetUsersController : Controller

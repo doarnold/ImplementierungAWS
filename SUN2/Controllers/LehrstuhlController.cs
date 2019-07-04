@@ -17,6 +17,8 @@ namespace SUN2.Controllers
         private SUN2Entities db = new SUN2Entities();
 
         // Gibt eine Liste mit allen vorhandenen Lehrstühlen zurück
+        // import: keine
+        // export: lehrstuhlmodel
         // GET: Lehrstuhl
         public ActionResult Index()
         {
@@ -107,6 +109,9 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht das Erstellen eines neuen Lehrstuhls (Import: LehrstuhlModel, Export: LehrstuhlModel)
+        // import: lehrstuhlmodel
+        // export: lehrstuhlmodel
+        // redirect auf indexseite
         // POST: Lehrstuhl/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -127,7 +132,10 @@ namespace SUN2.Controllers
         }
 
 
-        // Ermglicht das Bearbeiten eines Lehrstuhls (Import: LehrstuhlID, Export: LehrstuhlModel)
+        // Ermöglicht das Bearbeiten eines Lehrstuhls (Import: LehrstuhlID, Export: LehrstuhlModel)
+        // import: lehrstuhlid
+        // export: lehrstuhlmodel
+        // redirect auf error view, falls keine authorizierung vorliegt
         // GET: Lehrstuhl/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -153,6 +161,9 @@ namespace SUN2.Controllers
 
 
         // Ermglicht das Bearbeiten eines Lehrstuhls (Import: LehrstuhlID, Export: LehrstuhlModel)
+        // import: lehrstuhlmodel
+        // export: lehrstuhlmodel
+        // redirect auf index seite
         // POST: Lehrstuhl/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -168,6 +179,10 @@ namespace SUN2.Controllers
         }
 
 
+        // Ermöglicht das Löschen eines Lehrstuhls
+        // import: lehrstuhlid
+        // export: lehrstuhlmodel
+        // redirect auf error view, falls keine authorizierung vorliegt
         // GET: Lehrstuhl/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -193,6 +208,9 @@ namespace SUN2.Controllers
         }
 
 
+        // Führt die Löschung als Post durch
+        // import: lehrstuhlid
+        // export: redirect
         // POST: Lehrstuhl/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -17,6 +17,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht das Abonnieren eines bestimmten Lehrstuhls (import: Lehrstuhlid, Export: redirect)
+        // leitet bei erfolg zur der lehrstuhlübersicht weiter
         // POST: AbonnentenLehrstuhl/Abo/5
         public ActionResult Abo(int? lehrstuhlid)
         {
@@ -57,6 +58,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglich das Deabonnieren eines bestimtmen Lehrstuhls (Import: lehrstuhlid,  Export: redirect)
+        // leitet bei erfolg zur Seite der Lehrstuhlübersicht weiter
         // POST: AbonnentenLehrstuhl/Deabo/5
         public ActionResult Deabo(int? lehrstuhlid)
         {

@@ -160,6 +160,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht es, einen bestimmten Gruppeneintrag zu bearbeiten (Import: GruppenEintragsID, Export: gruppenEintrageModel)
+        // redirect auf error view, falls keine authorizierung vorliegt.
         // GET: GruppenEintraege/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -185,6 +186,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht es, einen bestimmten Gruppeneintrag zu bearbeiten (Import: gruppenEintrageModel, Export: gruppenEintrageModel)
+        // redirect auf gruppenseite
         // POST: GruppenEintraege/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -201,6 +203,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht es, einen bestimmten Gruppeneintrag zu löschen (Import: gruppenEintragID, Export: gruppenEintrageModel)
+        // redirect auf error view, fallls keine authorizierung vorliegt.
         // GET: GruppenEintraege/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -226,6 +229,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht es, einen bestimmten Gruppeneintrag zu löschen (Import: gruppenEintrageModel, Export: gruppenEintrageModel)
+        // redirect auf gruppenview
         // POST: GruppenEintraege/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

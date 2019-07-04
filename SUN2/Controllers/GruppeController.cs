@@ -18,6 +18,8 @@ namespace SUN2.Controllers
 
 
         // Gibt eine Liste mit allen vorhandenen Gruppen zurück
+        // Import: keine Importparameter
+        // Export: View + vier ViewBags (zuordnung, verantwortlich, autor, beitritt)
         // GET: Gruppe
         public ActionResult Index()
         {
@@ -102,6 +104,8 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht das Erstellen einer neuen Gruppe
+        // keine Importparameter
+        // Export: view
         // GET: Gruppe/Create
         public ActionResult Create()
         {
@@ -110,6 +114,8 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht das Erstellen einer neuen Gruppe
+        // Import: Model der Gruppe
+        // Export: Redirect auf Indexview
         // POST: Gruppe/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -142,6 +148,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht das Bearbeiten einer bestimmten Gruppe (Import: GruppenID, Export GruppeModel)
+        // Reidrect auf Error, falls keine Authorizierung vorliegt.
         // GET: Gruppe/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -169,6 +176,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht das Bearbeiten einer bestimmten Gruppe (Import: GruppeModel, Export: GruppeModel)
+        // redirect auf indexview
         // POST: Gruppe/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -185,6 +193,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht das Löschen einer bestimmten Gruppe (Import: GruppenID, Export: GruppeModel)
+        // redirect auf error view, falls keine authorizierung vorliegt.
         // GET: Gruppe/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -211,6 +220,7 @@ namespace SUN2.Controllers
 
 
         // Ermöglicht das Löschen einer bestimmten Gruppe (Import: GruppenID, Export: -)
+        // redirect auf index view
         // POST: Gruppe/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
