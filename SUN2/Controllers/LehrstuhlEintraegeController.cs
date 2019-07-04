@@ -39,10 +39,6 @@ namespace SUN2.Controllers
                     // hier werden PRIVATEN alle lehrstühle ausgeschlossen, in denen der User nicht mitarbeiter ist
                     ok = false;
 
-                    // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
-                    autor[l.lehrstuhlid] = AuthCheck.AutorLE(l.lehrstuhlid, userId);
-                    verantwortlich[l.lehrstuhlid] = AuthCheck.VerantLehr(l.lehrstuhlid, userId);
-
                     foreach (MitarbeiterLehrstuhl ml in db.MitarbeiterLehrstuhls)
                     {
                         if (ml.lehrstuhlid == l.lehrstuhlid && ml.userid == userId)
@@ -68,6 +64,10 @@ namespace SUN2.Controllers
                 {
                     foreach (LehrstuhlEintraege le in db.LehrstuhlEintraeges)
                     {
+                        // Signal an Frontend, ob User auch Verantwortlicher ist und somit bearbeiten/löschen darf
+                        autor[le.id] = AuthCheck.AutorLE(le.id, userId);
+                        verantwortlich[le.lehrstuhlid] = AuthCheck.VerantLehr(le.lehrstuhlid, userId);
+
                         if (le.lehrstuhlid == lehrstuhlid)
                         {
                             foreach (Person person in db.Person)
@@ -91,6 +91,8 @@ namespace SUN2.Controllers
                     }
 
                     ViewBag.zuordnung = zuordnung;
+                    ViewBag.autor = autor;
+                    ViewBag.verantwortlich = verantwortlich;
 
                     // Bezeichnung des lehrstuhls in View übergeben
                     foreach (Lehrstuhl le in db.Lehrstuhls)
@@ -103,9 +105,6 @@ namespace SUN2.Controllers
                 }
   
             }
-
-            ViewBag.autor = autor;
-            ViewBag.verantwortlich = verantwortlich;
 
             return View(entries.ToList());
         }
@@ -183,7 +182,7 @@ namespace SUN2.Controllers
             {
                 db.Entry(lehrstuhlEintraege).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { lehrstuhlid = lehrstuhlEintraege.lehrstuhlid });
             }
             return View(lehrstuhlEintraege);
         }
