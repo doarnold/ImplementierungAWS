@@ -49,7 +49,7 @@ namespace SUN2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,vorname,persinfos,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
+        public ActionResult Create([Bind(Include = "id,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace SUN2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,vorname,persinfos,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
+        public ActionResult Edit([Bind(Include = "id,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,6 @@ namespace SUN2.Controllers
 
         // profiledaten des eingeloggten users laden
         // GET: Person/EditMe
-        [CustomAuthorize(Roles = "Admin, Student, Dozent")] //nur ein Beispiel, wie Autorisierung funktioniert
         public ActionResult EditMe()
         {
             var id = User.Identity.GetUserId();
@@ -121,7 +120,7 @@ namespace SUN2.Controllers
         // POST: Person/EditMe
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMe([Bind(Include = "id,name,vorname,persinfos,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
+        public ActionResult EditMe([Bind(Include = "id,name,vorname,matnr,hsemester,fsemester,studienbeginn,studiengang,studienfach,email")] Person person)
         {
             if (ModelState.IsValid)
             {

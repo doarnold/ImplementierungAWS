@@ -31,7 +31,6 @@
 
 <br />
 
-{ var zuordnung = ViewBag.zuordnung; }
 
 <div id="ListContainer">
     <table class="table">
@@ -81,9 +80,9 @@
                 </td>
                 <td>
                     @{
-                        if (zuordnung != null)
+                        if (ViewBag.zuordnung != null)
                         {
-                            foreach (var person in zuordnung)
+                            foreach (var person in ViewBag.zuordnung)
                             {
                                 if (person.name == item.verantwortlicher)
                                 {

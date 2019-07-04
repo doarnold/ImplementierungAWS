@@ -13,14 +13,7 @@
 
             <div class="header"><h2>Mein Profil bearbeiten</h2></div>
 
-            <p id="defaultLabel">
-                Beschreibe dich selbst.
-            </p>
-            @Html.TextAreaFor(model => model.persinfos, new { htmlAttributes = new { @placeholder = "Beschreibe dich selbst.", @rows = 100, @cols = 200 } })
 
-            @Html.ValidationMessageFor(model => model.persinfos, "", new { @class = "text-danger" })
-
-            <hr />
 
 
 
@@ -97,18 +90,18 @@
 
             <label class="col-sm-3">Studiengang:</label>
             <div class="col-sm-9">
-                @Html.EditorFor(model => model.studiengang, new { htmlAttributes = new { @placeholder = "Studiengang" } })
+                @Html.EditorFor(model => model.studiengang, new { htmlAttributes = new { @placeholder = "Studiengang z.B. Bachelor of Science" } })
                 @Html.ValidationMessageFor(model => model.studiengang, "", new { @class = "text-danger" })
             </div>
 
             <label class="col-sm-3">Studienfach:</label>
             <div class="col-sm-9">
-                @Html.EditorFor(model => model.studienfach, new { htmlAttributes = new { @placeholder = "Studienfach" } })
+                @Html.EditorFor(model => model.studienfach, new { htmlAttributes = new { @placeholder = "Studienfach z.B. Informatik" } })
                 @Html.ValidationMessageFor(model => model.studienfach, "", new { @class = "text-danger" })
             </div>
 
 
-            <input id="submitButton" type="submit" value="Save" class="button">
+            <input id="submitButton" type="submit" value="Speichern" class="button">
         }
     </div>
 
