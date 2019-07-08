@@ -73,7 +73,7 @@ namespace SUN2.Controllers
                             zuordnung.Add(el);
                         }
                     }
-                    ViewBag.zuordnung = zuordnung;
+                 
                     entries.Add(lehrstuhl);
                 }
 
@@ -94,6 +94,7 @@ namespace SUN2.Controllers
             }
             ViewBag.mitarbeiter = mitarbeiter;
             ViewBag.verantwortlich = verantwortlich;
+            ViewBag.zuordnung = zuordnung;
 
 
             return View(entries);
