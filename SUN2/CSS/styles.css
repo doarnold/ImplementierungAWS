@@ -929,60 +929,10 @@ background-color: #FFFFFF;
         transition: all 0.4s ease-in-out;
     }
 
-    /*Delte*/
+    /*Delete*/
 
 
-#delteDialog {
-    background-color: cornsilk;
-    border-radius: 25px;
-    text-align: center;
-    display: block;
-    margin: 100px auto;
-    width: 700px;
-    overflow: hidden;
-    transform-origin: center center;
-    transition: transform 0.4s ease;
-}
 
-    #delteDialog.hidden {
-        transform: rotateX(-90deg);
-    }
-
-    #delteDialog h2 {
-        color: #8F69E8;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        font-family: 'Raleway', sans-serif;
-        font-size: 20px;
-        line-height: 3.5;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        margin: 0;
-        padding: 0;
-    }
-
-    #delteDialog h1 {
-        color: #666666;
-        font-family: 'Raleway', sans-serif;
-        font-size: 50px;
-        line-height: 1.8;
-        font-weight: 200;
-        margin: 0;
-        margin-top: 0.5em;
-        padding: 0;
-    }
-
-    #delteDialog h3 {
-        color: #888888;
-        font-family: 'Raleway', sans-serif;
-        font-size: 16px;
-        font-weight: 300;
-        display: block;
-        margin: 0 auto;
-        margin-bottom: 4em;
-        padding: 0;
-        width: 280px;
-    }
 
     #delteDialog #delteDialog-input[type='submit'] {
         background-color: #2e2e2e;
@@ -993,18 +943,57 @@ background-color: #FFFFFF;
 
     #delteDialog input[type='submit'] {
         color: rgba(255, 255, 255, 0.95);
-        background-color: #8F69E8;
-        border: none;
-        font-size: 25px;
-        font-weight: 500;
-        line-height: 3;
-        letter-spacing: 0.01em;
-        text-transform: uppercase;
-        padding: 0 2em;
-        transform-origin: 50% 0%;
-        transition: transform 0.75s cubic-bezier(0.5, 3, 0.65, 0.45) 0.3s;
+      
     }
 
+#delteDialog {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 10pt;
+    padding-top: 50px;
+    text-align: left;
+    margin: auto;
+    max-width: 540px;
+    min-width: 200px;
+    color: black;
+    background-color: #fbfbfb;
+    border: 1px solid #AAA;
+    border-bottom: 1px solid #888;
+    border-radius: 3px;
+    color: black;
+    box-shadow: 0px 2px 2px #AAA;
+    padding: 20px;
+    margin-top: 5%; 
+}
 
+    #delteDialog p {
+        color: black;
+    }
+
+    #delteDialog hr {
+        diplay: block;
+        border: none;
+        border-bottom: 1px dashed #ccc;
+    }
+
+    #delteDialog h1, #delteDialog h2 {
+        display: block;
+        text-align: center;
+    }
+
+    #delteDialog h1 {
+        color: #666;
+        font-weight: normal;
+        font-size: 50px;
+        padding: 0;
+        margin: 0;
+        margin-top: 10px;
+        line-height: 50px
+    }
+
+    #delteDialog h2 {
+        color: #666;
+        font-weight: normal;
+        font-size: 1.5em;
+    }
 
 

@@ -12,13 +12,8 @@
 
 
         <h2>Löschen</h2>
-
-        <h1>Delete your account?</h1>
-       
-
-
-
-
+        <hr />
+  
         <h3>Möchten Sie wirklich den Lehrstuhl "@Html.DisplayFor(model => model.bezeichnung)" löschen?</h3>
 
         <dl class="dl-horizontal"></dl>
@@ -29,7 +24,7 @@
 
 
 
-            <div class="form-actions no-color">
+            <div class="form-actions no-color" style="text-align: center">
                 <input type="submit" value="Löschen" class="btn btn-primary" /> |
 
                 @Html.ActionLink("Back to List", "Index",null,  new {@class = "btn btn-primary"})
@@ -38,8 +33,7 @@
     </div>
 
 
-    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
-
+  
 
 
 }
