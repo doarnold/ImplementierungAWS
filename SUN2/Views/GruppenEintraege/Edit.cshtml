@@ -13,7 +13,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal" style="margin-top:50px">
-            <h4 style="text-align:center">Gruppeneintrag bearbeiten</h4>
+            <h2 style="text-align:center">Gruppeneintrag bearbeiten</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
