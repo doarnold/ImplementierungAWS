@@ -10,15 +10,27 @@
 
 @if (Request.IsAuthenticated)
 {
-    var zuordnung = ViewBag.zuordnung;
-    var bezeichnung = ViewBag.bezeichnung;
-    var counter = 0;
-
-    foreach (var item in Model)
+    if (!Model.Any()) // keine einträge vorhanden
     {
 
-        if (counter == 0)
+
+
+        <br /><br /><br /><br /><br /><br />
+        <h3 style="color:black">Leider sind noch keine Beiträge angelegt worden.</h3>
+
+
+    }
+    else
+    {
+        var zuordnung = ViewBag.zuordnung;
+        var bezeichnung = ViewBag.bezeichnung;
+        var counter = 0;
+
+        foreach (var item in Model)
         {
+
+            if (counter == 0)
+            {
             <div id="GruppenPlatzhalter"></div>
             <h2 style="text-align:center">
                 Gruppe:
@@ -30,8 +42,8 @@
             </a>
 
             <div id="GruppenPlatzhalter"></div>
-            counter++;
-        }
+                counter++;
+            }
 
         <div id="GruppenBeitragGesamt">
 
@@ -72,14 +84,14 @@
                             if (verant[item.gruppenid] == true || aut[item.id] == true || User.IsInRole("Admin"))
                             {
 
-                            <a href="@Url.Action("Edit", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Bearbeiten">
-                                <i class='fas fa-edit'></i>
-                            </a>
+                                <a href="@Url.Action("Edit", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Bearbeiten">
+                                    <i class='fas fa-edit'></i>
+                                </a>
                                 // @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
                                 // @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
-                            <a href="@Url.Action("Delete", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Löschen">
-                                <i class='fas fa-trash-alt'></i>
-                            </a>
+                                <a href="@Url.Action("Delete", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Löschen">
+                                    <i class='fas fa-trash-alt'></i>
+                                </a>
 
                             }
                         }
@@ -136,8 +148,10 @@
             <div id="GruppenPlatzhalter"></div>
 
         </div>
-    }
+                            }
+                        }
 
+    <hr/>
 
     <div class="form-group">
         <div class="col-md-10">
