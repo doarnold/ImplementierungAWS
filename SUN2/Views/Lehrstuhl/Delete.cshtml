@@ -1,20 +1,33 @@
 ﻿@model SUN2.Models.Lehrstuhl
-
+@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Delete";
 }
 
 @if (Request.IsAuthenticated)
 {
-    <h3>Möchten Sie wirklich den Lehrstuhl "@Html.DisplayFor(model => model.bezeichnung)" löschen?</h3>
+   
+    <div id="delteDialog">
+    
 
-    <div>
-        <hr />
+
+        <h2>Löschen</h2>
+
+        <h1>Delete your account?</h1>
+       
+
+
+
+
+        <h3>Möchten Sie wirklich den Lehrstuhl "@Html.DisplayFor(model => model.bezeichnung)" löschen?</h3>
+
         <dl class="dl-horizontal"></dl>
 
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
+
+
 
             <div class="form-actions no-color">
                 <input type="submit" value="Löschen" class="btn btn-default" /> |
@@ -23,6 +36,11 @@
             </div>
         }
     </div>
+
+
+    @Html.ActionLink("Back to List", "Index")
+
+
 
 }
 else

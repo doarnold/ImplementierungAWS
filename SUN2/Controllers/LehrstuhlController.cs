@@ -73,9 +73,10 @@ namespace SUN2.Controllers
                             zuordnung.Add(el);
                         }
                     }
-                    ViewBag.zuordnung = zuordnung;
+
                     entries.Add(lehrstuhl);
                 }
+
 
                 // Um abonnieren/deabonnieren zu kennzeichnen, ViewBag mit allen Abos des Users an Frontend senden
                 List<AbonnentenLehrstuhl> list = new List<AbonnentenLehrstuhl>();
@@ -92,8 +93,12 @@ namespace SUN2.Controllers
                 ViewBag.abos = list;
 
             }
+
+
+
             ViewBag.mitarbeiter = mitarbeiter;
             ViewBag.verantwortlich = verantwortlich;
+            ViewBag.zuordnung = zuordnung;
 
 
             return View(entries);
@@ -125,6 +130,17 @@ namespace SUN2.Controllers
 
                 db.Lehrstuhls.Add(lehrstuhl);
                 db.SaveChanges();
+
+                // Mitgliedschaft herstellen
+                Lehrstuhl neu = db.Lehrstuhls.OrderByDescending(p => p.lehrstuhlid).FirstOrDefault(); // neue lehrstuhlid ermitteln
+
+                MitarbeiterLehrstuhl mg = new MitarbeiterLehrstuhl();
+                mg.lehrstuhlid = neu.lehrstuhlid;
+                mg.userid = userId;
+                db.MitarbeiterLehrstuhls.Add(mg);
+
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
