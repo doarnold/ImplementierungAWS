@@ -1,12 +1,26 @@
-﻿
+﻿@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Nicht eingeloggt";
 }
 
-<br />
-<h1>Sorry :( </h1>
-<h2>you are not authorized to see this page.</h2>
-<h2>Please @Html.ActionLink("Login", "Login", "Account") to see this page.</h2>
-<br />
 
 
+
+<div id="containerNotLoggedIn">
+    <div id="box">
+        <h1>404</h1>
+        <h2>Sorry :(</h2>
+        <hr />
+        <p>You are not authorized to see this page.</p>
+        <p>Please try the following:</p>
+        <ul>
+            <li>Please @Html.ActionLink("Login", "Login", "Account") to see this page.</li>
+           
+        </ul>
+    </div>
+</div>
+
+
+<div id="copyright">
+    &copy 2019 SUN</a>. All Rights Reserved.
+</div>
