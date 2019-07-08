@@ -14,8 +14,6 @@
         @Html.AntiForgeryToken()
         <div class="header"><h2>Neues Konto erstellen</h2></div>
 
-
-
         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
         @Html.TextBoxFor(m => m.Email, new { @placeholder = "E-Mail" })
 

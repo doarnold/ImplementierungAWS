@@ -22,10 +22,6 @@
 
             <div class="header"><h2>Mein Profil bearbeiten</h2></div>
 
-
-
-
-
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
 
@@ -71,12 +67,7 @@
                 @Html.ValidationMessageFor(model => model.fsemester, "", new { @class = "text-danger" })
 
             </div>
-
             <br />
-
-
-
-
             <label class="col-sm-3">Studiengang:</label>
             <div class="col-sm-9">
                 @Html.EditorFor(model => model.studiengang, new { htmlAttributes = new { @placeholder = "Studiengang z.B. Bachelor of Science" } })
@@ -112,7 +103,9 @@
 
         $(document).ready(function () {
             $("#submitButton").click(function () {
-                alert("Ihre persönlichen Daten wurden erfolgreich aktualisiert.");
+                alert("Ihre persönlichen Daten wurden erfolgreich aktualisiert.\nSie werden zum Newsfeed weitergeleitet.");
+                window.location.href("/Home/Index");
+                return false;
             });
         });
 
@@ -129,13 +122,6 @@
                 el.style.cssText = 'height:' + el.scrollHeight + 'px';
             }, 0);
         }
-
-
-
-
-
-
-
 
     </script>
 
