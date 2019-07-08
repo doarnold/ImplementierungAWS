@@ -5,7 +5,11 @@
 @Styles.Render("~/Content/css")
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+@{
+    ViewBag.Title = "Login";
 
+    //List<String> lehrstuhlName = ViewBag.lehrstuhlName;
+}
 
 <div id="login-box">
     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -26,7 +30,7 @@
 
 
         <input type="submit" value="Login" class="button">
-        
+
 
 
         @* Aktivieren Sie diese Option, nachdem Sie die Kontobestätigung für die Funktion zum Zurücksetzen des Kennworts aktiviert haben.

@@ -3,6 +3,13 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 @Html.HiddenFor(model => model.persinfos);
+@Html.HiddenFor(model => model.studienbeginn);
+
+@{
+    ViewBag.Title = "Profil";
+
+    //List<String> lehrstuhlName = ViewBag.lehrstuhlName;
+}
 
 @if (Request.IsAuthenticated)
 {
@@ -66,29 +73,9 @@
             </div>
 
             <br />
-            <label class="col-sm-3">Studienbeginn:</label>
 
-            <div class="col-sm-9">
-                @Html.EditorFor(model => model.studienbeginn, new { htmlAttributes = new { @id = "editor", @placeholder = "Studienbeginn" } })
-            </div>
 
-            <br />
-            @*<label class="col-sm-3"></label>
-                <div class="col-sm-9">
-                    @Html.DropDownListFor(
-                    model => model.studienbeginn,
-                    new SelectList(new List<Object>
-                    {
-                        new { value = 0 , text = "Wintersemester 2019"  },
-                        new { value = 1 , text = "Sommersemester 2019" },
-                        new { value = 2 , text = "Wintersemester 2018"}
-                        },
-                        "value",
-                        "text",
-                        Model.studienbeginn
-                        )
-                        )
-                </div>*@
+
 
             <label class="col-sm-3">Studiengang:</label>
             <div class="col-sm-9">
@@ -119,6 +106,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
+
+
 
 
         $(document).ready(function () {
