@@ -63,20 +63,26 @@
                         var verant = ViewBag.verantwortlich;
                         var aut = ViewBag.autor;
 
-                        if (verant[item.gruppenid] == true || aut[item.id] == true || User.IsInRole("Admin"))
+
+                        if (verant != null && aut != null)
                         {
+
+
+
+                            if (verant[item.gruppenid] == true || aut[item.id] == true || User.IsInRole("Admin"))
+                            {
 
                             <a href="@Url.Action("Edit", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Bearbeiten">
                                 <i class='fas fa-edit'></i>
                             </a>
-                            // @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
-                            // @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                                // @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                                // @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
                             <a href="@Url.Action("Delete", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Löschen">
                                 <i class='fas fa-trash-alt'></i>
                             </a>
 
+                            }
                         }
-
 
                         //@Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
                         <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary" title="Gruppe">

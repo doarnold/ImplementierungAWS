@@ -65,13 +65,17 @@
 
                 <div id="GruppenEdit">
 
+
                     @{
 
-                        var lverant = ViewBag.verantwortlich;
-                        var laut = ViewBag.autor;
+                                var lverant = ViewBag.verantwortlich;
+                                var laut = ViewBag.autor;
 
-                        if (lverant[item.lehrstuhlid] == true || laut[item.id] == true || User.IsInRole("Admin"))
-                        {
+                                if(lverant != null && laut != null) {
+
+                               
+                                if (lverant[item.lehrstuhlid] == true || laut[item.id] == true || User.IsInRole("Admin") )
+                                {
 
 
                             <a href="@Url.Action("Edit", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Bearbeiten">
@@ -81,6 +85,7 @@
                                 <i class='fas fa-trash-alt'></i>
                             </a>
                         }
+                         }
 
                         <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Lehrstuhl">
                             <i class='fa fa-users'></i>
