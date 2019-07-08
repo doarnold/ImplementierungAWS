@@ -11,138 +11,155 @@
 
 @if (Request.IsAuthenticated)
 {
-    var zuordnung = ViewBag.zuordnung;
-    var bezeichnung = ViewBag.bezeichnung;
-    var counter = 0;
 
-    foreach (var item in Model)
+    if (!Model.Any()) // keine einträge vorhanden
     {
 
-        if (counter == 0)
+
+
+    <br /><br /><br /><br /><br /><br />
+    <h3 style="color:black">Leider sind noch keine Beiträge angelegt worden.</h3>
+
+
+    }
+    else
+    {
+
+
+        var zuordnung = ViewBag.zuordnung;
+        var bezeichnung = ViewBag.bezeichnung;
+        var counter = 0;
+
+        foreach (var item in Model)
         {
-            <div id="LehrstuhlPlatzhalter"></div>
-            <h2 style="text-align:center">
-                Lehrstuhl:
-                @bezeichnung <!-- bei inkonstenten testdaten wird hier nichts angezeigt !-->
-            </h2>
 
-            if(User.IsInRole("Dozent") || User.IsInRole("Admin"))
+            if (counter == 0)
             {
+                <div id="LehrstuhlPlatzhalter"></div>
+                <h2 style="text-align:center">
+                    Lehrstuhl:
+                    @bezeichnung <!-- bei inkonstenten testdaten wird hier nichts angezeigt !-->
+                </h2>
 
-            <a href="@Url.Action("Create", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)">
-                Neuen Eintrag erstellen
-            </a>
-            
+                if (User.IsInRole("Dozent") || User.IsInRole("Admin"))
+                {
+
+                    <a href="@Url.Action("Create", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)">
+                        Neuen Eintrag erstellen
+                    </a>
+
+                }
+
+                <div id="LehrstuhlPlatzhalter"></div>
+                counter++;
             }
 
-            <div id="LehrstuhlPlatzhalter"></div>
-            counter++;
-        }
+
+            <div id="GruppenBeitragGesamt">
 
 
-        <div id="GruppenBeitragGesamt">
-
-
-            <div id="GruppenHead">
-                <div id="GruppenPostName">
-                    @{
-                        if (zuordnung != null)
-                        {
-                            foreach (var person in zuordnung)
+                <div id="GruppenHead">
+                    <div id="GruppenPostName">
+                        @{
+                            if (zuordnung != null)
                             {
-                                if (person.name == item.autor)
+                                foreach (var person in zuordnung)
                                 {
-                                    <a class="linkTest" href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                        @Html.DisplayFor(model => item.autor)
-                                    </a>
-                                    break;
+                                    if (person.name == item.autor)
+                                    {
+                                        <a class="linkTest" href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                            @Html.DisplayFor(model => item.autor)
+                                        </a>
+                                        break;
+                                    }
                                 }
                             }
                         }
-                    }
-                </div>
+                    </div>
 
-                <br />
-                <br />
+                    <br />
+                    <br />
 
-                <div>@Html.DisplayFor(modelItem => item.datum.Day).@Html.DisplayFor(modelItem => item.datum.Month).@Html.DisplayFor(modelItem => item.datum.Year) </div>
-
-
-                <div id="GruppenEdit">
+                    <div>@Html.DisplayFor(modelItem => item.datum.Day).@Html.DisplayFor(modelItem => item.datum.Month).@Html.DisplayFor(modelItem => item.datum.Year) </div>
 
 
-                    @{
+                    <div id="GruppenEdit">
 
-                                var lverant = ViewBag.verantwortlich;
-                                var laut = ViewBag.autor;
 
-                                if(lverant != null && laut != null) {
+                        @{
 
-                               
-                                if (lverant[item.lehrstuhlid] == true || laut[item.id] == true || User.IsInRole("Admin") )
+                            var lverant = ViewBag.verantwortlich;
+                            var laut = ViewBag.autor;
+
+                            if (lverant != null && laut != null)
+                            {
+
+
+                                if (lverant[item.lehrstuhlid] == true || laut[item.id] == true || User.IsInRole("Admin"))
                                 {
 
 
-                            <a href="@Url.Action("Edit", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Bearbeiten">
-                                <i class='fas fa-edit'></i>
+                                    <a href="@Url.Action("Edit", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Bearbeiten">
+                                        <i class='fas fa-edit'></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Löschen">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </a>
+                                }
+                            }
+
+                            <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Lehrstuhl">
+                                <i class='fa fa-users'></i>
                             </a>
-                            <a href="@Url.Action("Delete", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Löschen">
-                                <i class='fas fa-trash-alt'></i>
-                            </a>
+
                         }
-                         }
 
-                        <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary" title="Lehrstuhl">
-                            <i class='fa fa-users'></i>
-                        </a>
+                    </div>
 
+                </div>
+
+                <div id="GruppenInhalt">
+                    @Html.DisplayFor(modelItem => item.inhalt)
+                </div>
+
+                <div id="GruppenLabelsRahmen">
+                    @if (item.label1 != null && item.label1 != "")
+                    {
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1 }, null)">#@item.label1</a>
+
+                    }
+                    else
+                    {
+                    }
+
+                    @if (item.label2 != null && item.label2 != "")
+                    {
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2 }, null)">#@item.label2</a>
+                    }
+                    @if (item.label3 != null && item.label3 != "")
+                    {
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3 }, null)">#@item.label3</a>
+                    }
+                    @if (item.label4 != null && item.label4 != "")
+                    {
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4 }, null)">#@item.label4</a>
+                    }
+                    @if (item.label5 != null && item.label5 != "")
+                    {
+
+                        <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5 }, null)">#@item.label5</a>
                     }
 
                 </div>
 
-            </div>
-
-            <div id="GruppenInhalt">
-                @Html.DisplayFor(modelItem => item.inhalt)
-            </div>
-
-            <div id="GruppenLabelsRahmen">
-                @if (item.label1 != null && item.label1 != "")
-                {
-
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1 }, null)">#@item.label1</a>
-
-                }
-                else
-                {
-                }
-
-                @if (item.label2 != null && item.label2 != "")
-                {
-
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2 }, null)">#@item.label2</a>
-                }
-                @if (item.label3 != null && item.label3 != "")
-                {
-
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3 }, null)">#@item.label3</a>
-                }
-                @if (item.label4 != null && item.label4 != "")
-                {
-
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4 }, null)">#@item.label4</a>
-                }
-                @if (item.label5 != null && item.label5 != "")
-                {
-
-                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5 }, null)">#@item.label5</a>
-                }
+                @*<div id="GruppenPlatzhalter"></div>*@
 
             </div>
-
-            @*<div id="GruppenPlatzhalter"></div>*@
-
-        </div>
+        }
     }
 
     <hr />
