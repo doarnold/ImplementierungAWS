@@ -130,6 +130,17 @@ namespace SUN2.Controllers
 
                 db.Lehrstuhls.Add(lehrstuhl);
                 db.SaveChanges();
+
+                // Mitgliedschaft herstellen
+                Lehrstuhl neu = db.Lehrstuhls.OrderByDescending(p => p.lehrstuhlid).FirstOrDefault(); // neue lehrstuhlid ermitteln
+
+                MitarbeiterLehrstuhl mg = new MitarbeiterLehrstuhl();
+                mg.lehrstuhlid = neu.lehrstuhlid;
+                mg.userid = userId;
+                db.MitarbeiterLehrstuhls.Add(mg);
+
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
