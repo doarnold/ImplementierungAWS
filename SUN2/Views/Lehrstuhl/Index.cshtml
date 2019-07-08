@@ -25,10 +25,14 @@
     <div id="ListHeader">
         <h2>Übersicht aller Lehrstuhlseiten</h2>
 
-
+     
+         @if(User.IsInRole("Dozent") || User.IsInRole("Admin")){
         <p>
             @Html.ActionLink("Neuen Lehrstuhl anlegen", "Create")
         </p>
+        }
+        
+
 
     </div>
 
