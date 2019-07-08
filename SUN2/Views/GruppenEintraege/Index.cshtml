@@ -37,7 +37,7 @@
                 @bezeichnung <!-- bei inkonstenten testdaten wird hier nichts angezeigt !-->
             </h2>
 
-            <a href="@Url.Action("Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)">
+            <a href="@Url.Action("Create", "GruppenEintraege", new { gruppenid = item.gruppenid }, null)" class="btn btn-primary">
                 Neuen Eintrag erstellen
             </a>
 
@@ -158,7 +158,7 @@
             <input type="button" class="btn btn-primary" value="Zurück" onclick="window.history.back()" />
         </div>
         <div class="col-md-2">
-            @Html.ActionLink("Alle Gruppen", "Index", "Gruppe")
+            @Html.ActionLink("Alle Gruppen", "Index", "Gruppe", new {@class = "btn btn-primary"})
         </div>
     </div>
 

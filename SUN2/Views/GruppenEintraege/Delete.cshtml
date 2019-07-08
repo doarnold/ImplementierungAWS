@@ -26,9 +26,9 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" value="Löschen" class="btn btn-default" /> |
-                <input type="button" value="Zurück" onclick="window.history.back()" />
-                @Html.ActionLink("Alle Einträge", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, null)
+                <input type="submit" value="Löschen" class="btn btn-primary" /> |
+                <input type="button" value="Zurück" onclick="window.history.back()" class="btn btn-primary" />
+                @Html.ActionLink("Alle Einträge", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, new {@class = "btn btn-primary"})
             </div>
         }
     </div>

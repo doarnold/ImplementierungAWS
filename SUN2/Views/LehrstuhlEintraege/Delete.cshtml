@@ -26,10 +26,10 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" class="btn btn-primary" value="Löschen" class="btn btn-default" /> |
+                <input type="submit" class="btn btn-primary" value="Löschen" /> |
                 <div>
-                    <input type="button" value="Zurück" onclick="window.history.back()" />
-                    @Html.ActionLink("Alle Einträge", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null, new {@class = "btn btn-primary"})
+                    <input type="button" value="Zurück" onclick="window.history.back()" class="btn btn-primary" />
+                    @Html.ActionLink("Alle Einträge", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, new {@class = "btn btn-primary"})
                 </div>
             </div>
         }
