@@ -65,13 +65,13 @@
             <br />
 
 
-            <input type="submit" id="submit" value="Speichern" />
+            <input class="btn btn-primary" type="submit" id="submit" value="Speichern" />
 
         </div>
     }
 
 
-    @Html.ActionLink("Zurück", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null)
+    @Html.ActionLink("Zurück", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null, new {@class = "btn btn-primary"})
 }
 else
 {

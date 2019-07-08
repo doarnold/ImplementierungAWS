@@ -30,15 +30,15 @@
 
 
             <div class="form-actions no-color">
-                <input type="submit" value="Löschen" class="btn btn-default" /> |
+                <input type="submit" value="Löschen" class="btn btn-primary" /> |
 
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Back to List", "Index",null,  new {@class = "btn btn-primary"})
             </div>
         }
     </div>
 
 
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new {@class = "btn btn-primary"})
 
 
 

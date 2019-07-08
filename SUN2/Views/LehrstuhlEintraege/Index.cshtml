@@ -44,7 +44,7 @@
                 if (User.IsInRole("Dozent") || User.IsInRole("Admin"))
                 {
 
-                    <a href="@Url.Action("Create", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)">
+                    <a href="@Url.Action("Create", "LehrstuhlEintraege", new { lehrstuhlid = item.lehrstuhlid }, null)" class="btn btn-primary">
                         Neuen Eintrag erstellen
                     </a>
 
@@ -165,10 +165,10 @@
     <hr />
     <div class="form-group">
         <div class="col-md-10">
-            <input type="button" value="Zurück" onclick="window.history.back()" />
+            <input type="button" class="btn btn-primary" value="Zurück" onclick="window.history.back()" />
         </div>
         <div class="col-md-2">
-            @Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl")
+            @Html.ActionLink("Alle Lehrstühle", "Index", "Lehrstuhl", new {@class = "btn btn-primary"})
         </div>
     </div>
 
