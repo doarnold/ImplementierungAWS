@@ -73,9 +73,10 @@ namespace SUN2.Controllers
                             zuordnung.Add(el);
                         }
                     }
-                 
+
                     entries.Add(lehrstuhl);
                 }
+
 
                 // Um abonnieren/deabonnieren zu kennzeichnen, ViewBag mit allen Abos des Users an Frontend senden
                 List<AbonnentenLehrstuhl> list = new List<AbonnentenLehrstuhl>();
@@ -92,6 +93,9 @@ namespace SUN2.Controllers
                 ViewBag.abos = list;
 
             }
+
+
+
             ViewBag.mitarbeiter = mitarbeiter;
             ViewBag.verantwortlich = verantwortlich;
             ViewBag.zuordnung = zuordnung;
