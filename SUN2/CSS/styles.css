@@ -619,7 +619,7 @@ background-color: #FFFFFF;
 
 #ListContainer {
     padding: 30px;
-    max-width: 780px; /* 780px*/
+    /* max-width: 780px;*/ /* 780px*/
     width: 100%;
     margin: auto;
 }
