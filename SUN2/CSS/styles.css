@@ -928,3 +928,81 @@ background-color: #FFFFFF;
         -webkit-transition: all 0.4s ease-in-out;
         transition: all 0.4s ease-in-out;
     }
+
+    /*Delte*/
+
+
+#delteDialog {
+    background-color: cornsilk;
+    border-radius: 25px;
+    text-align: center;
+    display: block;
+    margin: 100px auto;
+    width: 700px;
+    overflow: hidden;
+    transform-origin: center center;
+    transition: transform 0.4s ease;
+}
+
+    #delteDialog.hidden {
+        transform: rotateX(-90deg);
+    }
+
+    #delteDialog h2 {
+        color: #8F69E8;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        font-family: 'Raleway', sans-serif;
+        font-size: 20px;
+        line-height: 3.5;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        margin: 0;
+        padding: 0;
+    }
+
+    #delteDialog h1 {
+        color: #666666;
+        font-family: 'Raleway', sans-serif;
+        font-size: 50px;
+        line-height: 1.8;
+        font-weight: 200;
+        margin: 0;
+        margin-top: 0.5em;
+        padding: 0;
+    }
+
+    #delteDialog h3 {
+        color: #888888;
+        font-family: 'Raleway', sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 4em;
+        padding: 0;
+        width: 280px;
+    }
+
+    #delteDialog #delteDialog-input[type='submit'] {
+        background-color: #2e2e2e;
+        overflow: hidden;
+        position: relative;
+        perspective: 500px;
+    }
+
+    #delteDialog input[type='submit'] {
+        color: rgba(255, 255, 255, 0.95);
+        background-color: #8F69E8;
+        border: none;
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 3;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        padding: 0 2em;
+        transform-origin: 50% 0%;
+        transition: transform 0.75s cubic-bezier(0.5, 3, 0.65, 0.45) 0.3s;
+    }
+
+
