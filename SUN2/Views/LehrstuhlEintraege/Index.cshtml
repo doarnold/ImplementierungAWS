@@ -70,9 +70,11 @@
                                         <a class="linkTest" href="@Url.Action("Details", "Person", new { id = person.id }, null)">
                                             @Html.DisplayFor(model => item.autor)
                                         </a>
+                                    
+                                                 
                                         break;
                                     }
-                                }
+                            }
                             }
                         }
                     </div>
@@ -112,7 +114,17 @@
                                 <i class='fa fa-users'></i>
                             </a>
 
+
+                            var mail = "mailto:" + ViewBag.mail;
+                    <a href="@mail" , null)" class="btn btn-primary" title="Per Mail antworten">
+                        <i class='fa fa-paper-plane'></i>
+                       
+                    </a>
+
+
                         }
+
+
 
                     </div>
 

@@ -21,7 +21,7 @@
         <div id="wrapper">
 
             <label>Beitrag</label>
-            @Html.EditorFor(model => model.inhalt, new { htmlAttributes = new { id = "userKommentar", placeholder = "Write your comment here. You can Edit and Delete options. Just Hover in Your comment, you see the both buttons" } })
+            @Html.EditorFor(model => model.inhalt, new { htmlAttributes = new { id = "userKommentar", placeholder = "Schreibe hier einen Beitrag. Beachte, dass die Mindesttextlänge 15 Zeichen beträgt." } })
             @Html.ValidationMessageFor(model => model.inhalt, "", new { @class = "text-danger" })
 
 

@@ -74,8 +74,8 @@ namespace SUN2.Controllers
                             {
                                 if (person.id == le.autor)
                                 {
+                                    ViewBag.mail = person.AspNetUsers.Email;
                                     le.autor = HelpFunctions.GetDisplayName(person.id);
-
                                     userid = person.id;
                                 }
                             }
