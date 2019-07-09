@@ -10,360 +10,389 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <head>
     <style>
+        body  {
+  background-image: url("../../Images/CN63QSUO8C.jpg");
+  background-color: #cccccc;
+  background-repeat: no-repeat;
+background-size: 100% 100%;
+}
+        .container {
+            width:100%;
+        }
 
+        .tbox {
+            border-radius:25px;
+            padding:18px;
+            
+            width:35% !important;
+            margin-right: 100px !important;
+}
 
+        }
     </style>
 </head>
+<body>
+    @{
 
-@{
-
-    if (!User.Identity.IsAuthenticated) // wenn der user nicht angemeldet ist, dann hier anwendung vorstellen
-    {
-        <div id="GruppenPlatzhalter"></div>
-        <br />
-        <h2 style="text-align:center; font-weight:bold;">
-            SUN - Das Soziale Uni-Netzwerk der Universität Siegen
-        </h2>
-
-
-        <br /><br />
-        <div>
-            <h3 class="col-sm-11" style="text-align:center; font-weight:bold;">Was ist SUN?</h3>
-            <br />
-            <div class="col-sm-5" style="background-color:aliceblue; margin:10px; height:350px">
-                <div class="col-sm-7">
-                    <h4 style="text-align:left; font-weight:bold;">Sprachrohr der Lehrstühle</h4>
-                    <p style="color:black">
-                        SUN ist in erster Linie ein Angebot für Studenten, die auf der Suche nach Themen und Betreuern für ihre Qualifikationsarbeiten sind. <br />
-                        Es bietet dir die Möglichkeit, alle wichtigen Ausschreibungen der teilnehmenden Lehrstühle gebündelt auf einem Blick einzusehen. <br />
-                        Zusätzlich bleibst du immer über neue Ausschreibungen auf dem Laufenden, da du interessante Lehrstühle abonnieren kannst und so immer als Erster informiert wirst. <br />
-                    </p>
-                </div>
-                <div class="col-sm-5">
-                    <i class="fas fa-graduation-cap" style="font-size:120px; position:absolute; top:100px"></i>
-
-                </div>
-            </div>
-            <div class="col-sm-5" style="background-color:aliceblue; margin:10px; height:350px">
-                <div class="col-sm-7">
-                    <h4 style="text-align:left; font-weight:bold;">Treffpunkt für Studenten</h4>
-                    <p style="color:black">
-                        SUN bietet dir die Möglichkeit interaktive Lerngruppen für bestimmte Kurse oder allgemeine Studienfelder zu bilden. <br />
-                        Organisiere dich mit deinen Komilitonen in privaten oder öffentlichen Lerngruppen und bleibe auch hier mithilfe Gleichgesinnter auf dem Laufenden und tausche dich über <br />
-                        Übungsblätter und Klausurthemen aus.
-                    </p>
-                </div>
-                <div class="col-sm-5">
-                    <i class="fas fa-university" style="font-size:120px; position:absolute; top:100px"></i>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <h3 class="col-sm-11" style="text-align:center; font-weight:bold;">Was bietet mir SUN?</h3>
-            <br />
-            <div class="col-sm-5" style="background-color:aliceblue; margin:10px; height:350px">
-                <h4 style="text-align:left; font-weight:bold;">Keine Ausschreibungen von Lehrstühlen mehr verpassen</h4>
-                <div class="col-sm-7">
-
-                    <p style="color:black">
-                        SUN bietet dir die ultimative Chance, aktuelle Informationen zu Ausschreibungen direkt und auf einem Blick von den Lehrstühlen zu beziehen. <br />
-                        SUN hilft dir ein pasendes Thema für deine Projekt-, Seminar- oder Abschlussarbeit zu finden. <br />
-                        SUN gibt dir Anregungen für eigene Ideen, indem du Themen aus aktuellen Forschungsfeldern einsehen kannst. <br />
-                    </p>
-                </div>
-                <div class="col-sm-5">
-                    <i class="fas fa-briefcase" style="font-size:120px; position:absolute; top:100px"></i>
-
-                </div>
-            </div>
-            <div class="col-sm-5" style="background-color:aliceblue; margin:10px; height:350px">
-                <h4 style="text-align:left; font-weight:bold;">Schließe dich mit deinen Komilitonen in Lerngruppen zusammen</h4>
-                <div class="col-sm-7">
-
-                    <p style="color:black">
-                        SUN bietet dir Kontakt zu Komilitonen, indem es dir eine Plattform zum themenbasierten Austausch bietet. <br />
-                        SUN hilft dir neue Komilitonen zu finden, indem du nach Namen suchst oder dir Informationen wie Studienfach zu Usern anzeigen lässt. <br />
-                        SUN lässt dich nichts verpassen, wenn du einmal krank bist und nicht zur Vorlesung gehen kannst. Frag einfach in Lerngruppen nach Infos. <br />
-                    </p>
-                </div>
-                <div class="col-sm-5">
-                    <i class="fas fa-project-diagram" style="font-size:120px; position:absolute; top:100px"></i>
-                </div>
-            </div>
-        </div>
-        <br />
-
-
-
-
-        @*<div>
-                <h3 class="col-sm-12" style="text-align:left; font-weight:bold;">Was bietet mir SUN?</h3>
-                <br />
-
-                <div class="col-sm-6">
-                    <h4 style="text-align:left; font-weight:bold;">Keine Ausschreibungen von Lehrstühlen mehr verpassen</h4>
-                    <p style="color:black">
-                        SUN bietet dir die ultimative Chance, aktuelle Informationen zu Ausschreibungen direkt und auf einem Blick von den Lehrstühlen zu beziehen. <br />
-                        SUN hilft dir ein pasendes Thema für deine Projekt-, Seminar- oder Abschlussarbeit zu finden. <br />
-                        SUN gibt dir Anregungen für eigene Ideen, indem du Themen aus aktuellen Forschungsfeldern einsehen kannst.
-                    </p>
-                </div>
-                <br />
-
-                <div class="col-sm-6">
-                    <h4 style="text-align:left; font-weight:bold;">Schließe dich mit deinen Komilitonen in Lerngruppen zusammen</h4>
-                    <p style="color:black">
-                        SUN bietet dir Kontakt zu Komilitonen, indem es dir eine Plattform zum themenbasierten Austausch bietet. <br />
-                        SUN hilft dir neue Komilitonen zu finden, indem du nach Namen suchst oder dir Informationen wie Studienfach zu Usern anzeigen lässt. <br />
-                        SUN lässt dich nichts verpassen, wenn du einmal krank bist und nicht zur Vorlesung gehen kannst. Frag einfach in Lerngruppen nach Infos. <br />
-                    </p>
-                </div>
-                <br />
-            </div>*@
-
-
-    }
-    else
-    {
-
-
-
-        if (!Model.Any()) // keine einträge, in diesem fall eine kurzanleitung anzeigen
+        if (!User.Identity.IsAuthenticated) // wenn der user nicht angemeldet ist, dann hier anwendung vorstellen
         {
 
+            @*<div>
+                    <img src="~/Images/CN63QSUO8C.jpg" />
+                </div>*@
             <div id="GruppenPlatzhalter"></div>
-            <h2 style="text-align:center">
-                SUN - Newsfeed
-            </h2>
-            <h5 style="text-align:center">Hier findest Du alle Einträge Deiner Gruppen und abonnierten Lehrstühle</h5>
+            <br />
+            <h1 style="text-align:center; color:white; font-family:'Times New Roman', Times, serif; font-size:60px; padding-top:150px; padding-bottom: 100px; padding:120px;">
+                SUN - Das Soziale Uni-Netzwerk der Universität Siegen
+            </h1>
+
 
             <br /><br />
-            <h3 style="text-align:left; font-weight:bold;">Erste Schritte</h3>
-            <br />
-            <h5 style="text-align:left; font-weight:bold;">Mein Profil bearbeiten</h5>
-            <p style="color:black">Klicke oben rechts auf deine E-Mail-Adresse und anschließend auf "Profil bearbeiten".</p>
-            <br />
-            <h5 style="text-align:left; font-weight:bold;">Gruppen anzeigen / beitreten / erstellen</h5>
-            <p style="color:black">
-                Gruppen anzeigen: Klicke auf "Alle Gruppen", um eine Übersicht der öffentlichen Gruppen aufzurufen.<br />
-                Gruppe beitreten: Um einer Gruppe beizutreten, wähle unter "Alle Gruppen" eine passende Gruppe aus und klicke auf den Daumen nach oben.<br />
-                Gruppe anlegen: Klicke auf "Alle Gruppen" und anschließend auf den Button zum Anlegen einer neuen Gruppe.
-            </p>
-            <br />
-            <h5 style="text-align:left; font-weight:bold;">Lehrstühle anzeigen / abonnieren / erstellen</h5>
-            <p style="color:black">
-                Lehrstühle anzeigen: Klicke auf "Alle Lehrstühle", um eine Übersicht der öffentlichen Lehrstühle aufzurufen.<br />
-                Lehrstuhl abonnieren: Um einen Lehrstuhl zu abonnieren, wähle unter "Alle Lehrstügle" eine passenden Lehrstuhl aus und klicke auf den Daumen nach oben.<br />
-                Lehrstuhl anlegen (für Dozenten): Klicke auf "Alle Lehrstühle" und anschließend auf den Button zum Anlegen eines neuen Lehrstuhls.
-            </p>
-            <br />
-            <h5 style="text-align:left; font-weight:bold;">Einträge anzeigen / erstellen</h5>
-            <p style="color:black">
-                Einträge anzeigen: Gehe auf die Übersichtsseite der Lehrstühle oder Gruppen und klicke den Button zum Anzeigen der Einträge. <br />
-                Einträge erstellen: Um einen Eintrag zu erstellen, lass dir zunächst alle Einträge anzeigen und klicke anschließend den Button zum Erstellen einees neuen Eintrags.
-            </p>
-            <br />
-            <h5 style="text-align:left; font-weight:bold;">Meine Gruppen und Abos verwalten</h5>
-            <p style="color:black">
-                Über "Abos & Mitgliedschaften" kannst du alle abonnierten Lehrstühle und Gruppen anzeigen und auf Wunsch wieder deabonnieren.
-            </p>
-            <br />
-            <h5 style="text-align:left; font-weight:bold;">Nach Dingen suchen</h5>
-            <p style="color:black">
-                Nutze das obige Suchfeld um nach beliebigen Dingen in allen Lehrstühlen, Gruppen und jeweiligen Einträgen zu suchen.
-            </p>
+                  <div>
+                      <h3 class="col-sm-12" style="text-align:center; font-family:'Times New Roman', Times, serif; padding:50px; font-size:35px; color:white; padding-right:90px">Was ist SUN?</h3>
+
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-4 tbox" style="background-color:aliceblue; margin:10px; height:350px">
+
+                          <h4 style="text-align:center; font-weight:bold;">Sprachrohr der Lehrstühle</h4>
+
+                          <div class="col-sm-7">
+
+                              <p style="color:black">
+                                  SUN ist in erster Linie ein Angebot für Studenten, die auf der Suche nach Themen und Betreuern für ihre Qualifikationsarbeiten sind. <br />
+                                  Es bietet dir die Möglichkeit, alle wichtigen Ausschreibungen der teilnehmenden Lehrstühle gebündelt auf einem Blick einzusehen. <br />
+                                  Zusätzlich bleibst du immer über neue Ausschreibungen auf dem Laufenden, da du interessante Lehrstühle abonnieren kannst und so immer als Erster informiert wirst. <br />
+                              </p>
+                          </div>
+                          <div class="col-sm-4">
+                              <i class="fas fa-graduation-cap" style="font-size:120px; position:absolute; top:70px"></i>
+
+                          </div>
+
+                      </div>
+                      <div class="col-sm-5 tbox" style="background-color:aliceblue; margin:10px; height:350px">
+                          <h4 style="text-align:center; font-weight:bold;">Treffpunkt für Studenten</h4>
+                          <div class="col-sm-7">
+
+                              <p style="color:black">
+                                  SUN bietet dir die Möglichkeit interaktive Lerngruppen für bestimmte Kurse oder allgemeine Studienfelder zu bilden. <br />
+                                  Organisiere dich mit deinen Komilitonen in privaten oder öffentlichen Lerngruppen und bleibe auch hier mithilfe Gleichgesinnter auf dem Laufenden und tausche dich über <br />
+                                  Übungsblätter und Klausurthemen aus.
+                              </p>
+                          </div>
+                          <div class="col-sm-5">
+                              <i class="fas fa-university" style="font-size:120px; position:absolute; top:70px"></i>
+                          </div>
+                      </div>
+                      <div class="col-sm-1"></div>
+                  </div>
+
+                  <div>
+                      <h3 class="col-sm-12" style="text-align:center;  font-family:'Times New Roman', Times, serif; padding:50px; color:white; font-size:35px; padding-right:90px">Was bietet mir SUN?</h3>
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-5 tbox" style="background-color:aliceblue; margin:10px; height:350px">
+                          <h4 style="text-align:center; font-weight:bold;">Keine Ausschreibungen von Lehrstühlen mehr verpassen</h4>
+                          <div class="col-sm-7">
+
+                              <p style="color:black">
+                                  SUN bietet dir die ultimative Chance, aktuelle Informationen zu Ausschreibungen direkt und auf einem Blick von den Lehrstühlen zu beziehen. <br />
+                                  SUN hilft dir ein pasendes Thema für deine Projekt-, Seminar- oder Abschlussarbeit zu finden. <br />
+                                  SUN gibt dir Anregungen für eigene Ideen, indem du Themen aus aktuellen Forschungsfeldern einsehen kannst. <br />
+                              </p>
+                          </div>
+                          <div class="col-sm-5">
+                              <i class="fas fa-briefcase" style="font-size:120px; position:absolute; top:70px"></i>
+
+                          </div>
+                      </div>
+                      <div class="col-sm-5 tbox" style="background-color:aliceblue; margin:10px; height:350px">
+                          <h4 style="text-align:center; font-weight:bold;">Schließe dich mit deinen Komilitonen in Lerngruppen zusammen</h4>
+                          <div class="col-sm-7">
+
+                              <p style="color:black">
+                                  SUN bietet dir Kontakt zu Komilitonen, indem es dir eine Plattform zum themenbasierten Austausch bietet. <br />
+                                  SUN hilft dir neue Komilitonen zu finden, indem du nach Namen suchst oder dir Informationen wie Studienfach zu Usern anzeigen lässt. <br />
+                                  SUN lässt dich nichts verpassen, wenn du einmal krank bist und nicht zur Vorlesung gehen kannst. Frag einfach in Lerngruppen nach Infos. <br />
+                              </p>
+                          </div>
+                          <div class="col-sm-5">
+                              <i class="fas fa-project-diagram" style="font-size:120px; position:absolute; top:70px"></i>
+                          </div>
+                      </div>
+                      <div class="col-sm-1"></div>
+                  </div>
             <br />
 
+
+
+
+            @*<div>
+                    <h3 class="col-sm-12" style="text-align:left; font-weight:bold;">Was bietet mir SUN?</h3>
+                    <br />
+
+                    <div class="col-sm-6">
+                        <h4 style="text-align:left; font-weight:bold;">Keine Ausschreibungen von Lehrstühlen mehr verpassen</h4>
+                        <p style="color:black">
+                            SUN bietet dir die ultimative Chance, aktuelle Informationen zu Ausschreibungen direkt und auf einem Blick von den Lehrstühlen zu beziehen. <br />
+                            SUN hilft dir ein pasendes Thema für deine Projekt-, Seminar- oder Abschlussarbeit zu finden. <br />
+                            SUN gibt dir Anregungen für eigene Ideen, indem du Themen aus aktuellen Forschungsfeldern einsehen kannst.
+                        </p>
+                    </div>
+                    <br />
+
+                    <div class="col-sm-6">
+                        <h4 style="text-align:left; font-weight:bold;">Schließe dich mit deinen Komilitonen in Lerngruppen zusammen</h4>
+                        <p style="color:black">
+                            SUN bietet dir Kontakt zu Komilitonen, indem es dir eine Plattform zum themenbasierten Austausch bietet. <br />
+                            SUN hilft dir neue Komilitonen zu finden, indem du nach Namen suchst oder dir Informationen wie Studienfach zu Usern anzeigen lässt. <br />
+                            SUN lässt dich nichts verpassen, wenn du einmal krank bist und nicht zur Vorlesung gehen kannst. Frag einfach in Lerngruppen nach Infos. <br />
+                        </p>
+                    </div>
+                    <br />
+                </div>*@
 
 
         }
         else
         {
 
-            var zuordnung = ViewBag.zuordnung;
-            var counter = 0;
 
+
+            if (!Model.Any()) // keine einträge, in diesem fall eine kurzanleitung anzeigen
             {
 
+                <div id="GruppenPlatzhalter"></div>
+                <h2 style="text-align:center">
+                    SUN - Newsfeed
+                </h2>
+                <h5 style="text-align:center">Hier findest Du alle Einträge Deiner Gruppen und abonnierten Lehrstühle</h5>
 
-                foreach (var item in Model)
+                <br /><br />
+                <h3 style="text-align:left; font-weight:bold;">Erste Schritte</h3>
+                <br />
+                <h5 style="text-align:left; font-weight:bold;">Mein Profil bearbeiten</h5>
+                <p style="color:black">Klicke oben rechts auf deine E-Mail-Adresse und anschließend auf "Profil bearbeiten".</p>
+                <br />
+                <h5 style="text-align:left; font-weight:bold;">Gruppen anzeigen / beitreten / erstellen</h5>
+                <p style="color:black">
+                    Gruppen anzeigen: Klicke auf "Alle Gruppen", um eine Übersicht der öffentlichen Gruppen aufzurufen.<br />
+                    Gruppe beitreten: Um einer Gruppe beizutreten, wähle unter "Alle Gruppen" eine passende Gruppe aus und klicke auf den Daumen nach oben.<br />
+                    Gruppe anlegen: Klicke auf "Alle Gruppen" und anschließend auf den Button zum Anlegen einer neuen Gruppe.
+                </p>
+                <br />
+                <h5 style="text-align:left; font-weight:bold;">Lehrstühle anzeigen / abonnieren / erstellen</h5>
+                <p style="color:black">
+                    Lehrstühle anzeigen: Klicke auf "Alle Lehrstühle", um eine Übersicht der öffentlichen Lehrstühle aufzurufen.<br />
+                    Lehrstuhl abonnieren: Um einen Lehrstuhl zu abonnieren, wähle unter "Alle Lehrstügle" eine passenden Lehrstuhl aus und klicke auf den Daumen nach oben.<br />
+                    Lehrstuhl anlegen (für Dozenten): Klicke auf "Alle Lehrstühle" und anschließend auf den Button zum Anlegen eines neuen Lehrstuhls.
+                </p>
+                <br />
+                <h5 style="text-align:left; font-weight:bold;">Einträge anzeigen / erstellen</h5>
+                <p style="color:black">
+                    Einträge anzeigen: Gehe auf die Übersichtsseite der Lehrstühle oder Gruppen und klicke den Button zum Anzeigen der Einträge. <br />
+                    Einträge erstellen: Um einen Eintrag zu erstellen, lass dir zunächst alle Einträge anzeigen und klicke anschließend den Button zum Erstellen einees neuen Eintrags.
+                </p>
+                <br />
+                <h5 style="text-align:left; font-weight:bold;">Meine Gruppen und Abos verwalten</h5>
+                <p style="color:black">
+                    Über "Abos & Mitgliedschaften" kannst du alle abonnierten Lehrstühle und Gruppen anzeigen und auf Wunsch wieder deabonnieren.
+                </p>
+                <br />
+                <h5 style="text-align:left; font-weight:bold;">Nach Dingen suchen</h5>
+                <p style="color:black">
+                    Nutze das obige Suchfeld um nach beliebigen Dingen in allen Lehrstühlen, Gruppen und jeweiligen Einträgen zu suchen.
+                </p>
+                <br />
+
+
+
+            }
+            else
+            {
+
+                var zuordnung = ViewBag.zuordnung;
+                var counter = 0;
+
                 {
 
-                    if (counter == 0)
+
+                    foreach (var item in Model)
                     {
-                        <div id="GruppenPlatzhalter"></div>
-                        <h2 style="text-align:center">
-                            SUN - Newsfeed
-                        </h2>
-                        <h5 style="text-align:center">Hier findest Du alle Einträge Deiner Gruppen und abonnierten Lehrstühle</h5>
-                        <div id="GruppenPlatzhalter"></div>
-                        counter++;
-                    }
+
+                        if (counter == 0)
+                        {
+                            <div id="GruppenPlatzhalter"></div>
+                            <h2 style="text-align:center">
+                                SUN - Newsfeed
+                            </h2>
+                            <h5 style="text-align:center">Hier findest Du alle Einträge Deiner Gruppen und abonnierten Lehrstühle</h5>
+                            <div id="GruppenPlatzhalter"></div>
+                            counter++;
+                        }
 
 
 
-                    <div id="GruppenBeitragGesamt">
+                        <div id="GruppenBeitragGesamt">
 
 
-                        <div id="GruppenHead">
-                            <div id="GruppenPostName">
-                                @{
-                                    if (zuordnung != null)
-                                    {
-                                        foreach (var person in zuordnung)
+                            <div id="GruppenHead">
+                                <div id="GruppenPostName">
+                                    @{
+                                        if (zuordnung != null)
                                         {
-                                            if (person.name == item.autor)
+                                            foreach (var person in zuordnung)
                                             {
-                                                <a class="linkTest" href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                                    @Html.DisplayFor(model => item.autor)
-                                                </a>
-                                                break;
+                                                if (person.name == item.autor)
+                                                {
+                                                    <a class="linkTest" href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                                        @Html.DisplayFor(model => item.autor)
+                                                    </a>
+                                                    break;
+                                                }
                                             }
                                         }
-                                    }
 
-                                    if (item.typ == "g")
-                                    {
-                                        <a class="linkTest" href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.entityid })">
-                                            <i>in</i>
-                                            @Html.DisplayFor(model => item.entityname)
-                                        </a>
-                                    }
-                                    else
-                                    {
-
-                                        <a class="linkTest" href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid })">
-                                            <i>in</i>
-                                            @Html.DisplayFor(model => item.entityname)
-                                        </a>
-                                    }
-
-
-                                }
-                            </div>
-                            <br />
-                            <br />
-
-                            <div>@Html.DisplayFor(modelItem => item.datum.Day).@Html.DisplayFor(modelItem => item.datum.Month).@Html.DisplayFor(modelItem => item.datum.Year) </div>
-
-
-                            <div id="GruppenEdit">
-
-
-
-                                @{
-                                    if (item.typ == "g")
-                                    {
-
-
-                                        var verant = ViewBag.verantwortlich;
-                                        var aut = ViewBag.autor;
-
-                                        if (verant[item.entityid] == true || aut[item.id] == true || User.IsInRole("Admin"))
+                                        if (item.typ == "g")
+                                        {
+                                            <a class="linkTest" href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.entityid })">
+                                                <i>in</i>
+                                                @Html.DisplayFor(model => item.entityname)
+                                            </a>
+                                        }
+                                        else
                                         {
 
-                                            <a href="@Url.Action("Edit", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Bearbeiten">
-                                                <i class='fas fa-edit'></i>
+                                            <a class="linkTest" href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid })">
+                                                <i>in</i>
+                                                @Html.DisplayFor(model => item.entityname)
                                             </a>
-                                            // @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
-                                            // @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
-                                            <a href="@Url.Action("Delete", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Löschen">
-                                                <i class='fas fa-trash-alt'></i>
-                                            </a>
-
                                         }
 
 
-                                        //@Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
-                                        <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)" class="btn btn-primary" title="Gruppe">
-                                            <i class='fa fa-users'></i>
-                                        </a>
                                     }
-                                    else
-                                    {
-                                        var lverant = ViewBag.lverantwortlich;
-                                        var laut = ViewBag.lautor;
+                                </div>
+                                <br />
+                                <br />
 
-                                        if (lverant[item.entityid] == true || laut[item.id] == true || User.IsInRole("Admin"))
+                                <div>@Html.DisplayFor(modelItem => item.datum.Day).@Html.DisplayFor(modelItem => item.datum.Month).@Html.DisplayFor(modelItem => item.datum.Year) </div>
+
+
+                                <div id="GruppenEdit">
+
+
+
+                                    @{
+                                        if (item.typ == "g")
                                         {
 
 
-                                            <a href="@Url.Action("Edit", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Bearbeiten">
-                                                <i class='fas fa-edit'></i>
-                                            </a>
-                                            <a href="@Url.Action("Delete", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Löschen">
-                                                <i class='fas fa-trash-alt'></i>
+                                            var verant = ViewBag.verantwortlich;
+                                            var aut = ViewBag.autor;
+
+                                            if (verant[item.entityid] == true || aut[item.id] == true || User.IsInRole("Admin"))
+                                            {
+
+                                                <a href="@Url.Action("Edit", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Bearbeiten">
+                                                    <i class='fas fa-edit'></i>
+                                                </a>
+                                                // @Html.ActionLink("Eintrag bearbeiten", "Edit", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                                                // @Html.ActionLink("Eintrag löschen", "Delete", "GruppenEintraege", new { id = item.id }, null) <a>|</a>
+                                                <a href="@Url.Action("Delete", "GruppenEintraege", new { id = item.id })" class="btn btn-primary" title="Löschen">
+                                                    <i class='fas fa-trash-alt'></i>
+                                                </a>
+
+                                            }
+
+
+                                            //@Html.ActionLink("Zur Gruppe", "Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)
+                                            <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.entityid }, null)" class="btn btn-primary" title="Gruppe">
+                                                <i class='fa fa-users'></i>
                                             </a>
                                         }
+                                        else
+                                        {
+                                            var lverant = ViewBag.lverantwortlich;
+                                            var laut = ViewBag.lautor;
 
-                                        <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)" class="btn btn-primary" title="Lehrstuhl">
-                                            <i class='fa fa-users'></i>
-                                        </a>
+                                            if (lverant[item.entityid] == true || laut[item.id] == true || User.IsInRole("Admin"))
+                                            {
+
+
+                                                <a href="@Url.Action("Edit", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Bearbeiten">
+                                                    <i class='fas fa-edit'></i>
+                                                </a>
+                                                <a href="@Url.Action("Delete", "LehrstuhlEintraege", new { id = item.id }, null)" class="btn btn-primary" title="Löschen">
+                                                    <i class='fas fa-trash-alt'></i>
+                                                </a>
+                                            }
+
+                                            <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.entityid }, null)" class="btn btn-primary" title="Lehrstuhl">
+                                                <i class='fa fa-users'></i>
+                                            </a>
+                                        }
                                     }
+
+                                </div>
+
+                            </div>
+
+                            <div id="GruppenInhalt">
+                                @Html.DisplayFor(modelItem => item.inhalt)
+                            </div>
+
+
+
+                            <div id="GruppenLabelsRahmen">
+
+
+
+
+                                @if (item.label1 != null && item.label1 != "")
+                                {
+
+                                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1 }, null)">#@item.label1</a>
+
+                                }
+                                else
+                                {
+                                }
+
+                                @if (item.label2 != null && item.label2 != "")
+                                {
+
+                                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2 }, null)">#@item.label2</a>
+                                }
+                                @if (item.label3 != null && item.label3 != "")
+                                {
+
+                                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3 }, null)">#@item.label3</a>
+                                }
+                                @if (item.label4 != null && item.label4 != "")
+                                {
+
+                                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4 }, null)">#@item.label4</a>
+                                }
+                                @if (item.label5 != null && item.label5 != "")
+                                {
+
+                                    <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5 }, null)">#@item.label5</a>
                                 }
 
                             </div>
 
-                        </div>
-
-                        <div id="GruppenInhalt">
-                            @Html.DisplayFor(modelItem => item.inhalt)
-                        </div>
 
 
+                            @*<div id="GruppenPlatzhalter"></div>*@
 
-                        <div id="GruppenLabelsRahmen">
-
-
-
-
-                            @if (item.label1 != null && item.label1 != "")
-                            {
-
-                                <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label1 }, null)">#@item.label1</a>
-
-                            }
-                            else
-                            {
-                            }
-
-                            @if (item.label2 != null && item.label2 != "")
-                            {
-
-                                <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label2 }, null)">#@item.label2</a>
-                            }
-                            @if (item.label3 != null && item.label3 != "")
-                            {
-
-                                <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label3 }, null)">#@item.label3</a>
-                            }
-                            @if (item.label4 != null && item.label4 != "")
-                            {
-
-                                <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label4 }, null)">#@item.label4</a>
-                            }
-                            @if (item.label5 != null && item.label5 != "")
-                            {
-
-                                <a class="btn btn-info" href="@Url.Action("Search", "Home", new { searchstr = item.label5 }, null)">#@item.label5</a>
-                            }
 
                         </div>
-
-
-
-                        @*<div id="GruppenPlatzhalter"></div>*@
-
-
-                    </div>
+                    }
                 }
             }
         }
+
     }
-
-}
-
+</body>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
 <script>
 
