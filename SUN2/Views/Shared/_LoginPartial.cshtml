@@ -21,6 +21,7 @@
         @*<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>*@
     <ul class="dropdown-menu">
         <li>@Html.ActionLink("Profil bearbeiten", "EditMe", "Person", routeValues: null, htmlAttributes: new { @class = "nav-item-dropdown" })</li>
+        <li>@Html.ActionLink("Kennwort ändern", "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { @class = "nav-item-dropdown" })</li>
         @if (User.IsInRole("Admin"))
         {
             <li>@Html.ActionLink("Administration", "Administration", "Home", routeValues: null, htmlAttributes: new { @class = "nav-item-dropdown" })</li>
