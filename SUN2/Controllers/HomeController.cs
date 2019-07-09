@@ -298,114 +298,121 @@ namespace SUN2.Controllers
         // export: SearchModel
         public ActionResult Search(String searchstr)
         {
-            // liefert die Ergebnisse
-            List<SearchModel> sml = new List<SearchModel>();
-
-            // in gruppen suchen
-            var gruppe = db.Gruppes.Where(p => p.bezeichnung.Contains(searchstr) || 
-                                   p.beschreibung.Contains(searchstr) ||
-                                   p.verantwortlicher.Contains(searchstr));
-
-            foreach(Gruppe gr in gruppe)
+            if(searchstr == "")
             {
-                sml.Add(new SearchModel
+                return Redirect("Index");
+            } else
+            {
+                // liefert die Ergebnisse
+                List<SearchModel> sml = new List<SearchModel>();
+
+                // in gruppen suchen
+                var gruppe = db.Gruppes.Where(p => p.bezeichnung.Contains(searchstr) ||
+                                       p.beschreibung.Contains(searchstr) ||
+                                       p.verantwortlicher.Contains(searchstr));
+
+                foreach (Gruppe gr in gruppe)
                 {
-                    id = 0,
-                    entityid = gr.gruppenid,
-                    field1 = gr.bezeichnung,
-                    field2 = HelpFunctions.GetDisplayName(gr.verantwortlicher),
-                    field3 = "",
-                    field4 = "",
-                    typ = "g"
-                });
+                    sml.Add(new SearchModel
+                    {
+                        id = 0,
+                        entityid = gr.gruppenid,
+                        field1 = gr.bezeichnung,
+                        field2 = HelpFunctions.GetDisplayName(gr.verantwortlicher),
+                        field3 = "",
+                        field4 = "",
+                        typ = "g"
+                    });
+                }
+
+                // in lehrstühlen suchen
+                var lehrstuhl = db.Lehrstuhls.Where(p => p.bezeichnung.Contains(searchstr) ||
+                                       p.beschreibung.Contains(searchstr) ||
+                                       p.verantwortlicher.Contains(searchstr));
+
+                foreach (Lehrstuhl l in lehrstuhl)
+                {
+                    sml.Add(new SearchModel
+                    {
+                        id = 0,
+                        entityid = l.lehrstuhlid,
+                        field1 = l.bezeichnung,
+                        field2 = HelpFunctions.GetDisplayName(l.verantwortlicher),
+                        field3 = "",
+                        field4 = "",
+                        typ = "l"
+                    });
+                }
+
+                // in gruppeneinträgen suchen
+                var gruppeneintraege = db.GruppenEintraeges.Where(p => p.autor.Contains(searchstr) ||
+                                       p.inhalt.Contains(searchstr) ||
+                                       p.label1.Contains(searchstr) ||
+                                       p.label2.Contains(searchstr) ||
+                                       p.label3.Contains(searchstr) ||
+                                       p.label4.Contains(searchstr) ||
+                                       p.label5.Contains(searchstr));
+
+                foreach (GruppenEintraege ge in gruppeneintraege)
+                {
+                    sml.Add(new SearchModel
+                    {
+                        id = ge.id,
+                        entityid = ge.gruppenid,
+                        field1 = ge.inhalt,
+                        field2 = HelpFunctions.GetDisplayName(ge.autor),
+                        field3 = ge.datum.ToString(),
+                        field4 = "",
+                        typ = "ge"
+                    });
+                }
+
+
+                // in lehrstuhleinträgen suchen
+                var lehrstuhleintraege = db.LehrstuhlEintraeges.Where(p => p.autor.Contains(searchstr) ||
+                                       p.inhalt.Contains(searchstr) ||
+                                       p.label1.Contains(searchstr) ||
+                                       p.label2.Contains(searchstr) ||
+                                       p.label3.Contains(searchstr) ||
+                                       p.label4.Contains(searchstr) ||
+                                       p.label5.Contains(searchstr));
+
+                foreach (LehrstuhlEintraege le in lehrstuhleintraege)
+                {
+                    sml.Add(new SearchModel
+                    {
+                        id = le.id,
+                        entityid = le.lehrstuhlid,
+                        field1 = le.inhalt,
+                        field2 = HelpFunctions.GetDisplayName(le.autor),
+                        field3 = le.datum.ToString(),
+                        field4 = "",
+                        typ = "le"
+                    });
+                }
+
+
+                // in personen suchen
+                var personen = db.Person.Where(p => p.name.Contains(searchstr) ||
+                                       p.vorname.Contains(searchstr));
+
+                foreach (Person p in personen)
+                {
+                    sml.Add(new SearchModel
+                    {
+                        id = 0,
+                        entityid = 0,
+                        field1 = HelpFunctions.GetDisplayName(p.id),
+                        field2 = p.AspNetUsers.Role,
+                        field3 = p.AspNetUsers.Email,
+                        field4 = p.id,
+                        typ = "p"
+                    });
+                }
+
+                return View(sml);
             }
 
-            // in lehrstühlen suchen
-            var lehrstuhl = db.Lehrstuhls.Where(p => p.bezeichnung.Contains(searchstr) ||
-                                   p.beschreibung.Contains(searchstr) ||
-                                   p.verantwortlicher.Contains(searchstr));
-
-            foreach (Lehrstuhl l in lehrstuhl)
-            {
-                sml.Add(new SearchModel
-                {
-                    id = 0,
-                    entityid = l.lehrstuhlid,
-                    field1 = l.bezeichnung,
-                    field2 = HelpFunctions.GetDisplayName(l.verantwortlicher),
-                    field3 = "",
-                    field4 = "",
-                    typ = "l"
-                });
-            }
-
-            // in gruppeneinträgen suchen
-            var gruppeneintraege = db.GruppenEintraeges.Where(p => p.autor.Contains(searchstr) ||
-                                   p.inhalt.Contains(searchstr) ||
-                                   p.label1.Contains(searchstr) ||
-                                   p.label2.Contains(searchstr) ||
-                                   p.label3.Contains(searchstr) ||
-                                   p.label4.Contains(searchstr) ||
-                                   p.label5.Contains(searchstr));
-
-            foreach (GruppenEintraege ge in gruppeneintraege)
-            {
-                sml.Add(new SearchModel
-                {
-                    id = ge.id,
-                    entityid = ge.gruppenid,
-                    field1 = ge.inhalt,
-                    field2 = HelpFunctions.GetDisplayName(ge.autor),
-                    field3 = ge.datum.ToString(),
-                    field4 = "",
-                    typ = "ge"
-                });
-            }
-
-
-            // in lehrstuhleinträgen suchen
-            var lehrstuhleintraege = db.LehrstuhlEintraeges.Where(p => p.autor.Contains(searchstr) ||
-                                   p.inhalt.Contains(searchstr) ||
-                                   p.label1.Contains(searchstr) ||
-                                   p.label2.Contains(searchstr) ||
-                                   p.label3.Contains(searchstr) ||
-                                   p.label4.Contains(searchstr) ||
-                                   p.label5.Contains(searchstr));
-
-            foreach (LehrstuhlEintraege le in lehrstuhleintraege)
-            {
-                sml.Add(new SearchModel
-                {
-                    id = le.id,
-                    entityid = le.lehrstuhlid,
-                    field1 = le.inhalt,
-                    field2 = HelpFunctions.GetDisplayName(le.autor),
-                    field3 = le.datum.ToString(),
-                    field4 = "",
-                    typ = "le"
-                });
-            }
-
-
-            // in personen suchen
-            var personen = db.Person.Where(p => p.name.Contains(searchstr) ||
-                                   p.vorname.Contains(searchstr));
-
-            foreach (Person p in personen)
-            {
-                sml.Add(new SearchModel
-                {
-                    id = 0,
-                    entityid = 0,
-                    field1 = HelpFunctions.GetDisplayName(p.id),
-                    field2 = p.AspNetUsers.Role,
-                    field3 = p.AspNetUsers.Email,
-                    field4 = p.id,
-                    typ = "p"
-                });
-            }
-
-            return View(sml);
         }
 
 
