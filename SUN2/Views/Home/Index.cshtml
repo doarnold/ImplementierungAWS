@@ -27,13 +27,101 @@
         }
 
         .tbox {
+            display:none;
             border-radius: 25px;
             padding: 18px;
             width: 35% !important;
             margin-right: 100px !important;
             color:#686868;
         }
-        }
+        .scroll-down {
+  opacity: 1;
+  -webkit-transition: all .5s ease-in 3s;
+  transition: all .5s ease-in 3s;
+}
+
+#middle {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  margin-left: -16px;
+  display: block;
+  width: 45px;
+  height: 45px;
+  border: 2px solid #FFF;
+  background-size: 14px auto;
+  border-radius: 50%;
+  z-index: 2;
+  -webkit-animation: bounce 2s infinite 2s;
+  animation: bounce 2s infinite 2s;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+  transform: scale(1)
+}
+
+#middle:before {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 6px);
+    transform: rotate(-45deg);
+    display: block;
+    width: 12px;
+    height: 12px;
+    content: "";
+    border: 2px solid white;
+    border-width: 0px 0 2px 2px;
+}
+
+@@keyframes wiggle {
+  2% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  4% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  6% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  8% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  10% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+  12% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  14% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+  16% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  18% {
+    -webkit-transform: translateX(1px) rotate(0);
+    transform: translateX(1px) rotate(0);
+  }
+  20% {
+    -webkit-transform: translateX(-1px) rotate(0);
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+h1.wiggle {
+  display: inline-block;
+  animation: wiggle 1.7s infinite;
+}
+
+
+        
     </style>
 </head>
 
@@ -41,23 +129,26 @@
 
     if (!User.Identity.IsAuthenticated) // wenn der user nicht angemeldet ist, dann hier anwendung vorstellen
     {
-        <div class="body2">
+    <div class="body2">
 
-            @*<div>
-                    <img src="~/Images/CN63QSUO8C.jpg" />
-                </div>*@
-            <div id="GruppenPlatzhalter"></div>
-            <br />
-            <h1 style="text-align:center; color:white; font-family:'Times New Roman', Times, serif; font-size:60px; padding-top:150px; padding-bottom: 100px; padding:120px;">
-                SUN - Das Soziale Uni-Netzwerk der Universität Siegen
+        @*<div>
+            <img src="~/Images/CN63QSUO8C.jpg" />
+        </div>*@
+        <div id="GruppenPlatzhalter"></div>
+        <br />
+        <h1 style="text-align:center; color:white; font-family:'Times New Roman', Times, serif; font-size:60px; padding-top:150px; padding-bottom: 100px; padding:120px;">
+            SUN - Das Soziale Uni-Netzwerk der Universität Siegen
+        </h1>
+
+        <a class="btn btn-success" style="position:absolute; left:46% " href="/Account/Register" id="registerLink">Jetzt registrieren</a>
+
+
+        <br /><br />
+        <h1 class="wiggle" style="position:absolute; left:50%; bottom:0px;">
+            <a class="wiggle" id="middle" href="#middle2"></a>
             </h1>
-
-            <a class="btn btn-success" style ="position:absolute; left:45% "href="/Account/Register" id="registerLink">Jetzt registrieren</a>
-
-
-            <br /><br />
-            <div>
-                <h3 class="col-sm-12" style="text-align:center; font-family:'Times New Roman', Times, serif; padding:50px; font-size:35px; color:#686868; padding-right:90px">Was ist SUN?</h3>
+            <div style="padding-top:100px">
+                <h3 id="middle2" class="col-sm-12" style="text-align:center; font-family:'Times New Roman', Times, serif; padding:50px; font-size:35px; color:#686868; padding-right:90px; padding-top:150px">Was ist SUN?</h3>
 
                 <div class="col-sm-1"></div>
                 <div class="col-sm-4 tbox" style="background-color:aliceblue; margin:10px; height:350px">
@@ -130,7 +221,7 @@
                 <div class="col-sm-1"></div>
             </div>
             <br />
-        </div>
+    </div>
 
 
 
@@ -408,6 +499,11 @@
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $("#middle").click(function () {
 
+            $(".tbox").fadeIn(3000);
+        });
+    });
 </script>
 
