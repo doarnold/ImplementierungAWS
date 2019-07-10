@@ -1012,13 +1012,13 @@ background-color: #FFFFFF;
 
 
 
-    #Anlegen-box input[type='text']:focus, input[type="password"]:focus {
+    #Anlegen-box input[type='text']:focus{
         color: black;
         border: 1px solid black;
         outline: none;
     }
 
-    #Anlegen-box input[type='text'], input[type='password'] {
+    #Anlegen-box input[type='text'] {
         margin-top: 3px;
         margin-bottom: 10px;
         width: 100%;
