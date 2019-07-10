@@ -14,35 +14,34 @@
 
 
 
-<div id="Anlegen-box">
-    <h2 style="text-align:center">Neue Gruppe</h2>
-   <br />
+    <div id="Anlegen-box">
+        <h2 style="text-align:center">Neue Gruppe</h2>
+        <br />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-       
-           
+
+
         @Html.EditorFor(model => model.bezeichnung, new { htmlAttributes = new { @placeholder = "Bezeichnung" } })
         @Html.ValidationMessageFor(model => model.bezeichnung, "", new { @class = "text-danger" })
 
-           
-        @Html.EditorFor(model => model.beschreibung, new { htmlAttributes = new {@placeholder = "Beschreibung"  } })
+
+        @Html.EditorFor(model => model.beschreibung, new { htmlAttributes = new { @placeholder = "Beschreibung" } })
         @Html.ValidationMessageFor(model => model.beschreibung, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(model => model.privat, htmlAttributes: new { @class = "control-label col-md-2" })
+      
    
-     
         @Html.DropDownListFor(model => model.privat, new List<SelectListItem>() { new SelectListItem() { Text = "Privat", Value = "True" }, new SelectListItem() { Text = "Öffentlich", Value = "False" } })
         @Html.ValidationMessageFor(model => model.privat, "", new { @class = "text-danger" })
- 
-    <br />
-    <br />
+
+        <br />
+        <br />
 
 
-                <input type="submit" value="Anlegen" class="button">
-      
+        <input type="submit" value="Anlegen" class="button">
 
 
-</div>
+
+    </div>
 
     }
 
