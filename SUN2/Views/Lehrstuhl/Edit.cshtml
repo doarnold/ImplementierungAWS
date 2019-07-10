@@ -1,5 +1,5 @@
 ﻿@model SUN2.Models.Lehrstuhl
-
+@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Lehrstuhl bearbeiten";
 }
@@ -7,7 +7,7 @@
 @if (Request.IsAuthenticated)
 {
 
-    <h2>Lehrstuhl bearbeiten</h2>
+    
 
     using (Html.BeginForm())
     {
@@ -16,50 +16,52 @@
         @Html.HiddenFor(model => model.verantwortlicher)
         @Html.HiddenFor(model => model.lehrstuhlid)
 
-        <div class="form-horizontal">
-            <h4>Lehrstuhl</h4>
+        <div id="Anlegen-box" style="width: 450px">
+
+
+            <h2>Lehrstuhl bearbeiten</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.bezeichnung, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.bezeichnung, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.bezeichnung, "", new { @class = "text-danger" })
-                </div>
+            <label class="col-sm-3">Bezeichnung:</label>
+
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.bezeichnung, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.bezeichnung, "", new { @class = "text-danger" })
+
+            </div>
+            <label class="col-sm-3">Beschreibung:</label>
+
+            <div class="col-sm-9">
+                @Html.EditorFor(model => model.beschreibung, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.beschreibung, "", new { @class = "text-danger" })
+
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.beschreibung, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.beschreibung, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.beschreibung, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            <label class="col-sm-3">Sichtbarkeit:</label>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.privat, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.DropDownListFor(model => model.privat, new List<SelectListItem>() { new SelectListItem() { Text = "Privat", Value = "True" }, new SelectListItem() { Text = "Öffentlich", Value = "False" } })
-                        @Html.ValidationMessageFor(model => model.privat, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="col-sm-9">
+
+                @Html.DropDownListFor(model => model.privat, new List<SelectListItem>() { new SelectListItem() { Text = "Privat", Value = "True" }, new SelectListItem() { Text = "Öffentlich", Value = "False" } })
+                @Html.ValidationMessageFor(model => model.privat, "", new { @class = "text-danger" })
             </div>
 
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Speichern" class="btn btn-primary" />
-                </div>
-            </div>
+            <br />
+            <br />
+
+            <input type="submit" value="Speichern" class="button" style="width: 100%; max-width: 100%">
         </div>
+
+
+
     }
 
-    <div>
-        @Html.ActionLink("Zurück", "Index",null, new {@class = "btn btn-primary"})
+    <div style="text-align:center">
+        @Html.ActionLink("Zurück", "Index", null, new { @class = "btn btn-primary" })
     </div>
+
 
 }
 else
