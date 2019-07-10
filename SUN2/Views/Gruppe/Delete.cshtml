@@ -1,5 +1,5 @@
 ﻿@model SUN2.Models.Gruppe
-
+@Styles.Render("~/Content/css")
 @{
     ViewBag.Title = "Gruppe löschen";
 }
@@ -8,23 +8,28 @@
 @if (Request.IsAuthenticated)
 {
 
-    <h3>Möchten Sie die Gruppe " @Html.DisplayFor(model => model.bezeichnung) " wirklich löschen?</h3>
-    <div>
+    <div id="delteDialog">
+
+        <h2>Löschen</h2>
         <hr />
-        <dl class="dl-horizontal"></dl>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+        <h3>Möchten Sie die Gruppe " @Html.DisplayFor(model => model.bezeichnung) " wirklich löschen?</h3>
+       
+            <dl class="dl-horizontal"></dl>
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Gruppe löschen" class="btn btn-primary" />
-                @Html.ActionLink("Zurück", "Index", null, new {@class = "btn btn-primary"})
-            </div>
-        }
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Gruppe löschen" class="btn btn-primary" />
+                    @Html.ActionLink("Zurück", "Index", null, new { @class = "btn btn-primary" })
+                </div>
+            }
+       
     </div>
 }
 else
 {
-    Response.Redirect("/Error/NotLoggedIn");
+Response.Redirect("/Error/NotLoggedIn");
 }
