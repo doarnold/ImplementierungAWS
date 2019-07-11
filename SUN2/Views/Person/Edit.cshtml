@@ -1,7 +1,7 @@
 ﻿@model SUN2.Models.Person
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Bearbeiten";
 }
 
 
@@ -11,15 +11,15 @@
 
 @if (Request.IsAuthenticated)
 {
-
-    <h2>Edit</h2>
+    <br />
+    <h2>Profil bearbeiten</h2>
 
     using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Person</h4>
+
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
@@ -87,10 +87,13 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Änderung speichern" class="btn btn-primary" />
+
+                    @Html.ActionLink("Zurück zur Übersicht", "Index", "Person", null, new { @class = "btn btn-primary" })
                 </div>
             </div>
         </div>
+
     }
 
     @*<div>
