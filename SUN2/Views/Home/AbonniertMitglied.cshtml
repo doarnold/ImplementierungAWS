@@ -9,126 +9,157 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 @if (Request.IsAuthenticated)
+{
+
+    if (!Model.Any()) // keine einträge vorhanden
     {
 
-<br />
-<div id="ListHeader">
-    <h2>Meine Gruppen & abonnierten Lehrstühle</h2>
 
-    <div class="form-group">
-        <div class="col-md-6">
-            <p>
-                @Html.ActionLink("Zu den Lehrstühlen", "Index", "Lehrstuhl", new {@class = "btn btn-primary"})
-            </p>
+
+
+        <h3 style="color:black; text-align:center; margin-bottom: 5%; margin-top: 20%">Leider hast du noch keine Lehrstühle abonniert und bist noch keiner Gruppe beigetreten.</h3>
+
+
+    }
+    else
+    {
+
+
+        <br />
+        <div id="ListHeader">
+            <h2>Meine Gruppen & abonnierten Lehrstühle</h2>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <p>
+                        @Html.ActionLink("Zu den Lehrstühlen", "Index", "Lehrstuhl", new { @class = "btn btn-primary" })
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        @Html.ActionLink("Zu den Gruppen", "Index", "Gruppe", new { @class = "btn btn-primary" })
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <p>
-                @Html.ActionLink("Zu den Gruppen", "Index", "Gruppe", new {@class = "btn btn-primary"})
-            </p>
-        </div>
-    </div>
-</div>
 
-<br />
+        <br />
 
 
-<div id="ListContainer">
-    <table class="table">
-        <tr>
-            <th>
-                Bezeichnung
-            </th>
-            <th>
-                Beschreibung
-            </th>
-            <th>
-                Verantwortlicher
-            </th>
-            <th>
+        <div id="ListContainer">
+            <table class="table">
+                <tr>
+                    <th>
+                        Bezeichnung
+                    </th>
+                    <th>
+                        Beschreibung
+                    </th>
+                    <th>
+                        Verantwortlicher
+                    </th>
+                    <th>
 
-            </th>
-        </tr>
+                    </th>
+                </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @{
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @{
 
-                        if (item.typ == "g")
-                        {
-                            <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
-                                @Html.DisplayFor(modelItem => item.bezeichnung)
-                            </a>
-
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
-                                @Html.DisplayFor(modelItem => item.bezeichnung)
-                            </a>
-
-
-                        }
-                    }
-
-
-
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.beschreibung)
-                </td>
-                <td>
-                    @{
-                        if (ViewBag.zuordnung != null)
-                        {
-                            foreach (var person in ViewBag.zuordnung)
-                            {
-                                if (person.name == item.verantwortlicher)
+                                if (item.typ == "g")
                                 {
-                                    <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
-                                        @Html.DisplayFor(model => item.verantwortlicher)
+                                    <a href="@Url.Action("Index", "GruppenEintraege", new { gruppenid = item.id }, null)">
+                                        @Html.DisplayFor(modelItem => item.bezeichnung)
                                     </a>
-                                    break;
+
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Index", "LehrstuhlEintraege", new { lehrstuhlid = item.id }, null)">
+                                        @Html.DisplayFor(modelItem => item.bezeichnung)
+                                    </a>
+
+
                                 }
                             }
-                        }
-
-                    }
-                </td>
-
-
-                <td>
-                    @{
-
-                        if (item.typ == "g")
-                        {
-                            <a href="@Url.Action("Austreten", "MitgliederGruppe", new { gruppenid = item.id}, null )" class="btn btn-primary" title="Austreten">
-                                <i class='fa fa-thumbs-down'></i>
-                            </a>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.id }, null )" class="btn btn-primary" title="Deabonieren">
-                                <i class='fa fa-thumbs-down'></i>
-                            </a>
-                        }
-                    }
 
 
 
-                </td>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.beschreibung)
+                        </td>
+                        <td>
+                            @{
+                                if (ViewBag.zuordnung != null)
+                                {
+                                    foreach (var person in ViewBag.zuordnung)
+                                    {
+                                        if (person.name == item.verantwortlicher)
+                                        {
+                                            <a href="@Url.Action("Details", "Person", new { id = person.id }, null)">
+                                                @Html.DisplayFor(model => item.verantwortlicher)
+                                            </a>
+                                            break;
+                                        }
+                                    }
+                                }
 
-            </tr>
-        }
+                            }
+                        </td>
+
+
+                        <td>
+                            @{
+
+                                if (item.typ == "g")
+                                {
+                                    <a href="@Url.Action("Austreten", "MitgliederGruppe", new { gruppenid = item.id}, null )" class="btn btn-primary" title="Austreten">
+                                        <i class='fa fa-thumbs-down'></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Deabo", "AbonnentenLehrstuhl", new { lehrstuhlid = item.id }, null )" class="btn btn-primary" title="Deabonieren">
+                                        <i class='fa fa-thumbs-down'></i>
+                                    </a>
+                                }
+                            }
 
 
 
-    </table>
+                        </td>
+
+                    </tr>
+                }
 
 
-</div>
 
-} else {
+            </table>
+
+
+        </div>
+    }
+
+    <hr />
+    <div class="form-group">
+        <div class="col-md-10">
+            <br />
+            <br />
+            @Html.ActionLink("Alle Lehrstühle anzeigen", "Index", "Lehrstuhl", null, new { @class = "btn btn-primary" })
+
+            @Html.ActionLink("Zum Newsfeed", "Index", "Home", null, new { @class = "btn btn-primary" })
+            <br />
+            <br />
+        </div>
+    </div>
+
+}
+else
+{
     Response.Redirect("/Error/NotLoggedIn");
 }
+
