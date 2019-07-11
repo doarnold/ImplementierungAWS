@@ -6,7 +6,7 @@
 
 @if (Request.IsAuthenticated)
 {
-    <h2>Mitglied zum Hinzufügen auswählen</h2>
+    <h2 style="text-align: center; padding-top: 10px">Mitglied zum Hinzufügen auswählen</h2>
 
     <br />
     <table class="table">
@@ -44,3 +44,5 @@ else
 {
     Response.Redirect("/Error/NotLoggedIn");
 }
+
+
