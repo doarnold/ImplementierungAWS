@@ -1,18 +1,16 @@
 ﻿@model IEnumerable<SUN2.Models.AspNetUsers>
 @Styles.Render("~/Content/css")
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Administration";
 }
 
 @if (Request.IsAuthenticated)
 {
     @Html.AntiForgeryToken()
 
+    <br />
     <div id="ListHeader">
-        <h2>User-Administration</h2>
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
+        <h2>Alle User verwalten</h2>
     </div>
 
     <div id="ListContainer">
@@ -23,6 +21,7 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.UserName)
+                    (Achtung!)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Person.vorname)
@@ -62,9 +61,7 @@
                         }
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("bearbeiten", "Edit", new { id = item.Id }) 
                     </td>
                 </tr>
             }
