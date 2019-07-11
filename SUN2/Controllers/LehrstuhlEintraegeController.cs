@@ -231,7 +231,7 @@ namespace SUN2.Controllers
             LehrstuhlEintraege lehrstuhlEintraege = db.LehrstuhlEintraeges.Find(id);
             db.LehrstuhlEintraeges.Remove(lehrstuhlEintraege);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { lehrstuhlid = lehrstuhlEintraege.lehrstuhlid });
         }
 
 

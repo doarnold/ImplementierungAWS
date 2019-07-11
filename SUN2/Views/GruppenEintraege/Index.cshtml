@@ -154,10 +154,13 @@
 
     <div class="form-group">
         <div class="col-md-10">
-            <input type="button" class="btn btn-primary" value="Zurück" onclick="window.history.back()" />
-        </div>
-        <div class="col-md-2">
-            @Html.ActionLink("Alle Gruppen", "Index", "Gruppe", null, new { @class = "btn btn-primary" })
+            <br />
+            <br />
+            @Html.ActionLink("Alle Gruppen anzeigen", "Index", "Gruppe", null, new { @class = "btn btn-primary" })
+          
+                @Html.ActionLink("Zum Newsfeed", "Index", "Home", null, new { @class = "btn btn-primary" })
+          <br />
+            <br />
         </div>
     </div>
 
