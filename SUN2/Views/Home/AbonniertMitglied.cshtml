@@ -29,18 +29,6 @@
         <div id="ListHeader">
             <h2>Meine Gruppen & abonnierten Lehrstühle</h2>
 
-            <div class="form-group">
-                <div class="col-md-6">
-                    <p>
-                        @Html.ActionLink("Zu den Lehrstühlen", "Index", "Lehrstuhl", new { @class = "btn btn-primary" })
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <p>
-                        @Html.ActionLink("Zu den Gruppen", "Index", "Gruppe", new { @class = "btn btn-primary" })
-                    </p>
-                </div>
-            </div>
         </div>
 
         <br />
@@ -149,7 +137,10 @@
         <div class="col-md-10">
             <br />
             <br />
-            @Html.ActionLink("Alle Lehrstühle anzeigen", "Index", "Lehrstuhl", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Zu den Lehrstühlen", "Index", "Lehrstuhl", null, new { @class = "btn btn-primary" })
+      
+                @Html.ActionLink("Zu den Gruppen", "Index", "Gruppe", null,  new { @class = "btn btn-primary" })
+      
 
             @Html.ActionLink("Zum Newsfeed", "Index", "Home", null, new { @class = "btn btn-primary" })
             <br />
