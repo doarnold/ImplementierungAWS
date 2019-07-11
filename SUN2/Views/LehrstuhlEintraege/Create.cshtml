@@ -68,4 +68,4 @@ else
 {
     Response.Redirect("/Error/NotLoggedIn");
 }
-@Html.ActionLink("Zurück", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, null)
+@Html.ActionLink("Zurück", "Index", "LehrstuhlEintraege", new { lehrstuhlid = Model.lehrstuhlid }, new { @class = "btn btn-primary" })

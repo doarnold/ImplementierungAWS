@@ -5,7 +5,7 @@
 }
 
 @if (Request.IsAuthenticated)
-{
+{<br /><br />
     <h3>Möchten Sie wirklich diesen Eintrag löschen?</h3>
     <div>
         <hr />
@@ -27,7 +27,7 @@
 
             <div class="form-actions no-color">
                 <input type="submit" value="Löschen" class="btn btn-primary" /> |
-                <input type="button" value="Zurück" onclick="window.history.back()" class="btn btn-primary" />
+                <input type="button" value="Zurück" class="btn btn-primary" onclick="window.history.back()" class="btn btn-primary" />
                 @Html.ActionLink("Alle Einträge", "Index", "GruppenEintraege", new { gruppenid = Model.gruppenid }, new {@class = "btn btn-primary"})
             </div>
         }
